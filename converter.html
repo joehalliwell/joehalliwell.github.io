@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>Bank of Scotland CSV statements to QIF converter</title>
+<style>
+body {font-family: verdana; font-size: 10pt; background: #ccc;}
+#main {width: 600px; margin-left: auto; margin-right: auto; background: white; padding: 30px; border: 1px solid #555;}
+#output {width: 600px; height: 100px;}
+</style>
+</head>
+<body>
+<div id="main">
+<h1>Convert downloadable statements from the Bank of Scotland to QIF files</h1>
+<p>This service is not affiliated with, or endorsed by the Bank of Scotland</p>
+<p>This Javascript tool lets you convert Bank of Scotland CSV (comma separated value) bank statements into a QIF format file that you can import into your accountancy software.</p>
+<p>Your data never leaves the browser. So only you will ever see the input or the output.</p>
+1. Select your downloaded statement <input type="file" id="input" onChange="process();"><input type="reset">
+<br>
+2. Review the conversion below
+<br>
+<textarea id="output"></textarea>
+<br>
+3. Click the link to <a id="download" href="#">download the QIF</a> format file. Note that you may have to rename the file once you have downloaded it.
+<script>
+
+keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+
+// public method for encoding
+function enc(input) {
+		var output = "";
+		var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+		var i = 0;
+
+		//input = Base64._utf8_encode(input);
+
+		while (i < input.length) {
+
+			chr1 = input.charCodeAt(i++);
+			chr2 = input.charCodeAt(i++);
+			chr3 = input.charCodeAt(i++);
+			enc1 = chr1 >> 2;
+
+			enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+			enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+			enc4 = chr3 & 63;
+
+			if (isNaN(chr2)) {
+				enc3 = enc4 = 64;
+			} else if (isNaN(chr3)) {
+				enc4 = 64;
+			}
+			output = output +
+			keyStr.charAt(enc1) + keyStr.charAt(enc2) +
+			keyStr.charAt(enc3) + keyStr.charAt(enc4);
+		}
+		return output;
+}
+
+function process()
+{
+    var output = document.getElementById('output');
+    var csv = document.getElementById('input').files[0].getAsBinary().split("\n");
+    qif = "!Type:Bank\n";
+    for (i = 0; i < csv.length; i++)
+    {
+        bits = csv[i].split(",");
+        if (bits.length != 4) continue;
+	if (bits[0] == "Date") continue;
+        tDate = bits[0].replace('-','/');
+        tDetail = bits[1];
+        tType = bits[2];
+        tAmount = bits[3].replace('0x88','');
+        qif += "D" + tDate + "\n";
+        qif += "T" + tAmount + "\n";
+        qif += "N\n"
+        qif += "P" + tDetail + "\n";
+        qif += "^\n";
+    }
+    output.value = qif;
+    var link = document.getElementById('download');
+    link.href = "data:application/qif;base64," + enc(qif);
+}
+
+</script>
+</div>
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5118963-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- End of Google Analytics -->
+</body>
+</html>
