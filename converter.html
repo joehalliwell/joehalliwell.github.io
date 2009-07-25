@@ -10,18 +10,24 @@ body {font-family: verdana; font-size: 10pt; background: #ccc;}
 <body>
 <div id="main">
 <h1>Convert downloadable statements from the Bank of Scotland to QIF files</h1>
-<p>This service is not affiliated with, or endorsed by the Bank of Scotland</p>
+<p>This service is not affiliated with, or endorsed by the Bank of Scotland.</p>
 <p>This Javascript tool lets you convert Bank of Scotland CSV (comma separated value) bank statements into a QIF format file that you can import into your accountancy software.</p>
 <p>Your data never leaves the browser. So only you will ever see the input or the output.</p>
 1. Select your downloaded statement <input type="file" id="input" onChange="process();"><input type="reset">
 <br>
-2. Review the conversion below
+2. Review the conversion below.
 <br>
 <textarea id="output"></textarea>
 <br>
-3. Click the link to <a id="download" href="#">download the QIF</a> format file. Note that you may have to rename the file once you have downloaded it.
-<script>
+3. Copy and paste the contents to a plain text file.
+4. Or, click the link to <a id="download" href="#">download the QIF</a> format file. Note that you may have to rename the file once you have downloaded it.
 
+<h1>Comments?</h1>
+Please mail comments/questions/bugfixes to <a href="mailto:joe.halliwell@gmail.com">joe.halliwell@gmail.com</a>.
+
+<h1>Credits</h1>
+The base64 encoding function is based on code from <a href="http://www.webtoolkit.info/javascript-base64.html">webtoolkit.info</a>
+<script>
 keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 
 // public method for encoding
