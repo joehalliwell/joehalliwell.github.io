@@ -1,0 +1,186 @@
+<html>
+<head>
+<title>Aphorism Generator</title>
+<style>
+body { font-family: Georgia,Times,serif; color: #333; width: 100%; height:100%;}
+a, a:visited { text-decoration: none; color: #a55; }
+#card {
+    width: 500px;
+    font-size:36pt;
+    margin-top: 80px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    cursor: pointer;
+}
+hr { border: 1px solid #333; }
+#controls {
+    display: none;
+    font-size: 10pt; text-align: center; position: absolute; bottom: 5px; width: 100%;
+}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script>
+var conceptGroups = [
+['science', 'art', 'history', 'politics', 'mathematics', 'philosophy'],
+['joy', 'despair'],
+['truth', 'beauty', 'honour', 'life', 'death'],
+['love', 'hatred'],
+['war', 'peace'],
+['creativity', 'plagiarism'],
+['theft','charity'],
+['birth','death'],
+['murder','art'],
+['thinking', 'dreaming', 'believing', 'doubting', 'hoping'],
+['cowardice', 'valour', 'discretion'],
+['charity','courage','prudence','honesty','justice','kindness'],
+['remembering', 'forgetting'],
+['youth','age'],
+['comedy', 'religion', 'reality'],
+['God', 'the Devil'],
+['heaven', 'hell'],
+['Africa', 'America', 'Europe', 'India'],
+['modernity','antiquity'],
+['belief', 'thought', 'hope', 'sensation', 'imagination', 'knowledge', 'justification', 'fancy', 'conviction'],
+['justice','law'],
+['academia','industry'],
+['form','content'],
+['loving','leaving'],
+['music','mathematics'],
+['literature','fact'],
+['fact','fiction'],
+['prose','poetry'],
+['engineering','craft'],
+['leaving','arriving'],
+['chaos','order'],
+['society','family'],
+['work','leisure'],
+['wealth','poverty'],
+['success','failure'],
+['language','silence'],
+['truth','gossip'],
+['self-reference','aphorism'],
+['autonomy','slavery'],
+['humanity','religion'],
+['property','theft'],
+['slavery','grace'],
+['ambition','success'],
+['unity','multiplicity'],
+['nothingness','being'],
+['disease','health'],
+['candour','intrigue'],
+['necessity','contingency'],
+['debate','monologue'],
+['obedience', 'will'],
+['chance','fate'],
+['safety','security'],
+['life','living']
+]; 
+var frames = [
+'$a is a malady for which $b is the cure.',
+'$a wouldn\'t be $a if it weren\'t for $b.',
+'$a delivers us from $b, but who will deliver us from $a?',
+'$a adds to our pains, $b to our pleasures.',
+'Happiness is in $a, not in $b.',
+'$a unites men, $b divides them.',
+'$a deceives us more often than $b.',
+'A little $a is a dangerous thing, a great deal of it is absolutely fatal.',
+'$a is the $b of the common man.',
+'$a is the shadow of $b.',
+'Where $a rejoices, $b despairs.',
+'$a is the mistress of $b.',
+'Behind $a there is always $b.',
+'When $a sleeps, it dreams of $b.',
+'Where can we find $a? There we find $b also.',
+'$a and truth are continents divided by an ocean of $b.',
+'When $a was created, $b was the mould.',
+'$a is the meat, $b the mustard.',
+'$a is the enemy of $b.',
+'When $a dines out, $b foots the bill.',
+'$a is the chalk; $b the blackboard.',
+];
+
+function choose(choices) {
+    return Math.floor(Math.random() * choices.length);
+}
+function showAphorism(frameIndex, groupIndex, aIndex, bIndex) {
+    var frame = frames[frameIndex];
+    var a = conceptGroups[groupIndex][aIndex];
+    var b = conceptGroups[groupIndex][bIndex];
+    var aphorism = frame.replace(/\$a/gi, a);
+    aphorism = aphorism.replace(/\$b/gi, b);
+    aphorism = aphorism[0].toUpperCase() + aphorism.substring(1);
+    
+    // Display it
+    var code = frameIndex + '-' + groupIndex + '-' + aIndex + '-' + bIndex;
+    document.location= '#' + code;
+    $('#aphorism').html(aphorism);
+    $('#permalink').attr('href','#' + code);
+    var tweet = '' + aphorism + ' (from http://soda.sh/xS3)'; // + code + ')';
+    tweet = tweet.replace(/ /gi, "+");
+    //var tweet = $.URLEncode(tweet);
+    $('#tweet').attr('href', 'http://www.twitter.com/home?status='+tweet);
+}
+
+function getRandomIndices() {
+    var fi = choose(frames);
+    var ci = choose(conceptGroups);
+    var concepts = conceptGroups[ci];
+    var ai = choose(concepts);
+    var bi = ai;
+    while (bi == ai) bi = choose(concepts);
+    return [fi, ci, ai, bi];
+}
+
+function getNumAphorisms() {
+    var a = 0;
+    for (var i in conceptGroups) {
+        a = a + frames.length * conceptGroups[i].length * (conceptGroups[i].length - 1)
+    }
+    return a;
+}
+function init() {
+    var bits;
+    try {
+        var anchor = document.location.toString().split("#")[1];
+        var bits = anchor.split("-");
+        for (i = 0; i < 4; i++) {
+            if (isNaN(bits[i])) throw "NaN";
+            bits[i] = parseInt(bits[i]);
+        }  
+    }
+    catch (e) {
+        bits = getRandomIndices();
+    }
+    showAphorism.apply(this, bits);
+    $('#controls').fadeIn(4800);
+}
+$(init);
+</script>
+</head>
+<body>
+<div id="card" onClick="showAphorism.apply(null, getRandomIndices());">
+<hr />
+<span id="aphorism">
+</span>
+<hr />
+</div>
+<div id="controls">
+Aphorism Generator by <a href="http://www.joehalliwell.com">Joe Halliwell</a> after Paul Braffort.<br />
+<a href="javascript:showAphorism.apply(null, getRandomIndices());" title="Click to generate abother aphorism">another</a>
+- <a id="permalink" href="#" title="Bookmark this for a permanent link to the current aphorism">permalink</a>
+- <a id="tweet" href="#" title="Tweet this aphorism">tweet</a>
+</div>
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5118963-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<!-- End of Google Analytics -->
+</body>
+</html>
