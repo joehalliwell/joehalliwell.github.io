@@ -1,3 +1,13 @@
+var clamp = function(val, min, max) {
+    if (val < min) return min;
+    if (val > max) return max;
+    return val;
+}
+
+var quantize = function(val, step) {
+    return (Math.floor(val / step)) * step;
+}
+
 function Vec(x, y) {
     this.x = x;
     this.y = y;
@@ -11,8 +21,8 @@ Vec.prototype.add = function(v, alpha) {
 }
 
 Vec.prototype.rotate = function(theta) {
-    nx = this.x * cos(theta) - this.y * sin(theta);
-    ny = this.x * sin(theta) + this.y * cos(theta);
+    nx = this.x * Math.cos(theta) - this.y * Math.sin(theta);
+    ny = this.x * Math.sin(theta) + this.y * Math.cos(theta);
     this.x = nx;
     this.y = ny;
     return this;
@@ -20,118 +30,87 @@ Vec.prototype.rotate = function(theta) {
 
 function Segment(start, initialAngle, curvature, length, ttl) {
     this.start = start;
+    this.initialAngle = initialAngle;
     this.length = length;
-    this.curvature = curvature;
+    this.curvature = quantize(curvature, Math.PI/16);
     this.ttl = ttl;
-    this.r = this.length / this.curvature;
-    this.center = new Vec(0, this.r).rotate(initialAngle).add(start);
-    //this.end = 
-    this.endAngle = initialAngle + curvature;
+    this.endAngle = initialAngle + this.curvature;
+    this.state = Segment.GROWING;
+    if (this.curvature != 0) {
+        this.r = Math.abs(this.length / this.curvature);
+        this.center = new Vec(0, this.curvature < 0 ? -this.r : this.r).rotate(initialAngle).add(start);
+    }
+    this.computeEnd();
 }
+
+Segment.prototype.GROWING = 0;
+Segment.prototype.GROWN = 1;
+Segment.prototype.HOLDING = 2;
+Segment.prototype.DYING = 3;
+Segment.prototype.DEAD = 4;
 
 Segment.prototype.draw = function(ctx) {
     ctx.beginPath();
-    ctx.moveTo(this.start.x, this.start.y);
-    if (this.curvature < 0.01 && this.curvature > -0.01) {
+    if (this.curvature == 0) {
+        ctx.moveTo(this.start.x, this.start.y);
         ctx.lineTo(this.end.x, this.end.y);
         ctx.stroke();
         return;
     }
-    if (this.curvature > 0) {
-        ctx.arc(this.center.x, this.center.y, this.r, -Math.PI/2, -Math.PI/2 + this.curvature, 0);
-    }
-    else {
-        ctx.arc(this.center.x, this.center.y, -this.r, Math.PI/2, Math.PI/2 + this.curvature, 1);
-    }
+    var theta = this.initialAngle + ((this.curvature < 0) ? Math.PI/2 : -Math.PI/2);
+    ctx.arc(this.center.x, this.center.y, this.r, theta, theta + this.curvature,
+            this.curvature < 0 ? 1 : 0);
     ctx.stroke();
+    return;
 }
 
-Segment.prototype.tick = function() {
-    this.curvature = this.curvature/1.001;
-    if (this.curvature < 0.01 && this.curvature > -0.01) this.ccode = 0;
-    else {
-        if (this.curvature > 0) this.ccode = 1;
-        else this.ccode = 2;
-        this.r = this.length / this.curvature;
+Segment.prototype.computeEnd = function() {
+    if (this.curvature == 0) {
+        this.end = new Vec(this.length, 0).rotate(this.initialAngle).add(this.start);
+        return;
     }
-    switch (this.ccode) {
-        case 0:
-            this.end = { x: this.length, y: 0 };
-            break;
-        case 1:
-             this.end = {
-                x: Math.abs(this.r) * Math.cos(-Math.PI/2 + this.curvature),
-                y: this.r + Math.abs(this.r) * Math.sin(-Math.PI/2 + this.curvature)};
-            break;
-        case 2:
-             this.end = {
-                x: Math.abs(this.r) * Math.cos(Math.PI/2 + this.curvature),
-                y: this.r + Math.abs(this.r) * Math.sin(Math.PI/2 + this.curvature)};
-            break;
-    }
+    var theta = this.curvature + ((this.curvature < 0) ? Math.PI/2 : -Math.PI/2);
+    this.end = new Vec(this.r * Math.cos(theta), this.r * Math.sin(theta));
+    this.end.rotate(this.initialAngle).add(this.center);
 }
-
-var clamp = function(val, min, max) {
-    if (val < min) return min;
-    if (val > max) return max;
-    return val;
-}
-
-var quantize = function(val, step) {
-    return (floor(val / step)) * step;
-}
-
-var rotate = function(v, theta) {
-    return new Vec(v.x * cos(theta) - v.y * sin(theta), v.x * sin(theta) + v.y * cos(theta));
-}
-
+/*
 var pickCurvature = function(curv) {
     var delta = Math.PI/48;
     if (Math.random() < 0.9) return curv;
     var result = curv + (Math.random() < 0.5 ? delta : -delta);
     return clamp(result, 0.2 * -Math.PI, 0.2 *  Math.PI);
 }
+*/
 
 var canvas = document.getElementById('canvas');
 var c = canvas.getContext('2d');
+c.translate(100,800);
+c.lineWidth = 5;
 var tick = 0;
-var segments = new Array();
-s = new Segment(0, 100);
-for (i = 0; i < 300; i++) {
-    s = new Segment(0,0,pickCurvature(s.curvature),30 + Math.random() * 30);
-    segments.push(s);
-}
-c.translate(canvas.width/2, canvas.height/2);
-c.rotate(-Math.PI / 2);
-c.scale(0.1,0.1);
-function render() {
-    var s = new Segment(0, 100);
-    tick++;
-    //console.log(tick);
-    c.rotate(0.001);
-    c.save();
-    //c.fillStyle = 'rgba(255,255,255,0.008)';
-    //c.fillRect(0, 0, canvas.width * 10,canvas.height * 10);
-    for (i = 0; i < segments.length; i++) {
-        var s = segments[i];
-        s.tick();
-        c.lineWidth = 10;
-        c.strokeStyle = 'rgba(0,0,0,0.1)';
-        s.draw(c);
-        if (true) {
-            c.beginPath();
-            c.fillStyle = 'rgba(255,255,255,0.2)';
-            c.strokeStyle = 'rgba(70,50,25,0.1)';
-            c.lineWidth = 8;
-            c.arc(0,0, 10, 0, Math.PI * 2, 0);
-            c.fill();
-            c.stroke();
-        }
-        //c.translate(s.end.x, s.end.y);
-        //c.rotate(s.curvature);
-    }
-    c.restore();
-    setTimeout(render, 5);
-    }
-
-render();
+var t = Math.PI * 0.85;
+var s = new Segment(new Vec(0,0), 0, -t, 300, 1000);
+s.draw(c);
+console.log(s);
+s = new Segment(s.end, s.endAngle, t, 300, 1000);
+console.log(s);
+//c.strokeStyle = '#f55';
+s.draw(c);
+//c.strokeStyle = '#5f5';
+s = new Segment(s.end, s.endAngle, -t * 2, 300, 1000);
+console.log(s);
+s.draw(c);
+//c.strokeStyle = '#000';
+u = new Segment(s.end, s.endAngle, -t * 2, 100, 1000);
+u.draw(c);
+u = new Segment(s.end, s.endAngle, t * 2, 100, 1000);
+u.draw(c);
+u = new Segment(s.end, s.endAngle, -t / 2, 300, 1000);
+u.draw(c);
+u = new Segment(u.end, u.endAngle, -t , 300, 1000);
+u.draw(c);
+u = new Segment(u.end, u.endAngle, -t , 300, 1000);
+u.draw(c);
+u = new Segment(u.end, u.endAngle, -t/3 , 300, 1000);
+u.draw(c);
+u = new Segment(u.end, u.endAngle, t , 300, 1000);
+u.draw(c);
