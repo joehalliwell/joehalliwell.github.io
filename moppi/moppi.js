@@ -47,8 +47,12 @@ Segment.HOLDING = 2;
 Segment.DYING = 3;
 Segment.DEAD = 4;
 
+Segment.SCHEDULE = [0.1, 0.8, 0.1];
+MAX_RECURSION = 5;
+
 Segment.prototype.draw = function(ctx) {
     ctx.beginPath();
+    ctx.lineWidth = 1+ (2 * MAX_RECURSION) - (2 * this.level);
     // Special case for curvature 0
     if (this.curvature == 0) {
         ctx.moveTo(this.start.x, this.start.y);
@@ -57,8 +61,27 @@ Segment.prototype.draw = function(ctx) {
         return;
     }
     // General case
+    var startAngle = 0;
+    var endAngle = this.curvature;
+    switch (this.state) {
+        case Segment.HOLDING:
+        case Segment.GROWN:
+        case Segment.DIED:
+            break;
+        case Segment.GROWING:
+            endAngle = this.stateTick * this.curvature / (this.ttl * Segment.SCHEDULE[0]);
+            break;
+        case Segment.DYING:
+            if (this.level == 0) startAngle = this.stateTick * this.curvature / (this.ttl * Segment.SCHEDULE[2]);
+            else endAngle = clamp(((this.ttl * Segment.SCHEDULE[2]) - this.stateTick) / (this.ttl * Segment.SCHEDULE[2]), 0, 1) * this.curvature;
+            break;
+        case Segment.DEAD:
+            endAngle = 0;
+    }
+
+    if (startAngle == endAngle) return;
     var theta = this.initialAngle + ((this.curvature < 0) ? Math.PI/2 : -Math.PI/2);
-    ctx.arc(this.center.x, this.center.y, this.r, theta, theta + this.curvature,
+    ctx.arc(this.center.x, this.center.y, this.r, theta + startAngle, theta + endAngle,
             this.curvature < 0 ? 1 : 0);
     ctx.stroke();
     return;
@@ -80,20 +103,21 @@ Segment.prototype.tick = function() {
     this.stateTick++;
     switch (this.state) {
         case Segment.GROWING:
-            if (this.stateTick > this.ttl / 4) this.state = Segment.GROWN;
+            if (this.stateTick > (this.ttl * Segment.SCHEDULE[0])) this.state = Segment.GROWN;
             break;
         case Segment.GROWN:
             this.state = Segment.HOLDING;
             this.stateTick = 0;
             break;
         case Segment.HOLDING:
-            if (this.stateTick > this.ttl / 2) this.state = Segment.DIED;
+            if (this.stateTick > (this.ttl * Segment.SCHEDULE[1])) this.state = Segment.DIED;
             break;
         case Segment.DIED:
             this.state = Segment.DYING;
             this.stateTick = 0;
+            break;
         case Segment.DYING:
-            if (this.stateTick > this.ttl / 4) this.state = Segment.DEAD;
+            if (this.stateTick > (this.ttl * Segment.SCHEDULE[2])) this.state = Segment.DEAD;
             break;
         case Segment.DEAD:
             console.Log("DEAD");
@@ -101,23 +125,13 @@ Segment.prototype.tick = function() {
     }
 }
 
-
-/*
-var pickCurvature = function(curv) {
-    var delta = Math.PI/48;
-    if (Math.random() < 0.9) return curv;
-    var result = curv + (Math.random() < 0.5 ? delta : -delta);
-    return clamp(result, 0.2 * -Math.PI, 0.2 *  Math.PI);
-}
-*/
-
 var canvas = document.getElementById('canvas');
 var c = canvas.getContext('2d');
 //c.translate(100,300);
 //c.scale(0.5,0.5);
-var t = Math.PI * 0.4;
+var t = Math.PI * 0.5;
 var segments = new Array();
-var s = new Segment(new Vec(0,0), 0, -t, 300, 3000, 0);
+var s = new Segment(new Vec(0,0), 0, -t, 200, 3000, 0);
 segments.push(s);
 
 var cv = new Vec(0,0);
@@ -136,29 +150,33 @@ function render() {
         var s = segments[i];
         s.tick();
         s.draw(c);
-        if (s.state == Segment.GROWN & s.level < 5) {
+        if (s.state == Segment.GROWN & s.level < MAX_RECURSION) {
             console.log("Spawning");
             if (s.level == 0) {
-                liveSegs.push(new Segment(s.end, s.endAngle,
+                liveSegs.push(new Segment(s.end,
+                    s.endAngle,
                     t * (Math.random() < 0.5 ? 1 : -1),
-                    s.length - 5 + 10 * Math.random(),
-                    2000,
+                    250 + 50 * Math.random(),
+                    s.ttl,
                     0));
-               tv = s.end;
+               tv = liveSegs[liveSegs.length - 1].end;//s.end;
             }
             else {
-                liveSegs.push(new Segment(s.end, s.endAngle,
+                liveSegs.push(new Segment(s.end,
+                    s.endAngle,
                     t * (Math.random() < 0.5 ? 1: -1),
-                    s.length/ 1.1,
-                    s.ttl / 1.5,
+                    s.length / 1.1,
+                    s.ttl * Segment.SCHEDULE[1],
                     s.level + 1));
             }
             if (Math.random() < 0.85) {
-                liveSegs.push(new Segment(s.end, s.endAngle - 0.1,
-                t * 2,
-                s.length / 1.5,
-                s.ttl / 2,
-                s.level + 1));
+                var dir = (Math.random() < 0.5);
+                liveSegs.push(new Segment(s.end,
+                    s.endAngle + (dir ? -0.1 : 0.1),
+                    t * (dir ? -1 : 1),
+                    s.length / 1.5,
+                    s.ttl * Segment.SCHEDULE[1],
+                    s.level + 1));
             }
         }
         if (s.state != Segment.DEAD) {
