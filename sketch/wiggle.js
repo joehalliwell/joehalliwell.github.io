@@ -1,5 +1,4 @@
-$(function() {
-wiggle = new function() {
+addSketch("wiggle", new function() {
 	var bounds = Math.min(canvas.width, canvas.height) * 0.2;
 	var start = new Vec(canvas.width/2, canvas.height/2);
 	var pickPoint = function() {
@@ -32,8 +31,5 @@ wiggle = new function() {
 		ctx.fillStyle="rgba(0,0,0,1.0)";
 		drawBlob(ctx, pos.x, pos.y, 100);
 }
-}
+});
 
-addSketch(wiggle);
-}
-);

@@ -22,16 +22,17 @@ function render() {
 	setTimeout(render, 10);
 }
 
-function setCurrentSketch(sketch) {
-	currentSketch = sketch;
+function setCurrentSketch(sketchName) {
+	currentSketch = sketches[sketchName];
 	$('#title').html(sketch.title);
 	document.title = sketch.title;
+	document.location.hash = sketch;
 }
 
-function addSketch(sketch) {
-	sketches.push(sketch);
+function addSketch(sketchName, sketch) {
+	sketches[sketchName] = sketch;
 	if (currentSketch == null) {
-		setCurrentSketch(sketch);
+		setCurrentSketch(sketchName);
 		setTimeout(render, 10);
 	}
 }
