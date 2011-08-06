@@ -23,10 +23,11 @@ function render() {
 }
 
 function setCurrentSketch(sketchName) {
+	console.log("Setting sketch to " + sketchName);
 	currentSketch = sketches[sketchName];
-	$('#title').html(sketch.title);
-	document.title = sketch.title;
-	document.location.hash = sketch;
+	$('#title').html(currentSketch.title);
+	document.title = currentSketch.title;
+	document.location.hash = sketchName;
 }
 
 function addSketch(sketchName, sketch) {
