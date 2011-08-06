@@ -60,6 +60,7 @@ var quantize = function(val, step) {
 var ease = {
 	'none': function(lambda) { return lambda; },
 	'in': function(lambda) { return Math.sin(lambda * Math.PI / 2); },
+	'out': function(lambda) { return 1 - Math.sin(Math.PI/2 + lambda * Math.PI / 2); },
 	'inout' : function(lambda) { return 0.5 + 0.5 * Math.sin(-Math.PI/2 + lambda * Math.PI); }
 }
 

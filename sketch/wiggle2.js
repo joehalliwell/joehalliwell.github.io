@@ -28,7 +28,7 @@ addSketch("wiggle2", new function() {
 			end = pickPoint();
 		}
 		
-		var pos = interp(start, end, (time - startTime) / period, ease.inout);
+		var pos = interp(start, end, (time - startTime) / period, ease.out);
 
 		ctx.fillStyle="rgba(0,0,0,1.0)";
 		drawBlob(ctx, pos.x, pos.y, 100);
