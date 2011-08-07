@@ -8,6 +8,7 @@ var height = canvas.height;
 var currentSketch = null;
 var sketches = new Array();
 var time = new Date().getTime() * 0.001; // Hmmm
+var timeDelta = 0;
 
 function render() {
 	if (currentSketch == null) return;
@@ -17,7 +18,9 @@ function render() {
 		ctx.fillRect(0, 0, width, height);
 		ctx.restore();
 	}
-	time = new Date().getTime() * 0.001; // Convert to seconds
+	var newTime = new Date().getTime() * 0.001;
+	timeDelta = newTime - time;
+	time = newTime;
 	currentSketch.render(ctx);
 	setTimeout(render, 10);
 }
@@ -95,6 +98,10 @@ Vec.prototype.mult = function(lambda) {
 
 Vec.prototype.len = function() {
 	return Math.sqrt(this.x * this.x + this.y * this.y);
+}
+
+Vec.prototype.copy = function() {
+	return new Vec(this.x, this.y);
 }
 
 
