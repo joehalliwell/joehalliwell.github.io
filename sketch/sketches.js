@@ -40,7 +40,7 @@ function addSketch(sketchName, sketch) {
 
 function loadSketch(sketchName) {
 	if (!sketchName) return;
-	sketchName = sketchName.replace(/\//g,"").replace(/#/g,"");
+	sketchName = sketchName.replace("#","");
 	console.log("Loading " + sketchName);
 	$.getScript(sketchName + ".js");
 }
