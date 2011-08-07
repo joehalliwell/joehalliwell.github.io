@@ -35,7 +35,7 @@ addSketch("wiggle3", new function() {
 		// Spring force -- fiddle factors ahoy!
 		var f = pos.copy().add(x, -1);
 		f.add(v, new Vec(v.x * v.x, x.y * v.y).len() * -0.000002); // Drag
-		v.add(f.mult(timeDelta * 100)); // Mass and spring constant
+		v.add(f.mult(timeDelta * 10)); // Mass and spring constant
 		x.add(v, timeDelta);
 		
 		ctx.fillStyle="rgba(0,0,0,1.0)";
