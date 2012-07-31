@@ -145,7 +145,7 @@ function render() {
     c.lineCap="round";
     c.save();
     c.translate(400 - cv.x, 400 - cv.y);
-    cv = new Vec(cv.x + (tv.x - cv.x)/100, cv.y + (tv.y - cv.y)/100);
+    cv = new Vec(cv.x + (tv.x - cv.x)/400, cv.y + (tv.y - cv.y)/400);
     //console.log(cv.x + ", " + cv.y);
     //c.scale(0.5, 0.5);
     var liveSegs = new Array();
@@ -153,6 +153,7 @@ function render() {
         var s = segments[i];
         s.tick();
         s.draw(c);
+		//tv = liveSegs[liveSegs.length - 1].end;//s.end;
         if (s.state == Segment.GROWN & s.level < MAX_RECURSION) {
             console.log("Spawning");
             if (s.level == 0) {
@@ -162,7 +163,7 @@ function render() {
                     100 + 50 * Math.random(),
                     s.ttl,
                     0));
-               tv = liveSegs[liveSegs.length - 1].end;//s.end;
+                tv = liveSegs[liveSegs.length - 1].end;//s.end;
             }
             else {
                 liveSegs.push(new Segment(s.end,
