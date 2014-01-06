@@ -1,0 +1,11 @@
+<html>
+<head><title></title></head>
+<body>
+<h1>
+<script>
+var bits = window.location.toString().split("?", 2)
+var msg = bits.length < 2 ? "Try adding a query string" : decodeURIComponent(bits[1])
+document.write(msg);
+</script>
+<h1>
+</body>
