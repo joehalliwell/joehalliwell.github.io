@@ -1,11 +1,12 @@
 <html>
-<head><title></title></head>
+<head><title>Add a query argument to echo the content to the title and body of this page</title></head>
 <body>
-<h1>
+<p style="font-family: sans; font-size: 180%;">
 <script>
-var bits = window.location.toString().split("?", 2)
-var msg = bits.length < 2 ? "Try adding a query string" : decodeURIComponent(bits[1])
+var bits = window.location.toString().split("?", 2);
+var msg = bits.length < 2 ? document.title : decodeURIComponent(bits[1]);
 document.write(msg);
+document.title = msg;
 </script>
-<h1>
+</p>
 </body>
