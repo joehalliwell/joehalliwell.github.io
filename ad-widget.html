@@ -8,36 +8,45 @@
 <body>
 <div class="container">
 <h1>Ad widget generator</h1>
-<form role="form">
+<div role="form">
 <div class="form-group">
-<label>1. Select Ad format</label>
-<select name="format">
+<label>1. Select mailer</label>
+<select name="mailer" class="form-control">
+	<option value="{~xid~}">Adestra</option>
+	<option value="@@XID@@">dotMailer</option>
+</select>
+</div>
+<div class="form-group">
+<label>2. Select Ad format</label>
+<select name="format" class="form-control">
 	<option value="banner">Banner (1024x100)</option>
 	<option value="skyscraper">Skyscraper (150x700)</option>
 </select>
 </div>
 <div class="form-group">
-<label>2. Publisher reference</label>
-<input type="text" name="pubref" placeholder="Publisher reference">
+<label>3. Publisher reference</label>
+<input type="text" name="pubref" class="form-control" placeholder="Publisher reference">
 </div>
-</form>
+</div>
 <div class="form-group">
-<label>3. Paste the following code</label>
-<textarea id="output" rows="6" cols="80" style="font-family: monospace;"></textarea>
+<label>4. Copy &amp; paste the following code</label>
+<textarea id="output" rows="6" cols="80" style="font-family: monospace;" class="form-control"></textarea>
 </div>
 <script>
 function update() {
 	var format = $("[name=format]").val();
 	var pubref = $("[name=pubref]").val();
-	var rid = "asdfg";
-	var args = "format="+format+"&pubref="+pubref+"&rid="+rid;
+	var rid = (new Date).getTime();
+	var xid = $("[name=mailer]").val();
+	var args = "vt&xid="+xid+"&format="+format+"&pubref="+pubref+"&rid="+rid;
 	console.log(args);
-	var widget = "<a href=\"http://api.addaptive.com/click?xid={~xid~}&vt&!!!ARGS\"><img src=\"http://api.addaptive.com/image?xid={~xid~}&vt&!!!ARGS\"></a>";
+	var widget = "<a href=\"http://api.addaptive.com/click?!!!ARGS\"><img src=\"http://api.addaptive.com/image?!!!ARGS\"></a>";
 	widget = widget.replace(/!!!ARGS/g, args);
 	$('#output').val(widget);
 	return false;
 }
-$("form").change(update);
+$("[role=form]").change(update);
+$(update);
 </script>
 </div>
 </body>
