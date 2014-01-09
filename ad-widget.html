@@ -8,7 +8,7 @@
 <body>
 <div class="container">
 <h1>Ad widget generator</h1>
-<div role="form">
+<div id="form">
 <div class="form-group">
 <label>1. Select mailer</label>
 <select name="mailer" class="form-control">
@@ -29,7 +29,8 @@
 </div>
 </div>
 <div class="form-group">
-<label>4. Copy &amp; paste the following code</label>
+<!-- Clipboard handling is a pain http://stackoverflow.com/questions/400212/how-to-copy-to-the-clipboard-in-javascript -->
+<label>4. <button onclick="$('#output').select();">Copy &amp; paste the following code</button></label>
 <textarea id="output" rows="6" cols="80" style="font-family: monospace;" class="form-control"></textarea>
 </div>
 <script>
@@ -39,13 +40,14 @@ function update() {
 	var rid = (new Date).getTime();
 	var xid = $("[name=mailer]").val();
 	var args = "vt&xid="+xid+"&format="+format+"&pubref="+pubref+"&rid="+rid;
-	console.log(args);
+	//console.log(args);
 	var widget = "<a href=\"http://api.addaptive.com/click?!!!ARGS\"><img src=\"http://api.addaptive.com/image?!!!ARGS\"></a>";
 	widget = widget.replace(/!!!ARGS/g, args);
 	$('#output').val(widget);
 	return false;
 }
-$("[role=form]").change(update);
+$("#form").keyup(update);
+$("#form").change(update);
 $(update);
 </script>
 </div>
