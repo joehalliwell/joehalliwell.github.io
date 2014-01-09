@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ad widget</title>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<h1>Ad widget generator</h1>
+<form role="form">
+<div class="form-group">
+<label>1. Select Ad format</label>
+<select name="format">
+	<option value="banner">Banner (1024x100)</option>
+	<option value="skyscraper">Skyscraper (150x700)</option>
+</select>
+</div>
+<div class="form-group">
+<label>2. Publisher reference</label>
+<input type="text" name="pubref" placeholder="Publisher reference">
+</div>
+</form>
+<div class="form-group">
+<label>3. Paste the following code</label>
+<textarea id="output" rows="6" cols="80" style="font-family: monospace;"></textarea>
+</div>
+<script>
+function update() {
+	var format = $("[name=format]").val();
+	var pubref = $("[name=pubref]").val();
+	var rid = "asdfg";
+	var args = "format="+format+"&pubref="+pubref+"&rid="+rid;
+	console.log(args);
+	var widget = "<a href=\"http://api.addaptive.com/click?xid={~xid~}&vt&!!!ARGS\"><img src=\"http://api.addaptive.com/image?xid={~xid~}&vt&!!!ARGS\"></a>";
+	widget = widget.replace(/!!!ARGS/g, args);
+	$('#output').val(widget);
+	return false;
+}
+$("form").change(update);
+</script>
+</div>
+</body>
+</html>
