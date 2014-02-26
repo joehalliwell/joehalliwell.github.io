@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>SoDash</title>
+
+		<meta name="description" content="A few words on social media">
+		<meta name="author" content="Joe Halliwell">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>SoDash &amp; Social Media Analytics</h1>
+					<h3>or why my life is sooo hard</h3>
+					<p>
+						<small><a href="http://joehalliwell.com">Joe Halliwell</a> //
+						<a href="http://twitter.com/joehalliwell">@joehalliwell</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>SoDash: the plucky underdog</h2>
+					<ul>
+						<li>Best coverage of social media services</li>
+						<li>Automatic message routing/filing</li>
+						<li>Realtime data and co-working support</li>
+						<li>Household name clients</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>How we get the data</h2>
+					<ul>
+						<li>Official APIs: Twitter, Facebook, LinkedIn, Reddit, YouTube, Google+, Instagram...</li>
+						<li>Unofficial APIs: ReviewCentre, TripAdvisor, RSS...</li>
+						<li>Other aggregators: DataSift, Radian6, BOSS, GoogleAlerts</li>
+						<li>Scraping: Forums, Blogs, Guestbooks, everything else</li> 
+					</ul>
+				</section>
+
+				<section>
+					<h2>Anatomy of a tweet</h2>
+					From <a href="http://search.twitter.com/search.json?q=smedin">http://search.twitter.com/search.json?q=smedin</a>
+					<pre><code data-trim contenteditable language-json style="font-size: 16px; margin-top: 20px;">
+{
+	created_at: "Wed, 15 May 2013 07:39:04 +0000",
+	from_user: "prettysimple",
+	from_user_id: 17963713,
+	from_user_id_str: "17963713",
+	from_user_name: "James Coltham",
+	geo: null,
+	id: 334573630337982460,
+	id_str: "334573630337982464",
+	iso_language_code: "en",
+	metadata: {
+		result_type: "recent"
+	},
+	profile_image_url: "http://a0.twimg.com/profile_images/1469558027/Jim-retro-green_normal.jpg",
+	profile_image_url_https: "https://si0.twimg.com/profile_images/1469558027/Jim-retro-green_normal.jpg",
+	source: "Mobile Web (M5)", // Plus link
+	text: "@LockhartL have fun and tweet lots! #smedin",
+	to_user: "LockhartL",
+	to_user_id: 110347158,
+	to_user_id_str: "110347158",
+	to_user_name: "Leah Lockhart",
+	in_reply_to_status_id: 334572221941047300,
+	in_reply_to_status_id_str: "334572221941047296"
+};
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>API &#x2260; job done</h2>
+					<ul>
+						<li>No data standards, not even close</li>
+						<li>Byzantine architecture</li>
+						<li>Constant evolution</li>
+						<li>We're stuck with all that</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Some of our data is missing</h2>
+					<ul>
+						<li>Historic data isn't there</li>
+						<li>Location data isn't there</li>
+						<li>No service level guarantees</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Drowning in data</h2>
+					<ul>
+						<li>400M tweets per day</li>
+						<li>1B items of Facebook content per day</li>
+						<li>Technically challenging to store and query</li>
+						<li>Analysis tends to be quite superficial</li>
+						<li>More sophisticated analysis can be hard to interpret</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<h2>Computers not read text good</h2>
+					<ul>
+						<li>Sentiment analysis is deceptive</li>
+						<li>Evaluating performance is hard</li>
+						<li>You might be looking for a needle in a haystack</li>
+						<li>Pas en Anglais? Bonne chance!</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<h2>Who is your head of email?</h2>
+					<ul>
+						<li>Social media is cross-cutting</li>
+						<li>Workflow becoming more important</li>
+						<li>Routing becoming more important (we hope)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>The end of free</h2>
+					<ul>
+						<li>Data is disappearing behind pay walls</li>
+						<li>Services need to earn their upkeep</li>
+						<li>Everyone needs a business model (even Twitter)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Interesting times</h2>
+					<ul>
+						<li>Being social is not optional</li>
+						<li>Massive opportunities across the ecosystem</li>
+						<li>Money is flowing</li>
+						<li>It's insanely cool</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Thanks! Any questions?</h2>
+					<p>Follow @sodash on Twitter!</p>
+					<p>We're looking for beta testers!</p>					
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
