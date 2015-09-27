@@ -75,7 +75,7 @@ var conceptGroups = [
 ['chance','fate'],
 ['safety','security'],
 ['life','living']
-]; 
+];
 var frames = [
 '$a is a malady for which $b is the cure.',
 '$a wouldn\'t be $a if it weren\'t for $b.',
@@ -110,7 +110,7 @@ function showAphorism(frameIndex, groupIndex, aIndex, bIndex) {
     var aphorism = frame.replace(/\$a/gi, a);
     aphorism = aphorism.replace(/\$b/gi, b);
     aphorism = aphorism[0].toUpperCase() + aphorism.substring(1);
-    
+
     // Display it
     var code = frameIndex + '-' + groupIndex + '-' + aIndex + '-' + bIndex;
     document.location= '#' + code;
@@ -147,7 +147,7 @@ function init() {
         for (i = 0; i < 4; i++) {
             if (isNaN(bits[i])) throw "NaN";
             bits[i] = parseInt(bits[i]);
-        }  
+        }
     }
     catch (e) {
         bits = getRandomIndices();
@@ -166,6 +166,10 @@ $(init);
 <hr />
 </div>
 <div id="controls">
+<a href="https://play.google.com/store/apps/details?id=com.joehalliwell.aphorismer">
+  <img alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+</a><br />
 Aphorism Generator by <a href="http://www.joehalliwell.com">Joe Halliwell</a> after Paul Braffort.<br />
 <a href="javascript:showAphorism.apply(null, getRandomIndices());" title="Click to generate abother aphorism">another</a>
 - <a id="permalink" href="#" title="Bookmark this for a permanent link to the current aphorism">permalink</a>
