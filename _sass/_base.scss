@@ -9,7 +9,8 @@
 body {
 	font-family: $base-font;
 	color: $text-color;
-	@include font-size(16);
+	background-color: $body-color;
+	@include font-size(18);
 }
 
 p {
@@ -17,7 +18,7 @@ p {
 }
 
 li {
-	@include font-size(16,12,24);
+	@include font-size(18,12,24);
 }
 
 /* Headings */
@@ -25,6 +26,9 @@ li {
 h1, h2, h3, h4, h5, h6 {
 	font-family: $heading-font;
 	text-rendering: optimizeLegibility; // Fix the character spacing for headings
+	font-weight: bold;
+	letter-spacing: 2px;
+	text-transform: uppercase;
 }
 h1 {
 	@include font-size(36);
@@ -58,7 +62,7 @@ ins {
 a {
 	color: $link-color;
 	&:hover {
-		color: darken($link-color, 20);
+		color: darken($link-color, 10);
 	}
 	&:focus {
 		@extend %tab-focus;

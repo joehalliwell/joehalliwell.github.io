@@ -6,14 +6,14 @@
    Typography variables
    ========================================================================== */
 
-$base-font                   	: Georgia,Times,"Times New Roman",serif;
+$base-font                   	: "Helvetica Neue","Segoe UI",Arial,sans-serif;
 $heading-font                	: "Helvetica Neue","Segoe UI",Arial,sans-serif;
 $caption-font                	: $base-font;
 $code-font                   	: monospace;
 $alt-font                    	: $heading-font;
 
-$doc-font-size               	: 16;
-$doc-line-height             	: 24;
+$doc-font-size               	: 18;
+$doc-line-height             	: 28;
 
 $border-radius               	: 3px;
 
@@ -24,15 +24,23 @@ $border-radius               	: 3px;
 $white                        : #fff;
 $black                        : #000;
 
-$body-color                  	: #ebebeb;
+$body-color                  	: #662167;
+$text-color                  	: #ffe455;
 
-$text-color                  	: #313130;
+$text-color                  	: #e42ce7;
+$body-color                  	: #ffe455;
+
+//$text-color: #444;
+//$body-color: #ddd;
+
+
 $caption-color                : mix($white, $text-color, 25%);
 
 $base-color                  	: #343434;
 $comp-color                  	: complement($base-color);
 $border-color                	: #ddd;
-$link-color                  	: #222;
+$link-color                  	: $text-color;
+$title-color                  : $text-color;
 
 $primary-color               	: $black;
 $success-color               	: #2ecc71;

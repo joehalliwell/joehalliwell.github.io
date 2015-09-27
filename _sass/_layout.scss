@@ -26,7 +26,7 @@
 	padding: (.25 * $masthead-height) 0; // fourth the height to center vertically
 	height: $masthead-height;
 	text-decoration: none;
-	color: $black;
+	color: $title-color;
 	font-family: $alt-font;
 	font-weight: 700;
 	@include font-size(20,no);
@@ -71,7 +71,7 @@
 			}
 			&:after {
 				width: 0;
-				background: $black;
+				background: $title-color;
 			}
 			&:active:after,
 			&:hover:after {
@@ -105,7 +105,7 @@
 			font-weight: 700;
 			@include font-size(16,no);
 			line-height: .5 * $masthead-height; // half the height to center vertically
-			color: $black;
+			color: $title-color;
 			text-transform: uppercase;
 		}
 	}
@@ -164,10 +164,7 @@
 			a { text-decoration: none; }
 			p a,
 			li a {
-				border-bottom: 1px dotted lighten($link-color, 50);
-				&:hover {
-					border-bottom-style: solid;
-				}
+				border-bottom: 2px solid $link-color;
 			}
 			p > a.reversefootnote {
 				border-bottom-width: 0;
@@ -342,9 +339,9 @@
   /* Copyright text */
 	.copyright {
 		@include font-size(12);
-		color: lighten($black,60);
+		color: $text-color;
 		a {
-			color: lighten($black,60);
+			color: $text-color;
 			text-decoration: none;
 		}
 	}
