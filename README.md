@@ -1,4 +1,4 @@
-joehalliwell.github.io
-======================
+# joehalliwell.github.io
 
-Homepage
+Made with:
+- https://github.com/mmistakes/skinny-bones-jekyll
