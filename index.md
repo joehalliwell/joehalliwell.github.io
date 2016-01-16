@@ -5,7 +5,7 @@ permalink: /
 
 Cor! Isn't everything _amazing_?
 
-## Big things that I helped make
+## Bigger things that I helped make
 
 - [Ginsberg](https://www.ginsberg.io/), a place to track your emotional and physical wellbeing
 - [Sodash](http://sodash.com), an AI-driven social media monitoring and engagement tool
@@ -16,7 +16,7 @@ Cor! Isn't everything _amazing_?
 - [Devbot](https://www.google.co.uk/?#q=devbot+edinburgh+robotics), now defunct full stack robotics toolkit
 - [VIR](http://andrewback.net/works/VIR) an artwork with [Andrew Back](http://andrewback.net)
 
-## Little things that I made myself
+## Littler things that I made myself
 
 - [DellDisco](https://chrome.google.com/webstore/detail/delldisco/afklhpnabnbhaommppgieeaaphdekbjk?hl=en-GB), blinkenlights for Dell Chromebooks
 - [Aphorismer](https://play.google.com/store/apps/details?id=com.joehalliwell.aphorismer), an endless stream of profound nonsense for Android devices, based on my [Aphorism Generator](aphorisms.html)
