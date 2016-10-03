@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html><head>
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+}
+
+#colophon {
+    position: fixed;
+    left: 5px;
+    bottom: 5px;
+    color: #dbb;
+    font-weight: 100;
+}
+
+svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #fee;
+    cursor: pointer;
+}
+
+path {
+  fill-rule: evenodd;
+  stroke: #333;
+  stroke-width: 1px;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+</style>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<title>SGLZR</title>
+</head>
+
+<body>
+<svg>
+<title>Click for more...</title>
+</svg>
+
+<div id="colophon">
+<span onclick="getDesire();">SGLZ</span> ∴
+<span onclick="setParameters('Joe Halliwell', seed);">CRDT</span> ∴
+<span onclick="tweet();">PSTW</span>
+</div>
+
+<script>
+
+function onResize() {
+    // Rejig everything to fit nicely
+
+    log("Handling resize");
+    svg.attr("width", window.innerWidth);
+    svg.attr("height", window.innerHeight);
+    var size = Math.min(window.innerWidth, window.innerHeight);
+    var ox = 0.5 * (window.innerWidth - size + (3 * margin * size));
+    var oy = 0.5 * (window.innerHeight - size + (2 * margin * size));
+    var transform = "";
+    transform += "translate(" + ox + "," + oy + ") ";
+    transform += "scale(" + (1.0 - margin * 3) * size + ")"
+    container.attr("transform", transform);
+
+    var transform = "";
+    transform += "translate(" + (0.5 * window.innerWidth) + "," + (window.innerHeight - margin * size) + ") ";
+    transform += "scale(10, -10)"
+    title.attr("transform", transform);
+}
+
+var font = {
+    "A": "L9ADABL2M6L8",
+    "B": "LCLDABA7L6M7A5A1L0",
+    "C": "M5A1A3L9ADAB",
+    "D": "LCLDABL5A1L0",
+    "E": "M2L0LCLEM6L8",
+    "F": "LCLEM6L8",
+    "G": "MBADA9L3A1A5L8L7M8L2",
+    "H": "LCM6L8M2LECE",
+    "I": "L2M1LDMCLE",
+    "J": "M3A1A5LELC",
+    "K": "LCMEL6L2",
+    "L": "M2L0LC",
+    "M": "LCL7LEL2",
+    "N": "LCL2LE",
+    "O": "M3L9ADABL5A1A3",
+    "P": "LCLDABA7L6",
+    "Q": "M3L9ADABL5A1A3M4L2",
+    "R": "LCLDABA7L6L2C2",
+    "S": "L1A5A7A9ADLE",
+    "T": "M1LDMCLE",
+    "U": "MCL3A1A5LE",
+    "V": "MCL1LE",
+    "W": "MCL0L7L2LE",
+    "X": "LEMCL2",
+    "Y": "MCL7LEM7L1",
+    "Z": "MCLEL0L2",
+    " ": ""
+}
+
+function log() {
+    if (console) {
+        console.log.apply(null, arguments);
+    }
+}
+
+function coords(c) {
+    var cell = (c >= 65) ? 10 + (c - 65) : c - 48;
+    var point = {x: 1.0 / 2.0 * (cell % 3), y: 1.0  * aspect / 4.0 * Math.floor(cell / 3)};
+    //log(String.fromCharCode(c), c, point);
+    return point;
+}
+
+function buildPath(path) {
+    //log("Decoding " + path);
+    var i = 0;
+    var p = ["M0,0"]
+    var prev = {x: 0, y: 0};
+    while (i < path.length) {
+        var command = path.charAt(i++);
+        var point = coords(path.charCodeAt(i++));
+        if (command == 'L') {
+            p.push("L", point.x, ",", point.y);
+        }
+        else if (command == 'M') {
+            p.push("M", point.x, ",", point.y);
+        }
+        else if (command == 'A') {
+            var x = Math.round(0.5 * (prev.x + point.x));
+            var y = 0.5 * aspect * Math.round((prev.y + point.y) / aspect)
+            p.push("Q", x, ",", y, ",", point.x, ",", point.y);
+        }
+        else if (command == 'C') {
+            var cs = 1;
+            p.push("A", cs, ",", cs, ",0,1,0,", point.x, ",", point.y);
+        }
+        prev = point;
+    }
+    //log(p.join(""));
+    return p.join("");
+}
+
+function getPath(c) {
+    return buildPath(font[c]);
+}
+
+function getFrames(c) {
+    //log("Getting frames for: " + c);
+    var path = font[c];
+    var frames = [];
+    var prev = {x: 0, y: 0};
+    var i = 0;
+    while (i < path.length) {
+        var command = path.charAt(i++);
+        var point = coords(path.charCodeAt(i++));
+        if (command == 'L') {
+            frames = frames.concat(getFramesForLine(prev, point));
+            frames = frames.concat(getFramesForLine(point, prev));
+        }
+        prev = point;
+    }
+    return frames;
+}
+
+function getFramesForLine(a, b) {
+    var frames = [];
+    var scale = 1.0 / Math.sqrt((a.y - b.y) ** 2 + (a.x - b.x) ** 2);
+    var r = Math.atan((a.y - b.y) / (a.x - b.x)) * 180.0 / Math.PI;
+
+    /** Build up transforms */
+    var transform = "";
+    transform += "translate(" + b.x + "," + b.y + ") ";
+    transform += "rotate(" + (r + 90) + ") ";
+    transform += "scale(" + (scale) + ") ";
+    frames.push(transform);
+
+    var transform = "";
+    transform += "translate(" + b.x + "," + b.y + ") ";
+    transform += "rotate(" + (r) + ") ";
+    transform += "scale(" + (scale) + ") ";
+    frames.push(transform);
+
+
+    return frames;
+}
+
+function drawTitle(text) {
+    text = text.toUpperCase();
+    title.selectAll("g").remove();
+    var group = title.append("g");
+    var offset = 0.5 * text.length
+    var spacing = 1.5;
+    for (var i = 0; i < text.length; i++) {
+        var c = text.charAt(i);
+        var transform = "translate(" + (i - offset) * 1.5 + "," + 0 + ") ";
+        group.append("g")
+             .attr("transform", transform)
+             .append("path")
+             .attr("d", getPath(c))
+    }
+}
+
+function sigilize(msg) {
+    log("Sigilising " + msg);
+    msg = msg.toUpperCase();
+    vowels = [" ", "A", "E", "I", "O", "U"];
+    var letters = {}
+    for (var i = 0; i < msg.length; i++) {
+        var c = msg.charAt(i);
+        if (vowels.indexOf(c) != -1) continue;
+        letters[c] = true
+    }
+    msg = Object.keys(letters).join("");
+    log("  -> " + msg);
+
+    var frames = [frame];
+    frame.selectAll("g").remove();
+
+    for (var i = 0; i < msg.length; i++) {
+        var c = msg.charAt(i);
+        var parent = choose(frames);
+        //log(parent);
+        var group = parent.append("g");
+        group
+            .attr("letter", c)
+            .datum({letter: c})
+            .append("path")
+            .attr("d", getPath(c));
+        pc = parent.datum().letter;
+        //log("Parenting " + c + " to " + pc);
+        if (pc) {
+            var transform = choose(getFrames(pc))
+            //log(transform);
+            group.attr("transform", transform);
+        }
+
+        frames.push(group);
+    }
+
+    // Fit to viewport
+    var bbox = frame.node().getBBox();
+    var max = Math.max(bbox.width, bbox.height)
+    var scale = 1.0 / max;
+    transform = "";
+    transform += "scale(" + scale + ",-" + scale + ") ";
+    var ox = -bbox.x + 0.5 * (max - bbox.width);
+    var oy = bbox.y + bbox.height + 0.5 * (max - bbox.height)
+    transform += "translate(" + ox + ",-" + oy + ")"
+    frame.attr("transform", transform);
+}
+
+function choose(choices) {
+    var choice = choices[Math.floor(choices.length * random())];
+    return choice;
+}
+
+var seed = 0;
+var rng = 0;
+function random() {
+    var r = Math.sin(seed + rng++) * 10000;
+    return r - Math.floor(r);
+}
+
+function randomize() {
+    setParameters(msg, Math.floor(100000 * Math.random()));
+}
+
+function getParameters() {
+    var hash = window.location.hash;
+    var bits = hash.split("@");
+    msg = bits[0].substring(1) || msg;
+    seed = parseInt(bits[1]) || seed;
+    rng = 0;
+
+    sigilize(msg);
+    drawTitle(msg);
+}
+
+function setParameters(msg, seed) {
+    window.location.hash = msg + "@" + seed;
+    getParameters();
+}
+
+function getDesire() {
+    msg = window.prompt("ENTER YOUR DESIRE", "I WANT THE TASTE OF BUTTER");
+    setParameters(msg, seed);
+}
+
+function tweet() {
+    var target = "";
+    target += "https://twitter.com/home?status=" + msg + " ";
+    target += window.location;
+    window.location.href = target;
+}
+
+var margin = 0.1;
+var aspect = 2;
+var seed = 77301;
+var msg = "SIGILIZER";
+
+var svg = d3.select("svg");
+var container = svg.append("g");
+var frame = container.append("g");
+frame.datum({letter: " "});
+
+var title = svg.append("g");
+
+d3.selectAll("svg").on("click", randomize);
+window.onresize = onResize;
+window.onhashchange = getParameters;
+
+onResize();
+getParameters();
+
+</script>
+</body>
+</html>
