@@ -294,9 +294,8 @@ function getDesire() {
 }
 
 function tweet() {
-    var target = "";
-    target += "https://twitter.com/home?status=" + msg + " ";
-    target += window.location;
+    var tweet = msg + " " + window.location;
+    var target = "https://twitter.com/home?status=" + encodeURIComponent(msg);
     window.location.href = target;
 }
 
