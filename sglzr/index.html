@@ -294,9 +294,8 @@ function getDesire() {
 }
 
 function tweet() {
-    var tweet = msg.toUpperCase() + " " + window.location;
+    var tweet = msg.toUpperCase() + " " + window.location + " #SGLZR";
     var target = "https://twitter.com/home?status=" + encodeURIComponent(tweet);
-    alert(target);
     window.location.href = target;
 }
 
