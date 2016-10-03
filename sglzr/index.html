@@ -275,7 +275,7 @@ function randomize() {
 function getParameters() {
     var hash = window.location.hash;
     var bits = hash.split("@");
-    msg = bits[0].substring(1) || msg;
+    msg = bits[0].substring(1).replace(/\+/g, " ") || msg;
     seed = parseInt(bits[1]) || seed;
     rng = 0;
 
@@ -284,7 +284,7 @@ function getParameters() {
 }
 
 function setParameters(msg, seed) {
-    window.location.hash = msg + "@" + seed;
+    window.location.hash = msg.replace(/ /g, "+") + "@" + seed;
     getParameters();
 }
 
