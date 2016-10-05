@@ -16,8 +16,15 @@ body {
     position: fixed;
     left: 5px;
     bottom: 5px;
-    color: #dbb;
+    color: #a77;
+}
+
+#colophon button {
+    color: #a77;
     font-weight: 100;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 svg {
@@ -48,9 +55,10 @@ path {
 </svg>
 
 <div id="colophon">
-<span onclick="getDesire();">SGLZ</span> ∴
-<span onclick="setParameters('Joe Halliwell', seed);">CRDT</span> ∴
-<span onclick="tweet();">PSTW</span>
+<button onclick="randomize();">SGLZ</button> ∴
+<button onclick="getDesire();">XPRS</button> ∴
+<button onclick="setParameters('Joe Halliwell', seed);">CRDT</button> ∴
+<button onclick="tweet();">PSTW</button>
 </div>
 
 <script>
@@ -211,17 +219,22 @@ function drawTitle(text) {
     }
 }
 
-function sigilize(msg) {
-    log("Sigilising " + msg);
-    vowels = [" ", "A", "E", "I", "O", "U"];
+function getCharacters(msg) {
+    msg = msg.replace(/[AEIOU ]/g, "");
     var letters = {}
     for (var i = 0; i < msg.length; i++) {
         var c = msg.charAt(i);
-        if (vowels.indexOf(c) != -1) continue;
         letters[c] = true
     }
     msg = Object.keys(letters).join("");
-    log("  -> " + msg);
+    log("Building sigil from", msg);
+    return msg;
+}
+
+function sigilize(msg) {
+    log("Sigilising", msg);
+
+    msg = getCharacters(msg);
 
     var frames = [frame];
     frame.selectAll("g").remove();
@@ -297,7 +310,7 @@ function setParameters(msg, seed) {
 }
 
 function getDesire() {
-    msg = window.prompt("ENTER YOUR DESIRE", "I WANT THE TASTE OF BUTTER");
+    msg = window.prompt("ENTER YOUR DESIRE", "I WANT THE TASTE OF BUTTER") || msg;
     setParameters(msg, seed);
 }
 
