@@ -107,7 +107,7 @@ var font = {
 
 function log() {
     if (console) {
-        console.log.apply(null, arguments);
+        console.log.apply(console, arguments);
     }
 }
 
@@ -169,9 +169,13 @@ function getFrames(c) {
     return frames;
 }
 
+function distance(a, b) {
+    return Math.sqrt((a.y - b.y) * (a.y - b.y) + (a.x - b.x) * (a.x - b.x));
+}
+
 function getFramesForLine(a, b) {
     var frames = [];
-    var scale = 1.0 / Math.sqrt((a.y - b.y) ** 2 + (a.x - b.x) ** 2);
+    var scale = 1.0 / distance(a, b);
     var r = Math.atan((a.y - b.y) / (a.x - b.x)) * 180.0 / Math.PI;
 
     /** Build up transforms */
@@ -209,7 +213,6 @@ function drawTitle(text) {
 
 function sigilize(msg) {
     log("Sigilising " + msg);
-    msg = msg.toUpperCase();
     vowels = [" ", "A", "E", "I", "O", "U"];
     var letters = {}
     for (var i = 0; i < msg.length; i++) {
@@ -275,7 +278,12 @@ function randomize() {
 function getParameters() {
     var hash = window.location.hash;
     var bits = hash.split("@");
-    msg = bits[0].substring(1).replace(/\+/g, " ") || msg;
+
+    msg = bits[0].substring(1) || msg;
+    msg = msg.toUpperCase();
+    msg = msg.replace(/\+/g, " ");
+    msg = msg.replace(/[^A-Z ]/g, "");
+
     seed = parseInt(bits[1]) || seed;
     rng = 0;
 
