@@ -20,6 +20,7 @@ Cor! Isn't everything _amazing_?
 
 - [DellDisco](https://chrome.google.com/webstore/detail/delldisco/afklhpnabnbhaommppgieeaaphdekbjk?hl=en-GB), blinkenlights for Dell Chromebooks
 - [Aphorismer](https://play.google.com/store/apps/details?id=com.joehalliwell.aphorismer), an endless stream of profound nonsense for Android devices, based on my [Aphorism Generator](aphorisms.html)
+- [SGLZR](http://www.joehalliwell.com/sglzr), sigilize your desires, shape reality!
 - [Chronochrome](http://www.joehalliwell.com/chronochrome), interactive video art thing
 - [jGeoPlanet](http://joehalliwell.com/jGeoPlanet/), a java client library for Yahoo's GeoPlanet service
 - Sketches: [Relax](relax.html), [Vines](sketch/vines.html)
