@@ -1,357 +1,420 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<html><head>
-<style>
+<meta charset="utf-8" />
+<html>
+  <head>
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        padding: 0px;
+        margin: 0px;
+        background: #fee;
+      }
 
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  padding: 0px;
-  margin: 0px;
-}
+      #colophon {
+        position: fixed;
+        left: 5px;
+        bottom: 5px;
+        color: #a77;
+      }
 
-#colophon {
-    position: fixed;
-    left: 5px;
-    bottom: 5px;
-    color: #a77;
-}
+      #colophon button {
+        color: #a77;
+        font-weight: 100;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
 
-#colophon button {
-    color: #a77;
-    font-weight: 100;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
+      svg {
+        display: block;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <title>SGLZR</title>
+  </head>
 
-svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: #fee;
-    cursor: pointer;
-}
+  <body>
+    <svg></svg>
 
-path {
-  fill-rule: evenodd;
-  stroke: #333;
-  stroke-width: 1px;
-  fill: none;
-  vector-effect: non-scaling-stroke;
-  stroke-linecap: butt;
-  stroke-linejoin: round;
-}
-</style>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<title>SGLZR</title>
-</head>
+    <div id="colophon">
+      <button onclick="randomize();">SGLZ</button>
+      ∴ <button onclick="getDesire();">XPRS</button> ∴
+      <button onclick="setParameters('Joe Halliwell', 9102);">CRDT</button> ∴
+      <button onclick="tweet();">PSTW</button> ∴
+      <button onclick="save();">XPNG</button> ∴
+      <a id="xsvg" download="sigil.svg"><button>XSVG</button></a>
+    </div>
 
-<body>
-<svg>
-<title>Click for more...</title>
-</svg>
+    <script>
+      function onResize() {
+        // Rejig everything to fit nicely
 
-<div id="colophon">
-<button onclick="randomize();">SGLZ</button> ∴
-<button onclick="getDesire();">XPRS</button> ∴
-<button onclick="setParameters('Joe Halliwell', 9102);">CRDT</button> ∴
-<button onclick="tweet();">PSTW</button>
-</div>
+        var size = 1.0 * Math.min(window.innerWidth, window.innerHeight);
+        svg.attr("width", size);
+        svg.attr("height", size);
 
-<script>
+        var ox = 1.5 * (margin * size);
+        var oy = 1.0 * (margin * size);
+        var transform = "";
+        transform += "translate(" + ox + "," + oy + ") ";
+        transform += "scale(" + (1.0 - margin * 3) * size + ")";
+        container.attr("transform", transform);
 
-function onResize() {
-    // Rejig everything to fit nicely
+        ox = 0.5 * size;
+        oy = size - margin * size;
+        var transform = "";
+        transform += "translate(" + ox + "," + oy + ") ";
+        transform += "scale(10, -10)";
+        title.attr("transform", transform);
+      }
 
-    log("Handling resize");
-    svg.attr("width", window.innerWidth);
-    svg.attr("height", window.innerHeight);
-    var size = Math.min(window.innerWidth, window.innerHeight);
-    var ox = 0.5 * (window.innerWidth - size + (3 * margin * size));
-    var oy = 0.5 * (window.innerHeight - size + (2 * margin * size));
-    var transform = "";
-    transform += "translate(" + ox + "," + oy + ") ";
-    transform += "scale(" + (1.0 - margin * 3) * size + ")"
-    container.attr("transform", transform);
+      var font = {
+        A: "L9ADABL2M6L8",
+        B: "LCLDABA7L6M7A5A1L0",
+        C: "M5A1A3L9ADAB",
+        D: "LCLDABL5A1L0",
+        E: "M2L0LCLEM6L8",
+        F: "LCLEM6L8",
+        G: "MBADA9L3A1A5L8L7M8L2",
+        H: "LCM6L8M2LECE",
+        I: "L2M1LDMCLE",
+        J: "M3A1A5LELC",
+        K: "LCMEL6L2",
+        L: "M2L0LC",
+        M: "LCL7LEL2",
+        N: "LCL2LE",
+        O: "M3L9ADABL5A1A3",
+        P: "LCLDABA7L6",
+        Q: "M3L9ADABL5A1A3M4L2",
+        R: "LCLDABA7L6L2C2",
+        S: "L1A5A7A9ADLE",
+        T: "M1LDMCLE",
+        U: "MCL3A1A5LE",
+        V: "MCL1LE",
+        W: "MCL0L7L2LE",
+        X: "LEMCL2",
+        Y: "MCL7LEM7L1",
+        Z: "MCLEL0L2",
+        " ": "",
+      };
 
-    var transform = "";
-    transform += "translate(" + (0.5 * window.innerWidth) + "," + (window.innerHeight - margin * size) + ") ";
-    transform += "scale(10, -10)"
-    title.attr("transform", transform);
-}
+      function log() {
+        if (console) {
+          console.log.apply(console, arguments);
+        }
+      }
 
-var font = {
-    "A": "L9ADABL2M6L8",
-    "B": "LCLDABA7L6M7A5A1L0",
-    "C": "M5A1A3L9ADAB",
-    "D": "LCLDABL5A1L0",
-    "E": "M2L0LCLEM6L8",
-    "F": "LCLEM6L8",
-    "G": "MBADA9L3A1A5L8L7M8L2",
-    "H": "LCM6L8M2LECE",
-    "I": "L2M1LDMCLE",
-    "J": "M3A1A5LELC",
-    "K": "LCMEL6L2",
-    "L": "M2L0LC",
-    "M": "LCL7LEL2",
-    "N": "LCL2LE",
-    "O": "M3L9ADABL5A1A3",
-    "P": "LCLDABA7L6",
-    "Q": "M3L9ADABL5A1A3M4L2",
-    "R": "LCLDABA7L6L2C2",
-    "S": "L1A5A7A9ADLE",
-    "T": "M1LDMCLE",
-    "U": "MCL3A1A5LE",
-    "V": "MCL1LE",
-    "W": "MCL0L7L2LE",
-    "X": "LEMCL2",
-    "Y": "MCL7LEM7L1",
-    "Z": "MCLEL0L2",
-    " ": ""
-}
+      function coords(c) {
+        var cell = c >= 65 ? 10 + (c - 65) : c - 48;
+        var point = {
+          x: (1.0 / 2.0) * (cell % 3),
+          y: ((1.0 * aspect) / 4.0) * Math.floor(cell / 3),
+        };
+        //log(String.fromCharCode(c), c, point);
+        return point;
+      }
 
-function log() {
-    if (console) {
-        console.log.apply(console, arguments);
-    }
-}
-
-function coords(c) {
-    var cell = (c >= 65) ? 10 + (c - 65) : c - 48;
-    var point = {x: 1.0 / 2.0 * (cell % 3), y: 1.0  * aspect / 4.0 * Math.floor(cell / 3)};
-    //log(String.fromCharCode(c), c, point);
-    return point;
-}
-
-function buildPath(path) {
-    //log("Decoding " + path);
-    var i = 0;
-    var p = ["M0,0"]
-    var prev = {x: 0, y: 0};
-    while (i < path.length) {
-        var command = path.charAt(i++);
-        var point = coords(path.charCodeAt(i++));
-        if (command == 'L') {
+      function buildPath(path) {
+        //log("Decoding " + path);
+        var i = 0;
+        var p = ["M0,0"];
+        var prev = { x: 0, y: 0 };
+        while (i < path.length) {
+          var command = path.charAt(i++);
+          var point = coords(path.charCodeAt(i++));
+          if (command == "L") {
             p.push("L", point.x, ",", point.y);
-        }
-        else if (command == 'M') {
+          } else if (command == "M") {
             p.push("M", point.x, ",", point.y);
-        }
-        else if (command == 'A') {
+          } else if (command == "A") {
             var x = Math.round(0.5 * (prev.x + point.x));
-            var y = 0.5 * aspect * Math.round((prev.y + point.y) / aspect)
+            var y = 0.5 * aspect * Math.round((prev.y + point.y) / aspect);
             p.push("Q", x, ",", y, ",", point.x, ",", point.y);
-        }
-        else if (command == 'C') {
+          } else if (command == "C") {
             var cs = 1;
             p.push("A", cs, ",", cs, ",0,1,0,", point.x, ",", point.y);
+          }
+          prev = point;
         }
-        prev = point;
-    }
-    //log(p.join(""));
-    return p.join("");
-}
+        //log(p.join(""));
+        return p.join("");
+      }
 
-function getPath(c) {
-    return buildPath(font[c]);
-}
+      function getPath(c) {
+        return buildPath(font[c]);
+      }
 
-function getFrames(c) {
-    //log("Getting frames for: " + c);
-    var path = font[c];
-    var frames = [];
-    var prev = {x: 0, y: 0};
-    var i = 0;
-    while (i < path.length) {
-        var command = path.charAt(i++);
-        var point = coords(path.charCodeAt(i++));
-        if (command == 'L') {
+      function getFrames(c) {
+        //log("Getting frames for: " + c);
+        var path = font[c];
+        var frames = [];
+        var prev = { x: 0, y: 0 };
+        var i = 0;
+        while (i < path.length) {
+          var command = path.charAt(i++);
+          var point = coords(path.charCodeAt(i++));
+          if (command == "L") {
             frames = frames.concat(getFramesForLine(prev, point));
             frames = frames.concat(getFramesForLine(point, prev));
+          }
+          prev = point;
         }
-        prev = point;
-    }
-    return frames;
-}
+        return frames;
+      }
 
-function distance(a, b) {
-    return Math.sqrt((a.y - b.y) * (a.y - b.y) + (a.x - b.x) * (a.x - b.x));
-}
+      function distance(a, b) {
+        return Math.sqrt((a.y - b.y) * (a.y - b.y) + (a.x - b.x) * (a.x - b.x));
+      }
 
-function getFramesForLine(a, b) {
-    var frames = [];
-    var scale = 1.0 / distance(a, b);
-    var r = Math.atan((a.y - b.y) / (a.x - b.x)) * 180.0 / Math.PI;
+      function getFramesForLine(a, b) {
+        var frames = [];
+        var scale = 1.0 / distance(a, b);
+        var r = (Math.atan((a.y - b.y) / (a.x - b.x)) * 180.0) / Math.PI;
 
-    /** Build up transforms */
-    var transform = "";
-    transform += "translate(" + b.x + "," + b.y + ") ";
-    transform += "rotate(" + (r + 90) + ") ";
-    transform += "scale(" + (scale) + ") ";
-    frames.push(transform);
+        /** Build up transforms */
+        var transform = "";
+        transform += "translate(" + b.x + "," + b.y + ") ";
+        transform += "rotate(" + (r + 90) + ") ";
+        transform += "scale(" + scale + ") ";
+        frames.push(transform);
 
-    var transform = "";
-    transform += "translate(" + b.x + "," + b.y + ") ";
-    transform += "rotate(" + (r) + ") ";
-    transform += "scale(" + (scale) + ") ";
-    frames.push(transform);
+        var transform = "";
+        transform += "translate(" + b.x + "," + b.y + ") ";
+        transform += "rotate(" + r + ") ";
+        transform += "scale(" + scale + ") ";
+        frames.push(transform);
 
+        return frames;
+      }
 
-    return frames;
-}
-
-function drawTitle(text) {
-    text = text.toUpperCase();
-    title.selectAll("g").remove();
-    var group = title.append("g");
-    var offset = 0.5 * text.length
-    var spacing = 1.5;
-    for (var i = 0; i < text.length; i++) {
-        var c = text.charAt(i);
-        var transform = "translate(" + (i - offset) * 1.5 + "," + 0 + ") ";
-        group.append("g")
-             .attr("transform", transform)
-             .append("path")
-             .attr("d", getPath(c))
-    }
-}
-
-function getCharacters(msg) {
-    msg = msg.replace(/[AEIOU ]/g, "");
-    var letters = {}
-    for (var i = 0; i < msg.length; i++) {
-        var c = msg.charAt(i);
-        letters[c] = true
-    }
-    msg = Object.keys(letters).join("");
-    log("Building sigil from", msg);
-    return msg;
-}
-
-function sigilize(msg) {
-    log("Sigilising", msg);
-
-    msg = getCharacters(msg);
-
-    var frames = [frame];
-    frame.selectAll("g").remove();
-
-    for (var i = 0; i < msg.length; i++) {
-        var c = msg.charAt(i);
-        var parent = choose(frames);
-        //log(parent);
-        var group = parent.append("g");
-        group
-            .attr("letter", c)
-            .datum({letter: c})
+      function drawTitle(text) {
+        text = text.toUpperCase();
+        title.selectAll("g").remove();
+        var group = title.append("g");
+        var offset = 0.5 * text.length;
+        var spacing = 1.5;
+        for (var i = 0; i < text.length; i++) {
+          var c = text.charAt(i);
+          var transform = "translate(" + (i - offset) * 1.5 + "," + 0 + ") ";
+          group
+            .append("g")
+            .attr("transform", transform)
             .append("path")
+            .attr("vector-effect", "non-scaling-stroke")
+            .attr("stroke", fg_color)
+            .attr("stroke-width", 1)
+            .attr("fill", "none")
+            .attr("stroke-linecap", "butt")
+            .attr("stroke-linejoin", "round")
+
             .attr("d", getPath(c));
-        pc = parent.datum().letter;
-        //log("Parenting " + c + " to " + pc);
-        if (pc) {
-            var transform = choose(getFrames(pc))
+        }
+      }
+
+      function getCharacters(msg) {
+        msg = msg.replace(/[AEIOU ]/g, "");
+        var letters = {};
+        for (var i = 0; i < msg.length; i++) {
+          var c = msg.charAt(i);
+          letters[c] = true;
+        }
+        msg = Object.keys(letters).join("");
+        log("Building sigil from", msg);
+        return msg;
+      }
+
+      function sigilize(msg) {
+        log("Sigilising", msg);
+
+        msg = getCharacters(msg);
+
+        var frames = [frame];
+        frame.selectAll("g").remove();
+
+        for (var i = 0; i < msg.length; i++) {
+          var c = msg.charAt(i);
+          var parent = choose(frames);
+          //log(parent);
+          var group = parent.append("g");
+          group
+            .attr("letter", c)
+            .datum({ letter: c })
+            .append("path")
+            .attr("vector-effect", "non-scaling-stroke")
+            .attr("stroke", fg_color)
+            .attr("stroke-width", 1)
+            .attr("fill", "none")
+            .attr("stroke-linecap", "butt")
+            .attr("stroke-linejoin", "round")
+            .attr("d", getPath(c));
+          pc = parent.datum().letter;
+          //log("Parenting " + c + " to " + pc);
+          if (pc) {
+            var transform = choose(getFrames(pc));
             //log(transform);
             group.attr("transform", transform);
+          }
+
+          frames.push(group);
         }
 
-        frames.push(group);
-    }
+        // Fit to viewport
+        var bbox = frame.node().getBBox();
+        var max = Math.max(bbox.width, bbox.height);
+        var scale = 1.0 / max;
+        transform = "";
+        transform += "scale(" + scale + ",-" + scale + ") ";
+        var ox = -bbox.x + 0.5 * (max - bbox.width);
+        var oy = bbox.y + bbox.height + 0.5 * (max - bbox.height);
+        transform += "translate(" + ox + ",-" + oy + ")";
+        frame.attr("transform", transform);
+      }
 
-    // Fit to viewport
-    var bbox = frame.node().getBBox();
-    var max = Math.max(bbox.width, bbox.height)
-    var scale = 1.0 / max;
-    transform = "";
-    transform += "scale(" + scale + ",-" + scale + ") ";
-    var ox = -bbox.x + 0.5 * (max - bbox.width);
-    var oy = bbox.y + bbox.height + 0.5 * (max - bbox.height)
-    transform += "translate(" + ox + ",-" + oy + ")"
-    frame.attr("transform", transform);
-}
+      function choose(choices) {
+        var choice = choices[Math.floor(choices.length * random())];
+        return choice;
+      }
 
-function choose(choices) {
-    var choice = choices[Math.floor(choices.length * random())];
-    return choice;
-}
+      var seed = 0;
+      var rng = 0;
+      function random() {
+        var r = Math.sin(seed + rng++) * 10000;
+        return r - Math.floor(r);
+      }
 
-var seed = 0;
-var rng = 0;
-function random() {
-    var r = Math.sin(seed + rng++) * 10000;
-    return r - Math.floor(r);
-}
+      function randomize() {
+        setParameters(msg, Math.floor(100000 * Math.random()));
+      }
 
-function randomize() {
-    setParameters(msg, Math.floor(100000 * Math.random()));
-}
+      function getParameters() {
+        var hash = window.location.hash;
+        var bits = hash.split("@");
 
-function getParameters() {
-    var hash = window.location.hash;
-    var bits = hash.split("@");
+        msg = bits[0].substring(1) || msg;
+        msg = msg.toUpperCase();
+        msg = msg.replace(/\+/g, " ");
+        msg = msg.replace(/[^A-Z ]/g, "");
 
-    msg = bits[0].substring(1) || msg;
-    msg = msg.toUpperCase();
-    msg = msg.replace(/\+/g, " ");
-    msg = msg.replace(/[^A-Z ]/g, "");
+        seed = parseInt(bits[1]) || seed;
+        rng = 0;
 
-    seed = parseInt(bits[1]) || seed;
-    rng = 0;
+        sigilize(msg);
+        drawTitle(msg);
+        setupDownload();
+      }
 
-    sigilize(msg);
-    drawTitle(msg);
-}
+      function setupDownload() {
+        // This no longer works!
+        var link = d3.select("#xsvg")[0][0];
+        link.href = getSvgDataURL();
+      }
 
-function setParameters(msg, seed) {
-    window.location.hash = msg.replace(/ /g, "+") + "@" + seed;
-    getParameters();
-}
+      function setParameters(msg, seed) {
+        window.location.hash = msg.replace(/ /g, "+") + "@" + seed;
+        getParameters();
+      }
 
-function getDesire() {
-    msg = window.prompt("WHAT DOST THOU WANT?", "I WANT THE TASTE OF BUTTER") || msg;
-    setParameters(msg, seed);
-}
+      function getDesire() {
+        const desire = "I WANT THE TASTE OF BUTTER";
+        msg = window.prompt(prompt, desire) || msg;
+        setParameters(msg, seed);
+      }
 
-function tweet() {
-    var tweet = msg.toUpperCase() + " " + window.location + " #SGLZR";
-    var target = "https://twitter.com/home?status=" + encodeURIComponent(tweet);
-    window.location.href = target;
-}
+      function tweet() {
+        var tweet = msg.toUpperCase() + " " + window.location + " #SGLZR";
+        var target =
+          "https://twitter.com/home?status=" + encodeURIComponent(tweet);
+        window.location.href = target;
+      }
 
-var margin = 0.1;
-var aspect = 2;
-var seed = 77301;
-var msg = "SIGILIZER";
+      function getSvgDataURL() {
+        var svg = d3.select("svg")[0][0];
+        var svgStr = serializer.serializeToString(svg);
+        return "data:image/svg+xml;base64," + window.btoa(svgStr);
+      }
 
-var svg = d3.select("svg");
-var container = svg.append("g");
-var frame = container.append("g");
-frame.datum({letter: " "});
+      function save() {
+        console.log("Exporting");
+        var img = new Image();
+        img.src = getSvgDataURL();
 
-var title = svg.append("g");
+        // You could also use the actual string without base64 encoding it:
+        //img.src = "data:image/svg+xml;utf8," + svgStr;
 
-d3.selectAll("svg").on("click", randomize);
-window.onresize = onResize;
-window.onhashchange = getParameters;
+        console.log(svgStr.length);
 
-onResize();
-getParameters();
+        var canvas = document.createElement("canvas");
+        document.body.appendChild(canvas);
+        var w = 2048; //parseInt(d3.select(svg).style("width"));
+        var h = 2048; //parseInt(d3.select(svg).style("height"));
+        canvas.width = w;
+        canvas.height = h;
+        var ctx = canvas.getContext("2d");
 
-</script>
+        img.onload = (i) => ctx.drawImage(img, 0, 0, w, h);
+        // Now save as png or whatever
+      }
 
-<!-- Google Analytics -->
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      // Easier than using CSS
+      var bg_color = "#fee"; //"#002fa7";
+      var fg_color = "#333"; //"#f0f0f0";
 
-ga('create', 'UA-5118963-1', 'auto');  // Replace with your property ID.
-ga('send', 'pageview');
+      var margin = 0.1;
+      var aspect = 2;
+      var seed = 77301;
+      const prompt = "WHAT DOST THOU WANT?";
+      var msg = "SIGILIZER";
 
-</script>
-<!-- End Google Analytics -->
-</body>
+      var serializer = new XMLSerializer();
+      var svg = d3.select("svg");
+
+      svg.style("background", bg_color);
+
+      var container = svg.append("g");
+      var frame = container.append("g");
+      frame.datum({ letter: " " });
+
+      var title = svg.append("g");
+
+      d3.selectAll("svg").on("click", randomize);
+      window.onresize = onResize;
+      window.onhashchange = getParameters;
+
+      onResize();
+      getParameters();
+    </script>
+
+    <!-- Google Analytics -->
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      );
+
+      ga("create", "UA-5118963-1", "auto"); // Replace with your property ID.
+      ga("send", "pageview");
+    </script>
+    <!-- End Google Analytics -->
+  </body>
 </html>
