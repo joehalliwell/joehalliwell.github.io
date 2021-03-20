@@ -7,14 +7,17 @@ Cor! Isn't everything _amazing_?
 
 ## Bigger things that I helped make
 
-- [Ginsberg](https://www.ginsberg.io/), a place to track your emotional and physical wellbeing
+- [AdAppTive](http://www.redfoxmedia.co/), a rule-based ad broker
+- [Buddhify](http://buddhify.com/), a cross-platform meditation app
+- [Winterwell](http://www.winterwell.com), a mathematics and statistics consultancy
 - [Sodash](http://sodash.com), an AI-driven social media monitoring and engagement tool
 - [The 39 Steps](http://thestorymechanics.com/digital-adaptations/the-thirty-nine-steps/), an interactive book from from [Digital Adaptations](http://thestorymechanics.com/digital-adaptations/)
-- [Buddhify](http://buddhify.com/), a cross-platform meditation app
-- [AdAppTive](http://www.redfoxmedia.co/), a rule-based ad broker
-- [Winterwell](http://www.winterwell.com), a mathematics and statistics consultancy
-- [Devbot](https://www.google.co.uk/?#q=devbot+edinburgh+robotics), now defunct full stack robotics toolkit
 - [VIR](http://andrewback.net/works/VIR) an artwork with [Andrew Back](http://andrewback.net)
+
+<!--
+- [Devbot](https://www.google.co.uk/?#q=devbot+edinburgh+robotics), now defunct full stack robotics toolkit
+- [Ginsberg](https://www.youtube.com/watch?app=desktop&v=3pB5GwO93W8&list=PLB5B179D13EDCCA7A&index=68), now defunct place to track your emotional and physical wellbeing
+-->
 
 ## Littler things that I made myself
 
