@@ -52,6 +52,35 @@
     </div>
 
     <script>
+      DEFAULTS = {
+        showTitle: true,
+        removeVowels: true,
+        makeUnique: true,
+        stroke_width: 1,
+        margin: 0.1,
+        aspect: 2,
+        bg_color: "#fee",
+        fg_color: "#111111",
+      };
+      KISS = {
+        showTitle: false,
+        stroke_width: 20,
+        aspect: 1,
+        bg_color: "#F5B512",
+        fg_color: "#dedede",
+      };
+      SPHINX = {
+        showTitle: false,
+        bg_color: "#111111",
+        fg_color: "#dedede",
+      };
+      // I think I hacked this -- so it's not perfectly reproducible
+      ADVICE = {
+        margin: 0.1,
+      };
+
+      var config = { ...DEFAULTS, ...ADVICE };
+
       function onResize() {
         // Rejig everything to fit nicely
 
@@ -59,19 +88,23 @@
         svg.attr("width", size);
         svg.attr("height", size);
 
-        var ox = 1.5 * (margin * size);
-        var oy = 1.0 * (margin * size);
+        var ox = 1.5 * (config.margin * size);
+        var oy = (config.showTitle ? 1.0 : 1.5) * (config.margin * size);
         var transform = "";
         transform += "translate(" + ox + "," + oy + ") ";
-        transform += "scale(" + (1.0 - margin * 3) * size + ")";
+        transform += "scale(" + (1.0 - config.margin * 3) * size + ")";
         container.attr("transform", transform);
 
-        ox = 0.5 * size;
-        oy = size - margin * size;
-        var transform = "";
-        transform += "translate(" + ox + "," + oy + ") ";
-        transform += "scale(10, -10)";
-        title.attr("transform", transform);
+        if (config.showTitle) {
+          ox = 0.5 * size;
+          oy = size - config.margin * size;
+          var transform = "";
+          transform += "translate(" + ox + "," + oy + ") ";
+          transform += "scale(10, -10)";
+          title.attr("transform", transform);
+        } else {
+          title.attr("transform", "scale(0)");
+        }
       }
 
       var font = {
@@ -114,7 +147,7 @@
         var cell = c >= 65 ? 10 + (c - 65) : c - 48;
         var point = {
           x: (1.0 / 2.0) * (cell % 3),
-          y: ((1.0 * aspect) / 4.0) * Math.floor(cell / 3),
+          y: ((1.0 * config.aspect) / 4.0) * Math.floor(cell / 3),
         };
         //log(String.fromCharCode(c), c, point);
         return point;
@@ -134,7 +167,10 @@
             p.push("M", point.x, ",", point.y);
           } else if (command == "A") {
             var x = Math.round(0.5 * (prev.x + point.x));
-            var y = 0.5 * aspect * Math.round((prev.y + point.y) / aspect);
+            var y =
+              0.5 *
+              config.aspect *
+              Math.round((prev.y + point.y) / config.aspect);
             p.push("Q", x, ",", y, ",", point.x, ",", point.y);
           } else if (command == "C") {
             var cs = 1;
@@ -207,8 +243,8 @@
             .attr("transform", transform)
             .append("path")
             .attr("vector-effect", "non-scaling-stroke")
-            .attr("stroke", fg_color)
-            .attr("stroke-width", 1)
+            .attr("stroke", config.fg_color)
+            .attr("stroke-width", config.stroke_width)
             .attr("fill", "none")
             .attr("stroke-linecap", "round")
             .attr("stroke-linejoin", "round")
@@ -218,13 +254,16 @@
       }
 
       function getCharacters(msg) {
-        msg = msg.replace(/[AEIOU ]/g, "");
-        var letters = {};
-        for (var i = 0; i < msg.length; i++) {
-          var c = msg.charAt(i);
-          letters[c] = true;
+        msg = msg.toUpperCase();
+        if (config.removeVowels) msg = msg.replace(/[AEIOU ]/g, "");
+        if (config.makeUnique) {
+          var letters = {};
+          for (var i = 0; i < msg.length; i++) {
+            var c = msg.charAt(i);
+            letters[c] = true;
+          }
+          msg = Object.keys(letters).join("");
         }
-        msg = Object.keys(letters).join("");
         log("Building sigil from", msg);
         return msg;
       }
@@ -247,8 +286,8 @@
             .datum({ letter: c })
             .append("path")
             .attr("vector-effect", "non-scaling-stroke")
-            .attr("stroke", fg_color)
-            .attr("stroke-width", 1)
+            .attr("stroke", config.fg_color)
+            .attr("stroke-width", config.stroke_width)
             .attr("fill", "none")
             .attr("stroke-linecap", "round")
             .attr("stroke-linejoin", "round")
@@ -312,6 +351,7 @@
       function setupDownload() {
         // This no longer works!
         var link = d3.select("#xsvg")[0][0];
+        link.download = `sigil-${seed}.svg`;
         link.href = getSvgDataURL();
       }
 
@@ -347,8 +387,6 @@
         // You could also use the actual string without base64 encoding it:
         //img.src = "data:image/svg+xml;utf8," + svgStr;
 
-        console.log(svgStr.length);
-
         var canvas = document.createElement("canvas");
         document.body.appendChild(canvas);
         var w = 2048; //parseInt(d3.select(svg).style("width"));
@@ -362,11 +400,30 @@
       }
 
       // Easier than using CSS
-      var bg_color = "#fee"; //"#002fa7";
-      var fg_color = "#333"; //"#f0f0f0";
+      var bg_color = "#111111"; //"#313030"; //"#002fa7";
+      var fg_color = "#dedede"; //"#888"; //"#f0f0f0";
 
-      var margin = 0.1;
-      var aspect = 2;
+      // SILVER
+      // bg_color = "#dedede";
+      // fg_color = "#111111";
+
+      // // Blue
+      // bg_color = "#48f";
+      // fg_color = "#dedede";
+
+      // // Green
+      // bg_color = "#2a4";
+      // bg_color = "#195905";
+      // fg_color = "#dedede";
+
+      // // Cerise
+      // bg_color = "#a24";
+
+      // // Purple
+      // bg_color = "#428";
+      // bg_color = "#82a";
+      // fg_color = "#111111";
+
       var seed = 77301;
       const prompt = "WHAT DOST THOU WANT?";
       var msg = "SIGILIZER";
@@ -374,7 +431,7 @@
       var serializer = new XMLSerializer();
       var svg = d3.select("svg");
 
-      svg.style("background", bg_color);
+      svg.style("background", config.bg_color);
 
       var container = svg.append("g");
       var frame = container.append("g");
