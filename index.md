@@ -21,7 +21,7 @@ Cor! Isn't everything _amazing_?
 
 ## Littler things that I made myself
 
-- [Digital art at hicetnunc](https://www.hicetnunc.xyz/tz/tz1LGa2ePYGgWuxKF9z4Ps341N1M4xuUm6Nb), ethical NFTs
+- [Digital art at hicetnunc](https://objkt.com/profile/joehalliwell/created), ethical NFTs
 - [DellDisco](https://chrome.google.com/webstore/detail/delldisco/afklhpnabnbhaommppgieeaaphdekbjk?hl=en-GB), blinkenlights for Dell Chromebooks
 - [Chronochrome](http://www.joehalliwell.com/chronochrome), interactive video art thing
 - [jGeoPlanet](http://joehalliwell.com/jGeoPlanet/), a java client library for Yahoo's GeoPlanet service
