@@ -69,6 +69,14 @@
         bg_color: "#F5B512",
         fg_color: "#dedede",
       };
+      KISS2 = {
+        showTitle: false,
+        stroke_width: 20,
+        aspect: 1,
+        bg_color: "#F5B512",
+        fg_color: "#dedede",
+        removeVowels: false,
+      };
       SPHINX = {
         showTitle: false,
         bg_color: "#111111",
@@ -78,8 +86,34 @@
       ADVICE = {
         margin: 0.1,
       };
+      COLLABORATE = {
+        showTitle: false,
+        bg_color: "#002fa7",
+        fg_color: "#dedede",
+        aspect: 2,
+        removeVowels: false,
+        stroke_width: 1,
+      };
 
-      var config = { ...DEFAULTS, ...ADVICE };
+      PIXEL = {
+        ...COLLABORATE,
+        bg_color: "#4a6f65", // "#002fa7",
+        removeVowels: true,
+      };
+
+      HICATHON = {
+        showTitle: false,
+        aspect: 1,
+        stroke_width: 1,
+        fg_color: "#F5B512",
+        fg_color: "#dedede",
+
+        bg_color: "#4a6f65",
+        bg_color: "#111111",
+
+        // removeVowels: false,
+      };
+      var config = { ...DEFAULTS }; // ...HICATHON };
 
       function onResize() {
         // Rejig everything to fit nicely
