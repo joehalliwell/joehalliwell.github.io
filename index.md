@@ -14,13 +14,16 @@ Cor! Isn't everything _amazing_?
 - [Table top interactives](https://isodesign.co.uk/projects/first-world-war-gallery-av-installations-interactives) for the Imperial War Museum
 - [The 39 Steps](http://thestorymechanics.com/digital-adaptations/the-thirty-nine-steps/), an interactive book from from [Digital Adaptations](http://thestorymechanics.com/digital-adaptations/)
 - [VIR](http://andrewback.net/works/VIR) an artwork with [Andrew Back](http://andrewback.net)
+
 <!-- - [Devbot](https://www.google.co.uk/?#q=devbot+edinburgh+robotics), now defunct full stack robotics toolkit -->
 <!-- - [Ginsberg](https://www.youtube.com/watch?app=desktop&v=3pB5GwO93W8&list=PLB5B179D13EDCCA7A&index=68), now defunct place to track your emotional and physical wellbeing -->
 
 ## Littler things that I made myself
 
-- [Digital art at hicetnunc](https://objkt.com/profile/joehalliwell/created), ethical NFTs
+- [Aphorismer](https://play.google.com/store/apps/details?id=com.joehalliwell.aphorismer), a stream of profound nonsense for Android
+- [MeditationTime](https://play.google.com/store/apps/details?id=com.joehalliwell.meditationtime), a simple meditation timer for Android
 - [DellDisco](https://chrome.google.com/webstore/detail/delldisco/afklhpnabnbhaommppgieeaaphdekbjk?hl=en-GB), blinkenlights for Dell Chromebooks
+- [Digital art at hicetnunc](https://objkt.com/profile/joehalliwell/created), ethical NFTs
 - [Chronochrome](http://www.joehalliwell.com/chronochrome), interactive video art thing
 - [jGeoPlanet](http://joehalliwell.com/jGeoPlanet/), a java client library for Yahoo's GeoPlanet service
 - Sketches: [Relax](relax.html), [Vines](sketch/vines.html)
