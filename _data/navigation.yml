@@ -1,11 +1,13 @@
 # Site navigation links
 
 - title: Blog
-  url: http://joehalliwell.wordpress.com
+  url: https://joehalliwell.wordpress.com
 
 - title: Twitter
-  url: http://www.twitter.com/joehalliwell
+  url: https://www.twitter.com/joehalliwell
+
+- title: Mastodon
+  url: https://mastodon.social/@joehalliwell
 
 - title: Github
-  url: http://www.github.com/joehalliwell
-  
+  url: https://www.github.com/joehalliwell
