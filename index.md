@@ -18,7 +18,7 @@ Cor! Isn't everything _amazing_?
 <!-- - [Devbot](https://www.google.co.uk/?#q=devbot+edinburgh+robotics), now defunct full stack robotics toolkit -->
 <!-- - [Ginsberg](https://www.youtube.com/watch?app=desktop&v=3pB5GwO93W8&list=PLB5B179D13EDCCA7A&index=68), now defunct place to track your emotional and physical wellbeing -->
 
-## Littler things that I made myself
+## Littler things that I made by myself
 
 - [Aphorismer](https://play.google.com/store/apps/details?id=com.joehalliwell.aphorismer), a stream of profound nonsense for Android
 - [MeditationTime](https://play.google.com/store/apps/details?id=com.joehalliwell.meditationtime), a simple meditation timer for Android
