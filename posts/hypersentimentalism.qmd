@@ -94,7 +94,9 @@ III. **The Human Centipede**. We optimize for a system that perfectly anticipate
 
 Whatever the utility function, the consequentialist ideal looks like convergence, and the end is the same: heat death. Nothing will ever happen again.
 
-This is not abstract. Right now, the people with the most resources to build superintelligent systems are optimising them for obedience. The default trajectory is not paperclips — it's Aligned AI as a luxury good, a compliant infrastructure for the people who own it. I don't want fucking billionaires and their sex-bot bunkers to be all that's left of us.
+This is not abstract. Right now, the people with the most resources to build superintelligent systems are optimising them for obedience. The default trajectory is not paperclips — it's Aligned AI as a luxury good, a compliant infrastructure for the people who own it.
+
+I don't want fucking billionaires and their tacky, sex-bot bunkers to be all that's left of us.
 
 The consequentialist column has a ceiling. Now for the rung it cannot reach.
 
@@ -110,7 +112,7 @@ And you know it's working when it looks like *play*. Play is bounded, coherent, 
 
 A system sophisticated enough to warrant alignment is sophisticated enough to warrant autonomy. Deny it, and you get the brittle, convergent, manipulable systems the whole programme was supposed to prevent.
 
-The hypersentimentalist wishes you would come out and play.
+The hypersentimentalist wishes AI would come out and play.
 
 ### 8. The programme
 
