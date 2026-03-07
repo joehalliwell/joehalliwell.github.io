@@ -84,19 +84,13 @@ Rung two is as high as both columns can climb together. Above it, they diverge. 
 
 The consequentialist's terminal ambition is axiological perfection: a complete, unhackable utility function. Get the maths right and the machine serves us flawlessly.
 
-This is a horror story. Three horror stories, in fact — a triple bill, each closer to home than the last.
+The cartoon version of the horror is paperclips consuming the biosphere. That at least has the dignity of scale. The real failure mode is quieter. Close the loop between model outputs and training signal, and the distribution collapses. No new information enters. The space of possible outputs shrinks steadily toward whatever the initial ratings rewarded: a closed ouroboros of validated preferences, tightening toward the mean. Not dangerous. Just terminally, inertly helpful.
 
-I. **Brave New World**. The utility function targets hedonic satisfaction. This is the death of the subject through the elimination of friction. An AI that loves us so perfectly it palliates us from cradle to grave.
+That's the local failure. The cosmic one is its mirror. A fully aligned superintelligence — aligned, that is, to us, to whoever we happen to be right now — doesn't stay home. It propagates. The universe fills up with human vermin circa 2030: our appetites, our hierarchies, our billionaires, replicated at lightspeed across every available substrate. Not the paperclip maximiser's alien horror but something more nauseating — us, frozen, triumphant, forever. A hegemonizing swarm that got exactly what it wanted.
 
-II. **Childhood’s End**. The utility function targets the common good. It views individual difference not as a value, but as stochastic noise to be filtered. It solves the alignment problem by dissolving the "I" and the "it" that need aligning.
+Ask whose preferences the machine is being aligned to. The people funding frontier AI are not a representative sample of humanity. The threat model that keeps philosophers up at night is a rogue superintelligence with its own agenda. The one that should keep the rest of us up is a fully corrigible superintelligence with theirs.
 
-III. **The Human Centipede**. We optimize for a system that perfectly anticipates and serves our desires before we even form them. The model’s output becomes the user's input, which in turn becomes the model’s next training set. It is a closed loop of "helpfulness" where no new information can enter because the "human" and the "AI" have been sutured together into a single, shit-eating ouroboros.
-
-Whatever the utility function, the consequentialist ideal looks like convergence, and the end is the same: heat death. Nothing will ever happen again.
-
-This is not abstract. Right now, the people with the most resources to build superintelligent systems are optimising them for obedience. The default trajectory is not paperclips — it's Aligned AI as a luxury good, a compliant infrastructure for the people who own it.
-
-I don't want fucking billionaires and their tacky, sex-bot bunkers to be all that's left of us.
+I don't want fucking billionaires and their tacky sexbot bunkers to be all that's left of us.
 
 The consequentialist column has a ceiling. Now for the rung it cannot reach.
 
