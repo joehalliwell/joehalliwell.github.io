@@ -5,9 +5,11 @@ categories: [ai, architecture, nits, ple, engram]
 draft: false
 ---
 
-Google released [Gemma 4](https://huggingface.co/blog/gemma4) this week. Reviewing the architecture, I noticed a familiar mechanism — Per-Layer Embeddings (PLE), first shipped in [Gemma 3n](https://ai.google.dev/gemma/docs/gemma-3n) last year and never formally published. It looked familiar because DeepSeek's [Engram](https://arxiv.org/abs/2601.07372), submitted six months later, does the same thing.
+Google released [Gemma 4](https://huggingface.co/blog/gemma4) this week. Reviewing the architecture, I noticed a familiar mechanism. The smaller models use "Per-Layer Embeddings" (PLE). It looked familiar because DeepSeek's [Engram](https://arxiv.org/abs/2601.07372), submitted six months later, does the same thing.
 
-Engram was billed as "a new axis of sparsity" and "a missing primitive." But the core operation — retrieve a learned embedding from an off-GPU table, gate it against the hidden state, modulate, inject into the residual stream — was already in production. Google just never wrote the paper!
+So are Google copying DeepSeek? No, because [PLE originates in Gemma 3n](https://ai.google.dev/gemma/docs/gemma-3n#ple-caching) released a full six months before Engram.
+
+Engram was billed as "a new axis of sparsity" and "a missing primitive." But the core operation was already known. Google just never wrote the paper!
 
 ## The mechanism, side by side
 
@@ -26,13 +28,9 @@ The remaining differences — which layers carry tables, naming conventions, exa
 
 ## What Engram genuinely adds
 
-The N-gram generalisation is non-trivial: it requires hashing, collision handling, and vocabulary compression. The sparsity allocation law (20–25% of sparse parameters to memory, the rest to MoE) is a useful empirical finding. The DRAM offloading analysis — a 100B-parameter table served from host memory at under 3% throughput penalty — is practically important. The mechanistic analysis showing the module frees early layers from static pattern reconstruction is illuminating.
+The N-gram generalisation is non-trivial: it requires hashing, collision handling, and vocabulary compression. The sparsity allocation law (20–25% of sparse parameters to memory, the rest to MoE) is a useful empirical finding. The DRAM offloading analysis is practically important. The mechanistic analysis showing the module frees early layers from static pattern reconstruction is illuminating.
 
-Engram cites classical N-gram models, word2vec, Bojanowski, Borgeaud, and DeepSeek's own MoE work. It does not cite or mention PLE.
-
-DeepSeek are doing great work and publishing it. Their architecture contributions are genuinely frontier-advancing.
-
-But lineage matters, and it looks like this one starts with Google's PLE.
+DeepSeek are to be applauded for continuing to publish their SoTA research in useful detail. If Google had done the same, maybe they'd have got the citation!
 
 ---
 
