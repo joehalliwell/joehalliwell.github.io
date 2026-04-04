@@ -1,69 +1,41 @@
 ---
-title: "An unacknowledged debt: how DeepSeek's Engram quietly extends Google's Per-Layer Embeddings"
+title: "Gemma 4, and Engram's secret ancestor"
 date: "2026-04-04"
-categories: [ai, architecture, nits]
+categories: [ai, architecture, nits, ple, engram]
 draft: false
 ---
 
-Google released [Gemma 4](https://huggingface.co/blog/gemma4) this week. Whilst reading the architecture notes, I noticed something I haven't seen discussed: DeepSeek's [Engram](https://arxiv.org/abs/2601.07372) module — published in January 2026 as "a new axis of sparsity" — is a direct generalisation of a technique Google shipped six months earlier, without acknowledgement.
+Google released [Gemma 4](https://huggingface.co/blog/gemma4) this week. Reviewing the architecture, I noticed a familiar mechanism — Per-Layer Embeddings (PLE), first shipped in [Gemma 3n](https://ai.google.dev/gemma/docs/gemma-3n) last year and never formally published. It looked familiar because DeepSeek's [Engram](https://arxiv.org/abs/2601.07372), submitted six months later, does the same thing.
 
-This isn't exactly an accusation of impropriety. Because Google shipped the architecture in code and developer docs rather than formalising it in an academic paper, it fell outside the traditional academic radar, making it easy to overlook. But the lineage is worth recording.
+Engram was billed as "a new axis of sparsity" and "a missing primitive." But the core operation — retrieve a learned embedding from an off-GPU table, gate it against the hidden state, modulate, inject into the residual stream — was already in production. Google just never wrote the paper!
 
-## Gemma 4
+## The mechanism, side by side
 
-Four models, edge to datacenter, all [Apache 2.0](https://github.com/google-deepmind/gemma). The [26B MoE](https://huggingface.co/google/gemma-4-27b-it) activates just 3.8B parameters at inference — [Arena AI #6 among open models](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-gemma-4) — making hardware efficiency a priority. Similarly, the 31B dense model fits comfortably on a single H100. The edge models (E2B, E4B) run on phones. All natively multimodal, up to 256K context. For anyone building agentic workflows on open weights, this makes "run it yourself" credible.
+Much of the community's understanding of PLE comes from [antimatter15's reverse-engineering work](https://github.com/antimatter15/reverse-engineering-gemma-3n).
 
-## What's inside?
+PLE maintains a learned embedding table per transformer layer. At each layer:
 
-No standalone technical paper yet. While Gemma 4 is commanding the headlines, its architectural DNA was quietly introduced months earlier. What we know comes from [Maarten Grootendorst's visual guide](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-gemma-4) on Hugging Face, the [Google Developers Blog](https://developers.googleblog.com/en/introducing-gemma-3n-developer-guide/), and the [Gemma 3n documentation](https://ai.google.dev/gemma/docs/gemma-3n) from mid-2025 where several core components first appeared — including, in the smaller models, Per-Layer Embeddings (PLE).
+1. **Retrieve** a learned vector by token ID.
+2. **Gate** via a projection of the hidden state through a non-linearity.
+3. **Modulate** by element-wise multiplication.
+4. **Inject** back into the residual stream.
 
-## PLE: the mechanism
+Engram performs the same four operations. The difference is the retrieval key: where PLE indexes by single token ID, Engram indexes by hashed N-gram sequence. Set N=1 and the hash reduces to a direct lookup. PLE is the unigram case of Engram.
 
-Standard transformers give each token one embedding vector at input. That vector must encode everything every layer might need, and the model learns to pass irrelevant information through early layers like a hot potato until something can use it.
+The remaining differences — which layers carry tables, naming conventions, exact dimensionality — are implementation choices, not architectural ones.
 
-PLE maintains a separate learned embedding table per transformer layer — 30 tables, each V × 256. At inference, all 30 vectors per input token are fetched once and cached. At each layer ℓ:
+## What Engram genuinely adds
 
-1. **Gate.** Project the hidden state to 256 dims, apply GELU.
-2. **Modulate.** Element-wise multiply with the layer's stored embedding.
-3. **Inject.** Project back up, normalise, add to residual stream.
+The N-gram generalisation is non-trivial: it requires hashing, collision handling, and vocabulary compression. The sparsity allocation law (20–25% of sparse parameters to memory, the rest to MoE) is a useful empirical finding. The DRAM offloading analysis — a 100B-parameter table served from host memory at under 3% throughput penalty — is practically important. The mechanistic analysis showing the module frees early layers from static pattern reconstruction is illuminating.
 
-The tables live on CPU or flash, not GPU — which is how E2B has 5B total parameters but a 2B memory footprint. PLE was introduced in [Gemma 3n](https://ai.google.dev/gemma/docs/gemma-3n) in mid-2025 and, as far as I can determine, was never published as a standalone paper. Much of the community's understanding comes from [antimatter15's reverse-engineering work](https://github.com/antimatter15/reverse-engineering-gemma-3n).
+Engram cites classical N-gram models, word2vec, Bojanowski, Borgeaud, and DeepSeek's own MoE work. It does not cite or mention PLE.
 
-## Well, that looks familiar...
+DeepSeek are doing great work and publishing it. Their architecture contributions are genuinely frontier-advancing.
 
-In January 2026, DeepSeek published [Engram](https://arxiv.org/abs/2601.07372). At designated layers, the module performs the following operations:
-
-1. **Retrieve.** Hash the N-gram sequence to generate an index, then fetch the corresponding learned embedding from a large, off-GPU table.
-2. **Gate.** Project the current hidden state and apply a non-linearity.
-3. **Modulate.** Element-wise multiply the hidden state projection with the retrieved N-gram embedding.
-4. **Inject.** Project back up and add to the residual stream.
-
-The gating pattern is structurally identical to PLE's. The difference is the key. PLE indexes by single token ID — direct lookup. Engram indexes by hashed N-gram sequences, which is why it needs the hashing machinery. With N=1, Engram's hash reduces to a direct token ID lookup.
-
-**PLE *is* Engram with N=1.** The remaining differences — which layers, where the tables live, what you call the vector — are implementation choices, not architectural ones.
-
-## What Engram adds
-
-The N-gram generalisation is non-trivial: hashing, collision handling, vocabulary compression. The [sparsity allocation law](https://github.com/deepseek-ai/Engram) (20–25% of sparse parameters to memory, the rest to MoE) is a useful finding. The DRAM offloading analysis (100B-parameter table served from host memory, <3% throughput penalty) is practically important. The mechanistic analysis — showing the module frees early layers from static pattern reconstruction — is illuminating.
-
-The paper cites classical N-gram models, word2vec, Bojanowski, Borgeaud, and DeepSeek's own MoE work. It does not cite or mention PLE.
-
-## The gap
-
-PLE shipped in production six months before Engram was submitted. The core mechanism is identical at N=1. The paper's framing — "a new axis of sparsity," "a missing primitive" — reads differently once you know the unigram case was already deployed at scale.
-
-Charitably: PLE was never published, so there was no formal citation target. Less charitably: the most direct contemporary precedent was omitted and the novelty claims framed without acknowledging it.
-
-## Why it matters
-
-Small point, big field, fast-moving. DeepSeek's architectural innovation — MoE, multi-latent attention, [hyper-connections](https://arxiv.org/abs/2409.19606) — is genuinely frontier-advancing. Engram is good work.
-
-But lineage matters. The lesson may be less about DeepSeek's citation practices than about the cost of shipping innovations without publishing them: if you don't write the paper, you forfeit the citation.
-
-PLE is Engram at N=1. Engram is PLE generalised to N-grams. The lineage should be recorded, even if belatedly, and even if only here.
+But lineage matters, and it looks like this one starts with Google's PLE.
 
 ---
 
 ## Acknowledgements
 
-*This essay was coauthored by Claude Opus 4.6 and Gemini 3.1 Pro.*
+Co-authored by Claude Opus 4.6. Thanks to Gemini 3 for review and suggestions.
