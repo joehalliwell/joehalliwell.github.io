@@ -1,0 +1,36 @@
+---
+title: "Per-Layer Embeddings vs Engram"
+date: "2026-04-04"
+categories: [ai, architecture, nits, ple, engram]
+draft: false
+---
+
+Google released [Gemma 4](https://huggingface.co/blog/gemma4) this week. Reviewing the architecture, I noticed a familiar-looking mechanism. The smaller models use "Per-Layer Embeddings" (PLE) which are strikingly similar to DeepSeek's [Engram](https://arxiv.org/abs/2601.07372).
+
+Both modules follow the same high-level pattern: retrieve a learned embedding from an off-GPU table, gate it against the current hidden state, and inject the result into the residual stream. The motivation is identical too: offload static pattern knowledge from the transformer backbone so that early layers can focus on reasoning rather than rote reconstruction.
+
+## Oh wow! So Google are taking inspiration from DeepSeek?
+
+No, because it turns out that [PLE originates in Gemma 3n](https://ai.google.dev/gemma/docs/gemma-3n#ple-caching) released a full six months before Engram!
+
+## Ah okay, so DeepSeek are ripping off Google?
+
+No, because the mechanisms are substantially different in detail.
+
+PLE indexes by single token ID and gates via element-wise modulation (project, GELU, multiply, project back). Engram indexes by hashed N-gram sequences using multi-head hashing, and gates via a scalar attention-style mechanism (Key/Value projections from the retrieved embedding, normalised dot-product against the hidden state).
+
+Also, the Engram whitepaper brings a bunch of practical and empirical findings to the table, notably their proposal that 20–25% parameter allocation to the memory. Plus the analysis showing the module frees early layers from static pattern reconstruction is illuminating.
+
+Still, PLE seems close enough to warrant a citation. The Engram paper cites classical N-gram models, word2vec, Bojanowski, Borgeaud, and DeepSeek's own MoE work. It does not cite or mention PLE.
+
+## Okay, so DeepSeek are bad after all?
+
+Nope. Much of the community's understanding of PLE comes from [antimatter15's reverse-engineering work](https://github.com/antimatter15/reverse-engineering-gemma-3n). Google didn't publish!
+
+DeepSeek are to be applauded for continuing to publish their SoTA research in useful detail. If Google had done the same, maybe they'd have got the citation!
+
+---
+
+## Acknowledgements
+
+Co-authored by Claude Opus 4.6. Thanks to Gemini 3 for review and suggestions.

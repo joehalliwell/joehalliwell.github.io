@@ -1,0 +1,119 @@
+---
+title: Holiday books
+date: "2010-07-14"
+categories: [review,perec,wittgenstein]
+draft: false
+---
+
+I’ve been reading Species of Spaces and Other Pieces a collection of
+[Georges Perec's](http://en.wikipedia.org/wiki/Georges_Perec) writing this week. It’s a
+perfect holiday book. It’s full of things to read and things to do. It’s a
+grown-up version of the summer annuals (Whizzer & Chips) I used to read in the
+car on the way to Pwllheli.
+
+## 243 Postcards
+
+One piece is called “Two Hundred and Fourty-three Postcards in Real Colour”.
+Dedicated to Italo Calvino; the title evokes JG Ballard. It is the combined text
+of 243 holiday postcards. This should be terribly boring, but by some sleight of
+hand it’s not. Here are the first five as a taster:
+
+![An old postcard with a sepia photograph of the Great Mosque of Kairouan](great-mosque-of-kairouan-postcard.png)
+
+- We’re camping near Ajaccio. Lovely weather. We eat well. I’ve got sunburnt. Fondest love.
+- We’re at the Hôtel Alcazar. Getting a tan. Really nice! We’ve made loads of friends. Back on the 7th.
+- We’re sailing off L’Ile-Rousse. Getting ourselves a tan. Food admirable. I’ve gone and got sunburnt! Love etc.
+- We’ve just done Dahomey. Superb nights. Fantastic swimming. Excursions on camel-back. Will be in Paris on the 15th.
+- We’ve finally landed in Nice. Lots of lazing about and sleep. Really nice (despite the sunburn). Love.
+
+Postcards are ridden with clichés, but Perec’s holiday-makers know that and
+circumlocute them, finding syncopated ways to say the same old things. The
+effect is disruptive and wholly convincing. Darlings, I do it myself.
+
+Postcards are formulaic. Knowing a little of Perec, I suspect we’re looking at
+an exhaustive catalogue here. 243 = 3 * 3 * 3 * 3 * 3. Perhaps these texts
+represent 5 decisions, each with 3 choices.
+
+Perhaps not. But the sense that a formula might be at play is irresistible: this
+feels like a system of co-ordinates. And that suspicion of regularity
+hyper-sensitises us to variation. Every phrase becomes a hook.
+
+Alone, each message is banal. Gridded together they become terribly poignant: telegraphic!
+
+## Collage
+
+Combinatorics crop up again in the essay (of sorts) “Think/Classify”. It’s a
+collage piece: a handful of elegant paragraphs with little in common. Sure
+they’re about thinking. But what isn’t?
+
+Collage is a gentle, therapeutic art form. I’ve always been suspicious of it.
+
+Things — any things, even several copies of the same thing — go together. The
+choice can be arbitrary at least in so far as we’re capable of that. Things
+agree with one another and contradict one another to the same degree. It seems
+lazy.
+
+Paul Auster‘s strength, someone wrote is that “he simply rubs stories together
+like pebbles. They clatter, spark, and echo with a deepening mystery.” That
+phrase caught my ear. There’s profundity in setting things up together and
+(thereby) calling attention to the arrangement.
+
+## Aphorism
+
+I am suspicious of surrealism. Dali and Magritte are too slick. I prefer the
+muddy ones: Ernst, Carrington etc.
+
+One of Perec’s fellow OuLiPo-eans, Marcel Benabou invented a “machine” for
+producing Aphorisms. Like a language it has grammar and vocabulary. Sets of
+abstract nouns, preferably weighty ones, make up the vocabulary: war/peace,
+knowledge/science, morality/art etc. The grammar consists of template phrases:
+“A, like B, is largely a matter of taste”, “A wouldn’t be A, were it not for B”,
+“The true name of A is B” etc.
+
+I’ve made a web page that lets you explore a corner of this space:
+[Aphorism Generator](http://www.joehalliwell.com/aphorisms.html).
+
+“Where is the thinking here?” asks Perec. “In the formula? In the vocabulary? In
+the operation that marries them?” It’s in our heads, obviously.
+
+## Peregrination
+
+It shouldn’t be a surprise that I’m not the first to make a
+computer simulate Benabou’s machine. Computers are combiners par excellence.
+Perec tells us that Paul Buffort wrote a program that could turn out “a good
+dozen [aphorisms] within a few seconds”. This is a charming reminder of how far
+we’ve come. Modern machines can generate aphorisms at a rate of knots.
+
+> They are playing a game. They are playing at
+> not playing a game. If I show them I see they are, I
+> shall break the rules and they will punish me.
+> I must play their game, of not seeing I see the game.
+> -- Knots, RD Laing
+
+In the introduction to Knots (incidentally another excellent holiday book) Laing
+writes that the patterns to which he’ll call attention could have been presented
+as “raw data” — presumably transcripts — or further distilled “towards an
+abstract logico-mathematical calculus”.
+
+Perhaps Laing was just being lazy. Or perhaps he knew that calculi can be stone
+cold boring. If there is a single thread to Knots, far better to show a few
+colourful examples of it. Or maybe Knots is a a salad. The Latin for salad,
+“satura”, is sometimes thought the ancestor of “satire”. I’ve never been
+convinced by that one.
+
+One person who did have a taste for abstraction was Early Wittgenstein. At the
+end of his Tractatus he famously says, “whereof we cannot speak, thereof we must
+be silent.”
+
+(I really don’t know what Laing was after with “logico-mathematical”.)
+
+Whereas big on archaisms, Late Wittgenstein got especially big on “shewing”.
+Shewing is something that you can do in silence, instead of speaking. The
+problem is roughly that there are certain things — thing that don’t exist,
+generally speaking — that can’t be talked about without missing the mark. This
+resulted in a very great number of little notes which were arranged into books
+after his death like pressed flowers.
+
+The Wittgensteins are the most important philosophers of the Twentieth century.
+
+A lot of Perec’s pieces don’t really have a proper ending.

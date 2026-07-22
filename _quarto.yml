@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: build
+
+website:
+  title: "Joe Halliwell"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/joehalliwell
+      - icon: twitter
+        href: https://twitter.com/joehalliwell
+
+  site-url: https://joehalliwell.com/blog
+  google-analytics: "405350320"
+
+execute:
+  cache: true
+
+format:
+  html:
+    theme:
+      - simplex
+      - styles.scss
+    toc: true
+    toc-location: left

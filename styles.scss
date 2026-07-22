@@ -1,0 +1,25 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+$font-size-root: 13pt;
+$link-color: #29b;
+
+/*-- scss:rules --*/
+
+
+.reveal .slide blockquote {
+  border-left: 3px solid $text-muted;
+  padding-left: 0.5em;
+}
+
+h1, h2, h3, h4, h5, h6, h7 {
+  text-transform: uppercase;
+  font-weight: normal !important;
+  letter-spacing: .1rem;
+}
+
+.navbar-title, .nav-item, .quarto-title-meta-heading {
+  font-size: var(--bs-body-font-size) !important;
+  text-transform: uppercase;
+  font-weight: normal !important;
+  letter-spacing: .1rem;
+}
