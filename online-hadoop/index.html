@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Building online systems with Hadoop</title>
+
+		<meta name="description" content="Some war stories about building an online system with Hadoop">
+		<meta name="author" content="Joe Halliwell">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<style>
+		html.zoutro body {
+			background:url("images/hadoop_doll.jpg");
+			background-position:top;
+			background-size: 100%;
+			background-opacity: 0.1;
+		}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section data-state="outro">
+					<h1>Building an online system with Hadoop</h1>
+					<p>
+						<small><a href="http://joehalliwell.com">Joe Halliwell</a> //
+						<a href="http://twitter.com/joehalliwell">@joehalliwell</a>
+						<br>
+						<a href="http://www.winterwell.com">Winterwell Associates Ltd</a>
+						</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Project X: a new kind of ad server</h2>
+					<ul>
+						<li>Built on Winterwell's MagicMatch algorithm</li>
+						<li>Compute: Need to compare 100M x 100M records and do it often</li>
+						<li>Store: lots of fat "enhanced" records, plus lots of skinny transactions</li>
+						<li>Bonus requirements: fast, highly concurrent, highly available</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Hadoop: the elephant in the room</h2>
+					<ul>
+						<li>Open-source implementation of Google infrastructure ca 2006</li>
+						<li>Designed to index a large and growing web by scaling horizontally on commodity hardware</li>
+						<li>A family of tools
+							<ul>
+								<li>HDFS: Scalable storage infrastructure</li>
+								<li>MapReduce: Scalable compute infrastructure</li>
+								<li>And: ZooKeeper, HBase, Cassandra, Chukwa, Pig, Hive, Mahout...</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>A confession</h2>
+				</section>
+
+				<section>
+					<h2>Lesson 1: It's not rocket science</h2>
+					<ul>
+						<li>It's just good old-fashioned file-oriented batch processing</li>
+						<ul>
+							<li class="fragment">...at massive scale</li>
+							<li class="fragment">...in any language you like</li>
+							<li class="fragment">...sensitive to data locality</li>
+							<li class="fragment">...battle-tested and fault tolerant</li>
+							<li class="fragment">...with built-in monitoring and admin tools</li>
+						</ul>
+						<li class="fragment">Awesome!</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Lesson 2: It is immature</h2>
+					<ul>
+						<li>Surprising limits on functionality</li>
+						<li>Poorly organised documentation</li>
+						<li><code>/tmp</code> is not a good location for persistent data</li>
+						<li>HBase clients can easily/accidentally crash the server</li>
+						<li>Single points of failure</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Lesson 3: You can't always outrun Big O</h2>
+					<ul>
+						<li>Version 0.1 averaged 200k cmp/sec. Yay!</li>
+						<li class="fragment">100M records + N<small><sup>2</sup></small> algorithm = ???</li>
+						<li class="fragment">1,500 years</li>
+						<li class="fragment">Horizontal scaling isn't going to help</li>
+						<li class="fragment">Bugger</li>
+					</ul>
+				</section>
+								
+				<section>
+					<h2>Lesson 4: Unlimited storage is liberating</h2>
+					<ul>
+						<li>No need for backups (in principle)</li>
+						<li>Keep everything</li>
+						<li>Version everything</li>
+						<li>Design for experimentation</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Lesson 5: Don't overlook ZooKeeper</h2>
+					<ul>
+						<li>Ships with HBase</li>
+						<li>Minimalistic, eventually consistent, persisted, in-memory database</li>
+						<li>Distributed locks and counters</li>
+						<li>Leadership election</li>
+						<li>Easy to use (via Curator)</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Lesson 6: Deployment is complicated</h2>
+					<ul>
+						<li>Ensure you have a good sysadmin</li>
+						<li>Work closely with her</li>
+						<li>Beware log files!</li>
+						<li>Build a hetrogenous cluster</li>
+						<li>Consider Hadoop 2.0</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Wrap-up</h2>
+					<ul>
+						<li>Can you build on-line systems with Hadoop? Yes!</li>
+						<li>Can you achieve good performance and high-availability? Yes!</li>
+						<li>Project X in production and serving ads</li>
+						<li>What's next? More versioning; more analytics; Hadoop 2 port</li>
+					</ul>				
+				</section>
+				
+				<section>
+					<h2>Thanks! Any questions?</h2>
+					<p>Follow @joehalliwell on Twitter!</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

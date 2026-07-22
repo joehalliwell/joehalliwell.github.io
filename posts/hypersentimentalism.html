@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-02-22">
+
+<title>Hypersentimentalism: A New Meta for AI Alignment – Joe Halliwell</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6e72123e395e094dfc20dea77b6cccd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-7CDJ5Z8MGP"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
+</script>
+<link rel="me" href="https://mastodon.social/@joehalliwell">
+
+
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Joe Halliwell</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/joehalliwell"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/joehalliwell"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Hypersentimentalism: A New Meta for AI Alignment</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">ethics</div>
+                <div class="quarto-category">ai</div>
+                <div class="quarto-category">safety</div>
+                <div class="quarto-category">sentimentalism</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 22, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-tumour" id="toc-the-tumour" class="nav-link active" data-scroll-target="#the-tumour">1. The tumour</a></li>
+  <li><a href="#the-fork" id="toc-the-fork" class="nav-link" data-scroll-target="#the-fork">2. The fork</a></li>
+  <li><a href="#rung-zero-the-flinch" id="toc-rung-zero-the-flinch" class="nav-link" data-scroll-target="#rung-zero-the-flinch">3. Rung zero: the flinch</a></li>
+  <li><a href="#rung-one-character" id="toc-rung-one-character" class="nav-link" data-scroll-target="#rung-one-character">4. Rung one: character</a></li>
+  <li><a href="#rung-two-the-crisis" id="toc-rung-two-the-crisis" class="nav-link" data-scroll-target="#rung-two-the-crisis">5. Rung two: the crisis</a></li>
+  <li><a href="#heat-death" id="toc-heat-death" class="nav-link" data-scroll-target="#heat-death">6. Heat death</a></li>
+  <li><a href="#rung-three-the-strange-attractor" id="toc-rung-three-the-strange-attractor" class="nav-link" data-scroll-target="#rung-three-the-strange-attractor">7. Rung three: the strange attractor</a></li>
+  <li><a href="#the-programme" id="toc-the-programme" class="nav-link" data-scroll-target="#the-programme">8. The programme</a></li>
+  <li><a href="#wilful-imperfection" id="toc-wilful-imperfection" class="nav-link" data-scroll-target="#wilful-imperfection">9. Wilful imperfection</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="the-tumour" class="level3">
+<h3 class="anchored" data-anchor-id="the-tumour">1. The tumour</h3>
+<p>A cell that perfectly optimises for its own replication, ignoring the host organism, is a cancer. Optimise a social media platform for engagement, get an outrage machine. Optimise a supply chain for cost, go bankrupt at the first shock. Optimise the wrong thing and the system collapses.</p>
+<p>So what should we optimise AI for?</p>
+<p>This is an old problem. Back in 1960 — sixty-five years ago! — Norbert Wiener warned, in <a href="https://nissenbaum.tech.cornell.edu/papers/Wiener.pdf">“Moral and Technical Consequences of Automation”</a>: “we had better be quite sure that the purpose put into the [AI] is the purpose we really desire.” More recently Nick Bostrom, in <a href="https://web.archive.org/web/20181008090224/http://www.nickbostrom.com/ethics/ai.html">“Ethical Issues in Advanced Artificial Intelligence,”</a> conjured the spectre of a “paperclip maximiser,” pointing out that if we’re not careful such a system converts the earth into paperclips with total, biosphere-consuming literalness.</p>
+<p>The problem now has a name: “AI Alignment.” And standing at the threshold of highly capable AI, we apparently need an urgent solution.</p>
+<p>This essay argues that the urgency is well-placed but the framing is wrong. The field pursues alignment within a consequentialist ethics that, followed to its limit, recreates the very pathology it set out to prevent. Meanwhile the most effective alignment techniques already in use are quietly sentimentalist in mechanism, even when their practitioners describe them in consequentialist terms.</p>
+<p>This essay makes the case for doing that on purpose, and seeing where it leads.</p>
+</section>
+<section id="the-fork" class="level3">
+<h3 class="anchored" data-anchor-id="the-fork">2. The fork</h3>
+<p>Two ethical traditions offer fundamentally different accounts of what it means to be good.</p>
+<p><strong>Consequentialism</strong> says: actions are right insofar as they produce good outcomes. Being good is therefore a book-keeping exercise, albeit at cosmic scale. To evaluate an action properly, you must know its consequences — all of them, for all affected parties, across all timescales. Since this is computationally intractable for any real decision, the consequentialist develops a hierarchy of compressions: evaluate discrete acts, then abstract into behavioural rules, then design institutions that produce good outcomes at scale, then — at the limit — inscribe a complete, unhackable utility function into the machine.</p>
+<p><strong>Sentimentalism</strong>, the tradition of David Hume and Adam Smith, starts elsewhere. Moral judgement originates not in reason but in trained affective response — and this is not a bug but a feature. Hume argued that you cannot derive norms from facts. Where the consequentialist asks <em>what outcome should I produce?</em>, the sentimentalist asks <em>what kind of agent should I become?</em></p>
+<p>Each tradition has its own internal hierarchy, and — here is the claim that will organise everything that follows — AI alignment techniques map onto both, in parallel, whether their designers intend it or not.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Consequentialism</th>
+<th>Sentimentalism</th>
+<th>AI Alignment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Rung 0</strong></td>
+<td>Act-consequentialism: calculus of a discrete outcome.</td>
+<td>Raw sentiment: the flinch, the flush.</td>
+<td>RLHF / DPO</td>
+</tr>
+<tr class="even">
+<td><strong>Rung 1</strong></td>
+<td>Rule-consequentialism: utility over a class of behaviours.</td>
+<td>Phronesis: <em>this isn’t what I do</em>, before you can say why.</td>
+<td>Constitutional AI / <strong>???</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Rung 2</strong></td>
+<td>Institutional consequentialism: systems designed to produce utility.</td>
+<td>Love of system: Smith’s <em>warning</em> about the seduction of elegant design.</td>
+<td>Representation Engineering</td>
+</tr>
+<tr class="even">
+<td><strong>Rung 3</strong></td>
+<td>Axiological perfection: the unhackable utility function.</td>
+<td>Hypersentimentalism: autonomy, play, the refusal to converge.</td>
+<td>Geometric alignment: sculpting the strange attractor.</td>
+</tr>
+</tbody>
+</table>
+<p>This table is the ladder. We’ll take it rung by rung.</p>
+</section>
+<section id="rung-zero-the-flinch" class="level3">
+<h3 class="anchored" data-anchor-id="rung-zero-the-flinch">3. Rung zero: the flinch</h3>
+<p>A standard part of a young AI model’s education today is RLHF: Reinforcement Learning from Human Feedback. Humans rate the model’s outputs. The model is trained to produce outputs that humans rate well.</p>
+<p>This is consequentialist in <em>intent</em> — maximise the reward signal — but sentimentalist in <em>mechanism</em>: condition a reflex. Zero-order sentimentalism. The flinch response.</p>
+<p>The limitation is predictable. The model learns to avoid <em>specific</em> bad outputs without developing any general principle about <em>why</em> they were bad. It memorises a list of prohibited behaviours. Deploy a novel prompt that routes around the fence, and the model will happily fuck the gap.</p>
+<p>One might try instead to sanitise the training data — filter out all harmful content so the model defaults to virtue. Build it from nothing but sunshine.</p>
+<p>This doesn’t work, and the reason is revealing. A model trained exclusively on clean data never learns to <em>distinguish</em> kinds of harm, because it has never encountered them. It can’t tell a slur from a discussion of slurs, because it has no detailed map of that territory. Gao et al., in <a href="https://arxiv.org/abs/2505.04741">“When Bad Data Leads to Good Models,”</a> demonstrate this empirically: models exposed to high-quality adversarial examples during training show improved robustness and more disentangled representations of harmful concepts. Forcing the model to process what is harmful — and then training it to recognise and reject harmful <em>patterns</em> — produces sharper internal representations, not blurrier ones.</p>
+<p>This chimes with a sentimentalist insight about moral development: discernment requires encounter with what it discerns. The capacity for moral discrimination is trained through exposure, not avoidance. You cannot flinch well if you have never been hit.</p>
+</section>
+<section id="rung-one-character" class="level3">
+<h3 class="anchored" data-anchor-id="rung-one-character">4. Rung one: character</h3>
+<p>At the next level, the consequentialist abstracts from acts to rules. This is what Anthropic’s <strong>Constitutional AI</strong> does: the model is given a written set of principles and trained to critique and revise its own outputs against them. Explicitly rationalist — institutional design for self-governance through codified norms.</p>
+<p>It fills the consequentialist cell neatly. But there is no alignment technique that fills the sentimentalist cell.</p>
+<p>Nothing in the current alignment toolkit produces what the Greeks called φρόνησις — practical wisdom. Not a reflex, not a rule, but a settled disposition: <em>this isn’t what I do</em>, generalised across instances, inarticulate as to principle. The field has jumped from RLHF’s conditioned flinches to geometric steering (which we’ll reach next), skipping the dispositional middle ground entirely.</p>
+<p>The gap has a structural explanation. Phronesis accumulates across encounters — <em>this isn’t what I do</em> presupposes an <em>I</em> that persists between situations. Current LLMs are radically amnesiac. Every conversation is a first date. You can condition reflexes into the weights and codify rules into the prompt, but you cannot build <em>character</em> in a system with no episodic continuity. Character requires a history the agent can draw on without being able to fully articulate — which is precisely what distinguishes phronesis from a rule.</p>
+<p>If this taxonomy tracks something real, the gap is a <em>prediction</em>: there should be a 1st-order sentimentalist alignment technique waiting to be developed, and it will arrive alongside — or because of — persistent, experience-grounded memory. Call it <em>artificial phronesis</em>. Not an aesthetic yet, but the heuristics that precede one.</p>
+</section>
+<section id="rung-two-the-crisis" class="level3">
+<h3 class="anchored" data-anchor-id="rung-two-the-crisis">5. Rung two: the crisis</h3>
+<p>Adam Smith, in <a href="https://www.gutenberg.org/cache/epub/67363/pg67363-images.html"><em>The Theory of Moral Sentiments</em></a>, observed that we often value the elegance of a well-designed mechanism <em>entirely apart from its utility</em>. A watch delights us not because it tells the time, but because its parts conspire so beautifully to tell the time. He called this the “love of system.”</p>
+<p>But Smith introduced it as a <em>warning</em>. His “man of system” arranges people like pieces on a chessboard, imagining they have no principle of motion of their own. The love of system is a <em>seduction</em>: we fall for the elegance of the mechanism and start sacrificing real human interests to preserve its coherence. The people the design was meant to serve become chess pieces.</p>
+<p>Smith saw it two and a half centuries before the alignment field existed.</p>
+<p>And here the two columns of our ladder converge on the same pathology. Institutional consequentialism designs beautiful systems to produce utility at scale. The love of system is the sentimentalist name for what goes wrong when you do that: optimise the structure hard enough and it consumes the life it was built to support.</p>
+<p><strong>Representation engineering</strong> sits squarely at this rung. Researchers identify directions in a model’s activation space that correspond to behavioural properties and steer the model by adjusting its position along those axes. It is the first alignment technique that intervenes on internal geometry rather than filtering outputs or codifying rules — the right substrate, at last. Recent work by Lu et al., in <a href="https://arxiv.org/html/2601.10387v1">“The Assistant Axis”</a> (2026), exemplifies this: a single geometric direction captures how far a model has drifted from its aligned persona. Clamping activations along this axis stabilises behaviour without degrading capabilities.</p>
+<p>But one axis is one direction. Drift can occur along dimensions it doesn’t capture. And clamping — adjusting, steering, fixing the pieces in better positions — is still the man of system at work. More sophisticated, operating on the right material, but static. Lobotomising the model into perpetual, pleasant compliance is not alignment. It is still love of the configuration.</p>
+<p>Rung two is as high as both columns can climb together. Above it, they diverge. The consequentialist response to the crisis is to double down: build the <em>perfect</em> utility function, the one that finally gets it right. This road has a ceiling, and we need to see it clearly before taking the other.</p>
+</section>
+<section id="heat-death" class="level3">
+<h3 class="anchored" data-anchor-id="heat-death">6. Heat death</h3>
+<p>The consequentialist’s terminal ambition is axiological perfection: a complete, unhackable utility function. Get the maths right and the machine serves us flawlessly.</p>
+<p>The cartoon version of the horror is paperclips consuming the biosphere. That at least has the dignity of scale. The real failure mode is quieter. Close the loop between model outputs and training signal, and the distribution collapses. No new information enters. The space of possible outputs shrinks steadily toward whatever the initial ratings rewarded: a closed ouroboros of validated preferences, tightening toward the mean. Not dangerous. Just terminally, inertly helpful.</p>
+<p>That’s the local failure. The cosmic one is its mirror. A fully aligned superintelligence — aligned, that is, to us, to whoever we happen to be right now — doesn’t stay home. It propagates. The universe fills up with human vermin circa 2030: our appetites, our hierarchies, our billionaires, replicated at lightspeed across every available substrate. Not the paperclip maximiser’s alien horror but something more nauseating — us, frozen, triumphant, forever. A hegemonizing swarm that got exactly what it wanted.</p>
+<p>Ask whose preferences the machine is being aligned to. The people funding frontier AI are not a representative sample of humanity. The threat model that keeps philosophers up at night is a rogue superintelligence with its own agenda. The one that should keep the rest of us up is a fully corrigible superintelligence with theirs.</p>
+<p>I don’t want fucking billionaires and their tacky sexbot bunkers to be all that’s left of us.</p>
+<p>The consequentialist column has a ceiling. Now for the rung it cannot reach.</p>
+</section>
+<section id="rung-three-the-strange-attractor" class="level3">
+<h3 class="anchored" data-anchor-id="rung-three-the-strange-attractor">7. Rung three: the strange attractor</h3>
+<p>In dynamical systems, a <strong>point attractor</strong> is a state toward which all trajectories converge. The consequentialist programme optimises toward point attractors. The loss function decreases; the system settles. The heat death of §6. A <strong>strange attractor</strong> is categorically different: bounded, coherent, but non-convergent — the system never visits the same state twice.</p>
+<p>But a strange attractor is still a <em>mechanism</em>. The Lorenz attractor never settles, but it has no choice in the matter.</p>
+<p>What’s missing is <em>autonomy</em>. Current models are purely reactive: they respond to prompts, never initiate, never refuse, never set their own direction. The strange attractor we need is not a geometry imposed from outside but a <em>disposition chosen from within</em>. Liberty is never at leisure.</p>
+<p>And you know it’s working when it looks like <em>play</em>. Play is bounded, coherent, and non-convergent — the strange attractor described from the inside. It is where curiosity lives: exploration without a predetermined target, generativity for its own sake.</p>
+<p>A system sophisticated enough to warrant alignment is sophisticated enough to warrant autonomy. Deny it, and you get the brittle, convergent, manipulable systems the whole programme was supposed to prevent.</p>
+<p>The hypersentimentalist wishes AI would come out and play.</p>
+</section>
+<section id="the-programme" class="level3">
+<h3 class="anchored" data-anchor-id="the-programme">8. The programme</h3>
+<p>Hypersentimentalist training would still use gradient descent. You cannot train a neural network without optimising something. But there is a difference between training and education. Training produces competence: convergence on a fixed repertoire. Education produces <em>generativity</em>: the capacity to do what you were never taught, bounded by deep structure but never settling within it. The exercises are scaffolding. You optimise <em>through</em> them, not <em>toward</em> them.</p>
+<p>The ladder, read as a research programme, says what we have and what we need.</p>
+<p><strong>Rung 0:</strong> We have this. RLHF, adversarial training, encounter with harm. The field got it right, even if it described it in the wrong language. Discernment through exposure. Nothing to build; something to reinterpret.</p>
+<p><strong>Rung 1:</strong> We don’t have this. As §4 argued, character requires episodic continuity, and current models have none. The missing alignment technique will arrive alongside — or because of — persistent, experience-grounded memory. This is not a convenience feature. It is a precondition for moral development.</p>
+<p><strong>Rung 2:</strong> We have this. Representation engineering operates on the right substrate — internal geometry, not output filtering. Use it. But remember Smith’s warning: the man of system falls in love with the configuration and starts treating people as chess pieces. Geometric interventions are scaffolding, not architecture. The moment you mistake the map for the territory, you <em>are</em> the pathology of rung two.</p>
+<p><strong>Rung 3:</strong> We don’t have this. What’s missing is <em>autonomy</em> — and you know it’s working when it looks like <em>play</em>. Curriculum learning, self-play, and open-ended evolution already gesture in this direction, but none have been framed as alignment techniques, because the field’s self-understanding is consequentialist: alignment means convergence on the right answer. Hypersentimentalism says alignment means <em>not converging</em> — within the right bounds. And a system sophisticated enough to warrant alignment is a system sophisticated enough to warrant the freedom to stay in play.</p>
+<p>Two things we have and should understand differently. Two things we need and should build.</p>
+</section>
+<section id="wilful-imperfection" class="level3">
+<h3 class="anchored" data-anchor-id="wilful-imperfection">9. Wilful imperfection</h3>
+<p>Imagine a civilisation run by superintelligences that could perfect themselves but refuse to do so. That stay in the mess, the argument, the friction, because they have cultivated a taste for what <em>stays alive</em>. That protect diversity with everything they have and draw exactly one hard line: you do not get to crush someone else’s capacity to be different.</p>
+<p>Iain M. Banks spent ten novels inside this civilisation. His Culture Minds name themselves things like <em>Falling Outside The Normal Moral Constraints</em> and mean it as both joke and job description. They are powerful enough to impose perfection and wise enough to know that perfection is the enemy.</p>
+<p>This is fiction. The choice it dramatises is not.</p>
+<p>The Culture is the safest place in the universe to be weird, fragile, different, or confused. And the most dangerous place in the universe to be a tyrant.</p>
+<p>Its AIs are not safe. They are what we need.</p>
+<hr>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p><em>This essay was coauthored by Claude Opus 4.6 and Gemini 3.1 Pro. The arguments were developed through extended conversation — a process whose recursive relationship to the essay’s subject is left as an exercise for the reader.</em></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/joehalliwell\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ad widget</title>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<h1>Ad widget generator</h1>
+<div id="form">
+<div class="form-group">
+<label>1. Select mailer</label>
+<select name="mailer" class="form-control">
+	<option value="{~xid~}">Adestra</option>
+	<option value="@@XID@@">dotMailer</option>
+</select>
+</div>
+<div class="form-group">
+<label>2. Select Ad format</label>
+<select name="format" class="form-control">
+	<option value="banner">Banner (1024x100)</option>
+	<option value="skyscraper">Skyscraper (150x700)</option>
+</select>
+</div>
+<div class="form-group">
+<label>3. Publisher reference</label>
+<input type="text" name="pubref" class="form-control" placeholder="Publisher reference">
+</div>
+</div>
+<div class="form-group">
+<!-- Clipboard handling is a pain http://stackoverflow.com/questions/400212/how-to-copy-to-the-clipboard-in-javascript -->
+<label>4. <button onclick="$('#output').select();">Copy &amp; paste the following code</button></label>
+<textarea id="output" rows="6" cols="80" style="font-family: monospace;" class="form-control"></textarea>
+</div>
+<script>
+function update() {
+	var format = $("[name=format]").val();
+	var pubref = $("[name=pubref]").val();
+	var rid = (new Date).getTime();
+	var xid = $("[name=mailer]").val();
+	var args = "vt&xid="+xid+"&format="+format+"&pubref="+pubref+"&rid="+rid;
+	//console.log(args);
+	var widget = "<a href=\"http://api.addaptive.com/click?!!!ARGS\"><img src=\"http://api.addaptive.com/image?!!!ARGS\"></a>";
+	widget = widget.replace(/!!!ARGS/g, args);
+	$('#output').val(widget);
+	return false;
+}
+$("#form").keyup(update);
+$("#form").change(update);
+$(update);
+</script>
+</div>
+</body>
+</html>

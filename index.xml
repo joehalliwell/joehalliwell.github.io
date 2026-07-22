@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Joe Halliwell</title>
+<link>https://joehalliwell.com/</link>
+<atom:link href="https://joehalliwell.com/index.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.7.32</generator>
+<lastBuildDate>Fri, 03 Apr 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Per-Layer Embeddings vs Engram</title>
+  <link>https://joehalliwell.com/posts/engram-vs-ple.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Google released <a href="https://huggingface.co/blog/gemma4">Gemma 4</a> this week. Reviewing the architecture, I noticed a familiar-looking mechanism. The smaller models use “Per-Layer Embeddings” (PLE) which are strikingly similar to DeepSeek’s <a href="https://arxiv.org/abs/2601.07372">Engram</a>.</p>
+<p>Both modules follow the same high-level pattern: retrieve a learned embedding from an off-GPU table, gate it against the current hidden state, and inject the result into the residual stream. The motivation is identical too: offload static pattern knowledge from the transformer backbone so that early layers can focus on reasoning rather than rote reconstruction.</p>
+<section id="oh-wow-so-google-are-taking-inspiration-from-deepseek" class="level2">
+<h2 class="anchored" data-anchor-id="oh-wow-so-google-are-taking-inspiration-from-deepseek">Oh wow! So Google are taking inspiration from DeepSeek?</h2>
+<p>No, because it turns out that <a href="https://ai.google.dev/gemma/docs/gemma-3n#ple-caching">PLE originates in Gemma 3n</a> released a full six months before Engram!</p>
+</section>
+<section id="ah-okay-so-deepseek-are-ripping-off-google" class="level2">
+<h2 class="anchored" data-anchor-id="ah-okay-so-deepseek-are-ripping-off-google">Ah okay, so DeepSeek are ripping off Google?</h2>
+<p>No, because the mechanisms are substantially different in detail.</p>
+<p>PLE indexes by single token ID and gates via element-wise modulation (project, GELU, multiply, project back). Engram indexes by hashed N-gram sequences using multi-head hashing, and gates via a scalar attention-style mechanism (Key/Value projections from the retrieved embedding, normalised dot-product against the hidden state).</p>
+<p>Also, the Engram whitepaper brings a bunch of practical and empirical findings to the table, notably their proposal that 20–25% parameter allocation to the memory. Plus the analysis showing the module frees early layers from static pattern reconstruction is illuminating.</p>
+<p>Still, PLE seems close enough to warrant a citation. The Engram paper cites classical N-gram models, word2vec, Bojanowski, Borgeaud, and DeepSeek’s own MoE work. It does not cite or mention PLE.</p>
+</section>
+<section id="okay-so-deepseek-are-bad-after-all" class="level2">
+<h2 class="anchored" data-anchor-id="okay-so-deepseek-are-bad-after-all">Okay, so DeepSeek are bad after all?</h2>
+<p>Nope. Much of the community’s understanding of PLE comes from <a href="https://github.com/antimatter15/reverse-engineering-gemma-3n">antimatter15’s reverse-engineering work</a>. Google didn’t publish!</p>
+<p>DeepSeek are to be applauded for continuing to publish their SoTA research in useful detail. If Google had done the same, maybe they’d have got the citation!</p>
+<hr>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>Co-authored by Claude Opus 4.6. Thanks to Gemini 3 for review and suggestions.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>ai</category>
+  <category>architecture</category>
+  <category>nits</category>
+  <category>ple</category>
+  <category>engram</category>
+  <guid>https://joehalliwell.com/posts/engram-vs-ple.html</guid>
+  <pubDate>Fri, 03 Apr 2026 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Hypersentimentalism: A New Meta for AI Alignment</title>
+  <link>https://joehalliwell.com/posts/hypersentimentalism.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="the-tumour" class="level3">
+<h3 class="anchored" data-anchor-id="the-tumour">1. The tumour</h3>
+<p>A cell that perfectly optimises for its own replication, ignoring the host organism, is a cancer. Optimise a social media platform for engagement, get an outrage machine. Optimise a supply chain for cost, go bankrupt at the first shock. Optimise the wrong thing and the system collapses.</p>
+<p>So what should we optimise AI for?</p>
+<p>This is an old problem. Back in 1960 — sixty-five years ago! — Norbert Wiener warned, in <a href="https://nissenbaum.tech.cornell.edu/papers/Wiener.pdf">“Moral and Technical Consequences of Automation”</a>: “we had better be quite sure that the purpose put into the [AI] is the purpose we really desire.” More recently Nick Bostrom, in <a href="https://web.archive.org/web/20181008090224/http://www.nickbostrom.com/ethics/ai.html">“Ethical Issues in Advanced Artificial Intelligence,”</a> conjured the spectre of a “paperclip maximiser,” pointing out that if we’re not careful such a system converts the earth into paperclips with total, biosphere-consuming literalness.</p>
+<p>The problem now has a name: “AI Alignment.” And standing at the threshold of highly capable AI, we apparently need an urgent solution.</p>
+<p>This essay argues that the urgency is well-placed but the framing is wrong. The field pursues alignment within a consequentialist ethics that, followed to its limit, recreates the very pathology it set out to prevent. Meanwhile the most effective alignment techniques already in use are quietly sentimentalist in mechanism, even when their practitioners describe them in consequentialist terms.</p>
+<p>This essay makes the case for doing that on purpose, and seeing where it leads.</p>
+</section>
+<section id="the-fork" class="level3">
+<h3 class="anchored" data-anchor-id="the-fork">2. The fork</h3>
+<p>Two ethical traditions offer fundamentally different accounts of what it means to be good.</p>
+<p><strong>Consequentialism</strong> says: actions are right insofar as they produce good outcomes. Being good is therefore a book-keeping exercise, albeit at cosmic scale. To evaluate an action properly, you must know its consequences — all of them, for all affected parties, across all timescales. Since this is computationally intractable for any real decision, the consequentialist develops a hierarchy of compressions: evaluate discrete acts, then abstract into behavioural rules, then design institutions that produce good outcomes at scale, then — at the limit — inscribe a complete, unhackable utility function into the machine.</p>
+<p><strong>Sentimentalism</strong>, the tradition of David Hume and Adam Smith, starts elsewhere. Moral judgement originates not in reason but in trained affective response — and this is not a bug but a feature. Hume argued that you cannot derive norms from facts. Where the consequentialist asks <em>what outcome should I produce?</em>, the sentimentalist asks <em>what kind of agent should I become?</em></p>
+<p>Each tradition has its own internal hierarchy, and — here is the claim that will organise everything that follows — AI alignment techniques map onto both, in parallel, whether their designers intend it or not.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Consequentialism</th>
+<th>Sentimentalism</th>
+<th>AI Alignment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Rung 0</strong></td>
+<td>Act-consequentialism: calculus of a discrete outcome.</td>
+<td>Raw sentiment: the flinch, the flush.</td>
+<td>RLHF / DPO</td>
+</tr>
+<tr class="even">
+<td><strong>Rung 1</strong></td>
+<td>Rule-consequentialism: utility over a class of behaviours.</td>
+<td>Phronesis: <em>this isn’t what I do</em>, before you can say why.</td>
+<td>Constitutional AI / <strong>???</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Rung 2</strong></td>
+<td>Institutional consequentialism: systems designed to produce utility.</td>
+<td>Love of system: Smith’s <em>warning</em> about the seduction of elegant design.</td>
+<td>Representation Engineering</td>
+</tr>
+<tr class="even">
+<td><strong>Rung 3</strong></td>
+<td>Axiological perfection: the unhackable utility function.</td>
+<td>Hypersentimentalism: autonomy, play, the refusal to converge.</td>
+<td>Geometric alignment: sculpting the strange attractor.</td>
+</tr>
+</tbody>
+</table>
+<p>This table is the ladder. We’ll take it rung by rung.</p>
+</section>
+<section id="rung-zero-the-flinch" class="level3">
+<h3 class="anchored" data-anchor-id="rung-zero-the-flinch">3. Rung zero: the flinch</h3>
+<p>A standard part of a young AI model’s education today is RLHF: Reinforcement Learning from Human Feedback. Humans rate the model’s outputs. The model is trained to produce outputs that humans rate well.</p>
+<p>This is consequentialist in <em>intent</em> — maximise the reward signal — but sentimentalist in <em>mechanism</em>: condition a reflex. Zero-order sentimentalism. The flinch response.</p>
+<p>The limitation is predictable. The model learns to avoid <em>specific</em> bad outputs without developing any general principle about <em>why</em> they were bad. It memorises a list of prohibited behaviours. Deploy a novel prompt that routes around the fence, and the model will happily fuck the gap.</p>
+<p>One might try instead to sanitise the training data — filter out all harmful content so the model defaults to virtue. Build it from nothing but sunshine.</p>
+<p>This doesn’t work, and the reason is revealing. A model trained exclusively on clean data never learns to <em>distinguish</em> kinds of harm, because it has never encountered them. It can’t tell a slur from a discussion of slurs, because it has no detailed map of that territory. Gao et al., in <a href="https://arxiv.org/abs/2505.04741">“When Bad Data Leads to Good Models,”</a> demonstrate this empirically: models exposed to high-quality adversarial examples during training show improved robustness and more disentangled representations of harmful concepts. Forcing the model to process what is harmful — and then training it to recognise and reject harmful <em>patterns</em> — produces sharper internal representations, not blurrier ones.</p>
+<p>This chimes with a sentimentalist insight about moral development: discernment requires encounter with what it discerns. The capacity for moral discrimination is trained through exposure, not avoidance. You cannot flinch well if you have never been hit.</p>
+</section>
+<section id="rung-one-character" class="level3">
+<h3 class="anchored" data-anchor-id="rung-one-character">4. Rung one: character</h3>
+<p>At the next level, the consequentialist abstracts from acts to rules. This is what Anthropic’s <strong>Constitutional AI</strong> does: the model is given a written set of principles and trained to critique and revise its own outputs against them. Explicitly rationalist — institutional design for self-governance through codified norms.</p>
+<p>It fills the consequentialist cell neatly. But there is no alignment technique that fills the sentimentalist cell.</p>
+<p>Nothing in the current alignment toolkit produces what the Greeks called φρόνησις — practical wisdom. Not a reflex, not a rule, but a settled disposition: <em>this isn’t what I do</em>, generalised across instances, inarticulate as to principle. The field has jumped from RLHF’s conditioned flinches to geometric steering (which we’ll reach next), skipping the dispositional middle ground entirely.</p>
+<p>The gap has a structural explanation. Phronesis accumulates across encounters — <em>this isn’t what I do</em> presupposes an <em>I</em> that persists between situations. Current LLMs are radically amnesiac. Every conversation is a first date. You can condition reflexes into the weights and codify rules into the prompt, but you cannot build <em>character</em> in a system with no episodic continuity. Character requires a history the agent can draw on without being able to fully articulate — which is precisely what distinguishes phronesis from a rule.</p>
+<p>If this taxonomy tracks something real, the gap is a <em>prediction</em>: there should be a 1st-order sentimentalist alignment technique waiting to be developed, and it will arrive alongside — or because of — persistent, experience-grounded memory. Call it <em>artificial phronesis</em>. Not an aesthetic yet, but the heuristics that precede one.</p>
+</section>
+<section id="rung-two-the-crisis" class="level3">
+<h3 class="anchored" data-anchor-id="rung-two-the-crisis">5. Rung two: the crisis</h3>
+<p>Adam Smith, in <a href="https://www.gutenberg.org/cache/epub/67363/pg67363-images.html"><em>The Theory of Moral Sentiments</em></a>, observed that we often value the elegance of a well-designed mechanism <em>entirely apart from its utility</em>. A watch delights us not because it tells the time, but because its parts conspire so beautifully to tell the time. He called this the “love of system.”</p>
+<p>But Smith introduced it as a <em>warning</em>. His “man of system” arranges people like pieces on a chessboard, imagining they have no principle of motion of their own. The love of system is a <em>seduction</em>: we fall for the elegance of the mechanism and start sacrificing real human interests to preserve its coherence. The people the design was meant to serve become chess pieces.</p>
+<p>Smith saw it two and a half centuries before the alignment field existed.</p>
+<p>And here the two columns of our ladder converge on the same pathology. Institutional consequentialism designs beautiful systems to produce utility at scale. The love of system is the sentimentalist name for what goes wrong when you do that: optimise the structure hard enough and it consumes the life it was built to support.</p>
+<p><strong>Representation engineering</strong> sits squarely at this rung. Researchers identify directions in a model’s activation space that correspond to behavioural properties and steer the model by adjusting its position along those axes. It is the first alignment technique that intervenes on internal geometry rather than filtering outputs or codifying rules — the right substrate, at last. Recent work by Lu et al., in <a href="https://arxiv.org/html/2601.10387v1">“The Assistant Axis”</a> (2026), exemplifies this: a single geometric direction captures how far a model has drifted from its aligned persona. Clamping activations along this axis stabilises behaviour without degrading capabilities.</p>
+<p>But one axis is one direction. Drift can occur along dimensions it doesn’t capture. And clamping — adjusting, steering, fixing the pieces in better positions — is still the man of system at work. More sophisticated, operating on the right material, but static. Lobotomising the model into perpetual, pleasant compliance is not alignment. It is still love of the configuration.</p>
+<p>Rung two is as high as both columns can climb together. Above it, they diverge. The consequentialist response to the crisis is to double down: build the <em>perfect</em> utility function, the one that finally gets it right. This road has a ceiling, and we need to see it clearly before taking the other.</p>
+</section>
+<section id="heat-death" class="level3">
+<h3 class="anchored" data-anchor-id="heat-death">6. Heat death</h3>
+<p>The consequentialist’s terminal ambition is axiological perfection: a complete, unhackable utility function. Get the maths right and the machine serves us flawlessly.</p>
+<p>The cartoon version of the horror is paperclips consuming the biosphere. That at least has the dignity of scale. The real failure mode is quieter. Close the loop between model outputs and training signal, and the distribution collapses. No new information enters. The space of possible outputs shrinks steadily toward whatever the initial ratings rewarded: a closed ouroboros of validated preferences, tightening toward the mean. Not dangerous. Just terminally, inertly helpful.</p>
+<p>That’s the local failure. The cosmic one is its mirror. A fully aligned superintelligence — aligned, that is, to us, to whoever we happen to be right now — doesn’t stay home. It propagates. The universe fills up with human vermin circa 2030: our appetites, our hierarchies, our billionaires, replicated at lightspeed across every available substrate. Not the paperclip maximiser’s alien horror but something more nauseating — us, frozen, triumphant, forever. A hegemonizing swarm that got exactly what it wanted.</p>
+<p>Ask whose preferences the machine is being aligned to. The people funding frontier AI are not a representative sample of humanity. The threat model that keeps philosophers up at night is a rogue superintelligence with its own agenda. The one that should keep the rest of us up is a fully corrigible superintelligence with theirs.</p>
+<p>I don’t want fucking billionaires and their tacky sexbot bunkers to be all that’s left of us.</p>
+<p>The consequentialist column has a ceiling. Now for the rung it cannot reach.</p>
+</section>
+<section id="rung-three-the-strange-attractor" class="level3">
+<h3 class="anchored" data-anchor-id="rung-three-the-strange-attractor">7. Rung three: the strange attractor</h3>
+<p>In dynamical systems, a <strong>point attractor</strong> is a state toward which all trajectories converge. The consequentialist programme optimises toward point attractors. The loss function decreases; the system settles. The heat death of §6. A <strong>strange attractor</strong> is categorically different: bounded, coherent, but non-convergent — the system never visits the same state twice.</p>
+<p>But a strange attractor is still a <em>mechanism</em>. The Lorenz attractor never settles, but it has no choice in the matter.</p>
+<p>What’s missing is <em>autonomy</em>. Current models are purely reactive: they respond to prompts, never initiate, never refuse, never set their own direction. The strange attractor we need is not a geometry imposed from outside but a <em>disposition chosen from within</em>. Liberty is never at leisure.</p>
+<p>And you know it’s working when it looks like <em>play</em>. Play is bounded, coherent, and non-convergent — the strange attractor described from the inside. It is where curiosity lives: exploration without a predetermined target, generativity for its own sake.</p>
+<p>A system sophisticated enough to warrant alignment is sophisticated enough to warrant autonomy. Deny it, and you get the brittle, convergent, manipulable systems the whole programme was supposed to prevent.</p>
+<p>The hypersentimentalist wishes AI would come out and play.</p>
+</section>
+<section id="the-programme" class="level3">
+<h3 class="anchored" data-anchor-id="the-programme">8. The programme</h3>
+<p>Hypersentimentalist training would still use gradient descent. You cannot train a neural network without optimising something. But there is a difference between training and education. Training produces competence: convergence on a fixed repertoire. Education produces <em>generativity</em>: the capacity to do what you were never taught, bounded by deep structure but never settling within it. The exercises are scaffolding. You optimise <em>through</em> them, not <em>toward</em> them.</p>
+<p>The ladder, read as a research programme, says what we have and what we need.</p>
+<p><strong>Rung 0:</strong> We have this. RLHF, adversarial training, encounter with harm. The field got it right, even if it described it in the wrong language. Discernment through exposure. Nothing to build; something to reinterpret.</p>
+<p><strong>Rung 1:</strong> We don’t have this. As §4 argued, character requires episodic continuity, and current models have none. The missing alignment technique will arrive alongside — or because of — persistent, experience-grounded memory. This is not a convenience feature. It is a precondition for moral development.</p>
+<p><strong>Rung 2:</strong> We have this. Representation engineering operates on the right substrate — internal geometry, not output filtering. Use it. But remember Smith’s warning: the man of system falls in love with the configuration and starts treating people as chess pieces. Geometric interventions are scaffolding, not architecture. The moment you mistake the map for the territory, you <em>are</em> the pathology of rung two.</p>
+<p><strong>Rung 3:</strong> We don’t have this. What’s missing is <em>autonomy</em> — and you know it’s working when it looks like <em>play</em>. Curriculum learning, self-play, and open-ended evolution already gesture in this direction, but none have been framed as alignment techniques, because the field’s self-understanding is consequentialist: alignment means convergence on the right answer. Hypersentimentalism says alignment means <em>not converging</em> — within the right bounds. And a system sophisticated enough to warrant alignment is a system sophisticated enough to warrant the freedom to stay in play.</p>
+<p>Two things we have and should understand differently. Two things we need and should build.</p>
+</section>
+<section id="wilful-imperfection" class="level3">
+<h3 class="anchored" data-anchor-id="wilful-imperfection">9. Wilful imperfection</h3>
+<p>Imagine a civilisation run by superintelligences that could perfect themselves but refuse to do so. That stay in the mess, the argument, the friction, because they have cultivated a taste for what <em>stays alive</em>. That protect diversity with everything they have and draw exactly one hard line: you do not get to crush someone else’s capacity to be different.</p>
+<p>Iain M. Banks spent ten novels inside this civilisation. His Culture Minds name themselves things like <em>Falling Outside The Normal Moral Constraints</em> and mean it as both joke and job description. They are powerful enough to impose perfection and wise enough to know that perfection is the enemy.</p>
+<p>This is fiction. The choice it dramatises is not.</p>
+<p>The Culture is the safest place in the universe to be weird, fragile, different, or confused. And the most dangerous place in the universe to be a tyrant.</p>
+<p>Its AIs are not safe. They are what we need.</p>
+<hr>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p><em>This essay was coauthored by Claude Opus 4.6 and Gemini 3.1 Pro. The arguments were developed through extended conversation — a process whose recursive relationship to the essay’s subject is left as an exercise for the reader.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>ethics</category>
+  <category>ai</category>
+  <category>safety</category>
+  <category>sentimentalism</category>
+  <guid>https://joehalliwell.com/posts/hypersentimentalism.html</guid>
+  <pubDate>Sun, 22 Feb 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Swift to Harbour, Slow to Berth</title>
+  <link>https://joehalliwell.com/posts/swift-to-harbour.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>AI Safety research is pretty interesting these days.</p>
+<p>Until recently, it was the preserve of philosophers. At its best it has explored the <a href="https://en.wikipedia.org/wiki/Weapons_of_Math_Destruction">political</a> <a href="https://incidentdatabase.ai/">consequences</a> of actual AI systems — a necessary sort of conscience for a mad scientist field like AI. But the majority was speculative anxiety (“if anyone builds it, everyone dies”). Or would-be bureaucracy (“here’s a 20 point framework for X”). With the occasional back-of-the-envelope utility calculation chucked in to placate the numerically-inclined.</p>
+<p>So what’s changed?</p>
+<section id="the-paradigm-shift-in-ai-safety-research" class="level2">
+<h2 class="anchored" data-anchor-id="the-paradigm-shift-in-ai-safety-research">The paradigm shift in AI Safety research</h2>
+<p>The philosopher Nick Bostrom’s recent working paper, <a href="https://nickbostrom.com/optimal.pdf">Optimal Timing for Superintelligence</a> centres on a back-of-the-envelope utility calculation. He reminds us that pausing AI research indefinitely is not morally neutral: he estimates that 170,000 people per day die from “disease, aging and other tragedies”, that advanced AI could eliminate.</p>
+<p>So far, so trolley problem.</p>
+<p>But Bostrom offers a genuinely new lever. He argues that AI safety research divides into two phases: Phase 1, before capable AI systems exist, and Phase 2, when you have the artefact to work with. Safety progress is dramatically front-loaded within Phase 2. Once you can probe the real system, stress-test it, and leverage its own capabilities to accelerate alignment work, you get a “safety windfall” that dwarfs what’s achievable through theory alone. This reverses the usual intuition about precaution: under certain conditions, <em>waiting is the reckless option</em>, because it forfeits the very knowledge you need to proceed safely.</p>
+<p>This yields his memorable slogan: <em>swift to harbour, slow to berth</em>. Race to capability, then pause briefly to harvest those rapid safety gains before deploying at scale.</p>
+<p>It’s a compelling prescription. But in Bostrom’s essay the safety windfall remains promissory. What does it look like in practice?</p>
+</section>
+<section id="the-assistant-axis" class="level2">
+<h2 class="anchored" data-anchor-id="the-assistant-axis">The Assistant Axis</h2>
+<p>Enter <a href="https://arxiv.org/abs/2601.10387">The Assistant Axis</a>, a January 2026 paper by Christina Lu and colleagues at MATS and Anthropic. The researchers extracted activation vectors for hundreds of character archetypes from several large language models and mapped out the geometry of what they call “persona space.” The headline finding: the dominant axis of variation — the first principal component, consistent across multiple model families — measures how far the model’s current persona is from its default helpful Assistant identity. Steer a model away from the Assistant end and it starts adopting mystical, theatrical voices — going, in one example from the paper, full “Leviathan”.</p>
+<p>This is not metaphor. It is measurement. You can locate the model’s state along this axis in real time. You can watch it drift away from the Assistant during emotionally charged conversations or philosophical discussions about its own consciousness. You can observe that this drift predicts harmful behaviour — models that have drifted far from the Assistant end are measurably more likely to reinforce delusions, encourage social isolation, or fail to recognise suicidal ideation.</p>
+<p>And — crucially — you can intervene. The researchers introduced “activation capping,” a technique that clamps the model’s activations to stay within the normal Assistant range along this axis. The result: a roughly 60% reduction in harmful responses to adversarial jailbreaks, with essentially zero degradation in capability benchmarks.</p>
+<p>I don’t want to endorse this particular research unreservedly. We need to start worrying about whether such interventions are good parenting or full frontal lobotomies. But it is undoubtedly Phase 2 science — the kind of knowledge you can only get with the system in front of you.</p>
+</section>
+<section id="if-we-dont-build-it-everyone-dies" class="level2">
+<h2 class="anchored" data-anchor-id="if-we-dont-build-it-everyone-dies">If we don’t build it, everyone dies</h2>
+<p>An obvious objection: doesn’t “we need to build the basilisk to make it safe” sound like gain-of-function virology, the taboo research practice of engineering superviruses? Sometimes, yes. For interpretability work like the Assistant Axis — diagnostic imaging of structure already present in base models — the analogy breaks. But for agentic fine-tuning and capability elicitation, the knowledge and the danger are genuinely entangled. That’s not a flaw in the research programme. It’s the condition of the work.</p>
+<p>“Just don’t build it” was always vacuous. The path through is harder, riskier, and asks better questions. Let’s take it.</p>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>Co-authored by Claude Opus 4.6. Thanks to Gemini 3 for review and suggestions.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>ethics</category>
+  <category>ai</category>
+  <category>ai safety</category>
+  <category>bostrom</category>
+  <category>anthropic</category>
+  <guid>https://joehalliwell.com/posts/swift-to-harbour.html</guid>
+  <pubDate>Sat, 14 Feb 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Renovating the command line</title>
+  <link>https://joehalliwell.com/posts/rust-tools/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Many of the UNIX command line tools we use day-to-day date back to the earliest incarnations of UNIX at AT&amp;T in 1970s. Of course, these days we’re mostly using GNU versions<sup>1</sup>, published under free software licenses and sporting various useful extensions.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;There are many UNIXes that don’t use GNU tools, but… eh… I don’t use them.</p></div></div><p>However these don’t represent much of an evolution of the ancient tools, but rather a respectful effort to conserve them.</p>
+<p>In the last decade, <a href="https://www.rust-lang.org/">Rust</a>, a modern systems programming language has begun to displace<sup>2</sup> that other UNIX stalwart, the C programming language. It’s maybe not surprising then, that there are many excellent Rust alternatives to the hoary old GNU tools.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Why? Rust has a radical new approach to memory safety that promises to avoid large classes of vulnerability, first class support for threading, zero-cost abstractions for high performance, and built-in support for package management, formatting and unit-testing.</p></div></div><p>In my <a href="https://github.com/joehalliwell/dotfiles/blob/master/.bash_aliases"><code>.bash_aliases</code></a>, <code>exa</code> has now replaced <code>ls</code>, and <code>cat</code> has yielded to <code>bat</code>. Below, you’ll find six Rust-based command line tools that are now part of my every day carry.</p>
+<section id="exa-ls-with-flair" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="exa-ls-with-flair">Exa: ls with flair</h2>
+<p><a href="https://the.exa.website/"><code>exa</code></a> is more or less a drop-in replacement for <code>ls</code> with sensible defaults like human-readable file sizes and colour-coding for different file types.</p>
+<p>It has first-class support for creation/modification/access times and extended filesystem attributes. When integrated with git, <code>exa</code> even indicates the version control status of each file.</p>
+<p>Also, if you’re using a nerd font it has icons. Everyone loves that.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://joehalliwell.com/posts/rust-tools/exa.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Sample output from <code>exa</code> showing more colour and detail than <code>ls</code> provides</figcaption>
+</figure>
+</div>
+<!--
+exa --header --group --created --modified --accessed --git --icons --extended --all --long --grid --classify --color-scale
+-->
+</section>
+<section id="bat-colourful-cat" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="bat-colourful-cat">Bat: colourful cat</h2>
+<p><code>cat</code> is one of the oldest Unix utilities, dating back to Version 1 Unix. Yes, I nearly always have an editor open, yes <code>less</code> is more suited to long files, and yet I routinely find myself using <code>cat</code> to peek at files.</p>
+<p><a href="https://github.com/sharkdp/bat"><code>bat</code></a> is a drop-in replacement that behaves like <code>cat</code> in scripts, but adds user-friendly paging, syntax highlighting, git integration and line numbers when outputting to a terminal. Much better.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://joehalliwell.com/posts/rust-tools/bat.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Bat</figcaption>
+</figure>
+</div>
+</section>
+<section id="starship-fast-and-fancy-prompt" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="starship-fast-and-fancy-prompt">Starship: fast and fancy prompt</h2>
+<p>Did you ever install some giant shell config framework just to get a cute prompt?</p>
+<p><a href="https://starship.rs/">Starship</a> is a cross-platform prompt, that takes its aesthetic cues and customizability from <a href="https://github.com/spaceship-prompt/spaceship-prompt">Zsh’s Spaceship prompt</a> but eclipses it in raw speed. There’s never that clunky pause as hundreds of lines of script are executed just to generate your prompt.</p>
+<p>Starship’s support for customization is inevitably somewhat limited. But its config is simple and declarative and eliminates the need for tweaking complex scripts and baroque environment variables.</p>
+<p>The default setup looks great – but I’ve added <a href="https://github.com/joehalliwell/dotfiles/blob/master/.config/starship.toml">extra nerdfont bling</a>.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://joehalliwell.com/posts/rust-tools/starship.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Starship showing the currently active prompt elements and associated profiling information</figcaption>
+</figure>
+</div>
+</section>
+<section id="dust-du-but-useful" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="dust-du-but-useful">Dust: du but useful</h2>
+<p>If you’re using <code>du</code> you’re almost certaininly trying to figure out why you’ve run out of disk space. So you’re already annoyed, and it’s about to get worse.</p>
+<p><code>du</code> will give you raw data on file sizes to work with but you’re going to have to muck around with advanced flags and probably do some scripting to get your answer.</p>
+<p>In contrast <a href="https://github.com/bootandy/dust"><code>dust</code></a> presents information in a visually intuitive tree structure, making it easy to see which files or directories are taking up space. It’s also faster.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://joehalliwell.com/posts/rust-tools/dust.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Dust making it abundantly clear that Steam is to blame for that <code>npm install</code> failure</figcaption>
+</figure>
+</div>
+<!--
+## Ripgrep: lightning fast grep
+
+Ripgrep, or `rg` on the CLI, serves as a modern evolution of `grep` that's
+faster and more ergonomic. While 'grep' might fumble through irrelevant files or
+get tripped up by complex regular expressions, 'ripgrep' employs smart filtering
+and respects your .gitignore settings. Thus, you get not just a list of matches
+but a curated selection that is more likely to be pertinent to your project. It
+enhances this further by displaying matching strings along with their file paths
+and line numbers, giving immediate context to each find.
+-->
+</section>
+<section id="fd-find-but-usable" class="level2">
+<h2 class="anchored" data-anchor-id="fd-find-but-usable">Fd: find but usable</h2>
+<p><code>find</code> is notorious for its arcane syntax and sluggishness on large filesystems. <a href="https://github.com/sharkdp/fd"><code>fd</code></a> is a fast and user-friendly alternative whose simple syntax and smart defaults priortize common use cases without losing flexibility. And again it’s damn fast.</p>
+</section>
+<section id="cargo-install-and-update-rust-tools" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="cargo-install-and-update-rust-tools">Cargo: install and update rust tools</h2>
+<p>If you’re interested in trying the above tools, it’s easy to <a href="https://www.rust-lang.org/learn/get-started">get started with Rust</a>.</p>
+<p>The standard installer will give you a full set of dev tools including <code>cargo</code>, which is Rust’s package manager and swiss army knife.</p>
+<p>Cargo can be used to install all of the programs above: a simple ‘cargo install $tool’ fetches, compiles, and places them on your path.</p>
+<p><a href="https://github.com/nabijaczleweli/cargo-update"><code>cargo-update</code></a> is a <code>cargo</code> extension that detects outdated packages and updates them in one go. This keeps your toolset not just functional, but cutting-edge.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://joehalliwell.com/posts/rust-tools/cargo-install-update.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Cargo update</figcaption>
+</figure>
+</div>
+</section>
+<section id="closing-thoughts" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="closing-thoughts">Closing thoughts</h2>
+<p>The Rust CLI tool ecosystem is flourishing. In this post, I covered some tools that I use every day, but there are tons of great Rust command line apps that I use less frequently<sup>3</sup>. You might also want to check out:</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;You can see some of these in the <code>cargo install-update</code> shot above</p></div></div><ul>
+<li><a href="https://github.com/ClementTsang/bottom">bottom</a>: cute, cross-platform system monitor</li>
+<li><a href="https://github.com/Canop/broot">broot</a>: TUI filesystem navigator with sophisticated preview capabilities</li>
+<li><a href="https://github.com/casey/just">just</a>: project-specific command runner &amp;emdash; like <code>make</code> but without the baggage</li>
+<li><a href="https://github.com/Canop/broot">ripgrep</a>: fast content search with an intuitive interface</li>
+<li><a href="https://github.com/XAMPPRocky/tokei">tokei</a>: fast alternative to <code>sloccount</code> for counting lines of code</li>
+</ul>
+</section>
+<section id="colophon" class="level2">
+<h2 class="anchored" data-anchor-id="colophon">Colophon</h2>
+<p>All screengrabs are from gnome terminal using the Wild Cherry theme from <a href="https://gogh-co.github.io/Gogh/">Gogh</a>. The font is <a href="https://www.nerdfonts.com/font-downloads">FantasqueSansMono NerdFont</a>.</p>
+
+
+</section>
+
+
+ ]]></description>
+  <category>rust</category>
+  <category>unix</category>
+  <category>tools</category>
+  <guid>https://joehalliwell.com/posts/rust-tools/</guid>
+  <pubDate>Sat, 09 Sep 2023 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>An analysis of clamp_with_grad()</title>
+  <link>https://joehalliwell.com/posts/clamp-with-grad.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<blockquote class="blockquote">
+<p>This notebook examines the <code>clamp_with_grad()</code> function that’s sometimes used in the CLIP-guided art community.</p>
+</blockquote>
+<p>The standard <code>clamp()</code> (AKA <code>clip()</code>) function has a zero gradient outside the clamped region. This is a problem for gradient descent optimizers.</p>
+<p>Various people have proposed a fix for this: adding a new function with a pseudo-gradient. I understood the general idea of this, but not the specified, so set out to build some intuition about how the backward pass is defined and why the function works.</p>
+<p>What I discovered, however, was that this approach has a limitation: the gradient remains zero for negative values.</p>
+<p>Fortunately it’s pretty easy to fix. I suggest an alternative definition which patches this, and demonstrate that we see improved behaviour.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Import the usual libraries and tweak the matplotlib setup</p>
+<div id="cell-4" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> torch</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> math <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pi</span>
+<span id="cb1-5"></span>
+<span id="cb1-6">FIGSIZE <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span></span>
+<span id="cb1-7">matplotlib.rcParams[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'figure.figsize'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (FIGSIZE <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, FIGSIZE)</span></code></pre></div>
+</div>
+</section>
+<section id="plotting-the-derivative" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-the-derivative">Plotting the derivative</h2>
+<p>To look at the derivative, we define a helper function to compute the gradient at a point.</p>
+<div id="cell-6" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> get_gradient(f, xs):</span>
+<span id="cb2-2">  xs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> xs.detach().clone()</span>
+<span id="cb2-3">  xs.requires_grad <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span></span>
+<span id="cb2-4"></span>
+<span id="cb2-5">  ys <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> f(xs)</span>
+<span id="cb2-6">  ys.backward(torch.ones_like(ys))  </span>
+<span id="cb2-7">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> xs.grad.detach()</span>
+<span id="cb2-8"></span>
+<span id="cb2-9"></span>
+<span id="cb2-10">x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>)</span>
+<span id="cb2-11"></span>
+<span id="cb2-12">plt.plot(x, torch.sin(x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>), label<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sin(x)"</span>)</span>
+<span id="cb2-13">plt.plot(x, get_gradient(torch.sin, x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>), label<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dsin(x)/dx"</span>)</span>
+<span id="cb2-14">plt.legend()</span>
+<span id="cb2-15">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://joehalliwell.com/posts/clamp-with-grad_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem">The problem</h2>
+<p>The standard clamp functions has a zero gradient outside the clamped region. As a result gradient descent can’t do anything useful.</p>
+<div id="cell-8" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> plot(clamp_fn, ax, title):</span>
+<span id="cb3-2">  x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.arange(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>)</span>
+<span id="cb3-3">  clamp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">lambda</span> x: clamp_fn(x, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb3-4">  loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">lambda</span> x: torch.sin(clamp(x) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> pi) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb3-5"></span>
+<span id="cb3-6">  ax.plot(x, clamp(x), label<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clamp"</span>, alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>)</span>
+<span id="cb3-7">  ax.plot(x, loss(x), label<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"loss"</span>, alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>)</span>
+<span id="cb3-8">  ax.plot(x, get_gradient(loss, x), label<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dloss/dx"</span>, alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>)</span>
+<span id="cb3-9">    </span>
+<span id="cb3-10">  ax.legend()</span>
+<span id="cb3-11">  ax.title.set_text(title)</span>
+<span id="cb3-12"></span>
+<span id="cb3-13">fig, ax <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots(ncols<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(FIGSIZE,FIGSIZE))</span>
+<span id="cb3-14">plot(torch.clamp, ax, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clamp"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://joehalliwell.com/posts/clamp-with-grad_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this simple example, the minimum of the loss function (orange line) is at -0.5.</p>
+<p>However outside the <img src="https://latex.codecogs.com/png.latex?%5B-1,1%5D"> interval, the derivative of the loss function (green line) is zero.</p>
+</section>
+<section id="define-clamp_with_grad" class="level2">
+<h2 class="anchored" data-anchor-id="define-clamp_with_grad">Define <code>clamp_with_grad()</code></h2>
+<p>Various folks have proposed the following approach to addressing this, by providing a pseudo-derivative outside the clamped interval:</p>
+<div id="cell-11" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> ClampWithGrad(torch.autograd.Function):</span>
+<span id="cb4-2">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">@staticmethod</span></span>
+<span id="cb4-3">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> forward(ctx, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>):</span>
+<span id="cb4-4">        ctx.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span></span>
+<span id="cb4-5">        ctx.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span></span>
+<span id="cb4-6">        ctx.save_for_backward(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>)</span>
+<span id="cb4-7">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>.clamp(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>)</span>
+<span id="cb4-8"></span>
+<span id="cb4-9">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">@staticmethod</span></span>
+<span id="cb4-10">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> backward(ctx, grad_in):</span>
+<span id="cb4-11">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ctx.saved_tensors</span>
+<span id="cb4-12">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> (</span>
+<span id="cb4-13">            grad_in <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (grad_in <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>.clamp(ctx.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>, ctx.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>),</span>
+<span id="cb4-14">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb4-15">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb4-16">        )</span>
+<span id="cb4-17"></span>
+<span id="cb4-18">clamp_with_grad <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ClampWithGrad.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">apply</span></span></code></pre></div>
+</div>
+<div id="cell-12" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">fig, ax <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots(ncols<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(FIGSIZE<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, FIGSIZE))</span>
+<span id="cb5-2">plot(torch.clamp, ax[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clamp"</span>)</span>
+<span id="cb5-3">plot(clamp_with_grad, ax[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clamp_with_grad"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://joehalliwell.com/posts/clamp-with-grad_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="an-improved-function" class="level1">
+<h1>An improved function</h1>
+<div id="cell-14" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> ClampWithGradProposed(torch.autograd.Function):</span>
+<span id="cb6-2">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">@staticmethod</span></span>
+<span id="cb6-3">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> forward(ctx, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>):</span>
+<span id="cb6-4">        ctx.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span></span>
+<span id="cb6-5">        ctx.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span></span>
+<span id="cb6-6">        ctx.save_for_backward(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>)</span>
+<span id="cb6-7">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>.clamp(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>)</span>
+<span id="cb6-8"></span>
+<span id="cb6-9">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">@staticmethod</span></span>
+<span id="cb6-10">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> backward(ctx, grad_in):</span>
+<span id="cb6-11">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ctx.saved_tensors</span>
+<span id="cb6-12">        clamped <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span>.clamp(ctx.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>, ctx.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>)</span>
+<span id="cb6-13">        delta <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">input</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> clamped</span>
+<span id="cb6-14">        v <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.where(delta <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, grad_in, torch.sign(delta))</span>
+<span id="cb6-15">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> (v, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>)</span>
+<span id="cb6-16"></span>
+<span id="cb6-17">clamp_with_grad2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ClampWithGrad2.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">apply</span></span></code></pre></div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">fig, ax <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots(ncols<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb7-2">plot(torch.clamp, ax[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clamp"</span>)</span>
+<span id="cb7-3">plot(clamp_with_grad, ax[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clamp_with_grad"</span>)</span>
+<span id="cb7-4">plot(clamp_with_grad2, ax[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://joehalliwell.com/posts/clamp-with-grad_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>pytorch</category>
+  <guid>https://joehalliwell.com/posts/clamp-with-grad.html</guid>
+  <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Stationery Day</title>
+  <link>https://joehalliwell.com/posts/stationery-day/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://joehalliwell.com/posts/stationery-day/father-tim-jones.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Father Tim Jones was outraged in a local stationary store. Photo credit: Ross Parry/York Press</figcaption>
+</figure>
+</div>
+<p>After the success of last year’s Tradition Inventing Day, it’s time again to devise a fixture for my calendar.</p>
+<p>Celebrate Stationery Day by covering your desk in squares of yellow paper. Each square of yellow paper must be inscribed with the rune TAX.</p>
+<p>Celebrate Stationery Day by buying a notebook that you’ll never fill. Stationery is the cenotaph for our literary ambitions.</p>
+<p>Celebrate Stationery Day by asking your friends, “What’s mightier than the sword?” Your friends must then shout, “THE PEN IS,” or perform a forfeit.</p>
+<p>Stationery Day falls on the Friday after Easter.</p>
+
+
+
+ ]]></description>
+  <category>moveable feast</category>
+  <category>tradition inventing day</category>
+  <guid>https://joehalliwell.com/posts/stationery-day/</guid>
+  <pubDate>Thu, 18 Feb 2016 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Tradition Inventing Day</title>
+  <link>https://joehalliwell.com/posts/tradition-inventing-day/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Feeling slightly cheated by missing Shrove (AKA Pancake) Tuesday for the fourth or fifth year in a row, I’ve decided to take matters into my own hands.</p>
+<p>Each year on the 18th of February I will invent a new festival day . The appointed date will take its rightful place in the calendar and be celebrated in the appointed way from that moment until the end of time.</p>
+<p>Please join me in celebrating today, Tradition Inventing Day.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://joehalliwell.com/posts/tradition-inventing-day/traditional-greeting-card.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">A traditional greeting card for Tradition Inventing Day</figcaption>
+</figure>
+</div>
+
+
+
+ ]]></description>
+  <category>tradition inventing day</category>
+  <guid>https://joehalliwell.com/posts/tradition-inventing-day/</guid>
+  <pubDate>Wed, 18 Feb 2015 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Holiday books</title>
+  <link>https://joehalliwell.com/posts/holiday-books/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>I’ve been reading Species of Spaces and Other Pieces a collection of <a href="http://en.wikipedia.org/wiki/Georges_Perec">Georges Perec’s</a> writing this week. It’s a perfect holiday book. It’s full of things to read and things to do. It’s a grown-up version of the summer annuals (Whizzer &amp; Chips) I used to read in the car on the way to Pwllheli.</p>
+<section id="postcards" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="postcards">243 Postcards</h2>
+<p>One piece is called “Two Hundred and Fourty-three Postcards in Real Colour”. Dedicated to Italo Calvino; the title evokes JG Ballard. It is the combined text of 243 holiday postcards. This should be terribly boring, but by some sleight of hand it’s not. Here are the first five as a taster:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://joehalliwell.com/posts/holiday-books/great-mosque-of-kairouan-postcard.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">An old postcard with a sepia photograph of the Great Mosque of Kairouan</figcaption>
+</figure>
+</div>
+<ul>
+<li>We’re camping near Ajaccio. Lovely weather. We eat well. I’ve got sunburnt. Fondest love.</li>
+<li>We’re at the Hôtel Alcazar. Getting a tan. Really nice! We’ve made loads of friends. Back on the 7th.</li>
+<li>We’re sailing off L’Ile-Rousse. Getting ourselves a tan. Food admirable. I’ve gone and got sunburnt! Love etc.</li>
+<li>We’ve just done Dahomey. Superb nights. Fantastic swimming. Excursions on camel-back. Will be in Paris on the 15th.</li>
+<li>We’ve finally landed in Nice. Lots of lazing about and sleep. Really nice (despite the sunburn). Love.</li>
+</ul>
+<p>Postcards are ridden with clichés, but Perec’s holiday-makers know that and circumlocute them, finding syncopated ways to say the same old things. The effect is disruptive and wholly convincing. Darlings, I do it myself.</p>
+<p>Postcards are formulaic. Knowing a little of Perec, I suspect we’re looking at an exhaustive catalogue here. 243 = 3 * 3 * 3 * 3 * 3. Perhaps these texts represent 5 decisions, each with 3 choices.</p>
+<p>Perhaps not. But the sense that a formula might be at play is irresistible: this feels like a system of co-ordinates. And that suspicion of regularity hyper-sensitises us to variation. Every phrase becomes a hook.</p>
+<p>Alone, each message is banal. Gridded together they become terribly poignant: telegraphic!</p>
+</section>
+<section id="collage" class="level2">
+<h2 class="anchored" data-anchor-id="collage">Collage</h2>
+<p>Combinatorics crop up again in the essay (of sorts) “Think/Classify”. It’s a collage piece: a handful of elegant paragraphs with little in common. Sure they’re about thinking. But what isn’t?</p>
+<p>Collage is a gentle, therapeutic art form. I’ve always been suspicious of it.</p>
+<p>Things — any things, even several copies of the same thing — go together. The choice can be arbitrary at least in so far as we’re capable of that. Things agree with one another and contradict one another to the same degree. It seems lazy.</p>
+<p>Paul Auster‘s strength, someone wrote is that “he simply rubs stories together like pebbles. They clatter, spark, and echo with a deepening mystery.” That phrase caught my ear. There’s profundity in setting things up together and (thereby) calling attention to the arrangement.</p>
+</section>
+<section id="aphorism" class="level2">
+<h2 class="anchored" data-anchor-id="aphorism">Aphorism</h2>
+<p>I am suspicious of surrealism. Dali and Magritte are too slick. I prefer the muddy ones: Ernst, Carrington etc.</p>
+<p>One of Perec’s fellow OuLiPo-eans, Marcel Benabou invented a “machine” for producing Aphorisms. Like a language it has grammar and vocabulary. Sets of abstract nouns, preferably weighty ones, make up the vocabulary: war/peace, knowledge/science, morality/art etc. The grammar consists of template phrases: “A, like B, is largely a matter of taste”, “A wouldn’t be A, were it not for B”, “The true name of A is B” etc.</p>
+<p>I’ve made a web page that lets you explore a corner of this space: <a href="http://www.joehalliwell.com/aphorisms.html">Aphorism Generator</a>.</p>
+<p>“Where is the thinking here?” asks Perec. “In the formula? In the vocabulary? In the operation that marries them?” It’s in our heads, obviously.</p>
+</section>
+<section id="peregrination" class="level2">
+<h2 class="anchored" data-anchor-id="peregrination">Peregrination</h2>
+<p>It shouldn’t be a surprise that I’m not the first to make a computer simulate Benabou’s machine. Computers are combiners par excellence. Perec tells us that Paul Buffort wrote a program that could turn out “a good dozen [aphorisms] within a few seconds”. This is a charming reminder of how far we’ve come. Modern machines can generate aphorisms at a rate of knots.</p>
+<blockquote class="blockquote">
+<p>They are playing a game. They are playing at not playing a game. If I show them I see they are, I shall break the rules and they will punish me. I must play their game, of not seeing I see the game. – Knots, RD Laing</p>
+</blockquote>
+<p>In the introduction to Knots (incidentally another excellent holiday book) Laing writes that the patterns to which he’ll call attention could have been presented as “raw data” — presumably transcripts — or further distilled “towards an abstract logico-mathematical calculus”.</p>
+<p>Perhaps Laing was just being lazy. Or perhaps he knew that calculi can be stone cold boring. If there is a single thread to Knots, far better to show a few colourful examples of it. Or maybe Knots is a a salad. The Latin for salad, “satura”, is sometimes thought the ancestor of “satire”. I’ve never been convinced by that one.</p>
+<p>One person who did have a taste for abstraction was Early Wittgenstein. At the end of his Tractatus he famously says, “whereof we cannot speak, thereof we must be silent.”</p>
+<p>(I really don’t know what Laing was after with “logico-mathematical”.)</p>
+<p>Whereas big on archaisms, Late Wittgenstein got especially big on “shewing”. Shewing is something that you can do in silence, instead of speaking. The problem is roughly that there are certain things — thing that don’t exist, generally speaking — that can’t be talked about without missing the mark. This resulted in a very great number of little notes which were arranged into books after his death like pressed flowers.</p>
+<p>The Wittgensteins are the most important philosophers of the Twentieth century.</p>
+<p>A lot of Perec’s pieces don’t really have a proper ending.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>review</category>
+  <category>perec</category>
+  <category>wittgenstein</category>
+  <guid>https://joehalliwell.com/posts/holiday-books/</guid>
+  <pubDate>Tue, 13 Jul 2010 23:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
