@@ -9,28 +9,10 @@ project:
     - "*.qmd"
     - "posts/"
 
-  # Older pages that predate Quarto and keep their original URLs. Quarto only
-  # copies files it renders or that a rendered page links to, so anything not
-  # listed here silently vanishes from the build. `just check` guards this.
-  resources:
-    - "*.html"
-    - "*.pdf"
-    - all-walls.jpg
-    - sample.csv
-    - chronochrome/
-    - dai/
-    - eclub-social-media-sodash/
-    - family/
-    - fll/
-    - fonts/
-    - moppi/
-    - online-hadoop/
-    - res/
-    - sglzr/
-    - sketch/
-    - tools/
-
   post-render:
+    # Pages that predate Quarto live in _legacy/ and are copied to the root of
+    # the build, which is where their URLs have always been.
+    - _scripts/copy-legacy.sh
     - _scripts/make-blog-redirects.sh
 
 website:
