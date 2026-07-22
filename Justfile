@@ -6,11 +6,11 @@ render:
 check: render
     bash _scripts/check-urls.sh
 
-# Publish the checked build to GitHub Pages
-#
 # --no-render matters: without it quarto renders a second time into its own
 # worktree and publishes that, so the build `check` just validated is not the
 # build that goes up.
+
+# Publish the checked build to GitHub Pages
 publish: check
     quarto publish --no-prompt --no-browser --no-render gh-pages
 
