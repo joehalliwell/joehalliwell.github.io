@@ -56,3 +56,9 @@ format:
       - styles.scss
     toc: true
     toc-location: left
+    # Lets Mastodon verify the link on the profile at the other end. It fetches
+    # whichever URL the profile names, so this goes on every page rather than
+    # just the about page.
+    include-in-header:
+      text: |
+        <link rel="me" href="https://mastodon.social/@joehalliwell" />
