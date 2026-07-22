@@ -7,9 +7,6 @@ about:
     - icon: mastodon
       text: Mastodon
       href: https://mastodon.social/@joehalliwell
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/joehalliwell
     - icon: linkedin
       text: LinkedIn
       href: https://linkedin.com/in/joehalliwell
