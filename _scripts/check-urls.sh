@@ -14,7 +14,8 @@ missing=0
 checked=0
 while read -r path; do
     path="${path%%#*}"
-    path="$(echo "$path" | xargs)"
+    path="${path#"${path%%[![:space:]]*}"}"
+    path="${path%"${path##*[![:space:]]}"}"
     [ -z "$path" ] && continue
     checked=$((checked + 1))
     if [ ! -e "$output_dir/$path" ]; then
