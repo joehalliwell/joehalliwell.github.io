@@ -14,6 +14,28 @@ set -euo pipefail
 output_dir="${QUARTO_PROJECT_OUTPUT_DIR:-build}"
 legacy_dir="$(dirname "$0")/../_legacy"
 
+# Refuse to copy over anything Quarto just rendered. A legacy file that shadows
+# a generated page is not something urls.txt can catch -- the path still exists,
+# it just has the wrong thing in it -- so it has to be an error here.
+conflicts=()
+while IFS= read -r -d '' file; do
+    relative="${file#"$legacy_dir"/}"
+    if [ -e "$output_dir/$relative" ]; then
+        conflicts+=("$relative")
+    fi
+done < <(find "$legacy_dir" -type f -print0)
+
+if [ "${#conflicts[@]}" -gt 0 ]; then
+    {
+        echo "post-render: _legacy/ would overwrite ${#conflicts[@]} generated file(s):"
+        printf '  %s\n' "${conflicts[@]}"
+        echo
+        echo "Each of these exists both in _legacy/ and in the rendered site."
+        echo "Rename or delete the copy in _legacy/ -- whatever Quarto renders wins."
+    } >&2
+    exit 1
+fi
+
 cp -r "$legacy_dir/." "$output_dir/"
 
 echo "post-render: copied $(find "$legacy_dir" -type f | wc -l) legacy files to /"
