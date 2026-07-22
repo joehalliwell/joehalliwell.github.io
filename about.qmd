@@ -4,15 +4,18 @@ image: profile.jpg
 about:
   template: jolla
   links:
+    - icon: mastodon
+      text: Mastodon
+      href: https://mastodon.social/@joehalliwell
     - icon: twitter
       text: Twitter
-      href: https://twitter.com
+      href: https://twitter.com/joehalliwell
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://linkedin.com/in/joehalliwell
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/joehalliwell
 
 ---
 
