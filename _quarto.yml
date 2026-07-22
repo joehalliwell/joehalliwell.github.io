@@ -2,6 +2,37 @@ project:
   type: website
   output-dir: build
 
+  # Only these get rendered. Without an explicit list Quarto also picks up
+  # markdown inside the vendored reveal.js decks and renders over the real
+  # pages, e.g. online-hadoop/plugin/markdown/example.md.
+  render:
+    - "*.qmd"
+    - "posts/"
+
+  # Older pages that predate Quarto and keep their original URLs. Quarto only
+  # copies files it renders or that a rendered page links to, so anything not
+  # listed here silently vanishes from the build. `just check` guards this.
+  resources:
+    - "*.html"
+    - "*.pdf"
+    - all-walls.jpg
+    - sample.csv
+    - chronochrome/
+    - dai/
+    - eclub-social-media-sodash/
+    - family/
+    - fll/
+    - fonts/
+    - moppi/
+    - online-hadoop/
+    - res/
+    - sglzr/
+    - sketch/
+    - tools/
+
+  post-render:
+    - _scripts/make-blog-redirects.sh
+
 website:
   title: "Joe Halliwell"
   navbar:
@@ -12,8 +43,8 @@ website:
       - icon: twitter
         href: https://twitter.com/joehalliwell
 
-  site-url: https://joehalliwell.com/blog
-  google-analytics: "405350320"
+  site-url: https://joehalliwell.com
+  google-analytics: "G-7CDJ5Z8MGP"
 
 execute:
   cache: true
