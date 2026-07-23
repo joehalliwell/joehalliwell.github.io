@@ -1,0 +1,12 @@
+---
+title: "Not found"
+---
+
+There is nothing at this address.
+
+The blog moved to the top level of the site, so posts that used to live under
+`/blog/` are now at `/posts/`. Old `/blog/` links redirect on their own; a few
+odder corners of the site may not.
+
+Try <a href="/">the front page</a>, or the list of
+<a href="/things.html">things I have made</a>.

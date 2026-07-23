@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Joe Halliwell's Homepage</title>
+    <title>Things — Joe Halliwell</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="stylesheet" href="res/style.css" />
     <link
@@ -33,6 +33,9 @@
       .nav ul li a {
         text-decoration: none !important;
       }
+      .nav ul li[aria-current] {
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
@@ -43,8 +46,9 @@
           <h1>
             <ul>
               <li>
-                <a target="_blank" href="https://joehalliwell.com/blog">Blog</a>
+                <a href="index.html">Home</a>
               </li>
+              <li aria-current="page">Things</li>
               <li>
                 <a target="_blank" href="https://mastodon.social/@joehalliwell"
                   >Mastodon</a
@@ -136,16 +140,16 @@
               >, ethical NFTs
             </li>
             <li>
-              <a href="http://www.joehalliwell.com/chronochrome">Chronochrome</a
+              <a href="chronochrome/">Chronochrome</a
               >, interactive video art thing
             </li>
             <li>
-              <a href="http://joehalliwell.com/jGeoPlanet/">jGeoPlanet</a>, a
+              <a href="jGeoPlanet/">jGeoPlanet</a>, a
               java client library for Yahoo’s GeoPlanet service
             </li>
             <li>
-              Sketches: <a href="/relax.html">Relax</a>,
-              <a href="/sketch/vines.html">Vines</a>
+              Sketches: <a href="relax.html">Relax</a>,
+              <a href="sketch/vines.html">Vines</a>
               <!-- - Talks: [Building an online system with Hadoop](/online-hadoop/index.html) -->
             </li>
             <li>
@@ -156,11 +160,11 @@
               compute basic stats
             </li>
             <li>
-              <a href="/thesis.pdf">Linguistic Probability Theory</a>, my PhD
+              <a href="thesis.pdf">Linguistic Probability Theory</a>, my PhD
               thesis about reasoning with probability estimates
             </li>
             <li>
-              <a href="view-source:http://www.joehalliwell.com/blank.html"
+              <a href="blank.html"
                 >The smallest valid HTML5 page</a
               >
             </li>
@@ -212,31 +216,5 @@
       gtag("js", new Date());
       gtag("config", "G-7CDJ5Z8MGP");
     </script>
-    <!-- Google Analytics -->
-    <script>
-      (function (i, s, o, g, r, a, m) {
-        i["GoogleAnalyticsObject"] = r;
-        (i[r] =
-          i[r] ||
-          function () {
-            (i[r].q = i[r].q || []).push(arguments);
-          }),
-          (i[r].l = 1 * new Date());
-        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m);
-      })(
-        window,
-        document,
-        "script",
-        "//www.google-analytics.com/analytics.js",
-        "ga"
-      );
-
-      ga("create", "UA-5118963-1", "auto"); // Replace with your property ID.
-      ga("send", "pageview");
-    </script>
-    <!-- End Google Analytics -->
   </body>
 </html>

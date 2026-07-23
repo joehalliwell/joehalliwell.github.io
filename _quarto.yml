@@ -1,0 +1,46 @@
+project:
+  type: website
+  output-dir: build
+
+  # Only these get rendered. Without an explicit list Quarto also picks up
+  # markdown inside the vendored reveal.js decks and renders over the real
+  # pages, e.g. online-hadoop/plugin/markdown/example.md.
+  render:
+    - "*.qmd"
+    - "posts/"
+
+  post-render:
+    # Pages that predate Quarto live in _legacy/ and are copied to the root of
+    # the build, which is where their URLs have always been.
+    - _scripts/copy-legacy.sh
+    - _scripts/make-blog-redirects.sh
+
+website:
+  title: "Joe Halliwell"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/joehalliwell
+      - icon: mastodon
+        href: https://mastodon.social/@joehalliwell
+
+  site-url: https://joehalliwell.com
+  google-analytics: "G-7CDJ5Z8MGP"
+
+execute:
+  cache: true
+
+format:
+  html:
+    theme:
+      - simplex
+      - styles.scss
+    toc: true
+    toc-location: left
+    # Lets Mastodon verify the link on the profile at the other end. It fetches
+    # whichever URL the profile names, so this goes on every page rather than
+    # just the about page.
+    include-in-header:
+      text: |
+        <link rel="me" href="https://mastodon.social/@joehalliwell" />

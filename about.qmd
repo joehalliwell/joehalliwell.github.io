@@ -1,0 +1,23 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: mastodon
+      text: Mastodon
+      href: https://mastodon.social/@joehalliwell
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/joehalliwell
+    - icon: github
+      text: Github
+      href: https://github.com/joehalliwell
+
+---
+
+This is Joe Halliwell's website.
+
+Posts appear when they appear, on whatever seems interesting at the time.
+There is a [feed](index.xml) if you would rather not keep checking, and a
+list of [things I have made](things.html) if you would rather not read.
