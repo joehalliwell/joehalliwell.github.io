@@ -1,5 +1,12 @@
 <html>
-<head><title>Add a query argument to echo the content to the title and body of this page</title></head>
+<head>
+<title>Add a query argument to echo the content to the title and body of this page</title>
+<!-- This page reflects its query string into the title and body, so any URL of
+     the form echo.html?anything is a page on this domain saying whatever the
+     linker chose. It stays working, but it stays out of the index. -->
+<meta name="robots" content="noindex" />
+<link rel="canonical" href="https://joehalliwell.com/tools/echo.html" />
+</head>
 <body>
 <p style="font-family: sans; font-size: 180%; word-break:break-all;">
 <script>

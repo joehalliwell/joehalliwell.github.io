@@ -8,11 +8,19 @@
 <title>Joe Halliwell</title>
 <link>https://joehalliwell.com/</link>
 <atom:link href="https://joehalliwell.com/index.xml" rel="self" type="application/rss+xml"/>
-<description></description>
+<description>Essays and notes by Joe Halliwell on AI architecture and safety, machine
+learning, programming, and whatever else seems interesting at the time.
+</description>
+<image>
+<url>https://joehalliwell.com/profile.jpg</url>
+<title>Joe Halliwell</title>
+<link>https://joehalliwell.com/</link>
+</image>
 <generator>quarto-1.7.32</generator>
 <lastBuildDate>Fri, 03 Apr 2026 23:00:00 GMT</lastBuildDate>
 <item>
   <title>Per-Layer Embeddings vs Engram</title>
+  <dc:creator>Joe Halliwell</dc:creator>
   <link>https://joehalliwell.com/posts/engram-vs-ple.html</link>
   <description><![CDATA[ 
 
@@ -57,6 +65,7 @@
 </item>
 <item>
   <title>Hypersentimentalism: A New Meta for AI Alignment</title>
+  <dc:creator>Joe Halliwell</dc:creator>
   <link>https://joehalliwell.com/posts/hypersentimentalism.html</link>
   <description><![CDATA[ 
 
@@ -204,6 +213,7 @@
 </item>
 <item>
   <title>Swift to Harbour, Slow to Berth</title>
+  <dc:creator>Joe Halliwell</dc:creator>
   <link>https://joehalliwell.com/posts/swift-to-harbour.html</link>
   <description><![CDATA[ 
 
@@ -252,6 +262,7 @@
 </item>
 <item>
   <title>Renovating the command line</title>
+  <dc:creator>Joe Halliwell</dc:creator>
   <link>https://joehalliwell.com/posts/rust-tools/</link>
   <description><![CDATA[ 
 
@@ -367,9 +378,11 @@ and line numbers, giving immediate context to each find.
   <category>tools</category>
   <guid>https://joehalliwell.com/posts/rust-tools/</guid>
   <pubDate>Sat, 09 Sep 2023 23:00:00 GMT</pubDate>
+  <media:content url="https://joehalliwell.com/posts/rust-tools/exa.png" medium="image" type="image/png" height="59" width="144"/>
 </item>
 <item>
   <title>An analysis of clamp_with_grad()</title>
+  <dc:creator>Joe Halliwell</dc:creator>
   <link>https://joehalliwell.com/posts/clamp-with-grad.html</link>
   <description><![CDATA[ 
 
@@ -858,6 +871,7 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
 </item>
 <item>
   <title>Stationery Day</title>
+  <dc:creator>Joe Halliwell</dc:creator>
   <link>https://joehalliwell.com/posts/stationery-day/</link>
   <description><![CDATA[ 
 
@@ -884,9 +898,11 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
   <category>tradition inventing day</category>
   <guid>https://joehalliwell.com/posts/stationery-day/</guid>
   <pubDate>Thu, 18 Feb 2016 00:00:00 GMT</pubDate>
+  <media:content url="https://joehalliwell.com/posts/stationery-day/father-tim-jones.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Tradition Inventing Day</title>
+  <dc:creator>Joe Halliwell</dc:creator>
   <link>https://joehalliwell.com/posts/tradition-inventing-day/</link>
   <description><![CDATA[ 
 
@@ -910,9 +926,11 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
   <category>tradition inventing day</category>
   <guid>https://joehalliwell.com/posts/tradition-inventing-day/</guid>
   <pubDate>Wed, 18 Feb 2015 00:00:00 GMT</pubDate>
+  <media:content url="https://joehalliwell.com/posts/tradition-inventing-day/traditional-greeting-card.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 <item>
   <title>Holiday books</title>
+  <dc:creator>Joe Halliwell</dc:creator>
   <link>https://joehalliwell.com/posts/holiday-books/</link>
   <description><![CDATA[ 
 
@@ -979,6 +997,7 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
   <category>wittgenstein</category>
   <guid>https://joehalliwell.com/posts/holiday-books/</guid>
   <pubDate>Tue, 13 Jul 2010 23:00:00 GMT</pubDate>
+  <media:content url="https://joehalliwell.com/posts/holiday-books/great-mosque-of-kairouan-postcard.png" medium="image" type="image/png" height="227" width="144"/>
 </item>
 </channel>
 </rss>

@@ -1,10 +1,45 @@
 [
   {
-    "objectID": "posts/tradition-inventing-day/index.html",
-    "href": "posts/tradition-inventing-day/index.html",
-    "title": "Tradition Inventing Day",
+    "objectID": "posts/clamp-with-grad.html",
+    "href": "posts/clamp-with-grad.html",
+    "title": "An analysis of clamp_with_grad()",
     "section": "",
-    "text": "Feeling slightly cheated by missing Shrove (AKA Pancake) Tuesday for the fourth or fifth year in a row, I’ve decided to take matters into my own hands.\nEach year on the 18th of February I will invent a new festival day . The appointed date will take its rightful place in the calendar and be celebrated in the appointed way from that moment until the end of time.\nPlease join me in celebrating today, Tradition Inventing Day.\n\n\n\nA traditional greeting card for Tradition Inventing Day"
+    "text": "This notebook examines the clamp_with_grad() function that’s sometimes used in the CLIP-guided art community.\nThe standard clamp() (AKA clip()) function has a zero gradient outside the clamped region. This is a problem for gradient descent optimizers.\nVarious people have proposed a fix for this: adding a new function with a pseudo-gradient. I understood the general idea of this, but not the specified, so set out to build some intuition about how the backward pass is defined and why the function works.\nWhat I discovered, however, was that this approach has a limitation: the gradient remains zero for negative values.\nFortunately it’s pretty easy to fix. I suggest an alternative definition which patches this, and demonstrate that we see improved behaviour."
+  },
+  {
+    "objectID": "posts/clamp-with-grad.html#setup",
+    "href": "posts/clamp-with-grad.html#setup",
+    "title": "An analysis of clamp_with_grad()",
+    "section": "Setup",
+    "text": "Setup\nImport the usual libraries and tweak the matplotlib setup\n\nimport torch\nimport matplotlib\nimport matplotlib.pyplot as plt\nfrom math import pi\n\nFIGSIZE = 6\nmatplotlib.rcParams['figure.figsize'] = (FIGSIZE * 3, FIGSIZE)"
+  },
+  {
+    "objectID": "posts/clamp-with-grad.html#plotting-the-derivative",
+    "href": "posts/clamp-with-grad.html#plotting-the-derivative",
+    "title": "An analysis of clamp_with_grad()",
+    "section": "Plotting the derivative",
+    "text": "Plotting the derivative\nTo look at the derivative, we define a helper function to compute the gradient at a point.\n\ndef get_gradient(f, xs):\n  xs = xs.detach().clone()\n  xs.requires_grad = True\n\n  ys = f(xs)\n  ys.backward(torch.ones_like(ys))  \n  return xs.grad.detach()\n\n\nx = torch.arange(-2, 2, 0.01)\n\nplt.plot(x, torch.sin(x * 5), label=\"sin(x)\")\nplt.plot(x, get_gradient(torch.sin, x * 5), label=\"dsin(x)/dx\")\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "posts/clamp-with-grad.html#the-problem",
+    "href": "posts/clamp-with-grad.html#the-problem",
+    "title": "An analysis of clamp_with_grad()",
+    "section": "The problem",
+    "text": "The problem\nThe standard clamp functions has a zero gradient outside the clamped region. As a result gradient descent can’t do anything useful.\n\ndef plot(clamp_fn, ax, title):\n  x = torch.arange(-2, 2, 0.01)\n  clamp = lambda x: clamp_fn(x, -1, 1)\n  loss = lambda x: torch.sin(clamp(x) * pi) + 1\n\n  ax.plot(x, clamp(x), label=\"clamp\", alpha=0.5)\n  ax.plot(x, loss(x), label=\"loss\", alpha=0.5)\n  ax.plot(x, get_gradient(loss, x), label=\"dloss/dx\", alpha=0.5)\n    \n  ax.legend()\n  ax.title.set_text(title)\n\nfig, ax = plt.subplots(ncols=1, figsize=(FIGSIZE,FIGSIZE))\nplot(torch.clamp, ax, \"clamp\")\n\n\n\n\n\n\n\n\nIn this simple example, the minimum of the loss function (orange line) is at -0.5.\nHowever outside the \\([-1,1]\\) interval, the derivative of the loss function (green line) is zero."
+  },
+  {
+    "objectID": "posts/clamp-with-grad.html#define-clamp_with_grad",
+    "href": "posts/clamp-with-grad.html#define-clamp_with_grad",
+    "title": "An analysis of clamp_with_grad()",
+    "section": "Define clamp_with_grad()",
+    "text": "Define clamp_with_grad()\nVarious folks have proposed the following approach to addressing this, by providing a pseudo-derivative outside the clamped interval:\n\nclass ClampWithGrad(torch.autograd.Function):\n    @staticmethod\n    def forward(ctx, input, min, max):\n        ctx.min = min\n        ctx.max = max\n        ctx.save_for_backward(input)\n        return input.clamp(min, max)\n\n    @staticmethod\n    def backward(ctx, grad_in):\n        input, = ctx.saved_tensors\n        return (\n            grad_in * (grad_in * (input - input.clamp(ctx.min, ctx.max)) &gt;= 0),\n            None,\n            None,\n        )\n\nclamp_with_grad = ClampWithGrad.apply\n\n\nfig, ax = plt.subplots(ncols=2, figsize=(FIGSIZE*2, FIGSIZE))\nplot(torch.clamp, ax[0], \"clamp\")\nplot(clamp_with_grad, ax[1], \"clamp_with_grad\")"
+  },
+  {
+    "objectID": "posts/stationery-day/index.html",
+    "href": "posts/stationery-day/index.html",
+    "title": "Stationery Day",
+    "section": "",
+    "text": "Father Tim Jones was outraged in a local stationary store. Photo credit: Ross Parry/York Press\n\n\nAfter the success of last year’s Tradition Inventing Day, it’s time again to devise a fixture for my calendar.\nCelebrate Stationery Day by covering your desk in squares of yellow paper. Each square of yellow paper must be inscribed with the rune TAX.\nCelebrate Stationery Day by buying a notebook that you’ll never fill. Stationery is the cenotaph for our literary ambitions.\nCelebrate Stationery Day by asking your friends, “What’s mightier than the sword?” Your friends must then shout, “THE PEN IS,” or perform a forfeit.\nStationery Day falls on the Friday after Easter."
   },
   {
     "objectID": "posts/swift-to-harbour.html",
@@ -102,7 +137,7 @@
     "href": "index.html",
     "title": "Joe Halliwell",
     "section": "",
-    "text": "Per-Layer Embeddings vs Engram\n\n\n\nai\n\narchitecture\n\nnits\n\nple\n\nengram\n\n\n\n\n\n\n\n\n\nApr 4, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHypersentimentalism: A New Meta for AI Alignment\n\n\n\nethics\n\nai\n\nsafety\n\nsentimentalism\n\n\n\n\n\n\n\n\n\nFeb 22, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSwift to Harbour, Slow to Berth\n\n\n\nethics\n\nai\n\nai safety\n\nbostrom\n\nanthropic\n\n\n\n\n\n\n\n\n\nFeb 14, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nRenovating the command line\n\n\n\nrust\n\nunix\n\ntools\n\n\n\n\n\n\n\n\n\nSep 10, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nAn analysis of clamp_with_grad()\n\n\n\npytorch\n\n\n\n\n\n\n\n\n\nJan 1, 2022\n\n\n\n\n\n\n\n\n\n\n\n\nStationery Day\n\n\n\nmoveable feast\n\ntradition inventing day\n\n\n\n\n\n\n\n\n\nFeb 18, 2016\n\n\n\n\n\n\n\n\n\n\n\n\nTradition Inventing Day\n\n\n\ntradition inventing day\n\n\n\n\n\n\n\n\n\nFeb 18, 2015\n\n\n\n\n\n\n\n\n\n\n\n\nHoliday books\n\n\n\nreview\n\nperec\n\nwittgenstein\n\n\n\n\n\n\n\n\n\nJul 14, 2010\n\n\n\n\n\nNo matching items"
+    "text": "Per-Layer Embeddings vs Engram\n\n\n\nai\n\narchitecture\n\nnits\n\nple\n\nengram\n\n\n\nGoogle’s Per-Layer Embeddings and DeepSeek’s Engram look like the same mechanism. Where they actually differ, who published first, and who owed whom a citation.\n\n\n\n\n\nApr 4, 2026\n\n\nJoe Halliwell\n\n\n\n\n\n\n\n\n\n\n\n\nHypersentimentalism: A New Meta for AI Alignment\n\n\n\nethics\n\nai\n\nsafety\n\nsentimentalism\n\n\n\nAI alignment is pursued within a consequentialist ethics that, followed to its limit, recreates the pathology it set out to prevent. The case for a sentimentalist alternative — and for doing on purpose what the best current techniques already do by accident.\n\n\n\n\n\nFeb 22, 2026\n\n\nJoe Halliwell\n\n\n\n\n\n\n\n\n\n\n\n\nSwift to Harbour, Slow to Berth\n\n\n\nethics\n\nai\n\nai safety\n\nbostrom\n\nanthropic\n\n\n\nBostrom’s Optimal Timing for Superintelligence argues that pausing AI research is not morally neutral, and that under certain conditions waiting is the reckless option. What that does to AI safety research.\n\n\n\n\n\nFeb 14, 2026\n\n\nJoe Halliwell\n\n\n\n\n\n\n\n\n\n\n\n\nRenovating the command line\n\n\n\nrust\n\nunix\n\ntools\n\n\n\nSix Rust command line tools — exa, bat, starship, dust, ripgrep and fd — that have displaced their 1970s UNIX ancestors in my everyday setup.\n\n\n\n\n\nSep 10, 2023\n\n\nJoe Halliwell\n\n\n\n\n\n\n\n\n\n\n\n\nAn analysis of clamp_with_grad()\n\n\n\npytorch\n\n\n\nAn analysis of the clamp_with_grad() pseudo-gradient used in the CLIP-guided art community, showing where it still gives a zero gradient, and proposing a definition that does not.\n\n\n\n\n\nJan 1, 2022\n\n\nJoe Halliwell\n\n\n\n\n\n\n\n\n\n\n\n\nStationery Day\n\n\n\nmoveable feast\n\ntradition inventing day\n\n\n\nThe second Tradition Inventing Day festival. Celebrate with squares of yellow paper, a notebook you will never fill, and at least one forfeit.\n\n\n\n\n\nFeb 18, 2016\n\n\nJoe Halliwell\n\n\n\n\n\n\n\n\n\n\n\n\nTradition Inventing Day\n\n\n\ntradition inventing day\n\n\n\nEach year on the 18th of February I will invent a new festival day, to be celebrated in the appointed way until the end of time. This is the first.\n\n\n\n\n\nFeb 18, 2015\n\n\nJoe Halliwell\n\n\n\n\n\n\n\n\n\n\n\n\nHoliday books\n\n\n\nreview\n\nperec\n\nwittgenstein\n\n\n\nGeorges Perec’s Species of Spaces, R.D. Laing’s Knots, and both Wittgensteins: notes on a summer’s reading, and on 243 postcards.\n\n\n\n\n\nJul 14, 2010\n\n\nJoe Halliwell\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/holiday-books/index.html",
@@ -203,45 +238,10 @@
     "text": "Colophon\nAll screengrabs are from gnome terminal using the Wild Cherry theme from Gogh. The font is FantasqueSansMono NerdFont."
   },
   {
-    "objectID": "posts/clamp-with-grad.html",
-    "href": "posts/clamp-with-grad.html",
-    "title": "An analysis of clamp_with_grad()",
+    "objectID": "posts/tradition-inventing-day/index.html",
+    "href": "posts/tradition-inventing-day/index.html",
+    "title": "Tradition Inventing Day",
     "section": "",
-    "text": "This notebook examines the clamp_with_grad() function that’s sometimes used in the CLIP-guided art community.\nThe standard clamp() (AKA clip()) function has a zero gradient outside the clamped region. This is a problem for gradient descent optimizers.\nVarious people have proposed a fix for this: adding a new function with a pseudo-gradient. I understood the general idea of this, but not the specified, so set out to build some intuition about how the backward pass is defined and why the function works.\nWhat I discovered, however, was that this approach has a limitation: the gradient remains zero for negative values.\nFortunately it’s pretty easy to fix. I suggest an alternative definition which patches this, and demonstrate that we see improved behaviour."
-  },
-  {
-    "objectID": "posts/clamp-with-grad.html#setup",
-    "href": "posts/clamp-with-grad.html#setup",
-    "title": "An analysis of clamp_with_grad()",
-    "section": "Setup",
-    "text": "Setup\nImport the usual libraries and tweak the matplotlib setup\n\nimport torch\nimport matplotlib\nimport matplotlib.pyplot as plt\nfrom math import pi\n\nFIGSIZE = 6\nmatplotlib.rcParams['figure.figsize'] = (FIGSIZE * 3, FIGSIZE)"
-  },
-  {
-    "objectID": "posts/clamp-with-grad.html#plotting-the-derivative",
-    "href": "posts/clamp-with-grad.html#plotting-the-derivative",
-    "title": "An analysis of clamp_with_grad()",
-    "section": "Plotting the derivative",
-    "text": "Plotting the derivative\nTo look at the derivative, we define a helper function to compute the gradient at a point.\n\ndef get_gradient(f, xs):\n  xs = xs.detach().clone()\n  xs.requires_grad = True\n\n  ys = f(xs)\n  ys.backward(torch.ones_like(ys))  \n  return xs.grad.detach()\n\n\nx = torch.arange(-2, 2, 0.01)\n\nplt.plot(x, torch.sin(x * 5), label=\"sin(x)\")\nplt.plot(x, get_gradient(torch.sin, x * 5), label=\"dsin(x)/dx\")\nplt.legend()\nplt.show()"
-  },
-  {
-    "objectID": "posts/clamp-with-grad.html#the-problem",
-    "href": "posts/clamp-with-grad.html#the-problem",
-    "title": "An analysis of clamp_with_grad()",
-    "section": "The problem",
-    "text": "The problem\nThe standard clamp functions has a zero gradient outside the clamped region. As a result gradient descent can’t do anything useful.\n\ndef plot(clamp_fn, ax, title):\n  x = torch.arange(-2, 2, 0.01)\n  clamp = lambda x: clamp_fn(x, -1, 1)\n  loss = lambda x: torch.sin(clamp(x) * pi) + 1\n\n  ax.plot(x, clamp(x), label=\"clamp\", alpha=0.5)\n  ax.plot(x, loss(x), label=\"loss\", alpha=0.5)\n  ax.plot(x, get_gradient(loss, x), label=\"dloss/dx\", alpha=0.5)\n    \n  ax.legend()\n  ax.title.set_text(title)\n\nfig, ax = plt.subplots(ncols=1, figsize=(FIGSIZE,FIGSIZE))\nplot(torch.clamp, ax, \"clamp\")\n\n\n\n\n\n\n\n\nIn this simple example, the minimum of the loss function (orange line) is at -0.5.\nHowever outside the \\([-1,1]\\) interval, the derivative of the loss function (green line) is zero."
-  },
-  {
-    "objectID": "posts/clamp-with-grad.html#define-clamp_with_grad",
-    "href": "posts/clamp-with-grad.html#define-clamp_with_grad",
-    "title": "An analysis of clamp_with_grad()",
-    "section": "Define clamp_with_grad()",
-    "text": "Define clamp_with_grad()\nVarious folks have proposed the following approach to addressing this, by providing a pseudo-derivative outside the clamped interval:\n\nclass ClampWithGrad(torch.autograd.Function):\n    @staticmethod\n    def forward(ctx, input, min, max):\n        ctx.min = min\n        ctx.max = max\n        ctx.save_for_backward(input)\n        return input.clamp(min, max)\n\n    @staticmethod\n    def backward(ctx, grad_in):\n        input, = ctx.saved_tensors\n        return (\n            grad_in * (grad_in * (input - input.clamp(ctx.min, ctx.max)) &gt;= 0),\n            None,\n            None,\n        )\n\nclamp_with_grad = ClampWithGrad.apply\n\n\nfig, ax = plt.subplots(ncols=2, figsize=(FIGSIZE*2, FIGSIZE))\nplot(torch.clamp, ax[0], \"clamp\")\nplot(clamp_with_grad, ax[1], \"clamp_with_grad\")"
-  },
-  {
-    "objectID": "posts/stationery-day/index.html",
-    "href": "posts/stationery-day/index.html",
-    "title": "Stationery Day",
-    "section": "",
-    "text": "Father Tim Jones was outraged in a local stationary store. Photo credit: Ross Parry/York Press\n\n\nAfter the success of last year’s Tradition Inventing Day, it’s time again to devise a fixture for my calendar.\nCelebrate Stationery Day by covering your desk in squares of yellow paper. Each square of yellow paper must be inscribed with the rune TAX.\nCelebrate Stationery Day by buying a notebook that you’ll never fill. Stationery is the cenotaph for our literary ambitions.\nCelebrate Stationery Day by asking your friends, “What’s mightier than the sword?” Your friends must then shout, “THE PEN IS,” or perform a forfeit.\nStationery Day falls on the Friday after Easter."
+    "text": "Feeling slightly cheated by missing Shrove (AKA Pancake) Tuesday for the fourth or fifth year in a row, I’ve decided to take matters into my own hands.\nEach year on the 18th of February I will invent a new festival day . The appointed date will take its rightful place in the calendar and be celebrated in the appointed way from that moment until the end of time.\nPlease join me in celebrating today, Tradition Inventing Day.\n\n\n\nA traditional greeting card for Tradition Inventing Day"
   }
 ]

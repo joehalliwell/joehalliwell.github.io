@@ -6,7 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Joe Halliwell">
 <meta name="dcterms.date" content="2022-01-01">
+<meta name="description" content="An analysis of the clamp_with_grad() pseudo-gradient used in the CLIP-guided art community, showing where it still gives a zero gradient, and proposing a definition that does not.">
 
 <title>An analysis of clamp_with_grad() – Joe Halliwell</title>
 <style>
@@ -144,6 +146,19 @@ window.Quarto = {
 };
 </script>
 
+<meta property="og:title" content="An analysis of clamp_with_grad() – Joe Halliwell">
+<meta property="og:description" content="An analysis of the clamp_with_grad() pseudo-gradient used in the CLIP-guided art community, showing where it still gives a zero gradient, and proposing a definition that does not.">
+<meta property="og:image" content="https://joehalliwell.com/posts/clamp-with-grad_files/figure-html/cell-3-output-1.png">
+<meta property="og:site_name" content="Joe Halliwell">
+<meta property="og:image:height" content="357">
+<meta property="og:image:width" content="1056">
+<meta name="twitter:title" content="An analysis of clamp_with_grad() – Joe Halliwell">
+<meta name="twitter:description" content="An analysis of the clamp_with_grad() pseudo-gradient used in the CLIP-guided art community, showing where it still gives a zero gradient, and proposing a definition that does not.">
+<meta name="twitter:image" content="https://joehalliwell.com/posts/clamp-with-grad_files/figure-html/cell-3-output-1.png">
+<meta name="twitter:image-height" content="357">
+<meta name="twitter:image-width" content="1056">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://joehalliwell.com/posts/clamp-with-grad.html" />
 </head>
 
 <body class="floating nav-fixed quarto-light">
@@ -189,7 +204,12 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">An analysis of <code>clamp_with_grad()</code></h1>
-                                <div class="quarto-categories">
+                  <div>
+        <div class="description">
+          An analysis of the clamp_with_grad() pseudo-gradient used in the CLIP-guided art community, showing where it still gives a zero gradient, and proposing a definition that does not.
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">pytorch</div>
               </div>
                   </div>
@@ -198,6 +218,12 @@ window.Quarto = {
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Joe Halliwell </p>
+            </div>
+    </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
