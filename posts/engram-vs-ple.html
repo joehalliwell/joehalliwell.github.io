@@ -39,10 +39,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e4a8c97f15a36f48a6da402becafd217.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6e72123e395e094dfc20dea77b6cccd6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9bb0f2095b8c54af509316760a66a80a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -84,11 +84,15 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 
 <meta property="og:title" content="Per-Layer Embeddings vs Engram – Joe Halliwell">
 <meta property="og:description" content="Google’s Per-Layer Embeddings and DeepSeek’s Engram look like the same mechanism. Where they actually differ, who published first, and who owed whom a citation.">
-<meta property="og:image" content="https://joehalliwell.com/profile.jpg">
+<meta property="og:image" content="https://joehalliwell.com/posts/engram-vs-ple-plate.png">
 <meta property="og:site_name" content="Joe Halliwell">
+<meta property="og:image:height" content="590">
+<meta property="og:image:width" content="970">
 <meta name="twitter:title" content="Per-Layer Embeddings vs Engram – Joe Halliwell">
 <meta name="twitter:description" content="Google’s Per-Layer Embeddings and DeepSeek’s Engram look like the same mechanism. Where they actually differ, who published first, and who owed whom a citation.">
-<meta name="twitter:image" content="https://joehalliwell.com/profile.jpg">
+<meta name="twitter:image" content="https://joehalliwell.com/posts/engram-vs-ple-plate.png">
+<meta name="twitter:image-height" content="590">
+<meta name="twitter:image-width" content="970">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://joehalliwell.com/posts/engram-vs-ple.html" />
 </head>
@@ -182,6 +186,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
   <li><a href="#oh-wow-so-google-are-taking-inspiration-from-deepseek" id="toc-oh-wow-so-google-are-taking-inspiration-from-deepseek" class="nav-link active" data-scroll-target="#oh-wow-so-google-are-taking-inspiration-from-deepseek">Oh wow! So Google are taking inspiration from DeepSeek?</a></li>
   <li><a href="#ah-okay-so-deepseek-are-ripping-off-google" id="toc-ah-okay-so-deepseek-are-ripping-off-google" class="nav-link" data-scroll-target="#ah-okay-so-deepseek-are-ripping-off-google">Ah okay, so DeepSeek are ripping off Google?</a></li>
   <li><a href="#okay-so-deepseek-are-bad-after-all" id="toc-okay-so-deepseek-are-bad-after-all" class="nav-link" data-scroll-target="#okay-so-deepseek-are-bad-after-all">Okay, so DeepSeek are bad after all?</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
   </ul>
 </nav>
@@ -215,6 +220,10 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>Nope. Much of the community’s understanding of PLE comes from <a href="https://github.com/antimatter15/reverse-engineering-gemma-3n">antimatter15’s reverse-engineering work</a>. Google didn’t publish!</p>
 <p>DeepSeek are to be applauded for continuing to publish their SoTA research in useful detail. If Google had done the same, maybe they’d have got the citation!</p>
 <hr>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>There is a <a href="https://medium.com/@sampan090611/deepseek-engram-explained-how-conditional-memory-and-o-1-lookups-fix-llm-amnesia-50fce3937bb8">detailed explainer of Engram’s conditional memory and O(1) lookups</a> on Medium by <code>@sampan090611</code>, which walks through the mechanism block by block. The diagram used as this post’s image is theirs.</p>
 </section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>

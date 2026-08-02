@@ -47,6 +47,10 @@ learning, programming, and whatever else seems interesting at the time.
 <p>DeepSeek are to be applauded for continuing to publish their SoTA research in useful detail. If Google had done the same, maybe they’d have got the citation!</p>
 <hr>
 </section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>There is a <a href="https://medium.com/@sampan090611/deepseek-engram-explained-how-conditional-memory-and-o-1-lookups-fix-llm-amnesia-50fce3937bb8">detailed explainer of Engram’s conditional memory and O(1) lookups</a> on Medium by <code>@sampan090611</code>, which walks through the mechanism block by block. The diagram used as this post’s image is theirs.</p>
+</section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
 <p>Co-authored by Claude Opus 4.6. Thanks to Gemini 3 for review and suggestions.</p>
@@ -62,6 +66,7 @@ learning, programming, and whatever else seems interesting at the time.
   <category>engram</category>
   <guid>https://joehalliwell.com/posts/engram-vs-ple.html</guid>
   <pubDate>Fri, 03 Apr 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://joehalliwell.com/posts/engram-vs-ple-plate.png" medium="image" type="image/png" height="88" width="144"/>
 </item>
 <item>
   <title>Hypersentimentalism: A New Meta for AI Alignment</title>
@@ -879,17 +884,17 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
 
 
 
+<p>After the success of last year’s Tradition Inventing Day, it’s time again to devise a fixture for my calendar.</p>
+<p>Celebrate Stationery Day by covering your desk in squares of yellow paper. Each square of yellow paper must be inscribed with the rune TAX.</p>
+<p>Celebrate Stationery Day by buying a notebook that you’ll never fill. Stationery is the cenotaph for our literary ambitions.</p>
+<p>Celebrate Stationery Day by asking your friends, “What’s mightier than the sword?” Your friends must then shout, “THE PEN IS,” or perform a forfeit.</p>
+<p>Stationery Day falls on the Friday after Easter.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://joehalliwell.com/posts/stationery-day/father-tim-jones.jpg" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">Father Tim Jones was outraged in a local stationary store. Photo credit: Ross Parry/York Press</figcaption>
 </figure>
 </div>
-<p>After the success of last year’s Tradition Inventing Day, it’s time again to devise a fixture for my calendar.</p>
-<p>Celebrate Stationery Day by covering your desk in squares of yellow paper. Each square of yellow paper must be inscribed with the rune TAX.</p>
-<p>Celebrate Stationery Day by buying a notebook that you’ll never fill. Stationery is the cenotaph for our literary ambitions.</p>
-<p>Celebrate Stationery Day by asking your friends, “What’s mightier than the sword?” Your friends must then shout, “THE PEN IS,” or perform a forfeit.</p>
-<p>Stationery Day falls on the Friday after Easter.</p>
 
 
 
@@ -898,7 +903,6 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
   <category>tradition inventing day</category>
   <guid>https://joehalliwell.com/posts/stationery-day/</guid>
   <pubDate>Thu, 18 Feb 2016 00:00:00 GMT</pubDate>
-  <media:content url="https://joehalliwell.com/posts/stationery-day/father-tim-jones.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Tradition Inventing Day</title>
