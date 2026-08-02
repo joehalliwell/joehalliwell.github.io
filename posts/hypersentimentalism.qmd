@@ -1,5 +1,10 @@
 ---
 title: "Hypersentimentalism: A New Meta for AI Alignment"
+description: |
+  AI alignment is pursued within a consequentialist ethics that, followed to
+  its limit, recreates the pathology it set out to prevent. The case for a
+  sentimentalist alternative — and for doing on purpose what the best current
+  techniques already do by accident.
 date: "2026-02-22"
 categories: [ethics, ai, safety, sentimentalism]
 draft: false

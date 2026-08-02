@@ -1,5 +1,9 @@
 ---
 title: Holiday books
+description: |
+  Georges Perec's Species of Spaces, R.D. Laing's Knots, and both
+  Wittgensteins: notes on a summer's reading, and on 243 postcards.
+image: great-mosque-of-kairouan-postcard.png
 date: "2010-07-14"
 categories: [review,perec,wittgenstein]
 draft: false

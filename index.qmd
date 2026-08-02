@@ -1,5 +1,18 @@
 ---
 title: ""
+# The visible title is deliberately empty -- the banner carries the design --
+# but the <title> tag is the most heavily weighted thing on the most linked
+# page of the site, so it says what the site is about rather than just who
+# wrote it. `description-meta` sets the meta description without printing a
+# subtitle above the listing.
+#
+# Quarto appends the site title, so this must not repeat the name, and
+# `description-meta` has to be a plain string -- a block scalar is treated as
+# markdown and lands in the meta tag wrapped in a <p>.
+pagetitle: "Notes on AI, machine learning and software"
+description-meta: "Essays and notes by Joe Halliwell on AI architecture and safety, machine learning, programming, and whatever else seems interesting at the time."
+# Otherwise the listing lends the page one of the posts' images as its card.
+image: /profile.jpg
 listing:
   contents: posts
   sort: "date desc"

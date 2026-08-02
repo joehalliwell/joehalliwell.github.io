@@ -1,5 +1,9 @@
 ---
 title: Tradition Inventing Day
+description: |
+  Each year on the 18th of February I will invent a new festival day, to be
+  celebrated in the appointed way until the end of time. This is the first.
+image: traditional-greeting-card.png
 date: "2015-02-18"
 categories: [tradition inventing day]
 draft: false

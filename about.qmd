@@ -1,5 +1,8 @@
 ---
 title: "About"
+# The site-level description in _quarto.yml feeds the RSS channel, not the
+# pages, so anything that wants a meta description states its own.
+description-meta: "Joe Halliwell's website: who I am, what I write about, and where else to find me."
 image: profile.jpg
 about:
   template: jolla

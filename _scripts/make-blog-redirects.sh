@@ -17,6 +17,14 @@ cd "$output_dir"
 rm -rf blog
 
 find index.html about.html posts -name '*.html' -type f | while read -r page; do
+    # Point at the same URL add-seo-metadata.sh canonicalises the target to.
+    # Two spellings of one page's canonical URL is worse than either spelling.
+    case "$page" in
+        index.html) target="/" ;;
+        */index.html) target="/${page%index.html}" ;;
+        *) target="/$page" ;;
+    esac
+
     mkdir -p "blog/$(dirname "$page")"
     cat > "blog/$page" <<EOF
 <!DOCTYPE html>
@@ -24,11 +32,11 @@ find index.html about.html posts -name '*.html' -type f | while read -r page; do
   <head>
     <meta charset="utf-8" />
     <title>Moved</title>
-    <link rel="canonical" href="/$page" />
-    <meta http-equiv="refresh" content="0; url=/$page" />
+    <link rel="canonical" href="$target" />
+    <meta http-equiv="refresh" content="0; url=$target" />
   </head>
   <body>
-    <p>This page has moved to <a href="/$page">/$page</a>.</p>
+    <p>This page has moved to <a href="$target">$target</a>.</p>
   </body>
 </html>
 EOF

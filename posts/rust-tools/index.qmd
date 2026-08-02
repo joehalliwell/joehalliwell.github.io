@@ -1,5 +1,9 @@
 ---
 title: Renovating the command line
+description: |
+  Six Rust command line tools — exa, bat, starship, dust, ripgrep and fd —
+  that have displaced their 1970s UNIX ancestors in my everyday setup.
+image: exa.png
 date: "2023-09-10"
 categories: [rust,unix,tools]
 draft: false

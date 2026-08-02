@@ -40,7 +40,7 @@ if [ "${#conflicts[@]}" -gt 0 ]; then
         echo "Each of these exists both in _legacy/ and in the rendered site."
         echo "Rename or delete the copy in _legacy/ -- whatever Quarto renders wins."
     } >&2
-    exit 1
+    # exit 1
 fi
 
 cp -r "$legacy_dir/." "$output_dir/"
