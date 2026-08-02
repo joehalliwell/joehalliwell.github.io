@@ -284,7 +284,7 @@ learning, programming, and whatever else seems interesting at the time.
 <p><a href="https://the.exa.website/"><code>exa</code></a> is more or less a drop-in replacement for <code>ls</code> with sensible defaults like human-readable file sizes and colour-coding for different file types.</p>
 <p>It has first-class support for creation/modification/access times and extended filesystem attributes. When integrated with git, <code>exa</code> even indicates the version control status of each file.</p>
 <p>Also, if you’re using a nerd font it has icons. Everyone loves that.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
+<div class="quarto-figure quarto-figure-right page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://joehalliwell.com/posts/rust-tools/exa.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">Sample output from <code>exa</code> showing more colour and detail than <code>ls</code> provides</figcaption>
@@ -298,7 +298,7 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 <h2 class="anchored" data-anchor-id="bat-colourful-cat">Bat: colourful cat</h2>
 <p><code>cat</code> is one of the oldest Unix utilities, dating back to Version 1 Unix. Yes, I nearly always have an editor open, yes <code>less</code> is more suited to long files, and yet I routinely find myself using <code>cat</code> to peek at files.</p>
 <p><a href="https://github.com/sharkdp/bat"><code>bat</code></a> is a drop-in replacement that behaves like <code>cat</code> in scripts, but adds user-friendly paging, syntax highlighting, git integration and line numbers when outputting to a terminal. Much better.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
+<div class="quarto-figure quarto-figure-right page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://joehalliwell.com/posts/rust-tools/bat.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">Bat</figcaption>
@@ -311,7 +311,7 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 <p><a href="https://starship.rs/">Starship</a> is a cross-platform prompt, that takes its aesthetic cues and customizability from <a href="https://github.com/spaceship-prompt/spaceship-prompt">Zsh’s Spaceship prompt</a> but eclipses it in raw speed. There’s never that clunky pause as hundreds of lines of script are executed just to generate your prompt.</p>
 <p>Starship’s support for customization is inevitably somewhat limited. But its config is simple and declarative and eliminates the need for tweaking complex scripts and baroque environment variables.</p>
 <p>The default setup looks great – but I’ve added <a href="https://github.com/joehalliwell/dotfiles/blob/master/.config/starship.toml">extra nerdfont bling</a>.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
+<div class="quarto-figure quarto-figure-right page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://joehalliwell.com/posts/rust-tools/starship.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">Starship showing the currently active prompt elements and associated profiling information</figcaption>
@@ -323,7 +323,7 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 <p>If you’re using <code>du</code> you’re almost certaininly trying to figure out why you’ve run out of disk space. So you’re already annoyed, and it’s about to get worse.</p>
 <p><code>du</code> will give you raw data on file sizes to work with but you’re going to have to muck around with advanced flags and probably do some scripting to get your answer.</p>
 <p>In contrast <a href="https://github.com/bootandy/dust"><code>dust</code></a> presents information in a visually intuitive tree structure, making it easy to see which files or directories are taking up space. It’s also faster.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
+<div class="quarto-figure quarto-figure-right page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://joehalliwell.com/posts/rust-tools/dust.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">Dust making it abundantly clear that Steam is to blame for that <code>npm install</code> failure</figcaption>
@@ -351,7 +351,7 @@ and line numbers, giving immediate context to each find.
 <p>The standard installer will give you a full set of dev tools including <code>cargo</code>, which is Rust’s package manager and swiss army knife.</p>
 <p>Cargo can be used to install all of the programs above: a simple ‘cargo install $tool’ fetches, compiles, and places them on your path.</p>
 <p><a href="https://github.com/nabijaczleweli/cargo-update"><code>cargo-update</code></a> is a <code>cargo</code> extension that detects outdated packages and updates them in one go. This keeps your toolset not just functional, but cutting-edge.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
+<div class="quarto-figure quarto-figure-right page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://joehalliwell.com/posts/rust-tools/cargo-install-update.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">Cargo update</figcaption>
@@ -459,7 +459,7 @@ font-style: inherit;">True</span></span>
 <span id="cb2-5">  ys <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> f(xs)</span>
-<span id="cb2-6">  ys.backward(torch.ones_like(ys))  </span>
+<span id="cb2-6">  ys.backward(torch.ones_like(ys))</span>
 <span id="cb2-7">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -578,7 +578,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.5</span>)</span>
-<span id="cb3-9">    </span>
+<span id="cb3-9"></span>
 <span id="cb3-10">  ax.legend()</span>
 <span id="cb3-11">  ax.title.set_text(title)</span>
 <span id="cb3-12"></span>
@@ -736,8 +736,8 @@ font-style: inherit;">"clamp_with_grad"</span>)</span></code></pre></div>
 </div>
 </div>
 </section>
-<section id="an-improved-function" class="level1">
-<h1>An improved function</h1>
+<section id="an-improved-function" class="level2">
+<h2 class="anchored" data-anchor-id="an-improved-function">An improved function</h2>
 <div id="cell-14" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -889,7 +889,7 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
 <p>Celebrate Stationery Day by buying a notebook that you’ll never fill. Stationery is the cenotaph for our literary ambitions.</p>
 <p>Celebrate Stationery Day by asking your friends, “What’s mightier than the sword?” Your friends must then shout, “THE PEN IS,” or perform a forfeit.</p>
 <p>Stationery Day falls on the Friday after Easter.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
+<div class="quarto-figure quarto-figure-right page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://joehalliwell.com/posts/stationery-day/father-tim-jones.jpg" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">Father Tim Jones was outraged in a local stationary store. Photo credit: Ross Parry/York Press</figcaption>
@@ -917,7 +917,7 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
 <p>Feeling slightly cheated by missing Shrove (AKA Pancake) Tuesday for the fourth or fifth year in a row, I’ve decided to take matters into my own hands.</p>
 <p>Each year on the 18th of February I will invent a new festival day . The appointed date will take its rightful place in the calendar and be celebrated in the appointed way from that moment until the end of time.</p>
 <p>Please join me in celebrating today, Tradition Inventing Day.</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
+<div class="quarto-figure quarto-figure-right page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://joehalliwell.com/posts/tradition-inventing-day/traditional-greeting-card.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">A traditional greeting card for Tradition Inventing Day</figcaption>
@@ -946,7 +946,7 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
 <section id="postcards" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="postcards">243 Postcards</h2>
 <p>One piece is called “Two Hundred and Fourty-three Postcards in Real Colour”. Dedicated to Italo Calvino; the title evokes JG Ballard. It is the combined text of 243 holiday postcards. This should be terribly boring, but by some sleight of hand it’s not. Here are the first five as a taster:</p>
-<div class="quarto-figure quarto-figure-center page-columns page-full">
+<div class="quarto-figure quarto-figure-right page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="https://joehalliwell.com/posts/holiday-books/great-mosque-of-kairouan-postcard.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">An old postcard with a sepia photograph of the Great Mosque of Kairouan</figcaption>

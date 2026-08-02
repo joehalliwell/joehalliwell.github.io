@@ -18,14 +18,14 @@
     "href": "posts/clamp-with-grad.html#plotting-the-derivative",
     "title": "An analysis of clamp_with_grad()",
     "section": "Plotting the derivative",
-    "text": "Plotting the derivative\nTo look at the derivative, we define a helper function to compute the gradient at a point.\n\ndef get_gradient(f, xs):\n  xs = xs.detach().clone()\n  xs.requires_grad = True\n\n  ys = f(xs)\n  ys.backward(torch.ones_like(ys))  \n  return xs.grad.detach()\n\n\nx = torch.arange(-2, 2, 0.01)\n\nplt.plot(x, torch.sin(x * 5), label=\"sin(x)\")\nplt.plot(x, get_gradient(torch.sin, x * 5), label=\"dsin(x)/dx\")\nplt.legend()\nplt.show()"
+    "text": "Plotting the derivative\nTo look at the derivative, we define a helper function to compute the gradient at a point.\n\ndef get_gradient(f, xs):\n  xs = xs.detach().clone()\n  xs.requires_grad = True\n\n  ys = f(xs)\n  ys.backward(torch.ones_like(ys))\n  return xs.grad.detach()\n\n\nx = torch.arange(-2, 2, 0.01)\n\nplt.plot(x, torch.sin(x * 5), label=\"sin(x)\")\nplt.plot(x, get_gradient(torch.sin, x * 5), label=\"dsin(x)/dx\")\nplt.legend()\nplt.show()"
   },
   {
     "objectID": "posts/clamp-with-grad.html#the-problem",
     "href": "posts/clamp-with-grad.html#the-problem",
     "title": "An analysis of clamp_with_grad()",
     "section": "The problem",
-    "text": "The problem\nThe standard clamp functions has a zero gradient outside the clamped region. As a result gradient descent can’t do anything useful.\n\ndef plot(clamp_fn, ax, title):\n  x = torch.arange(-2, 2, 0.01)\n  clamp = lambda x: clamp_fn(x, -1, 1)\n  loss = lambda x: torch.sin(clamp(x) * pi) + 1\n\n  ax.plot(x, clamp(x), label=\"clamp\", alpha=0.5)\n  ax.plot(x, loss(x), label=\"loss\", alpha=0.5)\n  ax.plot(x, get_gradient(loss, x), label=\"dloss/dx\", alpha=0.5)\n    \n  ax.legend()\n  ax.title.set_text(title)\n\nfig, ax = plt.subplots(ncols=1, figsize=(FIGSIZE,FIGSIZE))\nplot(torch.clamp, ax, \"clamp\")\n\n\n\n\n\n\n\n\nIn this simple example, the minimum of the loss function (orange line) is at -0.5.\nHowever outside the \\([-1,1]\\) interval, the derivative of the loss function (green line) is zero."
+    "text": "The problem\nThe standard clamp functions has a zero gradient outside the clamped region. As a result gradient descent can’t do anything useful.\n\ndef plot(clamp_fn, ax, title):\n  x = torch.arange(-2, 2, 0.01)\n  clamp = lambda x: clamp_fn(x, -1, 1)\n  loss = lambda x: torch.sin(clamp(x) * pi) + 1\n\n  ax.plot(x, clamp(x), label=\"clamp\", alpha=0.5)\n  ax.plot(x, loss(x), label=\"loss\", alpha=0.5)\n  ax.plot(x, get_gradient(loss, x), label=\"dloss/dx\", alpha=0.5)\n\n  ax.legend()\n  ax.title.set_text(title)\n\nfig, ax = plt.subplots(ncols=1, figsize=(FIGSIZE,FIGSIZE))\nplot(torch.clamp, ax, \"clamp\")\n\n\n\n\n\n\n\n\nIn this simple example, the minimum of the loss function (orange line) is at -0.5.\nHowever outside the \\([-1,1]\\) interval, the derivative of the loss function (green line) is zero."
   },
   {
     "objectID": "posts/clamp-with-grad.html#define-clamp_with_grad",
@@ -33,6 +33,13 @@
     "title": "An analysis of clamp_with_grad()",
     "section": "Define clamp_with_grad()",
     "text": "Define clamp_with_grad()\nVarious folks have proposed the following approach to addressing this, by providing a pseudo-derivative outside the clamped interval:\n\nclass ClampWithGrad(torch.autograd.Function):\n    @staticmethod\n    def forward(ctx, input, min, max):\n        ctx.min = min\n        ctx.max = max\n        ctx.save_for_backward(input)\n        return input.clamp(min, max)\n\n    @staticmethod\n    def backward(ctx, grad_in):\n        input, = ctx.saved_tensors\n        return (\n            grad_in * (grad_in * (input - input.clamp(ctx.min, ctx.max)) &gt;= 0),\n            None,\n            None,\n        )\n\nclamp_with_grad = ClampWithGrad.apply\n\n\nfig, ax = plt.subplots(ncols=2, figsize=(FIGSIZE*2, FIGSIZE))\nplot(torch.clamp, ax[0], \"clamp\")\nplot(clamp_with_grad, ax[1], \"clamp_with_grad\")"
+  },
+  {
+    "objectID": "posts/clamp-with-grad.html#an-improved-function",
+    "href": "posts/clamp-with-grad.html#an-improved-function",
+    "title": "An analysis of clamp_with_grad()",
+    "section": "An improved function",
+    "text": "An improved function\n\nclass ClampWithGradProposed(torch.autograd.Function):\n    @staticmethod\n    def forward(ctx, input, min, max):\n        ctx.min = min\n        ctx.max = max\n        ctx.save_for_backward(input)\n        return input.clamp(min, max)\n\n    @staticmethod\n    def backward(ctx, grad_in):\n        input, = ctx.saved_tensors\n        clamped = input.clamp(ctx.min, ctx.max)\n        delta = input - clamped\n        v = torch.where(delta == 0, grad_in, torch.sign(delta))\n        return (v, None, None)\n\nclamp_with_grad2 = ClampWithGrad2.apply\n\n\nfig, ax = plt.subplots(ncols=3)\nplot(torch.clamp, ax[0], \"clamp\")\nplot(clamp_with_grad, ax[1], \"clamp_with_grad\")\nplot(clamp_with_grad2, ax[2], \"clamp_with_grad_proposed\")"
   },
   {
     "objectID": "posts/stationery-day/index.html",
