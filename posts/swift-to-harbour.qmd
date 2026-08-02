@@ -1,5 +1,9 @@
 ---
 title: Swift to Harbour, Slow to Berth
+description: |
+  Bostrom's Optimal Timing for Superintelligence argues that pausing AI
+  research is not morally neutral, and that under certain conditions waiting
+  is the reckless option. What that does to AI safety research.
 date: "2026-02-14"
 categories: [ethics, ai, ai safety, bostrom, anthropic]
 draft: false

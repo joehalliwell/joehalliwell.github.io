@@ -14,9 +14,30 @@ project:
     # the build, which is where their URLs have always been.
     - _scripts/copy-legacy.sh
     - _scripts/make-blog-redirects.sh
+    # Runs last: it needs both the legacy pages and the redirect stubs in place
+    # to decide what belongs in the sitemap and what gets a canonical link.
+    - _scripts/add-seo-metadata.sh
 
 website:
   title: "Joe Halliwell"
+
+  # Used as the fallback <meta name="description"> and og:description for any
+  # page without its own. Pages that deserve a specific one set `description:`.
+  description: |
+    Essays and notes by Joe Halliwell on AI architecture and safety, machine
+    learning, programming, and whatever else seems interesting at the time.
+
+  # Default social card image, used by pages that don't set their own. The
+  # leading slash matters: a bare filename is resolved against the page, so
+  # posts would advertise /posts/profile.jpg and scrapers would get a 404.
+  # Portrait rather than the 1200x630 the scrapers prefer, so it gets cropped.
+  image: /profile.jpg
+
+  # Without these a link to a post shared anywhere -- Mastodon, LinkedIn, Slack
+  # -- unfurls as a bare URL with no title, blurb or image.
+  open-graph: true
+  twitter-card: true
+
   navbar:
     right:
       - about.qmd

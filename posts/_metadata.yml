@@ -10,7 +10,9 @@ freeze: true
 # Enable banner style title blocks
 title-block-banner: true
 
-# author: Joe Halliwell
+# Gives every post a byline, and fills in dc:creator in the feed and the
+# article:author Open Graph tag.
+author: Joe Halliwell
 
 
 fig-cap-location: margin

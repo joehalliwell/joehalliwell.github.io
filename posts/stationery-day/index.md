@@ -1,5 +1,9 @@
 ---
 title: Stationery Day
+description: |
+  The second Tradition Inventing Day festival. Celebrate with squares of
+  yellow paper, a notebook you will never fill, and at least one forfeit.
+image: father-tim-jones.jpg
 date: "2016-02-18"
 categories: [moveable feast,tradition inventing day]
 draft: false
