@@ -9,6 +9,13 @@ project:
     - "*.qmd"
     - "posts/"
 
+  # The theme's @font-face rules point at /assets/fonts/. Quarto only copies
+  # files it can see referenced from the rendered HTML, and these are referenced
+  # from inside the compiled bootstrap CSS, which it does not scan -- so without
+  # this the site ships with no webfont and silently falls back to Georgia.
+  resources:
+    - assets/**
+
   post-render:
     # Pages that predate Quarto live in _legacy/ and are copied to the root of
     # the build, which is where their URLs have always been.

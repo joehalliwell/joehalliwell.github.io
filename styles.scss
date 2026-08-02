@@ -1,25 +1,1411 @@
+// ===========================================================================
+// Wire / Tufte experiment
+// ---------------------------------------------------------------------------
+// Hierarchy here comes from size, tracking and how far the ink is mixed toward
+// the paper -- never from weight, rules or panels. That is a constraint on
+// this sheet, not on Bootstrap underneath it, so the defaults block spends
+// most of its effort switching Bootstrap's own borders and bolds off.
+// ===========================================================================
+
 /*-- scss:defaults --*/
-$font-family-sans-serif: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-$font-size-root: 13pt;
-$link-color: #29b;
+
+// ---------------------------------------------------------------------------
+// Paper, not screen white
+// ---------------------------------------------------------------------------
+// Bootstrap needs real colours at compile time, so the flat values live here
+// and the color-mix() versions live in the rules. These are what the mixes
+// resolve to; if you retune one, retune the other.
+$paper: #f4f1ea;
+$ink: #221f1a; // #16130f held at 92% against the paper
+$accent: #a8371a;
+
+$body-bg: $paper;
+$body-color: $ink;
+
+// The single accent. It is spent here, on links, and nowhere else -- which
+// means taking it back off inline code, where Bootstrap spends it by default.
+$link-color: $accent;
+$link-hover-color: $accent;
+$code-color: $ink;
+
+// ---------------------------------------------------------------------------
+// The face
+// ---------------------------------------------------------------------------
+$font-family-serif: "Source Serif 4 Var", "Source Serif 4", "Iowan Old Style",
+  "Palatino Linotype", Palatino, Georgia, serif;
+$font-family-monospace: ui-monospace, "SF Mono", "Cascadia Mono", Menlo,
+  Consolas, monospace;
+
+// Quarto's bootstrap themes set body copy from the *sans* stack, so pointing
+// only $font-family-base at the serif leaves half the page in Helvetica.
+$font-family-sans-serif: $font-family-serif;
+$font-family-base: $font-family-serif;
+
+$font-size-root: 17px;
+
+// Nothing in the sheet is allowed to be bold, so take away the ability.
+$headings-font-weight: 400;
+$font-weight-bold: 400;
+$font-weight-bolder: 400;
+
+// No borders anywhere: this switches off Bootstrap's at the source rather than
+// unsetting them component by component.
+$border-width: 0;
+$table-border-width: 0;
+
+// ---------------------------------------------------------------------------
+// The grid: measure first, size second
+// ---------------------------------------------------------------------------
+// These have to be px: Quarto's own grid math compares them against a 500px
+// literal and sass refuses to mix units.
+//
+// Sized so the body track equals the measure exactly. Quarto derives the
+// widest variant at this value less 50px, then takes off the 2x30px gutters,
+// so the content column is $grid-body-width - 110. 80ch resolves to 820px at
+// the root size the clamp settles on from ~1330px up: 820 + 110 = 930.
+//
+// Making it *larger* was the bug behind the off-centre text column. The track
+// was 900px, the text capped at 820 and ranged left inside it, so the 80px of
+// unused track sat between the text and the sidenotes -- a right gutter of 110
+// against a left gutter of 30. The flanks were symmetric all along; the slack
+// was hiding inside the body column.
+//
+// Getting this wrong is silent in the other direction too: at 610px the track
+// collapsed to its 500px floor and served 57ch while the sheet claimed 62.
+// Check with _scripts/measure-column.sh, not by eye.
+$grid-body-width: 930px;
+
+// The two flanking columns are deliberately equal. Quarto centres the grid as
+// a whole, so unequal flanks put the text column off centre by half their
+// difference -- at 235/180 that was 27px, which is enough to see. Matching them
+// makes the measure land dead centre as a consequence of the geometry rather
+// than as a correction applied on top of it.
+//
+// 235 rather than 180 because it has to satisfy both: the table of contents
+// wraps badly below about this, and 22ch of sidenote at 0.82em needs 187px,
+// which the old 180 was actually clipping.
+$grid-margin-width: 235px;
+$grid-sidebar-width: 235px;
+$grid-column-gutter-width: 30px;
 
 /*-- scss:rules --*/
 
+// ===========================================================================
+// The face, self-hosted
+// ---------------------------------------------------------------------------
+// The hosted builds of this family drop the three things the sheet is built
+// on: real small caps (smcp/c2sc), real old-style figures (onum), and the
+// opsz axis that gives `font-optical-sizing: auto` something to do. These are
+// our own subsets of the Adobe originals -- rebuild with `just fonts`.
+// ===========================================================================
 
-.reveal .slide blockquote {
-  border-left: 3px solid $text-muted;
-  padding-left: 0.5em;
+@font-face {
+  font-family: "Source Serif 4 Var";
+  src: url("/assets/fonts/SourceSerif4Var-Roman.subset.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
 }
 
-h1, h2, h3, h4, h5, h6, h7 {
-  text-transform: uppercase;
-  font-weight: normal !important;
-  letter-spacing: .1rem;
+@font-face {
+  font-family: "Source Serif 4 Var";
+  src: url("/assets/fonts/SourceSerif4Var-Italic.subset.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
 }
 
-.navbar-title, .nav-item, .quarto-title-meta-heading {
-  font-size: var(--bs-body-font-size) !important;
-  text-transform: uppercase;
-  font-weight: normal !important;
-  letter-spacing: .1rem;
+:root {
+  // -- Ink -----------------------------------------------------------------
+  --paper: #{$paper};
+  --ink-pure: #16130f;
+
+  // Pure black on cream reads as a hole in the page. 92% is enough to still
+  // look black and enough to stop the letterforms vibrating.
+  --ink: color-mix(in oklch, var(--ink-pure) 92%, var(--paper));
+
+  // The mid-greys are mixed toward a *neutral* of the paper's lightness rather
+  // than toward the paper itself. Diluting warm ink into warm paper compounds
+  // the warmth, and low-chroma warm mid-tones are the perceptual signature of
+  // "dusty" -- these two values carry the largest surface area on the page
+  // (dates, table of contents, captions, descriptions), so it shows there
+  // first. This halves their chroma and leaves lightness, and therefore
+  // contrast, untouched. The paper stays exactly as warm as it was; the greys
+  // simply stop inheriting it.
+  --paper-neutral: oklch(95.85% 0 0);
+
+  // 92 / 74 / 56 rather than 92 / 60 / 40, because the lightest step is text
+  // and text needs 4.5:1. At 40% it measured 2.86:1 -- categories, footnote
+  // markers, table-of-contents entries and listing dates were all below the
+  // floor. 56% is 4.71:1.
+  //
+  // That fixes one value but constrains all three. The usable range runs from
+  // the body ink at L 0.25 to the 4.5:1 floor at about L 0.53, so three
+  // distinguishable levels have to sit ~0.14 apart, which is what these are.
+  // The consequence is that the quiet register is more present than it was:
+  // there is room on this paper for three ink levels, or for very light text,
+  // but not for both. A third step below the floor would only have been a
+  // fourth colour that some readers could not see.
+  --ink-quiet: color-mix(in oklch, var(--ink-pure) 74%, var(--paper-neutral));
+  --ink-faint: color-mix(in oklch, var(--ink-pure) 56%, var(--paper-neutral));
+
+  --accent: #{$accent};
+
+  // The resting underline under a link. Mixed toward the paper to keep it a
+  // mark rather than a rule, but not past the point where it stops being
+  // visible: at 45% it measured 2.0:1 against the paper, under the 3:1 that
+  // WCAG asks of a non-text indicator, and it is the *only* thing marking a
+  // link once the words themselves stay in ink. 75% gives 3.5:1.
+  --rule-quiet: color-mix(in oklch, var(--accent) 75%, var(--paper));
+
+  // -- Three registers, no fourth ------------------------------------------
+  // display -> caption smallcaps -> folio, a ~1.5 step apart. Body text and
+  // sidenotes are not registers; they are the text stream, at 1em and 0.82em.
+  //
+  // The display ramp breaks the chain deliberately: it is pinned to a
+  // cap-height in millimetres rather than derived from the caption ramp,
+  // because at that size the physical measurement is the thing being
+  // designed. --cap-to-size is 1 / 0.67, Source Serif's cap height.
+  --ramp-ratio: 1.5;
+  --cap-to-size: 1.4925;
+
+  // The floor is not taste, it is rasterisation. Below about 13.5px the
+  // small-cap I -- a single unbracketed stem roughly six pixels tall -- gets
+  // grid-fitted shorter than its neighbours, and "UNIX" renders as "UNiX".
+  // The failure is not monotonic in size (11.2 and 13.0 break, 12.0 and 13.5
+  // hold), which is how you can tell it is hinting rather than substitution.
+  // max() rather than a bare rem so a small root size cannot reintroduce it.
+  --ramp-folio: max(14px, 0.76rem);
+  --ramp-caption: calc(var(--ramp-folio) * var(--ramp-ratio));
+  --ramp-display: clamp(
+    calc(8mm * var(--cap-to-size)),
+    7.2vw,
+    calc(16mm * var(--cap-to-size))
+  );
+
+  // -- Measure -------------------------------------------------------------
+  // The measure and the line-height move together: a wider one needs more
+  // space between lines for the eye to find the start of the next. 80ch at
+  // 1.5 is the current balance.
+  --measure: 80ch;
+
+  // Fills the margin column rather than setting its own measure. It used to be
+  // 22ch, which was right when the column was 180px and became 62px of dead
+  // space when the column went to 235 -- and dead space at the outside edge
+  // reads as a wider margin on that side, which is exactly how it looked.
+  // The column width is the design decision now; this follows it.
+  --sidenote-measure: 100%;
+
+  // -- The contents page ---------------------------------------------------
+  // A list of headlines cannot use the display ramp -- at 8mm of cap height
+  // each entry would be a page to itself. This is the display register
+  // instanced for a list rather than a fourth ramp, so it is derived from the
+  // caption ramp and moves with everything else instead of floating free.
+  --ramp-listing: calc(var(--ramp-caption) * 1.25);
+
+  // Matched to the sidenote track, so the plates line up with where margin
+  // material sits everywhere else on the site.
+  --listing-plate: 180px;
+  --listing-gutter: 2.2rem;
+
+  // -- Tracking ------------------------------------------------------------
+  // Named because each one has to be paid back as negative margin at the end
+  // of the run, or the block sits visibly off-centre.
+  --track-kicker: 0.28em;
+  --track-label: 0.1em;
+  --track-display: -0.012em;
+}
+
+// ===========================================================================
+// Body
+// ===========================================================================
+
+// The measure is fixed; the size is what moves to satisfy it.
+//
+// `:root` rather than `html`: Bootstrap emits $font-size-root against :root,
+// which outranks a bare element selector, so an `html` rule here loses and the
+// type silently sits at the flat 17px instead of tracking the viewport.
+//
+// In px and vw rather than rem, because `rem` on the root element resolves
+// against the initial 16px, not against the value being set -- which makes any
+// rem in this clamp mean something other than it appears to.
+:root {
+  font-size: clamp(18.5px, 17.6px + 0.22vw, 20.5px);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  // Paired with --measure above.
+  line-height: 1.5;
+
+  font-optical-sizing: auto;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  font-variant-ligatures: common-ligatures no-discretionary-ligatures;
+  font-kerning: normal;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "dlig" 0;
+
+  // The whole small-caps layer is real or it is nothing. If the webfont fails
+  // the browser must fall back to a face that has them, not draw shrunken
+  // capitals -- faked caps at 0.28em tracking look exactly like what they are.
+  font-synthesis: none;
+
+  orphans: 2;
+  widows: 2;
+  text-wrap: pretty;
+}
+
+// Numerals go tabular and lining only where columns have to line up.
+th,
+td {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+// ===========================================================================
+// Running text
+// ===========================================================================
+
+main.content {
+  hanging-punctuation: first last;
+  margin-trim: block;
+}
+
+// Descendant, not child. Quarto wraps everything after the first heading in
+// <section class="level2">, and nests level3 inside that -- so a `>` here
+// reaches only the handful of paragraphs before the first h2 and lets the
+// entire rest of the post run to the full track width. The give-away is that
+// the opening section measures correctly and every later one reads wider.
+main.content :is(p, ul, ol, dl, blockquote),
+.quarto-title .description {
+  max-inline-size: var(--measure);
+}
+
+// ...which would otherwise also capture the sidenotes, since it outranks the
+// rule that gives them their own measure. Restated here at a weight that wins.
+main.content .column-margin :is(p, div),
+main.content .margin-caption,
+.column-margin :is(p, div) {
+  max-inline-size: var(--sidenote-measure);
+}
+
+// Justified, and hyphenated because of it. The two are one decision: at this
+// measure justification without hyphenation opens rivers, and hyphenation
+// without justification only halves a rag that was running to a 102px median
+// against a hard flush-left edge -- which is why the right-hand gutter read as
+// four times the left when both tracks were in fact 30px.
+//
+// Justified, both edges of the column are true vertical lines, so the equal
+// gutters finally look equal.
+//
+// hyphenate-limit-chars keeps the breaks civilised: nothing shorter than six
+// letters is broken, and never with fewer than three either side of the break.
+// Figure paragraphs are excluded, and not only because justifying a lone image
+// does nothing. `main.content :is(p, ...)` resolves to (0,1,2) -- `main` is a
+// type selector too -- which ties exactly with Quarto's own
+// `.quarto-figure-center > figure > p` and, coming later, beat it. So this rule
+// had been quietly overriding every figure's alignment, and `fig-align` in the
+// front matter had no effect at all.
+main.content :is(p, ul, ol, dl, blockquote):not(figure > p) {
+  text-align: justify;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+}
+
+// Not in the margin column. At twenty-odd characters there is nowhere to put
+// the slack, so justification pulls every line apart -- and a caption or a
+// sidenote is an aside, which should not be squared off like the main text.
+main.content .column-margin :is(p, div, li),
+main.content .margin-caption,
+main.content figcaption,
+main.content caption {
+  text-align: start;
+  hyphens: manual;
+}
+
+// On the contents page the headlines stay ranged left -- justifying one or two
+// lines of large type only stretches them, and the headline's flush left edge
+// is what the whole listing hangs from. The descriptions are ordinary prose in
+// the same column as the article body, so they are set the same way.
+.quarto-listing .listing-title {
+  text-align: start;
+  hyphens: manual;
+}
+
+.quarto-listing :is(.listing-description, .listing-description p) {
+  text-align: justify;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+}
+
+// Continuation paragraphs are indented, and pay for the indent by giving up
+// their leading -- the book setting. It is `p + p`, so the first paragraph
+// after any display line is flush by construction and needs no class.
+main.content p + p {
+  margin-block-start: 0;
+  text-indent: 1.5em;
+}
+
+// Sidenotes are their own stream: no indent, and no negative margin games.
+.column-margin p + p,
+blockquote p + p,
+figcaption p + p,
+li p + p {
+  margin-block-start: revert;
+  text-indent: 0;
+}
+
+// The fallback, deliberately left in the accent. Anything this sheet has not
+// explicitly placed keeps the loud treatment, so a link somewhere unforeseen
+// fails by being too visible rather than by disappearing.
+a {
+  color: var(--accent);
+  text-decoration-thickness: 0.045em;
+  text-underline-offset: 0.16em;
+  // Descenders cutting the rule is the one thing that makes an underline read
+  // as typography rather than as a hyperlink.
+  text-decoration-skip-ink: auto;
+}
+
+// Running-text links, set exactly as the listing headlines: the words stay in
+// ink and a hairline in the accent carries the signal, thickening to full
+// accent on hover, taking the accent outright on keyboard focus.
+//
+// Scoped to prose rather than set on `a` globally, because the navbar, the
+// table of contents, the categories and the listing each have their own
+// treatment and a blanket underline would land on all of them. Footnote
+// references are excluded: a superscript figure is already a mark, and
+// underlining it just thickens the number.
+main.content
+  :is(p, li, dd, dt, blockquote, figcaption, caption, td, th)
+  a:not(.footnote-ref),
+.column-margin a:not(.footnote-ref),
+#title-block-header .description a {
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: var(--rule-quiet);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  text-decoration-skip-ink: auto;
+
+  &:hover {
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1.5px;
+  }
+
+  &:focus-visible {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+}
+
+blockquote {
+  max-inline-size: var(--measure);
+  margin-inline-start: 1.5em;
+  padding: 0;
+  color: var(--ink-quiet);
+  font-size: 0.95em;
+}
+
+// ===========================================================================
+// The display line
+// ===========================================================================
+
+h1,
+.title,
+.quarto-title-banner .title {
+  font-size: var(--ramp-display);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: var(--track-display);
+  text-wrap: balance;
+  text-transform: none;
+  color: var(--ink);
+  max-inline-size: 18ch;
+
+  // At display size the face's own kerning is the only thing holding the pairs
+  // together, so it is asked for explicitly rather than left to the default.
+  font-feature-settings: "kern" 1, "liga" 1;
+
+  // A 0.95 line-height leaves the descenders of the last line sitting on
+  // whatever follows, so the space the leading would have given is put back
+  // here explicitly.
+  margin-block-end: 0.5em;
+}
+
+// Quarto pins the title's bottom margin to zero from a selector carrying an
+// id and four classes, so the space has to be asked for at the same weight.
+#title-block-header.quarto-title-block.default .quarto-title .title {
+  margin-block-end: 0.42em;
+}
+
+.quarto-title .description {
+  color: var(--ink-quiet);
+  max-inline-size: var(--measure);
+  margin-block-end: 1.6em;
+}
+
+// ===========================================================================
+// Small caps as label grammar
+// ===========================================================================
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-variant-caps: small-caps;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: var(--track-label);
+  margin-inline-end: calc(var(--track-label) * -1);
+  color: var(--ink);
+  line-height: 1.2;
+  margin-block: 2.2em 0.6em;
+
+  // Quarto hardcodes a hairline under every h2. A rule under a heading is the
+  // exact substitution the sheet is trying to avoid: the space is the signal.
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+h2 {
+  font-size: var(--ramp-caption);
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--ramp-caption);
+  color: var(--ink-quiet);
+}
+
+// The floating kicker: the widest tracking on the page, and the only place
+// that tracking appears.
+.kicker {
+  display: block;
+  font-variant-caps: small-caps;
+  text-transform: lowercase;
+  font-size: var(--ramp-folio);
+  letter-spacing: var(--track-kicker);
+  // Tracking adds a space after the last letter that is not there optically.
+  // Without this the block reads shifted left of where it sits.
+  margin-inline-end: calc(var(--track-kicker) * -1);
+  color: var(--ink-quiet);
+  margin-block-end: 1.4em;
+}
+
+// Bylines and credits: every letter a small cap, including the ones that were
+// already capitals.
+// The id-and-three-classes selector is Quarto's, which sizes these at .8em and
+// so drove them to 12.5px -- under the ~13.5px floor below which the small-cap
+// I gets grid-fitted short. It happened to render correctly at that size, but
+// only by luck: the failure is not monotonic, so a different root size would
+// have brought it back. The floor has to be restated where it can win.
+#title-block-header.quarto-title-block.default .quarto-title-meta-heading,
+#title-block-header.quarto-title-block.default .quarto-title-meta-contents {
+  font-size: var(--ramp-folio);
+}
+
+.credit,
+.quarto-title-meta,
+.quarto-title-meta-heading,
+.quarto-title-meta-contents {
+  font-variant-caps: all-small-caps;
+  font-size: var(--ramp-folio);
+  letter-spacing: var(--track-label);
+  margin-inline-end: calc(var(--track-label) * -1);
+  color: var(--ink-quiet);
+  font-weight: 400;
+  text-transform: none;
+}
+
+// Captions and folio share the label tracking; everything else is at zero.
+// These sit on the folio ramp, not the caption ramp. With small caps unable to
+// go below ~13.5px and body type at 20.5px, the whole label band is only about
+// 1.5x wide in total -- so a 1.5 step between two *label* ramps would put the
+// upper one level with the body text. The caption ramp is therefore the
+// section-heading ramp alone, and everything that is page furniture is folio.
+figcaption,
+.figure-caption,
+.margin-caption,
+caption,
+.date,
+.quarto-categories {
+  font-variant-caps: small-caps;
+  font-size: var(--ramp-folio);
+  letter-spacing: var(--track-label);
+  margin-inline-end: calc(var(--track-label) * -1);
+  color: var(--ink-quiet);
+  line-height: 1.3;
+}
+
+.quarto-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.2em;
+  margin-block-start: 1em;
+}
+
+// Categories arrive from Quarto as outlined pills. They are labels, so they
+// get label grammar instead: small caps, tracked, mixed back toward the paper.
+// Named at Quarto's own specificity, since a bare class cannot reach them.
+.quarto-title .quarto-categories .quarto-category,
+div.quarto-post .listing-categories .listing-category,
+.quarto-grid-item .listing-categories .listing-category {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  padding: 0;
+  margin-inline-end: 1.2em;
+  opacity: 1;
+  font-size: var(--ramp-folio);
+  font-variant-caps: all-small-caps;
+  text-transform: none;
+  letter-spacing: var(--track-label);
+  color: var(--ink-faint);
+}
+
+// ===========================================================================
+// The lockup: optical centring, and the void underneath it
+// ===========================================================================
+// The title sits at about 62% of the block rather than at 50%, which is where
+// the eye reads centre. That is done with weighted rows, not align-items,
+// because the leftover row underneath is the thing we actually want: it opens
+// the sidenote track before the first sidenote arrives.
+
+.quarto-title-banner {
+  background: var(--paper);
+  color: var(--ink);
+  min-block-size: min(42vh, 20rem);
+  grid-template-rows: 62fr auto 38fr;
+  padding-block: 2rem 0;
+  margin-block-end: 0;
+}
+
+// The display line needs more room than the 62ch measure gives it: at 16mm of
+// cap height a 610px column fits about seven characters, and the headline
+// comes apart into a stack of single words. It runs from the text's left edge
+// across the margin track instead -- flush with the body, but not confined to
+// its measure.
+.quarto-title-banner .quarto-title {
+  grid-row: 2;
+  grid-column: body-content-start / page-end;
+}
+
+// ===========================================================================
+// Sidenotes
+// ===========================================================================
+// `reference-location: margin` in posts/_metadata.yml already puts footnotes
+// out here; this is only their setting.
+
+.column-margin {
+  font-size: 0.82em;
+  line-height: 1.3;
+  color: var(--ink-quiet);
+  // Against their referent, not floated down the middle of the void.
+  align-self: start;
+  text-indent: 0;
+  hanging-punctuation: none;
+}
+
+.column-margin > div,
+.column-margin p {
+  max-inline-size: var(--sidenote-measure);
+}
+
+// The reference mark itself: quiet, and no smaller than a superior figure has
+// to be to still be legible.
+.footnote-ref,
+.column-margin sup {
+  color: var(--ink-faint);
+  text-decoration: none;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+// ===========================================================================
+// Page furniture: navbar, table of contents, listing
+// ===========================================================================
+
+.navbar {
+  background: var(--paper) !important;
+  box-shadow: none;
+  border: 0;
+  padding-block: 1.4rem;
+}
+
+// Scoped to `.navbar`. A bare `.nav-link` also catches the table of contents,
+// whose anchors carry the same Bootstrap class -- so with `!important` on the
+// colour and size, the navbar was quietly restyling the TOC and that was the
+// whole reason it did not match the listing rail.
+// The search button is not a `.nav-link`, so none of the navbar rules reached
+// it: Quarto injects it from JavaScript with a hardcoded 26px SVG coloured
+// rgba(0,0,0,.6), which sat larger than the social icons and, being a replaced
+// element on `vertical-align: middle`, two pixels below their baseline.
+//
+// Rather than matching an SVG's metrics to a font's, the SVG is dropped and
+// the glyph comes from Bootstrap Icons -- the same font, loaded on every page
+// already, that draws the GitHub and Mastodon marks beside it. It is then the
+// same kind of object as its neighbours: it inherits size and colour, sits on
+// the same baseline, and needs no nudging. \f52a is `bi-search`; the rest of
+// the block is what bootstrap-icons.css applies to every `.bi` glyph.
+.navbar #quarto-search {
+  font-size: var(--ramp-folio);
+  color: var(--ink-quiet);
+}
+
+.navbar #quarto-search.type-overlay .aa-Autocomplete {
+  inline-size: auto;
+}
+
+.navbar #quarto-search svg.aa-SubmitIcon {
+  display: none;
+}
+
+.navbar #quarto-search .aa-DetachedSearchButtonIcon::before {
+  content: "\f52a";
+  display: inline-block;
+  font-family: bootstrap-icons;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -0.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar .navbar-title,
+.navbar .nav-link,
+.navbar .navbar-brand,
+.navbar .menu-text {
+  font-variant-caps: all-small-caps;
+  font-size: var(--ramp-folio) !important;
+  letter-spacing: var(--track-label);
+  margin-inline-end: calc(var(--track-label) * -1);
+  font-weight: 400 !important;
+  text-transform: none;
+  color: var(--ink-quiet) !important;
+}
+
+.navbar-title {
+  color: var(--ink) !important;
+}
+
+// The table of contents is the article pages' version of the contents page's
+// left rail, so it is set the same way: label over a list of entries, folio
+// size, all-small-caps, quiet ink. The two were drifting apart by accident
+// rather than by decision -- Quarto's own sizes were winning in places where
+// this sheet thought it had already spoken.
+#TOC,
+.sidebar nav[role="doc-toc"] {
+  font-variant-caps: all-small-caps;
+  font-size: var(--ramp-folio);
+  letter-spacing: var(--track-label);
+  line-height: 1.35;
+}
+
+// Quarto insets the left rail (20px on the sidebar, .5em on the nav) while the
+// sidenote column has no inset at all. With the two flanks now the same width,
+// that padding is the difference between their inner edges -- so it goes, and
+// the rail starts on its column like the sidenotes start on theirs.
+nav.sidebar.sidebar-navigation,
+.quarto-margin-sidebar nav[role="doc-toc"],
+#quarto-margin-sidebar {
+  padding-inline-start: 0;
+}
+
+// "On this page" is the same kind of object as the listing's "Latest": a label
+// naming the column beneath it. Quarto sizes it at .875rem from a selector of
+// equal weight to this one, so this has to be stated at (0,2,2) to land.
+.sidebar nav[role="doc-toc"] > h2,
+#TOC > h2 {
+  font-size: var(--ramp-folio);
+  font-variant-caps: all-small-caps;
+  text-transform: none;
+  letter-spacing: var(--track-kicker);
+  margin-inline-end: calc(var(--track-kicker) * -1);
+  color: var(--ink-quiet);
+  margin-block: 0 0.5em;
+}
+
+// Quarto sizes the list itself at .875rem, which beats the size set on the nav
+// above because it targets the `ul` directly. It had been masked by the
+// navbar's `!important`; with that correctly scoped away, it has to be stated.
+#TOC ul,
+.sidebar nav[role="doc-toc"] ul {
+  border: 0;
+  padding-inline-start: 0;
+  list-style: none;
+  font-size: var(--ramp-folio);
+}
+
+// Quarto sets these to `color: inherit` from a four-element selector, so the
+// entries were resolving a step darker than the dates in the listing rail that
+// do the same job. Restated at matching weight.
+#TOC a,
+.sidebar nav[role="doc-toc"] a,
+#TOC ul li a,
+.sidebar nav[role="doc-toc"] ul li a {
+  color: var(--ink-faint);
+  text-decoration: none;
+  border: 0;
+  padding-inline-start: 0;
+}
+
+// Quarto marks the current section with the theme colour and a left rule.
+// Both are replaced by ink strength: the rest of the list is mixed toward the
+// paper, and where you are is the one entry at full ink. `!important` because
+// Quarto's own rule carries it.
+.sidebar nav[role="doc-toc"] > ul a,
+#TOC > ul a {
+  border-inline-start: 0;
+  padding-inline-start: 0;
+}
+
+#TOC a.active,
+.sidebar nav[role="doc-toc"] ul > li > a.active,
+.sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
+  color: var(--ink) !important;
+  border-inline-start: 0;
+}
+
+.sidebar nav[role="doc-toc"] ul > li > a:hover,
+.sidebar nav[role="doc-toc"] ul > li > ul > li > a:hover {
+  color: var(--accent) !important;
+}
+
+// ---------------------------------------------------------------------------
+// The contents page
+// ---------------------------------------------------------------------------
+// Text at the measure with the plates out in a margin track beside it, so the
+// column keeps a straight left *and* right edge and the images read as a light
+// rhythm running down the outside rather than as blocks interrupting the list.
+//
+// The date sits in that track too, on every entry -- which is the point. Only
+// about half the posts have an image, so a track that held plates alone would
+// be empty half the time and read as leftover space rather than as a column.
+// Giving it a job on every row is what makes it look intended.
+
+// The *text* column is centred in the page, not the block. Centring the block
+// would push the text right of centre by half the rail, which is what makes a
+// left rail read as though the page is leaning. So the start margin is computed
+// to put the measure dead centre and the rail hangs into the space left over.
+//
+// max() so that a viewport too narrow to hold the rail cannot drive this
+// negative; below the breakpoint the stacked layout resets it outright.
+// Quarto hangs a 41px right margin on the listing container, which leaves it
+// sitting 20.5px left of the page centre. Everything below computes from 50% of
+// this box, so that offset would be inherited by the centring itself.
+.quarto-listing {
+  margin-inline-end: 0;
+}
+
+.quarto-listing .list {
+  max-inline-size: calc(
+    var(--measure) + var(--listing-gutter) + var(--listing-plate)
+  );
+  margin-inline-start: max(
+    0px,
+    calc(
+      50% - var(--measure) / 2 - var(--listing-gutter) - var(--listing-plate)
+    )
+  );
+  margin-inline-end: auto;
+}
+
+div.quarto-post {
+  display: grid;
+  grid-template-columns: var(--listing-plate) minmax(0, var(--measure));
+  // `body` named in both rows spans it down the side of date-then-plate.
+  grid-template-areas:
+    "meta  body"
+    "plate body";
+  // The text is usually taller than the date, so `1fr` puts all the slack in
+  // the plate's row rather than sharing it and pushing the plate off the date.
+  grid-template-rows: auto 1fr;
+  // Both axes explicitly: Quarto sets `gap: 2em` as a shorthand, so overriding
+  // only the column leaves 2em of row-gap adrift in the margin track.
+  gap: 0 var(--listing-gutter);
+  align-items: start;
+
+  // Quarto rules off between posts. Space does the separating instead.
+  border-block-end: 0;
+  margin-block-end: 3.6em;
+}
+
+// ---------------------------------------------------------------------------
+// The lead
+// ---------------------------------------------------------------------------
+// One entry point, so the plates further down read as a considered second rank
+// instead of as the only visual event on the page. The whole thing degrades to
+// a large headline when the newest post has no image -- which is the current
+// state of the blog, and probably the common one.
+
+// The lead sits in the same two columns as everything else -- banner across the
+// text column, label and date in the rail. It used to span the whole block,
+// which put its left edge 225px left of every other headline and made it read
+// as a different object rather than as the first item. Its rank comes from the
+// banner and the display size, which is enough.
+div.quarto-post:first-child {
+  grid-template-areas:
+    ".     plate"
+    "meta  body";
+  grid-template-rows: auto 1fr;
+  margin-block-end: 2.6em;
+}
+
+div.quarto-post:first-child > .thumbnail {
+  margin-block-end: 1.2em;
+}
+
+// In the rail the label and date stack, both ranged left with the plates and
+// the dates of the entries below.
+div.quarto-post:first-child > .metadata {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2em;
+  margin-block-start: 0.75em;
+}
+
+// A landscape box rather than the square used down the column: the lead is a
+// banner across the measure, not a plate beside it.
+//
+// `contain`, not `cover`, and this is the one place it matters. The lead is
+// the only image on the page big enough to carry information -- a diagram, a
+// chart, a screenshot with text in it -- and cropping to fill the box eats it:
+// a 3:1 crop of the Engram diagram cut off both panel captions and the top of
+// every block. Letterboxing costs nothing here because the plate sits on the
+// paper with no border, so the empty part of the box is simply page. 2:1 is
+// close enough to the shape of most figures that there is little to letterbox.
+// The lead loses its fixed box for the same reason, but keeps a height cap:
+// at the full measure a portrait source would otherwise open the page at about
+// 1650px tall. `contain` still earns its place here, letterboxing anything
+// that hits the cap rather than cropping it.
+div.quarto-post:first-child .thumbnail-image {
+  max-block-size: 30rem;
+  object-fit: contain;
+}
+
+// The display register at its floor -- the same 8mm of cap height the post
+// titles clamp down to -- rather than a new size invented for this one place.
+// The display ramp itself, not its floor. It had been pinned to the 8mm
+// cap-height minimum -- 45px, the smallest display size the sheet defines --
+// while the entries below it sat at 29px. A 1.5x step is a difference in size;
+// this is a difference in register, and it also makes the lead read like the
+// article page it links to, which uses the same clamp for its title.
+div.quarto-post:first-child .listing-title,
+div.quarto-post:first-child .listing-title a {
+  font-size: var(--ramp-display);
+  line-height: 0.95;
+  letter-spacing: var(--track-display);
+  max-inline-size: 20ch;
+}
+
+// A standfirst rather than another description: large enough to belong to the
+// headline above it rather than to the list below.
+div.quarto-post:first-child .listing-description {
+  font-size: 1.22em;
+  line-height: 1.4;
+  margin-block-start: 0.5em;
+}
+
+// ---------------------------------------------------------------------------
+// Saying which is which
+// ---------------------------------------------------------------------------
+// Reverse chronological order is obvious once you have read two dates and not
+// before, and a display-scale lead reads as emphasis rather than as recency.
+// So one label, naming the lead. That is the part the page cannot show on its
+// own; everything else about the ordering, the hierarchy already says.
+//
+// It is generated content, but the ordering information is in the dates in the
+// markup either way -- nothing here is only in the stylesheet.
+//
+// Kicker tracking is what separates a label from the data beside it: "Latest"
+// is a name for the entry, "Apr 4, 2026" is a fact about it. Set on the
+// pseudo-element rather than inherited, so the wider tracking does not reach
+// the date sharing its column.
+div.quarto-post:first-child > .metadata::before {
+  content: "Latest";
+  color: var(--ink-quiet);
+  font-size: var(--ramp-folio);
+  letter-spacing: var(--track-kicker);
+  margin-inline-end: calc(var(--track-kicker) * -1);
+}
+
+// There is no "Previously" divider. Once the lead is set in the display
+// register rather than a step up from the list, the hierarchy is visible and a
+// label explaining it is scaffolding -- and it never found a home it did not
+// look stranded in. "Latest" stays, because naming the lead is information the
+// page cannot show on its own.
+
+// ---------------------------------------------------------------------------
+// The listing, narrow
+// ---------------------------------------------------------------------------
+// A 180px plate beside a readable measure needs roughly 700px to work. Below
+// that the margin track was taking its width regardless: at 485px it left the
+// text 245px -- about eighteen characters to the line -- and dropped the date
+// straight on top of the headline it was supposed to sit beside.
+//
+// px rather than rem here on purpose: lengths in a media query resolve against
+// the initial font size, not the document's, so `rem` would not mean what the
+// rest of this sheet means by it.
+@media (max-width: 700px) {
+  // No rail to hang anything into, so the centring offset comes back off.
+  .quarto-listing .list {
+    margin-inline: auto;
+  }
+
+  div.quarto-post {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "meta"
+      "body"
+      "plate";
+    grid-template-rows: auto auto auto;
+  }
+
+  // The lead keeps its banner at the top: it is the thing that makes it the
+  // lead, and stacking it under the description would bury it.
+  div.quarto-post:first-child {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "plate"
+      "meta"
+      "body";
+    grid-template-rows: auto auto auto;
+  }
+
+  div.quarto-post:first-child > .metadata {
+    flex-direction: row;
+    gap: 1.2em;
+    margin-block-start: 0;
+  }
+
+  // The date is above the headline now, not beside it, so there is no longer a
+  // baseline for it to be nudged onto.
+  div.quarto-post:not(:first-child) > .metadata {
+    margin-block-start: 0;
+    margin-block-end: 0.4em;
+  }
+
+  // No width cap once the layout has stacked. --listing-plate is the width of
+  // the rail the plates hang in on a wide screen; there is no rail here, so
+  // holding them to 180px just left them as thumbnails against a full-width
+  // headline. They take the column, like everything else in the stack.
+  div.quarto-post > .thumbnail {
+    margin-block-start: 1.4em;
+  }
+}
+
+// Quarto orders these with `order`, which a grid placement overrides outright.
+div.quarto-post > .metadata {
+  grid-area: meta;
+}
+
+// Quarto wraps the thumbnail in an inline <a>, so the image sits on a text
+// baseline and carries the descender gap under it -- which stops the plate
+// aligning with anything.
+.quarto-post .thumbnail a,
+.quarto-post .thumbnail img {
+  display: block;
+}
+
+// Align the date's baseline with the headline's first baseline rather than its
+// top: at 15.6px against a 29px headline, matching the tops leaves the date
+// visibly riding high. Marginal notes align on the baseline they annotate.
+div.quarto-post:not(:first-child) > .metadata {
+  margin-block-start: 0.55em;
+}
+
+div.quarto-post > .body {
+  grid-area: body;
+}
+
+div.quarto-post > .thumbnail {
+  grid-area: plate;
+}
+
+// The date becomes a kicker sitting over its headline rather than a column of
+// its own. Quarto stacks the metadata vertically; on one field it does not
+// need to.
+div.quarto-post > .metadata {
+  flex-direction: row;
+  gap: 1.2em;
+  margin-block-end: 0.5em;
+}
+
+// `div.` on the second selector because Quarto sets `div.quarto-post .metadata
+// { font-size: .8em }` at (0,2,1) and would otherwise win -- which left the
+// container at 16.4px while the date inside it sat at 15.58px, so a label added
+// to the row came out a different size from the date beside it.
+.quarto-post .listing-date,
+div.quarto-post .metadata {
+  font-variant-caps: all-small-caps;
+  font-size: var(--ramp-folio);
+  letter-spacing: var(--track-label);
+  color: var(--ink-faint);
+}
+
+// Headlines, not labels. Small caps are this sheet's label grammar, and using
+// them here too both blunted that signal and made the page monotonous -- a
+// column of small caps is a column of same-height rectangles with no word
+// shape to tell one entry from the next. Upper and lower case restores it.
+//
+// The tracking has to be reset explicitly: it would otherwise inherit the
+// display ramp's negative value, which is meant for type four times this size.
+.quarto-post .listing-title,
+.quarto-post .listing-title a {
+  font-variant-caps: normal;
+  text-transform: none;
+  font-size: var(--ramp-listing);
+  line-height: 1.12;
+  letter-spacing: 0;
+  text-wrap: balance;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+// ---------------------------------------------------------------------------
+// Saying that the entries are links
+// ---------------------------------------------------------------------------
+// The contents page had no affordance at all: titles, descriptions, dates and
+// plates all rendered as plain ink with no underline, no colour, no hover rule
+// and no focus rule. The only signal an entry was clickable was the cursor --
+// and a cursor only tells you once you are already pointing at it.
+//
+// A hairline in the accent answers it at rest, without turning nine headlines
+// into nine coloured ones. Fixed 1px rather than an em fraction so it stays a
+// hairline under the 90px lead as well as the 29px entries; mixed toward the
+// paper so it reads as a mark on the page rather than as a rule.
+.quarto-post .listing-title a {
+  text-decoration-line: underline;
+  text-decoration-color: var(--rule-quiet);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  text-decoration-skip-ink: auto;
+}
+
+// Hovering anywhere in the entry lights its headline. Quarto already wraps the
+// title, description, date and plate in four separate anchors covering about
+// 70% of the entry's area, so the target was generous all along -- this makes
+// that legible instead of leaving it to be found by accident.
+//
+// Hover moves the rule, not the words: to full accent and half a pixel
+// thicker, with the headline left in ink. Recolouring the whole headline said
+// far more than "you are pointing at this" needs to.
+div.quarto-post:hover .listing-title a {
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+}
+
+// Focus is louder than hover on purpose. A mouse pointer is already visible on
+// the thing it is pointing at, so hover only has to confirm; keyboard focus has
+// nothing else marking where it is, so it takes the accent outright -- on top
+// of the browser's own ring.
+//
+// `:has(:focus-visible)` rather than `:focus-within`. The two look
+// interchangeable and are not: `:focus-within` is defined against plain
+// `:focus`, and there is no `:focus-visible-within`. So it fired on mouse
+// clicks as well, and clicking an entry left its headline lit in the accent --
+// which is the loud keyboard signal appearing for a reader who never needed it.
+div.quarto-post:has(:focus-visible) .listing-title a {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+// The listing title is an h3, so it arrives carrying the section-heading's
+// 2.2em of space above it -- which lands between each date and the headline it
+// belongs to, breaking the lockup.
+div.quarto-post .body .listing-title {
+  margin-block: 0 0.25em;
+  // The heading rule pays back small-caps tracking with a negative end margin.
+  // These headlines are not tracked, so there is nothing to pay back and it
+  // only pushed the box a few pixels past the column it sits in.
+  margin-inline-end: 0;
+}
+
+.quarto-post .listing-description {
+  max-inline-size: var(--measure);
+  color: var(--ink-quiet);
+}
+
+// Quarto emits a placeholder div for posts with no image, which would
+// otherwise hold the track open and reintroduce the uneven spacing the small
+// plates were meant to fix.
+.quarto-post .listing-item-img-placeholder {
+  display: none;
+}
+
+// ===========================================================================
+// Tables
+// ===========================================================================
+// No rules, per the sheet's own constraint. The head is a small-caps label and
+// the columns are held apart by space, which is how a book does it -- if a
+// table here ever gets dense enough that it stops working, that is the honest
+// signal to give the head a hairline back.
+
+table {
+  max-inline-size: var(--measure);
+  border-collapse: collapse;
+  margin-block: 1.6em;
+}
+
+thead th {
+  font-variant-caps: small-caps;
+  text-transform: lowercase;
+  letter-spacing: var(--track-label);
+  font-weight: 400;
+  color: var(--ink-quiet);
+  text-align: start;
+  padding-block-end: 0.7em;
+}
+
+// Quarto rules the head off from the body; the small caps already do that job.
+.table > thead,
+table > thead {
+  border-block-end: 0;
+}
+
+th,
+td {
+  padding: 0.28em 1.2em 0.28em 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+// ===========================================================================
+// Code
+// ===========================================================================
+// No panel and no frame: the mono face and the highlighting are already two
+// signals, and a filled box would be a third plus a background colour the
+// sheet has sworn off.
+
+code,
+pre {
+  background: none;
+  border: 0;
+  font-size: 0.86em;
+  color: var(--ink);
+  // A code span is a literal. It must not inherit the small caps or the
+  // lowercasing of a caption or heading it happens to sit inside -- `ls` and
+  // `LS` are different commands. This also keeps code out of the small-caps
+  // rasterisation floor, which it was falling under at 0.86em of a caption.
+  font-variant-caps: normal;
+  text-transform: none;
+  // Code is the one place old-style figures are wrong: `1024` has to be four
+  // glyphs sitting on the same baseline.
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: normal;
+}
+
+// Bootstrap tints inline code with a panel and sets it in the theme colour.
+// Both have to go by name, because both are set at a specificity that a bare
+// `code` selector cannot reach.
+p code:not(.sourceCode),
+li code:not(.sourceCode),
+td code:not(.sourceCode),
+dd code:not(.sourceCode),
+div.sidebar-item-container .sidebar-link > code {
+  background: none;
+  padding: 0;
+  color: var(--ink);
+}
+
+div.sourceCode,
+pre.sourceCode {
+  background: none;
+  margin-inline-start: 1.5em;
+  max-inline-size: var(--measure);
+}
+
+// ===========================================================================
+// The plate
+// ===========================================================================
+// Scoped to `.plate` and to listing thumbnails rather than every `img`: a
+// square grayscale crop is right for a photograph and destroys a terminal
+// screenshot, and this blog has both. Add `.plate` in the fenced-div syntax:
+//
+//     ::: {.plate}
+//     ![](postcard.png)
+//     :::
+
+// No aspect-ratio. A fixed box plus `contain` is an invisible container whose
+// only effect is reserving space the image does not use -- the chart drew at
+// 180x61 inside a 180x180 square. The plate is now simply the image at the
+// width of the track, at whatever height it happens to be, which is also the
+// only treatment in this sheet that cannot crop anything.
+.plate img,
+img.plate,
+.quarto-post .thumbnail-image {
+  object-fit: contain;
+  inline-size: 100%;
+  block-size: auto;
+  image-rendering: auto;
+  border: 0;
+  border-radius: 0;
+
+  // Two things working together, and neither is right alone.
+  //
+  // contrast(0.9) pivots on mid-grey, so it lifts black off zero -- which is
+  // what stops multiply crushing a dark source like the terminal screenshot
+  // into a brick. brightness(1.053) then puts the white point back exactly
+  // where contrast moved it from (1 / 0.95), so white survives at full value.
+  //
+  // multiply can then do the job it was always meant to: white maps precisely
+  // onto the paper, so a diagram or chart on a white ground sits *in* the page
+  // with no visible rectangle, and the letterboxed part of a `contain` plate is
+  // indistinguishable from the part with an image in it.
+  //
+  // The paper goes on the *container* below, never here: filter applies to an
+  // element's background as well as its content, so painting paper on this
+  // element pushes it through the whole chain and lands it on a visibly
+  // different colour from the actual page.
+  //
+  // The sepia pulls the set through one warm palette; the grayscale is Joe's,
+  // left where he set it.
+  filter: grayscale(0.3) sepia(0.16) contrast(0.9) brightness(1.053);
+  mix-blend-mode: multiply;
+}
+
+// Quarto sets `opacity: 0.999` on <main>, which creates a stacking context and
+// isolates everything inside it from the page behind. A multiply against the
+// page therefore blends with nothing and silently does nothing at all -- which
+// is what it had been doing here all along. Giving the container the paper
+// puts a real backdrop inside the isolated group for the plate to blend with.
+//
+// It has to be the container rather than the image because the image is
+// filtered and the container is not, so this stays the true page colour, and
+// the letterboxed part of a `contain` plate matches the part with an image in
+// it exactly. Without this rule the plate shows as three different tones: the
+// page, the letterbox, and the image's own white.
+.quarto-post .thumbnail,
+.plate {
+  background: var(--paper);
+}
+
+// Quarto sets `object-fit: cover` from `div.quarto-post .thumbnail img`, which
+// at (0,2,2) outranks the `.quarto-post .thumbnail-image` rule above at
+// (0,2,0). So `contain` up there silently governed only the lead, whose own
+// selector is more specific still -- every plate down the column carried on
+// cropping. Matched here at (0,3,2).
+//
+// Its `margin-top` goes too: it offsets the plate from the date it hangs from.
+div.quarto-post .thumbnail img.thumbnail-image {
+  object-fit: contain;
+  margin-block-start: 0;
+}
+
+figure {
+  margin-block: 2em;
+}
+
+figure img {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+// Full bleed on narrow screens. Figures already filled the text column there,
+// so the only width left to give them is the 30px the column is inset from
+// each edge -- which on a phone is a tenth of the screen. Quarto's figure
+// wrapper already spans screen-start to screen-end; it is the paragraph inside
+// it that is pinned to the body column, so that is what has to be released.
+//
+// The caption stays inset: Quarto brings margin captions inline at this width,
+// and a caption running edge to edge would have no margin to sit in.
+@media (max-width: 700px) {
+  main.content figure > p {
+    grid-column: screen-start / screen-end;
+    text-align: center;
+  }
+
+  main.content figure > p > img {
+    inline-size: 100%;
+  }
+}
+
+// ===========================================================================
+// Word-sized graphics
+// ===========================================================================
+// Sparklines are set inside the sentence, at the size and colour of the
+// sentence. No frame, no caption, no figure wrapper -- if it needs one it is
+// not a sparkline, it is a chart.
+
+svg.spark {
+  block-size: 1em;
+  inline-size: auto;
+  vertical-align: baseline;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.06em;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  display: inline;
+}
+
+// ===========================================================================
+// Print
+// ===========================================================================
+
+@media print {
+  :root {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .navbar,
+  .sidebar,
+  #TOC {
+    display: none;
+  }
+}
+
+// ===========================================================================
+// Layout debugging
+// ---------------------------------------------------------------------------
+// Off unless <body> carries `debug`. Toggle it from the console:
+//
+//     document.body.classList.toggle('debug')
+//
+// `outline` rather than `border` on purpose: a border is part of the box and
+// shifts every edge by a pixel, which is the exact thing being inspected.
+// Outlines are painted outside the box and change no geometry at all.
+// ===========================================================================
+
+body.debug {
+  --debug-rule: 1px solid red;
+}
+
+body.debug main.content,
+body.debug nav.sidebar.sidebar-navigation,
+body.debug nav[role="doc-toc"],
+body.debug .column-margin,
+body.debug .margin-caption,
+body.debug #title-block-header,
+body.debug .quarto-title-banner,
+body.debug main.content > p,
+body.debug main.content section > p,
+body.debug .quarto-listing .list,
+body.debug div.quarto-post,
+body.debug div.quarto-post > .metadata,
+body.debug div.quarto-post > .body,
+body.debug div.quarto-post > .thumbnail,
+body.debug .quarto-post .listing-title {
+  outline: var(--debug-rule);
+}
+
+// A hairline down the exact centre of the viewport. The quickest way to tell
+// "centred" from "nearly centred": the measure should straddle it evenly.
+body.debug::after {
+  content: "";
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 50%;
+  inline-size: 1px;
+  background: red;
+  opacity: 0.6;
+  z-index: 9999;
+  pointer-events: none;
 }

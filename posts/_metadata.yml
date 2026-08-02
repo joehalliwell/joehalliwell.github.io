@@ -15,5 +15,9 @@ title-block-banner: true
 author: Joe Halliwell
 
 
+# Figures range right so an image's right edge meets the caption column beside
+# it, whatever the image's width. Centring only lined the two up when the image
+# happened to fill the measure.
+fig-align: right
 fig-cap-location: margin
 reference-location: margin

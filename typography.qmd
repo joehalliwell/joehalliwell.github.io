@@ -1,0 +1,82 @@
+---
+pagetitle: "Typography"
+description-meta: "A specimen page for the typographic settings used on this site."
+title: "The measure is fixed, the size follows"
+reference-location: margin
+fig-cap-location: margin
+title-block-banner: true
+toc: false
+---
+
+::: {.kicker}
+Specimen
+:::
+
+This page exists to be looked at rather than read. Every setting the sheet
+makes a claim about is exercised somewhere below, so that the claims can be
+checked instead of believed. If a rule here renders wrong, the rule is wrong.
+
+The paragraph you are reading is the text stream: Source Serif 4 at whatever
+size satisfies a 62-character measure, leaded at 1.45, with `text-wrap: pretty`
+doing what it can about ladders. This second paragraph is a continuation, so it
+is indented one and a half ems and gives up its leading in exchange -- the book
+setting, not the web one.
+
+## Real small caps, not shrunken capitals
+
+This heading is set in genuine `smcp` glyphs drawn at small-caps proportions,
+not capitals scaled down.[^synth] The difference is in the stroke weight: a
+scaled capital goes thin next to lowercase, and a real small cap does not.
+Compare a line of each: <span style="font-variant-caps: small-caps">handgloves
+in small caps</span> against <span style="font-variant-caps: none;
+font-size: 0.72em; text-transform: uppercase">handgloves faked by scaling</span>.
+
+[^synth]: The sheet sets `font-synthesis: none`, so if the webfont fails to
+load nothing is faked -- the fallback simply has no small caps. That is the
+intended failure: absent, not counterfeit.
+
+## Old-style figures in text, lining figures in tables
+
+In running text the figures are old-style and proportional, so 1848, 1972 and
+2026 sit in the line like lowercase letters rather than standing above it. The
+same numerals in a table go tabular and lining, because columns have to align:
+
+| Cut      | Optical size | Glyphs | Bytes  |
+|----------|--------------|--------|--------|
+| Roman    | 8–60         | 550    | 191268 |
+| Italic   | 8–60         | 436    | 152312 |
+| Caption  | 8            | 550    | 0      |
+| Display  | 60           | 550    | 0      |
+
+## Optical sizing is doing something
+
+The display line at the top of this page and the body text you are reading are
+the same font file at different points on the `opsz` axis. The display cut has
+finer hairlines and tighter spacing; the text cut is sturdier. Set
+`font-optical-sizing: none` in the inspector and the headline will visibly
+coarsen.
+
+## Word-sized graphics
+
+Sparklines belong inside the sentence, at the size and colour of the sentence.
+Render times fell over the last eight builds
+<svg class="spark" viewBox="0 0 48 12" aria-label="sparkline showing a decline"><polyline points="0,2 6,3 12,3 18,5 24,5 30,7 36,8 42,8 48,10"/></svg>
+and the cache hit rate went the other way
+<svg class="spark" viewBox="0 0 48 12" aria-label="sparkline showing a rise"><polyline points="0,10 6,9 12,8 18,8 24,6 30,5 36,4 42,2 48,1"/></svg>.
+They inherit `currentColor` and `1em`, take no frame, and are never wrapped in
+a figure.
+
+## Three registers
+
+Display, caption small caps, folio -- a 1.5 step apart, with no fourth. The
+kicker at the top of this page is folio with 0.28em of tracking; this heading
+is caption; the title is display. Body text and sidenotes are not registers,
+they are the text stream at 1em and 0.82em.[^registers]
+
+[^registers]: Which is the honest reading of "exactly three ramps": three
+*labelling* ramps. Counting the reading sizes as ramps would make it five, and
+counting them as forbidden would leave the sidenotes at body size.
+
+The only accent on the site is spent on [links](https://joehalliwell.com), and
+nowhere else. Everything else separating one thing from another is size,
+tracking, or how far the ink has been mixed toward the paper.

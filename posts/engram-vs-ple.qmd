@@ -6,6 +6,7 @@ description: |
   whom a citation.
 date: "2026-04-04"
 categories: [ai, architecture, nits, ple, engram]
+image: engram-vs-ple-plate.png
 draft: false
 ---
 
@@ -34,6 +35,13 @@ Nope. Much of the community's understanding of PLE comes from [antimatter15's re
 DeepSeek are to be applauded for continuing to publish their SoTA research in useful detail. If Google had done the same, maybe they'd have got the citation!
 
 ---
+
+## Further reading
+
+There is a [detailed explainer of Engram's conditional memory and O(1)
+lookups](https://medium.com/@sampan090611/deepseek-engram-explained-how-conditional-memory-and-o-1-lookups-fix-llm-amnesia-50fce3937bb8)
+on Medium by `@sampan090611`, which walks through the mechanism block by block.
+The diagram used as this post's image is theirs.
 
 ## Acknowledgements
 
