@@ -15,7 +15,7 @@
 // Bootstrap needs real colours at compile time, so the flat values live here
 // and the color-mix() versions live in the rules. These are what the mixes
 // resolve to; if you retune one, retune the other.
-$paper: #fffdfa;
+$paper: #fffefd;
 $ink: #221f1a; // #16130f held at 92% against the paper
 $accent: #a8371a;
 
@@ -215,6 +215,7 @@ $grid-column-gutter-width: 30px;
   --track-label: 0.1em;
   --track-display: -0.012em;
 
+  --content-justify: justify;
 }
 
 // ===========================================================================
@@ -297,26 +298,61 @@ main.content .margin-caption,
   max-inline-size: var(--sidenote-measure);
 }
 
-// Ragged right, and unhyphenated because of it. The two are one decision in
-// both directions: hyphenation is a justification tool, bought to get the extra
-// break points that keep word spacing from tearing open. A rag has no word
-// spacing to protect -- the slack all goes to the right edge, which is allowed
-// to be uneven -- so hyphenation there only breaks words for nothing and leaves
-// a fence of hyphens down the margin.
+// Justified, and hyphenated because of it. The two are one decision: at this
+// measure justification without hyphenation opens rivers, and hyphenation
+// without justification only halves a rag that was running to a 102px median
+// against a hard flush-left edge -- which is why the right-hand gutter read as
+// four times the left when both tracks were in fact 30px.
 //
-// This is the one change here that the measure was carrying. The note this
-// replaces recorded a 102px median rag at 80ch, which is what justification was
-// hiding; `text-wrap: pretty` on the body now does that work alone, optimising
-// the whole paragraph instead of breaking greedily line by line. Check it with
-// _scripts/measure-rag.sh rather than by eye -- if the median climbs back
-// toward 100px the honest fix is the measure, not the alignment.
+// Justified, both edges of the column are true vertical lines, so the equal
+// gutters finally look equal.
 //
-// Nothing sets text-align or hyphens any more, in either direction: `start` and
-// `manual` are the initial values, so the rules that switched the margin column,
-// the captions and the listing headlines back out of justification go with the
-// rule that made them necessary. That also frees `fig-align` in the front
-// matter, which the old (0,1,2) selector here had been silently overriding for
-// every figure on the site.
+// Ranged left was tried at this measure and reverted on looks. Do not reopen it
+// from the numbers alone: with `text-wrap: pretty` the rag measures far better
+// than the 102px above -- a 30px median, 3ch, p90 around 73px across three
+// posts, checked with _scripts/measure-rag.sh. It is a shallow, well-behaved
+// rag and the page still reads better squared off. The measurement is not the
+// argument here; it only says the rag is not what is wrong with it.
+//
+// hyphenate-limit-chars keeps the breaks civilised: nothing shorter than six
+// letters is broken, and never with fewer than three either side of the break.
+// Figure paragraphs are excluded, and not only because justifying a lone image
+// does nothing. `main.content :is(p, ...)` resolves to (0,1,2) -- `main` is a
+// type selector too -- which ties exactly with Quarto's own
+// `.quarto-figure-center > figure > p` and, coming later, beat it. So this rule
+// had been quietly overriding every figure's alignment, and `fig-align` in the
+// front matter had no effect at all.
+main.content :is(p, ul, ol, dl, blockquote):not(figure > p) {
+  text-align: var(--content-justify);
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+}
+
+// Not in the margin column. At twenty-odd characters there is nowhere to put
+// the slack, so justification pulls every line apart -- and a caption or a
+// sidenote is an aside, which should not be squared off like the main text.
+main.content .column-margin :is(p, div, li),
+main.content .margin-caption,
+main.content figcaption,
+main.content caption {
+  text-align: start;
+  hyphens: manual;
+}
+
+// On the contents page the headlines stay ranged left -- justifying one or two
+// lines of large type only stretches them, and the headline's flush left edge
+// is what the whole listing hangs from. The descriptions are ordinary prose in
+// the same column as the article body, so they are set the same way.
+.quarto-listing .listing-title {
+  text-align: start;
+  hyphens: manual;
+}
+
+.quarto-listing :is(.listing-description, .listing-description p) {
+  text-align: var(--content-justify);
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+}
 
 // Continuation paragraphs are indented, and keep their leading: closing the gap
 // so the indent could carry the break alone was tried and read as cramped, the
@@ -554,6 +590,34 @@ h6 {
   color: var(--ink-quiet);
   font-weight: 400;
   text-transform: none;
+}
+
+// The author/published row, on one grid rather than two.
+//
+// Quarto makes `.quarto-title-meta` a two-column grid but wraps each entry in
+// an unstyled div, so the label and the value inside each are an independent
+// block box. The two entries line up today purely because "Author" and
+// "Published" both happen to fit on one line: force either label to wrap and
+// its value drops 23px while the other stays put, with nothing to pull them
+// back. That is alignment by coincidence, and it is the kind that holds right
+// up until a label gets longer or the column gets narrower.
+//
+// Subgrid makes it structural. The container names two rows -- labels, then
+// values -- and each entry opts into them instead of laying out its own, so
+// every label shares a baseline and every value shares the one below it,
+// whatever any of them does. More rows than two is fine: further entries land
+// on implicit rows in pairs.
+//
+// No `grid-template-columns` here on purpose. The columns are Quarto's and
+// work; only the rows were never shared.
+.quarto-title-meta {
+  grid-template-rows: auto auto;
+}
+
+.quarto-title-meta > div {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 2;
 }
 
 // Page furniture: fixed-form labels, a few words each, carrying the label
