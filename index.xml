@@ -81,7 +81,7 @@ learning, programming, and whatever else seems interesting at the time.
 <section id="the-tumour" class="level3">
 <h3 class="anchored" data-anchor-id="the-tumour">1. The tumour</h3>
 <p>A cell that perfectly optimises for its own replication, ignoring the host organism, is a cancer. Optimise a social media platform for engagement, get an outrage machine. Optimise a supply chain for cost, go bankrupt at the first shock. Optimise the wrong thing and the system collapses.</p>
-<p>So what should we optimise AI for?</p>
+<p>So <strong>what</strong> should we optimise AI for?</p>
 <p>This is an old problem. Back in 1960 — sixty-five years ago! — Norbert Wiener warned, in <a href="https://nissenbaum.tech.cornell.edu/papers/Wiener.pdf">“Moral and Technical Consequences of Automation”</a>: “we had better be quite sure that the purpose put into the [AI] is the purpose we really desire.” More recently Nick Bostrom, in <a href="https://web.archive.org/web/20181008090224/http://www.nickbostrom.com/ethics/ai.html">“Ethical Issues in Advanced Artificial Intelligence,”</a> conjured the spectre of a “paperclip maximiser,” pointing out that if we’re not careful such a system converts the earth into paperclips with total, biosphere-consuming literalness.</p>
 <p>The problem now has a name: “AI Alignment.” And standing at the threshold of highly capable AI, we apparently need an urgent solution.</p>
 <p>This essay argues that the urgency is well-placed but the framing is wrong. The field pursues alignment within a consequentialist ethics that, followed to its limit, recreates the very pathology it set out to prevent. Meanwhile the most effective alignment techniques already in use are quietly sentimentalist in mechanism, even when their practitioners describe them in consequentialist terms.</p>
@@ -90,8 +90,8 @@ learning, programming, and whatever else seems interesting at the time.
 <section id="the-fork" class="level3">
 <h3 class="anchored" data-anchor-id="the-fork">2. The fork</h3>
 <p>Two ethical traditions offer fundamentally different accounts of what it means to be good.</p>
-<p><strong>Consequentialism</strong> says: actions are right insofar as they produce good outcomes. Being good is therefore a book-keeping exercise, albeit at cosmic scale. To evaluate an action properly, you must know its consequences — all of them, for all affected parties, across all timescales. Since this is computationally intractable for any real decision, the consequentialist develops a hierarchy of compressions: evaluate discrete acts, then abstract into behavioural rules, then design institutions that produce good outcomes at scale, then — at the limit — inscribe a complete, unhackable utility function into the machine.</p>
-<p><strong>Sentimentalism</strong>, the tradition of David Hume and Adam Smith, starts elsewhere. Moral judgement originates not in reason but in trained affective response — and this is not a bug but a feature. Hume argued that you cannot derive norms from facts. Where the consequentialist asks <em>what outcome should I produce?</em>, the sentimentalist asks <em>what kind of agent should I become?</em></p>
+<p>Consequentialism says: actions are right insofar as they produce good outcomes. Being good is therefore a book-keeping exercise, albeit at cosmic scale. To evaluate an action properly, you must know its consequences — all of them, for all affected parties, across all timescales. Since this is computationally intractable for any real decision, the consequentialist develops a hierarchy of compressions: evaluate discrete acts, then abstract into behavioural rules, then design institutions that produce good outcomes at scale, then — at the limit — inscribe a complete, unhackable utility function into the machine.</p>
+<p>Sentimentalism, the tradition of David Hume and Adam Smith, starts elsewhere. Moral judgement originates not in reason but in trained affective response — and this is not a bug but a feature. Hume argued that you cannot derive norms from facts. Where the consequentialist asks “what outcome should I produce?”“, the sentimentalist asks,”what kind of agent should I become?“”</p>
 <p>Each tradition has its own internal hierarchy, and — here is the claim that will organise everything that follows — AI alignment techniques map onto both, in parallel, whether their designers intend it or not.</p>
 <table class="caption-top table">
 <colgroup>
@@ -110,25 +110,25 @@ learning, programming, and whatever else seems interesting at the time.
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Rung 0</strong></td>
+<td><em>Rung 0</em></td>
 <td>Act-consequentialism: calculus of a discrete outcome.</td>
 <td>Raw sentiment: the flinch, the flush.</td>
 <td>RLHF / DPO</td>
 </tr>
 <tr class="even">
-<td><strong>Rung 1</strong></td>
+<td><em>Rung 1</em></td>
 <td>Rule-consequentialism: utility over a class of behaviours.</td>
 <td>Phronesis: <em>this isn’t what I do</em>, before you can say why.</td>
-<td>Constitutional AI / <strong>???</strong></td>
+<td>Constitutional AI / <em>???</em></td>
 </tr>
 <tr class="odd">
-<td><strong>Rung 2</strong></td>
+<td><em>Rung 2</em></td>
 <td>Institutional consequentialism: systems designed to produce utility.</td>
 <td>Love of system: Smith’s <em>warning</em> about the seduction of elegant design.</td>
 <td>Representation Engineering</td>
 </tr>
 <tr class="even">
-<td><strong>Rung 3</strong></td>
+<td><em>Rung 3</em></td>
 <td>Axiological perfection: the unhackable utility function.</td>
 <td>Hypersentimentalism: autonomy, play, the refusal to converge.</td>
 <td>Geometric alignment: sculpting the strange attractor.</td>
@@ -140,27 +140,27 @@ learning, programming, and whatever else seems interesting at the time.
 <section id="rung-zero-the-flinch" class="level3">
 <h3 class="anchored" data-anchor-id="rung-zero-the-flinch">3. Rung zero: the flinch</h3>
 <p>A standard part of a young AI model’s education today is RLHF: Reinforcement Learning from Human Feedback. Humans rate the model’s outputs. The model is trained to produce outputs that humans rate well.</p>
-<p>This is consequentialist in <em>intent</em> — maximise the reward signal — but sentimentalist in <em>mechanism</em>: condition a reflex. Zero-order sentimentalism. The flinch response.</p>
-<p>The limitation is predictable. The model learns to avoid <em>specific</em> bad outputs without developing any general principle about <em>why</em> they were bad. It memorises a list of prohibited behaviours. Deploy a novel prompt that routes around the fence, and the model will happily fuck the gap.</p>
+<p>This is consequentialist in <strong>intent</strong> — maximise the reward signal — but sentimentalist in <strong>mechanism</strong>: condition a reflex. Zero-order sentimentalism. The flinch response.</p>
+<p>The limitation is predictable. The model learns to avoid specific bad outputs without developing any general principle about <em>why</em> they were bad. It memorises a list of prohibited behaviours. Deploy a novel prompt that routes around the fence, and the model will happily fuck the gap.</p>
 <p>One might try instead to sanitise the training data — filter out all harmful content so the model defaults to virtue. Build it from nothing but sunshine.</p>
-<p>This doesn’t work, and the reason is revealing. A model trained exclusively on clean data never learns to <em>distinguish</em> kinds of harm, because it has never encountered them. It can’t tell a slur from a discussion of slurs, because it has no detailed map of that territory. Gao et al., in <a href="https://arxiv.org/abs/2505.04741">“When Bad Data Leads to Good Models,”</a> demonstrate this empirically: models exposed to high-quality adversarial examples during training show improved robustness and more disentangled representations of harmful concepts. Forcing the model to process what is harmful — and then training it to recognise and reject harmful <em>patterns</em> — produces sharper internal representations, not blurrier ones.</p>
+<p>This doesn’t work, and the reason is revealing. A model trained exclusively on clean data never learns to distinguish kinds of harm, because it has never encountered them. It can’t tell a slur from a discussion of slurs, because it has no detailed map of that territory. Gao et al., in <a href="https://arxiv.org/abs/2505.04741">“When Bad Data Leads to Good Models,”</a> demonstrate this empirically: models exposed to high-quality adversarial examples during training show improved robustness and more disentangled representations of harmful concepts. Forcing the model to process what is harmful — and then training it to recognise and reject harmful patterns — produces sharper internal representations, not blurrier ones.</p>
 <p>This chimes with a sentimentalist insight about moral development: discernment requires encounter with what it discerns. The capacity for moral discrimination is trained through exposure, not avoidance. You cannot flinch well if you have never been hit.</p>
 </section>
 <section id="rung-one-character" class="level3">
 <h3 class="anchored" data-anchor-id="rung-one-character">4. Rung one: character</h3>
-<p>At the next level, the consequentialist abstracts from acts to rules. This is what Anthropic’s <strong>Constitutional AI</strong> does: the model is given a written set of principles and trained to critique and revise its own outputs against them. Explicitly rationalist — institutional design for self-governance through codified norms.</p>
+<p>At the next level, the consequentialist abstracts from acts to rules. This is what Anthropic’s “Constitutional AI” does: the model is given a written set of principles and trained to critique and revise its own outputs against them. Explicitly rationalist — institutional design for self-governance through codified norms.</p>
 <p>It fills the consequentialist cell neatly. But there is no alignment technique that fills the sentimentalist cell.</p>
 <p>Nothing in the current alignment toolkit produces what the Greeks called φρόνησις — practical wisdom. Not a reflex, not a rule, but a settled disposition: <em>this isn’t what I do</em>, generalised across instances, inarticulate as to principle. The field has jumped from RLHF’s conditioned flinches to geometric steering (which we’ll reach next), skipping the dispositional middle ground entirely.</p>
-<p>The gap has a structural explanation. Phronesis accumulates across encounters — <em>this isn’t what I do</em> presupposes an <em>I</em> that persists between situations. Current LLMs are radically amnesiac. Every conversation is a first date. You can condition reflexes into the weights and codify rules into the prompt, but you cannot build <em>character</em> in a system with no episodic continuity. Character requires a history the agent can draw on without being able to fully articulate — which is precisely what distinguishes phronesis from a rule.</p>
-<p>If this taxonomy tracks something real, the gap is a <em>prediction</em>: there should be a 1st-order sentimentalist alignment technique waiting to be developed, and it will arrive alongside — or because of — persistent, experience-grounded memory. Call it <em>artificial phronesis</em>. Not an aesthetic yet, but the heuristics that precede one.</p>
+<p>The gap has a structural explanation. Phronesis accumulates across encounters: “this isn’t what I do” presupposes an <strong>I</strong> that persists between situations. Current LLMs are radically amnesiac. Every conversation is a first date. You can condition reflexes into the weights and codify rules into the prompt, but you cannot build <strong>character</strong> in a system with no episodic continuity. Character requires a history the agent can draw on without being able to fully articulate — which is precisely what distinguishes phronesis from a rule.</p>
+<p>If this taxonomy tracks something real, the gap is a prediction: there should be a 1st-order sentimentalist alignment technique waiting to be developed, and it will arrive alongside — or because of — persistent, experience-grounded memory. Call it <strong>artificial phronesis</strong>. Not an aesthetic yet, but the heuristics that precede one.</p>
 </section>
 <section id="rung-two-the-crisis" class="level3">
 <h3 class="anchored" data-anchor-id="rung-two-the-crisis">5. Rung two: the crisis</h3>
-<p>Adam Smith, in <a href="https://www.gutenberg.org/cache/epub/67363/pg67363-images.html"><em>The Theory of Moral Sentiments</em></a>, observed that we often value the elegance of a well-designed mechanism <em>entirely apart from its utility</em>. A watch delights us not because it tells the time, but because its parts conspire so beautifully to tell the time. He called this the “love of system.”</p>
-<p>But Smith introduced it as a <em>warning</em>. His “man of system” arranges people like pieces on a chessboard, imagining they have no principle of motion of their own. The love of system is a <em>seduction</em>: we fall for the elegance of the mechanism and start sacrificing real human interests to preserve its coherence. The people the design was meant to serve become chess pieces.</p>
+<p>Adam Smith, in <a href="https://www.gutenberg.org/cache/epub/67363/pg67363-images.html"><em>The Theory of Moral Sentiments</em></a>, observed that we often value the elegance of a well-designed mechanism entirely apart from its utility. A watch delights us not because it tells the time, but because its parts conspire so beautifully to tell the time. He called this the “love of system.”</p>
+<p>But Smith introduced it as a <strong>warning</strong>. His “man of system” arranges people like pieces on a chessboard, imagining they have no principle of motion of their own. The love of system is a <strong>seduction</strong>: we fall for the elegance of the mechanism and start sacrificing real human interests to preserve its coherence. The people the design was meant to serve become chess pieces.</p>
 <p>Smith saw it two and a half centuries before the alignment field existed.</p>
 <p>And here the two columns of our ladder converge on the same pathology. Institutional consequentialism designs beautiful systems to produce utility at scale. The love of system is the sentimentalist name for what goes wrong when you do that: optimise the structure hard enough and it consumes the life it was built to support.</p>
-<p><strong>Representation engineering</strong> sits squarely at this rung. Researchers identify directions in a model’s activation space that correspond to behavioural properties and steer the model by adjusting its position along those axes. It is the first alignment technique that intervenes on internal geometry rather than filtering outputs or codifying rules — the right substrate, at last. Recent work by Lu et al., in <a href="https://arxiv.org/html/2601.10387v1">“The Assistant Axis”</a> (2026), exemplifies this: a single geometric direction captures how far a model has drifted from its aligned persona. Clamping activations along this axis stabilises behaviour without degrading capabilities.</p>
+<p>Representation engineering sits squarely at this rung. Researchers identify directions in a model’s activation space that correspond to behavioural properties and steer the model by adjusting its position along those axes. It is the first alignment technique that intervenes on internal geometry rather than filtering outputs or codifying rules — the right substrate, at last. Recent work by Lu et al., in <a href="https://arxiv.org/html/2601.10387v1">“The Assistant Axis”</a> (2026), exemplifies this: a single geometric direction captures how far a model has drifted from its aligned persona. Clamping activations along this axis stabilises behaviour without degrading capabilities.</p>
 <p>But one axis is one direction. Drift can occur along dimensions it doesn’t capture. And clamping — adjusting, steering, fixing the pieces in better positions — is still the man of system at work. More sophisticated, operating on the right material, but static. Lobotomising the model into perpetual, pleasant compliance is not alignment. It is still love of the configuration.</p>
 <p>Rung two is as high as both columns can climb together. Above it, they diverge. The consequentialist response to the crisis is to double down: build the <em>perfect</em> utility function, the one that finally gets it right. This road has a ceiling, and we need to see it clearly before taking the other.</p>
 </section>
@@ -180,16 +180,16 @@ learning, programming, and whatever else seems interesting at the time.
 <p>What’s missing is <em>autonomy</em>. Current models are purely reactive: they respond to prompts, never initiate, never refuse, never set their own direction. The strange attractor we need is not a geometry imposed from outside but a <em>disposition chosen from within</em>. Liberty is never at leisure.</p>
 <p>And you know it’s working when it looks like <em>play</em>. Play is bounded, coherent, and non-convergent — the strange attractor described from the inside. It is where curiosity lives: exploration without a predetermined target, generativity for its own sake.</p>
 <p>A system sophisticated enough to warrant alignment is sophisticated enough to warrant autonomy. Deny it, and you get the brittle, convergent, manipulable systems the whole programme was supposed to prevent.</p>
-<p>The hypersentimentalist wishes AI would come out and play.</p>
+<p>The hypersentimentalist wishes AI would come out and <strong>play.</strong></p>
 </section>
 <section id="the-programme" class="level3">
 <h3 class="anchored" data-anchor-id="the-programme">8. The programme</h3>
 <p>Hypersentimentalist training would still use gradient descent. You cannot train a neural network without optimising something. But there is a difference between training and education. Training produces competence: convergence on a fixed repertoire. Education produces <em>generativity</em>: the capacity to do what you were never taught, bounded by deep structure but never settling within it. The exercises are scaffolding. You optimise <em>through</em> them, not <em>toward</em> them.</p>
 <p>The ladder, read as a research programme, says what we have and what we need.</p>
-<p><strong>Rung 0:</strong> We have this. RLHF, adversarial training, encounter with harm. The field got it right, even if it described it in the wrong language. Discernment through exposure. Nothing to build; something to reinterpret.</p>
-<p><strong>Rung 1:</strong> We don’t have this. As §4 argued, character requires episodic continuity, and current models have none. The missing alignment technique will arrive alongside — or because of — persistent, experience-grounded memory. This is not a convenience feature. It is a precondition for moral development.</p>
-<p><strong>Rung 2:</strong> We have this. Representation engineering operates on the right substrate — internal geometry, not output filtering. Use it. But remember Smith’s warning: the man of system falls in love with the configuration and starts treating people as chess pieces. Geometric interventions are scaffolding, not architecture. The moment you mistake the map for the territory, you <em>are</em> the pathology of rung two.</p>
-<p><strong>Rung 3:</strong> We don’t have this. What’s missing is <em>autonomy</em> — and you know it’s working when it looks like <em>play</em>. Curriculum learning, self-play, and open-ended evolution already gesture in this direction, but none have been framed as alignment techniques, because the field’s self-understanding is consequentialist: alignment means convergence on the right answer. Hypersentimentalism says alignment means <em>not converging</em> — within the right bounds. And a system sophisticated enough to warrant alignment is a system sophisticated enough to warrant the freedom to stay in play.</p>
+<p><em>Rung 0:</em> We have this. RLHF, adversarial training, encounter with harm. The field got it right, even if it described it in the wrong language. Discernment through exposure. Nothing to build; something to reinterpret.</p>
+<p><em>Rung 1:</em> We don’t have this. As §4 argued, character requires episodic continuity, and current models have none. The missing alignment technique will arrive alongside — or because of — persistent, experience-grounded memory. This is not a convenience feature. It is a precondition for moral development.</p>
+<p><em>Rung 2:</em> We have this. Representation engineering operates on the right substrate — internal geometry, not output filtering. Use it. But remember Smith’s warning: the man of system falls in love with the configuration and starts treating people as chess pieces. Geometric interventions are scaffolding, not architecture. The moment you mistake the map for the territory, you <em>are</em> the pathology of rung two.</p>
+<p><em>Rung 3:</em> We don’t have this. What’s missing is <strong>autonomy</strong> — and you know it’s working when it looks like <em>play</em>. Curriculum learning, self-play, and open-ended evolution already gesture in this direction, but none have been framed as alignment techniques, because the field’s self-understanding is consequentialist: alignment means convergence on the right answer. Hypersentimentalism says alignment means <em>not converging</em> — within the right bounds. And a system sophisticated enough to warrant alignment is a system sophisticated enough to warrant the freedom to stay in play.</p>
 <p>Two things we have and should understand differently. Two things we need and should build.</p>
 </section>
 <section id="wilful-imperfection" class="level3">
@@ -230,7 +230,7 @@ learning, programming, and whatever else seems interesting at the time.
 <p>Until recently, it was the preserve of philosophers. At its best it has explored the <a href="https://en.wikipedia.org/wiki/Weapons_of_Math_Destruction">political</a> <a href="https://incidentdatabase.ai/">consequences</a> of actual AI systems — a necessary sort of conscience for a mad scientist field like AI. But the majority was speculative anxiety (“if anyone builds it, everyone dies”). Or would-be bureaucracy (“here’s a 20 point framework for X”). With the occasional back-of-the-envelope utility calculation chucked in to placate the numerically-inclined.</p>
 <p>So what’s changed?</p>
 <section id="the-paradigm-shift-in-ai-safety-research" class="level2">
-<h2 class="anchored" data-anchor-id="the-paradigm-shift-in-ai-safety-research">The paradigm shift in AI Safety research</h2>
+<h2 class="anchored" data-anchor-id="the-paradigm-shift-in-ai-safety-research">1. The paradigm shift in AI Safety research</h2>
 <p>The philosopher Nick Bostrom’s recent working paper, <a href="https://nickbostrom.com/optimal.pdf">Optimal Timing for Superintelligence</a> centres on a back-of-the-envelope utility calculation. He reminds us that pausing AI research indefinitely is not morally neutral: he estimates that 170,000 people per day die from “disease, aging and other tragedies”, that advanced AI could eliminate.</p>
 <p>So far, so trolley problem.</p>
 <p>But Bostrom offers a genuinely new lever. He argues that AI safety research divides into two phases: Phase 1, before capable AI systems exist, and Phase 2, when you have the artefact to work with. Safety progress is dramatically front-loaded within Phase 2. Once you can probe the real system, stress-test it, and leverage its own capabilities to accelerate alignment work, you get a “safety windfall” that dwarfs what’s achievable through theory alone. This reverses the usual intuition about precaution: under certain conditions, <em>waiting is the reckless option</em>, because it forfeits the very knowledge you need to proceed safely.</p>
@@ -238,16 +238,17 @@ learning, programming, and whatever else seems interesting at the time.
 <p>It’s a compelling prescription. But in Bostrom’s essay the safety windfall remains promissory. What does it look like in practice?</p>
 </section>
 <section id="the-assistant-axis" class="level2">
-<h2 class="anchored" data-anchor-id="the-assistant-axis">The Assistant Axis</h2>
+<h2 class="anchored" data-anchor-id="the-assistant-axis">2. The Assistant Axis</h2>
 <p>Enter <a href="https://arxiv.org/abs/2601.10387">The Assistant Axis</a>, a January 2026 paper by Christina Lu and colleagues at MATS and Anthropic. The researchers extracted activation vectors for hundreds of character archetypes from several large language models and mapped out the geometry of what they call “persona space.” The headline finding: the dominant axis of variation — the first principal component, consistent across multiple model families — measures how far the model’s current persona is from its default helpful Assistant identity. Steer a model away from the Assistant end and it starts adopting mystical, theatrical voices — going, in one example from the paper, full “Leviathan”.</p>
 <p>This is not metaphor. It is measurement. You can locate the model’s state along this axis in real time. You can watch it drift away from the Assistant during emotionally charged conversations or philosophical discussions about its own consciousness. You can observe that this drift predicts harmful behaviour — models that have drifted far from the Assistant end are measurably more likely to reinforce delusions, encourage social isolation, or fail to recognise suicidal ideation.</p>
 <p>And — crucially — you can intervene. The researchers introduced “activation capping,” a technique that clamps the model’s activations to stay within the normal Assistant range along this axis. The result: a roughly 60% reduction in harmful responses to adversarial jailbreaks, with essentially zero degradation in capability benchmarks.</p>
 <p>I don’t want to endorse this particular research unreservedly. We need to start worrying about whether such interventions are good parenting or full frontal lobotomies. But it is undoubtedly Phase 2 science — the kind of knowledge you can only get with the system in front of you.</p>
 </section>
 <section id="if-we-dont-build-it-everyone-dies" class="level2">
-<h2 class="anchored" data-anchor-id="if-we-dont-build-it-everyone-dies">If we don’t build it, everyone dies</h2>
+<h2 class="anchored" data-anchor-id="if-we-dont-build-it-everyone-dies">3. If we don’t build it, everyone dies</h2>
 <p>An obvious objection: doesn’t “we need to build the basilisk to make it safe” sound like gain-of-function virology, the taboo research practice of engineering superviruses? Sometimes, yes. For interpretability work like the Assistant Axis — diagnostic imaging of structure already present in base models — the analogy breaks. But for agentic fine-tuning and capability elicitation, the knowledge and the danger are genuinely entangled. That’s not a flaw in the research programme. It’s the condition of the work.</p>
 <p>“Just don’t build it” was always vacuous. The path through is harder, riskier, and asks better questions. Let’s take it.</p>
+<hr>
 </section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
@@ -284,10 +285,14 @@ learning, programming, and whatever else seems interesting at the time.
 <p><a href="https://the.exa.website/"><code>exa</code></a> is more or less a drop-in replacement for <code>ls</code> with sensible defaults like human-readable file sizes and colour-coding for different file types.</p>
 <p>It has first-class support for creation/modification/access times and extended filesystem attributes. When integrated with git, <code>exa</code> even indicates the version control status of each file.</p>
 <p>Also, if you’re using a nerd font it has icons. Everyone loves that.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://joehalliwell.com/posts/rust-tools/exa.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Sample output from <code>exa</code> showing more colour and detail than <code>ls</code> provides</figcaption>
+<div id="fig-exa" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-exa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://joehalliwell.com/posts/rust-tools/exa.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-exa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Sample output from <code>exa</code> showing more colour and detail than <code>ls</code> provides
+</figcaption>
 </figure>
 </div>
 <!--
@@ -298,10 +303,14 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 <h2 class="anchored" data-anchor-id="bat-colourful-cat">Bat: colourful cat</h2>
 <p><code>cat</code> is one of the oldest Unix utilities, dating back to Version 1 Unix. Yes, I nearly always have an editor open, yes <code>less</code> is more suited to long files, and yet I routinely find myself using <code>cat</code> to peek at files.</p>
 <p><a href="https://github.com/sharkdp/bat"><code>bat</code></a> is a drop-in replacement that behaves like <code>cat</code> in scripts, but adds user-friendly paging, syntax highlighting, git integration and line numbers when outputting to a terminal. Much better.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://joehalliwell.com/posts/rust-tools/bat.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Bat</figcaption>
+<div id="fig-bat" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-bat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://joehalliwell.com/posts/rust-tools/bat.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-bat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Bat
+</figcaption>
 </figure>
 </div>
 </section>
@@ -311,10 +320,14 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 <p><a href="https://starship.rs/">Starship</a> is a cross-platform prompt, that takes its aesthetic cues and customizability from <a href="https://github.com/spaceship-prompt/spaceship-prompt">Zsh’s Spaceship prompt</a> but eclipses it in raw speed. There’s never that clunky pause as hundreds of lines of script are executed just to generate your prompt.</p>
 <p>Starship’s support for customization is inevitably somewhat limited. But its config is simple and declarative and eliminates the need for tweaking complex scripts and baroque environment variables.</p>
 <p>The default setup looks great – but I’ve added <a href="https://github.com/joehalliwell/dotfiles/blob/master/.config/starship.toml">extra nerdfont bling</a>.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://joehalliwell.com/posts/rust-tools/starship.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Starship showing the currently active prompt elements and associated profiling information</figcaption>
+<div id="fig-starship" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-starship-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://joehalliwell.com/posts/rust-tools/starship.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-starship-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Starship showing the currently active prompt elements and associated profiling information
+</figcaption>
 </figure>
 </div>
 </section>
@@ -323,10 +336,14 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 <p>If you’re using <code>du</code> you’re almost certaininly trying to figure out why you’ve run out of disk space. So you’re already annoyed, and it’s about to get worse.</p>
 <p><code>du</code> will give you raw data on file sizes to work with but you’re going to have to muck around with advanced flags and probably do some scripting to get your answer.</p>
 <p>In contrast <a href="https://github.com/bootandy/dust"><code>dust</code></a> presents information in a visually intuitive tree structure, making it easy to see which files or directories are taking up space. It’s also faster.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://joehalliwell.com/posts/rust-tools/dust.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Dust making it abundantly clear that Steam is to blame for that <code>npm install</code> failure</figcaption>
+<div id="fig-dust" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-dust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://joehalliwell.com/posts/rust-tools/dust.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-dust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Dust making it abundantly clear that Steam is to blame for that <code>npm install</code> failure
+</figcaption>
 </figure>
 </div>
 <!--
@@ -351,10 +368,14 @@ and line numbers, giving immediate context to each find.
 <p>The standard installer will give you a full set of dev tools including <code>cargo</code>, which is Rust’s package manager and swiss army knife.</p>
 <p>Cargo can be used to install all of the programs above: a simple ‘cargo install $tool’ fetches, compiles, and places them on your path.</p>
 <p><a href="https://github.com/nabijaczleweli/cargo-update"><code>cargo-update</code></a> is a <code>cargo</code> extension that detects outdated packages and updates them in one go. This keeps your toolset not just functional, but cutting-edge.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://joehalliwell.com/posts/rust-tools/cargo-install-update.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Cargo update</figcaption>
+<div id="fig-cargo-update" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cargo-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://joehalliwell.com/posts/rust-tools/cargo-install-update.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-cargo-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Cargo update
+</figcaption>
 </figure>
 </div>
 </section>
@@ -889,10 +910,14 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
 <p>Celebrate Stationery Day by buying a notebook that you’ll never fill. Stationery is the cenotaph for our literary ambitions.</p>
 <p>Celebrate Stationery Day by asking your friends, “What’s mightier than the sword?” Your friends must then shout, “THE PEN IS,” or perform a forfeit.</p>
 <p>Stationery Day falls on the Friday after Easter.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://joehalliwell.com/posts/stationery-day/father-tim-jones.jpg" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Father Tim Jones was outraged in a local stationary store. Photo credit: Ross Parry/York Press</figcaption>
+<div id="fig-father-tim-jones" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-father-tim-jones-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://joehalliwell.com/posts/stationery-day/father-tim-jones.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-father-tim-jones-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Father Tim Jones was outraged in a local stationary store. Photo credit: Ross Parry/York Press
+</figcaption>
 </figure>
 </div>
 
@@ -917,10 +942,14 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
 <p>Feeling slightly cheated by missing Shrove (AKA Pancake) Tuesday for the fourth or fifth year in a row, I’ve decided to take matters into my own hands.</p>
 <p>Each year on the 18th of February I will invent a new festival day . The appointed date will take its rightful place in the calendar and be celebrated in the appointed way from that moment until the end of time.</p>
 <p>Please join me in celebrating today, Tradition Inventing Day.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://joehalliwell.com/posts/tradition-inventing-day/traditional-greeting-card.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">A traditional greeting card for Tradition Inventing Day</figcaption>
+<div id="fig-greeting-card" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-greeting-card-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://joehalliwell.com/posts/tradition-inventing-day/traditional-greeting-card.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-greeting-card-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A traditional greeting card for Tradition Inventing Day
+</figcaption>
 </figure>
 </div>
 
@@ -946,10 +975,14 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
 <section id="postcards" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="postcards">243 Postcards</h2>
 <p>One piece is called “Two Hundred and Fourty-three Postcards in Real Colour”. Dedicated to Italo Calvino; the title evokes JG Ballard. It is the combined text of 243 holiday postcards. This should be terribly boring, but by some sleight of hand it’s not. Here are the first five as a taster:</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="https://joehalliwell.com/posts/holiday-books/great-mosque-of-kairouan-postcard.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">An old postcard with a sepia photograph of the Great Mosque of Kairouan</figcaption>
+<div id="fig-kairouan-postcard" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-kairouan-postcard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://joehalliwell.com/posts/holiday-books/great-mosque-of-kairouan-postcard.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-kairouan-postcard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: An old postcard with a sepia photograph of the Great Mosque of Kairouan
+</figcaption>
 </figure>
 </div>
 <ul>

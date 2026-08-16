@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e4a8c97f15a36f48a6da402becafd217.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fc12012c2ce3cdee74f258a35655ff07.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-3a1476604ee22b2910308776e513b393.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -97,7 +97,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <link rel="canonical" href="https://joehalliwell.com/posts/rust-tools/" />
 </head>
 
-<body class="floating nav-fixed slimcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -136,7 +136,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Renovating the command line</h1>
@@ -176,25 +176,9 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#exa-ls-with-flair" id="toc-exa-ls-with-flair" class="nav-link active" data-scroll-target="#exa-ls-with-flair">Exa: ls with flair</a></li>
-  <li><a href="#bat-colourful-cat" id="toc-bat-colourful-cat" class="nav-link" data-scroll-target="#bat-colourful-cat">Bat: colourful cat</a></li>
-  <li><a href="#starship-fast-and-fancy-prompt" id="toc-starship-fast-and-fancy-prompt" class="nav-link" data-scroll-target="#starship-fast-and-fancy-prompt">Starship: fast and fancy prompt</a></li>
-  <li><a href="#dust-du-but-useful" id="toc-dust-du-but-useful" class="nav-link" data-scroll-target="#dust-du-but-useful">Dust: du but useful</a></li>
-  <li><a href="#fd-find-but-usable" id="toc-fd-find-but-usable" class="nav-link" data-scroll-target="#fd-find-but-usable">Fd: find but usable</a></li>
-  <li><a href="#cargo-install-and-update-rust-tools" id="toc-cargo-install-and-update-rust-tools" class="nav-link" data-scroll-target="#cargo-install-and-update-rust-tools">Cargo: install and update rust tools</a></li>
-  <li><a href="#closing-thoughts" id="toc-closing-thoughts" class="nav-link" data-scroll-target="#closing-thoughts">Closing thoughts</a></li>
-  <li><a href="#colophon" id="toc-colophon" class="nav-link" data-scroll-target="#colophon">Colophon</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
@@ -212,10 +196,14 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p><a href="https://the.exa.website/"><code>exa</code></a> is more or less a drop-in replacement for <code>ls</code> with sensible defaults like human-readable file sizes and colour-coding for different file types.</p>
 <p>It has first-class support for creation/modification/access times and extended filesystem attributes. When integrated with git, <code>exa</code> even indicates the version control status of each file.</p>
 <p>Also, if you’re using a nerd font it has icons. Everyone loves that.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="exa.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Sample output from <code>exa</code> showing more colour and detail than <code>ls</code> provides</figcaption>
+<div id="fig-exa" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-exa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="exa.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-exa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Sample output from <code>exa</code> showing more colour and detail than <code>ls</code> provides
+</figcaption>
 </figure>
 </div>
 <!--
@@ -226,10 +214,14 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 <h2 class="anchored" data-anchor-id="bat-colourful-cat">Bat: colourful cat</h2>
 <p><code>cat</code> is one of the oldest Unix utilities, dating back to Version 1 Unix. Yes, I nearly always have an editor open, yes <code>less</code> is more suited to long files, and yet I routinely find myself using <code>cat</code> to peek at files.</p>
 <p><a href="https://github.com/sharkdp/bat"><code>bat</code></a> is a drop-in replacement that behaves like <code>cat</code> in scripts, but adds user-friendly paging, syntax highlighting, git integration and line numbers when outputting to a terminal. Much better.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="bat.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Bat</figcaption>
+<div id="fig-bat" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-bat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="bat.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-bat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Bat
+</figcaption>
 </figure>
 </div>
 </section>
@@ -239,10 +231,14 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 <p><a href="https://starship.rs/">Starship</a> is a cross-platform prompt, that takes its aesthetic cues and customizability from <a href="https://github.com/spaceship-prompt/spaceship-prompt">Zsh’s Spaceship prompt</a> but eclipses it in raw speed. There’s never that clunky pause as hundreds of lines of script are executed just to generate your prompt.</p>
 <p>Starship’s support for customization is inevitably somewhat limited. But its config is simple and declarative and eliminates the need for tweaking complex scripts and baroque environment variables.</p>
 <p>The default setup looks great – but I’ve added <a href="https://github.com/joehalliwell/dotfiles/blob/master/.config/starship.toml">extra nerdfont bling</a>.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="starship.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Starship showing the currently active prompt elements and associated profiling information</figcaption>
+<div id="fig-starship" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-starship-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="starship.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-starship-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Starship showing the currently active prompt elements and associated profiling information
+</figcaption>
 </figure>
 </div>
 </section>
@@ -251,10 +247,14 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 <p>If you’re using <code>du</code> you’re almost certaininly trying to figure out why you’ve run out of disk space. So you’re already annoyed, and it’s about to get worse.</p>
 <p><code>du</code> will give you raw data on file sizes to work with but you’re going to have to muck around with advanced flags and probably do some scripting to get your answer.</p>
 <p>In contrast <a href="https://github.com/bootandy/dust"><code>dust</code></a> presents information in a visually intuitive tree structure, making it easy to see which files or directories are taking up space. It’s also faster.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="dust.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Dust making it abundantly clear that Steam is to blame for that <code>npm install</code> failure</figcaption>
+<div id="fig-dust" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-dust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="dust.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-dust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Dust making it abundantly clear that Steam is to blame for that <code>npm install</code> failure
+</figcaption>
 </figure>
 </div>
 <!--
@@ -279,10 +279,14 @@ and line numbers, giving immediate context to each find.
 <p>The standard installer will give you a full set of dev tools including <code>cargo</code>, which is Rust’s package manager and swiss army knife.</p>
 <p>Cargo can be used to install all of the programs above: a simple ‘cargo install $tool’ fetches, compiles, and places them on your path.</p>
 <p><a href="https://github.com/nabijaczleweli/cargo-update"><code>cargo-update</code></a> is a <code>cargo</code> extension that detects outdated packages and updates them in one go. This keeps your toolset not just functional, but cutting-edge.</p>
-<div class="quarto-figure quarto-figure-right page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="cargo-install-update.png" class="img-fluid figure-img"></p>
-<figcaption class="margin-caption">Cargo update</figcaption>
+<div id="fig-cargo-update" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cargo-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="cargo-install-update.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-cargo-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Cargo update
+</figcaption>
 </figure>
 </div>
 </section>

@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e4a8c97f15a36f48a6da402becafd217.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fc12012c2ce3cdee74f258a35655ff07.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3a1476604ee22b2910308776e513b393.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -93,7 +93,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <link rel="canonical" href="https://joehalliwell.com/posts/swift-to-harbour.html" />
 </head>
 
-<body class="floating nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -132,7 +132,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Swift to Harbour, Slow to Berth</h1>
@@ -174,22 +174,8 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#the-paradigm-shift-in-ai-safety-research" id="toc-the-paradigm-shift-in-ai-safety-research" class="nav-link active" data-scroll-target="#the-paradigm-shift-in-ai-safety-research">The paradigm shift in AI Safety research</a></li>
-  <li><a href="#the-assistant-axis" id="toc-the-assistant-axis" class="nav-link" data-scroll-target="#the-assistant-axis">The Assistant Axis</a></li>
-  <li><a href="#if-we-dont-build-it-everyone-dies" id="toc-if-we-dont-build-it-everyone-dies" class="nav-link" data-scroll-target="#if-we-dont-build-it-everyone-dies">If we don’t build it, everyone dies</a></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -201,7 +187,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>Until recently, it was the preserve of philosophers. At its best it has explored the <a href="https://en.wikipedia.org/wiki/Weapons_of_Math_Destruction">political</a> <a href="https://incidentdatabase.ai/">consequences</a> of actual AI systems — a necessary sort of conscience for a mad scientist field like AI. But the majority was speculative anxiety (“if anyone builds it, everyone dies”). Or would-be bureaucracy (“here’s a 20 point framework for X”). With the occasional back-of-the-envelope utility calculation chucked in to placate the numerically-inclined.</p>
 <p>So what’s changed?</p>
 <section id="the-paradigm-shift-in-ai-safety-research" class="level2">
-<h2 class="anchored" data-anchor-id="the-paradigm-shift-in-ai-safety-research">The paradigm shift in AI Safety research</h2>
+<h2 class="anchored" data-anchor-id="the-paradigm-shift-in-ai-safety-research">1. The paradigm shift in AI Safety research</h2>
 <p>The philosopher Nick Bostrom’s recent working paper, <a href="https://nickbostrom.com/optimal.pdf">Optimal Timing for Superintelligence</a> centres on a back-of-the-envelope utility calculation. He reminds us that pausing AI research indefinitely is not morally neutral: he estimates that 170,000 people per day die from “disease, aging and other tragedies”, that advanced AI could eliminate.</p>
 <p>So far, so trolley problem.</p>
 <p>But Bostrom offers a genuinely new lever. He argues that AI safety research divides into two phases: Phase 1, before capable AI systems exist, and Phase 2, when you have the artefact to work with. Safety progress is dramatically front-loaded within Phase 2. Once you can probe the real system, stress-test it, and leverage its own capabilities to accelerate alignment work, you get a “safety windfall” that dwarfs what’s achievable through theory alone. This reverses the usual intuition about precaution: under certain conditions, <em>waiting is the reckless option</em>, because it forfeits the very knowledge you need to proceed safely.</p>
@@ -209,16 +195,17 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>It’s a compelling prescription. But in Bostrom’s essay the safety windfall remains promissory. What does it look like in practice?</p>
 </section>
 <section id="the-assistant-axis" class="level2">
-<h2 class="anchored" data-anchor-id="the-assistant-axis">The Assistant Axis</h2>
+<h2 class="anchored" data-anchor-id="the-assistant-axis">2. The Assistant Axis</h2>
 <p>Enter <a href="https://arxiv.org/abs/2601.10387">The Assistant Axis</a>, a January 2026 paper by Christina Lu and colleagues at MATS and Anthropic. The researchers extracted activation vectors for hundreds of character archetypes from several large language models and mapped out the geometry of what they call “persona space.” The headline finding: the dominant axis of variation — the first principal component, consistent across multiple model families — measures how far the model’s current persona is from its default helpful Assistant identity. Steer a model away from the Assistant end and it starts adopting mystical, theatrical voices — going, in one example from the paper, full “Leviathan”.</p>
 <p>This is not metaphor. It is measurement. You can locate the model’s state along this axis in real time. You can watch it drift away from the Assistant during emotionally charged conversations or philosophical discussions about its own consciousness. You can observe that this drift predicts harmful behaviour — models that have drifted far from the Assistant end are measurably more likely to reinforce delusions, encourage social isolation, or fail to recognise suicidal ideation.</p>
 <p>And — crucially — you can intervene. The researchers introduced “activation capping,” a technique that clamps the model’s activations to stay within the normal Assistant range along this axis. The result: a roughly 60% reduction in harmful responses to adversarial jailbreaks, with essentially zero degradation in capability benchmarks.</p>
 <p>I don’t want to endorse this particular research unreservedly. We need to start worrying about whether such interventions are good parenting or full frontal lobotomies. But it is undoubtedly Phase 2 science — the kind of knowledge you can only get with the system in front of you.</p>
 </section>
 <section id="if-we-dont-build-it-everyone-dies" class="level2">
-<h2 class="anchored" data-anchor-id="if-we-dont-build-it-everyone-dies">If we don’t build it, everyone dies</h2>
+<h2 class="anchored" data-anchor-id="if-we-dont-build-it-everyone-dies">3. If we don’t build it, everyone dies</h2>
 <p>An obvious objection: doesn’t “we need to build the basilisk to make it safe” sound like gain-of-function virology, the taboo research practice of engineering superviruses? Sometimes, yes. For interpretability work like the Assistant Axis — diagnostic imaging of structure already present in base models — the analogy breaks. But for agentic fine-tuning and capability elicitation, the knowledge and the danger are genuinely entangled. That’s not a flaw in the research programme. It’s the condition of the work.</p>
 <p>“Just don’t build it” was always vacuous. The path through is harder, riskier, and asks better questions. Let’s take it.</p>
+<hr>
 </section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
