@@ -15,7 +15,7 @@
 // Bootstrap needs real colours at compile time, so the flat values live here
 // and the color-mix() versions live in the rules. These are what the mixes
 // resolve to; if you retune one, retune the other.
-$paper: #f4f1ea;
+$paper: #fffdfa;
 $ink: #221f1a; // #16130f held at 92% against the paper
 $accent: #a8371a;
 
@@ -214,6 +214,8 @@ $grid-column-gutter-width: 30px;
   --track-kicker: 0.28em;
   --track-label: 0.1em;
   --track-display: -0.012em;
+
+  --content-justify: justify;
 }
 
 // ===========================================================================
@@ -306,7 +308,7 @@ main.content .margin-caption,
 // had been quietly overriding every figure's alignment, and `fig-align` in the
 // front matter had no effect at all.
 main.content :is(p, ul, ol, dl, blockquote):not(figure > p) {
-  text-align: justify;
+  text-align: var(--content-justify);
   hyphens: auto;
   hyphenate-limit-chars: 6 3 3;
 }
@@ -332,7 +334,7 @@ main.content caption {
 }
 
 .quarto-listing :is(.listing-description, .listing-description p) {
-  text-align: justify;
+  text-align: var(--content-justify);
   hyphens: auto;
   hyphenate-limit-chars: 6 3 3;
 }
@@ -410,9 +412,13 @@ blockquote {
 // The display line
 // ===========================================================================
 
+// The banner selector carries `.quarto-title` only to match the specificity of
+// Quarto's own `.quarto-title-banner .quarto-title .title{font-weight:600}`,
+// which would otherwise outrank the 400 below. The tie goes to us on source
+// order: the user layer is compiled after Quarto's rules.
 h1,
 .title,
-.quarto-title-banner .title {
+.quarto-title-banner .quarto-title .title {
   font-size: var(--ramp-display);
   font-weight: 400;
   line-height: 0.95;
