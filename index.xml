@@ -283,7 +283,7 @@ learning, programming, and whatever else seems interesting at the time.
 <section id="exa-ls-with-flair" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="exa-ls-with-flair">Exa: ls with flair</h2>
 <p><a href="https://the.exa.website/"><code>exa</code></a> is more or less a drop-in replacement for <code>ls</code> with sensible defaults like human-readable file sizes and colour-coding for different file types.</p>
-<p>It has first-class support for creation/modification/access times and extended filesystem attributes. When integrated with git, <code>exa</code> even indicates the version control status of each file.</p>
+<p>It has first-class support for creation / modification / access times and extended filesystem attributes. When integrated with git, <code>exa</code> even indicates the version control status of each file.</p>
 <p>Also, if you’re using a nerd font it has icons. Everyone loves that.</p>
 <div id="fig-exa" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">

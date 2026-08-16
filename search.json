@@ -102,7 +102,7 @@
     "href": "posts/rust-tools/index.html#exa-ls-with-flair",
     "title": "Renovating the command line",
     "section": "Exa: ls with flair",
-    "text": "Exa: ls with flair\nexa is more or less a drop-in replacement for ls with sensible defaults like human-readable file sizes and colour-coding for different file types.\nIt has first-class support for creation/modification/access times and extended filesystem attributes. When integrated with git, exa even indicates the version control status of each file.\nAlso, if you’re using a nerd font it has icons. Everyone loves that.\n\n\n\n\n\n\nFigure 1: Sample output from exa showing more colour and detail than ls provides"
+    "text": "Exa: ls with flair\nexa is more or less a drop-in replacement for ls with sensible defaults like human-readable file sizes and colour-coding for different file types.\nIt has first-class support for creation / modification / access times and extended filesystem attributes. When integrated with git, exa even indicates the version control status of each file.\nAlso, if you’re using a nerd font it has icons. Everyone loves that.\n\n\n\n\n\n\nFigure 1: Sample output from exa showing more colour and detail than ls provides"
   },
   {
     "objectID": "posts/rust-tools/index.html#bat-colourful-cat",
