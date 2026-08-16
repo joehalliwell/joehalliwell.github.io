@@ -48,13 +48,17 @@ website:
   navbar:
     right:
       - about.qmd
-      - icon: github
+      - text: "Github"
+        # icon: github
         href: https://github.com/joehalliwell
-      - icon: mastodon
+      - text: "Mastodon"
+        # icon: mastodon
         href: https://mastodon.social/@joehalliwell
 
   site-url: https://joehalliwell.com
   google-analytics: "G-7CDJ5Z8MGP"
+
+  search: false
 
 execute:
   cache: true
@@ -64,8 +68,8 @@ format:
     theme:
       - simplex
       - styles.scss
-    toc: true
-    toc-location: left
+    # toc: true
+    # toc-location: left
     # Lets Mastodon verify the link on the profile at the other end. It fetches
     # whichever URL the profile names, so this goes on every page rather than
     # just the about page.

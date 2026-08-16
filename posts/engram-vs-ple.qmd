@@ -1,5 +1,5 @@
 ---
-title: "Per-Layer Embeddings vs Engram"
+title: "Per-Layer Embeddings vs. Engram"
 description: |
   Google's Per-Layer Embeddings and DeepSeek's Engram look like the same
   mechanism. Where they actually differ, who published first, and who owed

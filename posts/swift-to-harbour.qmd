@@ -15,7 +15,7 @@ Until recently, it was the preserve of philosophers. At its best it has explored
 
 So what's changed?
 
-## The paradigm shift in AI Safety research
+## 1. The paradigm shift in AI Safety research
 
 The philosopher Nick Bostrom's recent working paper, [Optimal Timing for Superintelligence](https://nickbostrom.com/optimal.pdf) centres on a back-of-the-envelope utility calculation. He reminds us that pausing AI research indefinitely is not morally neutral: he estimates that 170,000 people per day die from "disease, aging and other tragedies", that advanced AI could eliminate.
 
@@ -27,7 +27,7 @@ This yields his memorable slogan: *swift to harbour, slow to berth*. Race to cap
 
 It's a compelling prescription. But in Bostrom's essay the safety windfall remains promissory. What does it look like in practice?
 
-## The Assistant Axis
+## 2. The Assistant Axis
 
 Enter [The Assistant Axis](https://arxiv.org/abs/2601.10387), a January 2026 paper by Christina Lu and colleagues at MATS and Anthropic. The researchers extracted activation vectors for hundreds of character archetypes from several large language models and mapped out the geometry of what they call "persona space." The headline finding: the dominant axis of variation — the first principal component, consistent across multiple model families — measures how far the model's current persona is from its default helpful Assistant identity. Steer a model away from the Assistant end and it starts adopting mystical, theatrical voices — going, in one example from the paper, full "Leviathan".
 
@@ -37,11 +37,13 @@ And — crucially — you can intervene. The researchers introduced "activation 
 
 I don't want to endorse this particular research unreservedly. We need to start worrying about whether such interventions are good parenting or full frontal lobotomies. But it is undoubtedly Phase 2 science — the kind of knowledge you can only get with the system in front of you.
 
-## If we don't build it, everyone dies
+## 3. If we don't build it, everyone dies
 
 An obvious objection: doesn't "we need to build the basilisk to make it safe" sound like gain-of-function virology, the taboo research practice of engineering superviruses? Sometimes, yes. For interpretability work like the Assistant Axis — diagnostic imaging of structure already present in base models — the analogy breaks. But for agentic fine-tuning and capability elicitation, the knowledge and the danger are genuinely entangled. That's not a flaw in the research programme. It's the condition of the work.
 
 "Just don't build it" was always vacuous. The path through is harder, riskier, and asks better questions. Let's take it.
+
+---
 
 ## Acknowledgements
 

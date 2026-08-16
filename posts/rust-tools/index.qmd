@@ -41,7 +41,7 @@ six Rust-based command line tools that are now part of my every day carry.
 with sensible defaults like human-readable file sizes and colour-coding for
 different file types.
 
-It has first-class support for creation/modification/access times and extended
+It has first-class support for creation / modification / access times and extended
 filesystem attributes. When integrated with git, `exa` even indicates the
 version control status of each file.
 
