@@ -4,6 +4,7 @@ _freeze/
 /.quarto/
 .jupyter_cache/
 .venv/
+_quarto_internal_scss_error.scss
 
 # Editors and OS
 .DS_Store
