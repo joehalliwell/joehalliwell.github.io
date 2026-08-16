@@ -22,4 +22,4 @@ sword?” Your friends must then shout, “THE PEN IS,” or perform a forfeit.
 
 Stationery Day falls on the Friday after Easter.
 
-![Father Tim Jones was outraged in a local stationary store. Photo credit: Ross Parry/York Press](father-tim-jones.jpg)
+![Father Tim Jones was outraged in a local stationary store. Photo credit: Ross Parry/York Press](father-tim-jones.jpg){#fig-father-tim-jones}

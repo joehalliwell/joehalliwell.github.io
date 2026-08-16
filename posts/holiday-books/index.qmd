@@ -22,7 +22,7 @@ Dedicated to Italo Calvino; the title evokes JG Ballard. It is the combined text
 of 243 holiday postcards. This should be terribly boring, but by some sleight of
 hand it’s not. Here are the first five as a taster:
 
-![An old postcard with a sepia photograph of the Great Mosque of Kairouan](great-mosque-of-kairouan-postcard.png)
+![An old postcard with a sepia photograph of the Great Mosque of Kairouan](great-mosque-of-kairouan-postcard.png){#fig-kairouan-postcard}
 
 - We’re camping near Ajaccio. Lovely weather. We eat well. I’ve got sunburnt. Fondest love.
 - We’re at the Hôtel Alcazar. Getting a tan. Really nice! We’ve made loads of friends. Back on the 7th.

@@ -47,7 +47,7 @@ version control status of each file.
 
 Also, if you're using a nerd font it has icons. Everyone loves that.
 
-![Sample output from `exa` showing more colour and detail than `ls` provides](exa.png)
+![Sample output from `exa` showing more colour and detail than `ls` provides](exa.png){#fig-exa}
 
 <!--
 exa --header --group --created --modified --accessed --git --icons --extended --all --long --grid --classify --color-scale
@@ -63,7 +63,7 @@ yet I routinely find myself using `cat` to peek at files.
 like `cat` in scripts, but adds user-friendly paging, syntax highlighting, git
 integration and line numbers when outputting to a terminal. Much better.
 
-![Bat](bat.png)
+![Bat](bat.png){#fig-bat}
 
 ## Starship: fast and fancy prompt
 
@@ -83,7 +83,7 @@ scripts and baroque environment variables.
 The default setup looks great -- but I've added
 [extra nerdfont bling](https://github.com/joehalliwell/dotfiles/blob/master/.config/starship.toml).
 
-![Starship showing the currently active prompt elements and associated profiling information](starship.png)
+![Starship showing the currently active prompt elements and associated profiling information](starship.png){#fig-starship}
 
 
 ## Dust: du but useful
@@ -99,7 +99,7 @@ In contrast [`dust`](https://github.com/bootandy/dust) presents information in a
 visually intuitive tree structure, making it easy to see which files or
 directories are taking up space. It's also faster.
 
-![Dust making it abundantly clear that Steam is to blame for that `npm install` failure](dust.png)
+![Dust making it abundantly clear that Steam is to blame for that `npm install` failure](dust.png){#fig-dust}
 
 <!--
 ## Ripgrep: lightning fast grep
@@ -135,7 +135,7 @@ install $tool' fetches, compiles, and places them on your path.
 extension that detects outdated packages and updates them in one go. This keeps
 your toolset not just functional, but cutting-edge.
 
-![Cargo update](cargo-install-update.png)
+![Cargo update](cargo-install-update.png){#fig-cargo-update}
 
 ## Closing thoughts
 

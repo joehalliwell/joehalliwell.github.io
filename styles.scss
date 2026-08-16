@@ -450,6 +450,15 @@ h1,
   margin-block-end: 1.6em;
 }
 
+// The standfirst is body text -- the same voice as the article, mixed back
+// toward the paper. Quarto sizes it at .9em from an id-and-four-class selector,
+// which put it at 18.5px against a 20.5px body: a third text stream, 2px below
+// the first, that nothing in this sheet asked for and no reader could name.
+// Restated at Quarto's own weight, since a bare class cannot reach it.
+#title-block-header.quarto-title-block.default .description > p {
+  font-size: 1em;
+}
+
 // ===========================================================================
 // Small caps as label grammar
 // ===========================================================================
@@ -526,16 +535,13 @@ h6 {
   text-transform: none;
 }
 
-// Captions and folio share the label tracking; everything else is at zero.
+// Page furniture: fixed-form labels, a few words each, carrying the label
+// tracking; everything else is at zero.
 // These sit on the folio ramp, not the caption ramp. With small caps unable to
 // go below ~13.5px and body type at 20.5px, the whole label band is only about
 // 1.5x wide in total -- so a 1.5 step between two *label* ramps would put the
 // upper one level with the body text. The caption ramp is therefore the
 // section-heading ramp alone, and everything that is page furniture is folio.
-figcaption,
-.figure-caption,
-.margin-caption,
-caption,
 .date,
 .quarto-categories {
   font-variant-caps: small-caps;
@@ -545,6 +551,39 @@ caption,
   color: var(--ink-quiet);
   line-height: 1.3;
 }
+
+// Captions are not furniture. They are prose about an object, and they share
+// the margin track with the sidenotes -- literally the same 235px column,
+// stacked. Two settings 8% apart in one column read as an accident rather than
+// a distinction, so captions take the sidenote's setting and the column has one
+// voice. The rest of the sheet already grouped them: they share a measure above
+// and an alignment above that.
+//
+// They had been on the folio ramp in small caps with label tracking, which is
+// this sheet's label grammar. Applied to a sentence it removes the ascender and
+// descender variation word shapes are recognised by -- right for "Apr 4, 2026",
+// wrong for "An old postcard with a sepia photograph of the harbour".
+figcaption,
+.figure-caption,
+.margin-caption,
+caption {
+  font-size: 0.82em;
+  font-variant-caps: normal;
+  letter-spacing: normal;
+  margin-inline-end: 0;
+  color: var(--ink-quiet);
+  line-height: 1.3;
+}
+
+// There is no generated "Figure" marker here. Every figure now carries a
+// crossref id, so Quarto writes "Figure 1:" into the caption itself -- a real
+// number backed by the markup, which is the thing a stylesheet counter could
+// not have been. Adding a marker on top would just say it twice.
+//
+// It cannot be given the small-caps label grammar the rest of the sheet uses
+// for labels: Quarto emits the prefix as bare text inside the figcaption, with
+// no element around it, so there is nothing for a selector to hold on to. It
+// reads in the caption's own voice until that changes.
 
 .quarto-categories {
   display: flex;

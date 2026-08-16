@@ -18,4 +18,4 @@ the appointed way from that moment until the end of time.
 
 Please join me in celebrating today, Tradition Inventing Day.
 
-![A traditional greeting card for Tradition Inventing Day](traditional-greeting-card.png)
+![A traditional greeting card for Tradition Inventing Day](traditional-greeting-card.png){#fig-greeting-card}
