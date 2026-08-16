@@ -215,7 +215,6 @@ $grid-column-gutter-width: 30px;
   --track-label: 0.1em;
   --track-display: -0.012em;
 
-  --content-justify: justify;
 }
 
 // ===========================================================================
@@ -263,6 +262,14 @@ td {
   font-variant-numeric: tabular-nums lining-nums;
 }
 
+// Acronyms are deliberately left alone -- no small caps, no filter to wrap
+// them. The case for small-capping a run of capitals is that at full size it
+// punches a hole in a page of lowercase, and that holds for UNIX or HTTP. It
+// inverts for the two- and three-letter runs this site actually writes most:
+// small caps set them at x-height, which removes the shape difference that
+// makes AI or LLM scannable in the first place. A page full of them reads
+// flatter, not calmer. If it ever comes back it needs a minimum run length.
+
 // ===========================================================================
 // Running text
 // ===========================================================================
@@ -290,70 +297,75 @@ main.content .margin-caption,
   max-inline-size: var(--sidenote-measure);
 }
 
-// Justified, and hyphenated because of it. The two are one decision: at this
-// measure justification without hyphenation opens rivers, and hyphenation
-// without justification only halves a rag that was running to a 102px median
-// against a hard flush-left edge -- which is why the right-hand gutter read as
-// four times the left when both tracks were in fact 30px.
+// Ragged right, and unhyphenated because of it. The two are one decision in
+// both directions: hyphenation is a justification tool, bought to get the extra
+// break points that keep word spacing from tearing open. A rag has no word
+// spacing to protect -- the slack all goes to the right edge, which is allowed
+// to be uneven -- so hyphenation there only breaks words for nothing and leaves
+// a fence of hyphens down the margin.
 //
-// Justified, both edges of the column are true vertical lines, so the equal
-// gutters finally look equal.
+// This is the one change here that the measure was carrying. The note this
+// replaces recorded a 102px median rag at 80ch, which is what justification was
+// hiding; `text-wrap: pretty` on the body now does that work alone, optimising
+// the whole paragraph instead of breaking greedily line by line. Check it with
+// _scripts/measure-rag.sh rather than by eye -- if the median climbs back
+// toward 100px the honest fix is the measure, not the alignment.
 //
-// hyphenate-limit-chars keeps the breaks civilised: nothing shorter than six
-// letters is broken, and never with fewer than three either side of the break.
-// Figure paragraphs are excluded, and not only because justifying a lone image
-// does nothing. `main.content :is(p, ...)` resolves to (0,1,2) -- `main` is a
-// type selector too -- which ties exactly with Quarto's own
-// `.quarto-figure-center > figure > p` and, coming later, beat it. So this rule
-// had been quietly overriding every figure's alignment, and `fig-align` in the
-// front matter had no effect at all.
-main.content :is(p, ul, ol, dl, blockquote):not(figure > p) {
-  text-align: var(--content-justify);
-  hyphens: auto;
-  hyphenate-limit-chars: 6 3 3;
-}
+// Nothing sets text-align or hyphens any more, in either direction: `start` and
+// `manual` are the initial values, so the rules that switched the margin column,
+// the captions and the listing headlines back out of justification go with the
+// rule that made them necessary. That also frees `fig-align` in the front
+// matter, which the old (0,1,2) selector here had been silently overriding for
+// every figure on the site.
 
-// Not in the margin column. At twenty-odd characters there is nowhere to put
-// the slack, so justification pulls every line apart -- and a caption or a
-// sidenote is an aside, which should not be squared off like the main text.
-main.content .column-margin :is(p, div, li),
-main.content .margin-caption,
-main.content figcaption,
-main.content caption {
-  text-align: start;
-  hyphens: manual;
-}
-
-// On the contents page the headlines stay ranged left -- justifying one or two
-// lines of large type only stretches them, and the headline's flush left edge
-// is what the whole listing hangs from. The descriptions are ordinary prose in
-// the same column as the article body, so they are set the same way.
-.quarto-listing .listing-title {
-  text-align: start;
-  hyphens: manual;
-}
-
-.quarto-listing :is(.listing-description, .listing-description p) {
-  text-align: var(--content-justify);
-  hyphens: auto;
-  hyphenate-limit-chars: 6 3 3;
-}
-
-// Continuation paragraphs are indented, and pay for the indent by giving up
-// their leading -- the book setting. It is `p + p`, so the first paragraph
-// after any display line is flush by construction and needs no class.
-main.content p + p {
-  margin-block-start: 0;
+// Continuation paragraphs are indented, and keep their leading: closing the gap
+// so the indent could carry the break alone was tried and read as cramped, the
+// paragraphs running together into a slab. Both signals stay. The leading is
+// Bootstrap's `p{margin-bottom:1rem}`, left alone rather than restated.
+//
+// `:is(p, .column-margin) + p`, not `p + p`. Quarto injects each sidenote as a
+// div between the paragraph carrying the reference and the next one -- the real
+// markup is `p -> div.column-margin -> p` -- so a plain sibling combinator
+// stopped indenting after every single footnote, in a sheet whose whole point
+// is footnotes in the margin. It failed invisibly, because a missing indent
+// looks like a deliberate opening paragraph.
+//
+// The principle, now that there is one: the indent carries across anything not
+// in the text flow, and stops at anything that is. A sidenote is lifted into
+// the margin column and leaves no hole here, so the paragraph after it is a
+// continuation. A figure is an interruption you can see, so the paragraph after
+// it starts flush -- which is why this is an explicit list and not `p ~ p`.
+main.content :is(p, .column-margin) + p {
   text-indent: 1.5em;
 }
 
-// Sidenotes are their own stream: no indent, and no negative margin games.
-.column-margin p + p,
-blockquote p + p,
-figcaption p + p,
-li p + p {
-  margin-block-start: revert;
+// Sidenotes, pull quotes, captions and list items are their own streams: they
+// keep space between paragraphs and take no indent.
+//
+// The `main.content` prefix is load-bearing and was missing for as long as this
+// rule has existed. Bare, `.column-margin p + p` is (0,1,2) and lost to the
+// main-stream rule above every time, so a sidenote's second paragraph was
+// indented like body copy. Nothing showed it because no post has ever had a
+// multi-paragraph sidenote or list item -- the rule was wrong and untestable at
+// the same time, which is why it survived. At (0,2,3) it now outranks the
+// (0,2,2) above it. The bare selectors stay for anything of these sitting
+// outside main.content, where there is nothing to outrank.
+main.content :is(.column-margin, blockquote, figcaption, li) p + p,
+:is(.column-margin, blockquote, figcaption, li) p + p {
   text-indent: 0;
+}
+
+// Which leaves sidenotes with no paragraph signal at all, because Quarto ships
+// `.column-margin.column-container p{margin-bottom:0}` at (0,2,1) -- it treats a
+// sidenote as one block. Fine until the indent above is correctly withheld, at
+// which point a two-paragraph sidenote runs together into a single lump. The
+// other streams need nothing: a list item's paragraphs already measure 20.5px
+// apart. On the preceding paragraph, for the same reason as everywhere else,
+// and in the sidenote's own em so the gap scales with the 16.8px stream rather
+// than dropping a body-sized hole into it.
+main.content .column-margin p:has(+ p),
+.column-margin p:has(+ p) {
+  margin-block-end: 0.6em;
 }
 
 // The fallback, deliberately left in the accent. Anything this sheet has not
@@ -421,7 +433,12 @@ h1,
 .quarto-title-banner .quarto-title .title {
   font-size: var(--ramp-display);
   font-weight: 400;
-  line-height: 0.95;
+  // 0.95 was tight enough that a descender on one line met a round or an
+  // ascender on the next -- the g/c collision -- which at 90px is the first
+  // thing the eye lands on. 1.12 is still tight for the size, which is the
+  // point at display, but it clears the overlap without opening the block out
+  // into prose.
+  line-height: 1.12;
   letter-spacing: var(--track-display);
   text-wrap: balance;
   text-transform: none;
@@ -432,9 +449,8 @@ h1,
   // together, so it is asked for explicitly rather than left to the default.
   font-feature-settings: "kern" 1, "liga" 1;
 
-  // A 0.95 line-height leaves the descenders of the last line sitting on
-  // whatever follows, so the space the leading would have given is put back
-  // here explicitly.
+  // The leading now carries the last line's descenders itself, so this is the
+  // gap to whatever follows rather than a repair for the line above it.
   margin-block-end: 0.5em;
 }
 
@@ -476,6 +492,11 @@ h6 {
   color: var(--ink);
   line-height: 1.2;
   margin-block: 2.2em 0.6em;
+
+  // Same reason as the display line: a heading is short enough that the browser
+  // can weigh the whole of it, so it should not be left breaking greedily and
+  // stranding one word on a second line.
+  text-wrap: balance;
 
   // Quarto hardcodes a hairline under every h2. A rule under a heading is the
   // exact substitution the sheet is trying to avoid: the space is the signal.
@@ -943,7 +964,10 @@ div.quarto-post:first-child .thumbnail-image {
 div.quarto-post:first-child .listing-title,
 div.quarto-post:first-child .listing-title a {
   font-size: var(--ramp-display);
-  line-height: 0.95;
+  // Tracks the article title's leading. They are one register by the argument
+  // above, so the descender clearance has to match or the lead stops reading
+  // like the page it links to.
+  line-height: 1.12;
   letter-spacing: var(--track-display);
   max-inline-size: 20ch;
 }
@@ -1231,8 +1255,13 @@ code,
 pre {
   background: none;
   border: 0;
-  font-size: 0.86em;
-  color: var(--ink);
+  font-size: 0.88em;
+  // A notch back from the body, not down in the quiet register with the
+  // captions. Mono x-heights run large against a serif, so at a matched ink the
+  // code reads louder than the prose carrying it -- and the correction has to
+  // be ink rather than weight, because weight is the one signal this sheet does
+  // not spend anywhere.
+  color: color-mix(in oklch, var(--ink) 82%, var(--paper));
   // A code span is a literal. It must not inherit the small caps or the
   // lowercasing of a caption or heading it happens to sit inside -- `ls` and
   // `LS` are different commands. This also keeps code out of the small-caps
@@ -1255,7 +1284,10 @@ dd code:not(.sourceCode),
 div.sidebar-item-container .sidebar-link > code {
   background: none;
   padding: 0;
-  color: var(--ink);
+  // Restates the mix from the `code` rule above rather than `var(--ink)`: this
+  // is the selector that actually wins for inline code, so a flat ink here
+  // silently undoes the correction and leaves every code span at full body ink.
+  color: color-mix(in oklch, var(--ink) 82%, var(--paper));
 }
 
 div.sourceCode,
