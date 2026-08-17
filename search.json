@@ -193,7 +193,7 @@
     "href": "index.html",
     "title": "Joe Halliwell",
     "section": "",
-    "text": "Per-Layer Embeddings vs Engram\n\n\nGoogle’s Per-Layer Embeddings and DeepSeek’s Engram look like the same mechanism. Where they actually differ, who published first, and who owed whom a citation.\n\n\n\n\n\nApr 4, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHypersentimentalism: A New Meta for AI Alignment\n\n\nAI alignment is pursued within a consequentialist ethics that, followed to its limit, recreates the pathology it set out to prevent. The case for a sentimentalist alternative — and for doing on purpose what the best current techniques already do by accident.\n\n\n\n\n\nFeb 22, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSwift to Harbour, Slow to Berth\n\n\nBostrom’s Optimal Timing for Superintelligence argues that pausing AI research is not morally neutral, and that under certain conditions waiting is the reckless option. What that does to AI safety research.\n\n\n\n\n\nFeb 14, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nRenovating the command line\n\n\nSix Rust command line tools — exa, bat, starship, dust, ripgrep and fd — that have displaced their 1970s UNIX ancestors in my everyday setup.\n\n\n\n\n\nSep 10, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nAn analysis of clamp_with_grad()\n\n\nAn analysis of the clamp_with_grad() pseudo-gradient used in the CLIP-guided art community, showing where it still gives a zero gradient, and proposing a definition that does not.\n\n\n\n\n\nJan 1, 2022\n\n\n\n\n\n\n\n\n\n\n\n\nStationery Day\n\n\nThe second Tradition Inventing Day festival. Celebrate with squares of yellow paper, a notebook you will never fill, and at least one forfeit.\n\n\n\n\n\nFeb 18, 2016\n\n\n\n\n\n\n\n\n\n\n\n\nTradition Inventing Day\n\n\nEach year on the 18th of February I will invent a new festival day, to be celebrated in the appointed way until the end of time. This is the first.\n\n\n\n\n\nFeb 18, 2015\n\n\n\n\n\n\n\n\n\n\n\n\nHoliday books\n\n\nGeorges Perec’s Species of Spaces, R.D. Laing’s Knots, and both Wittgensteins: notes on a summer’s reading, and on 243 postcards.\n\n\n\n\n\nJul 14, 2010\n\n\n\n\n\nNo matching items"
+    "text": "Per-Layer Embeddings vs. Engram\n\n\nGoogle’s Per-Layer Embeddings and DeepSeek’s Engram look like the same mechanism. Where they actually differ, who published first, and who owed whom a citation.\n\n\n\n\n\nApr 4, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHypersentimentalism: A New Meta for AI Alignment\n\n\nAI alignment is pursued within a consequentialist ethics that, followed to its limit, recreates the pathology it set out to prevent. The case for a sentimentalist alternative — and for doing on purpose what the best current techniques already do by accident.\n\n\n\n\n\nFeb 22, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nSwift to Harbour, Slow to Berth\n\n\nBostrom’s Optimal Timing for Superintelligence argues that pausing AI research is not morally neutral, and that under certain conditions waiting is the reckless option. What that does to AI safety research.\n\n\n\n\n\nFeb 14, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nRenovating the command line\n\n\nSix Rust command line tools — exa, bat, starship, dust, ripgrep and fd — that have displaced their 1970s UNIX ancestors in my everyday setup.\n\n\n\n\n\nSep 10, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nAn analysis of clamp_with_grad()\n\n\nAn analysis of the clamp_with_grad() pseudo-gradient used in the CLIP-guided art community, showing where it still gives a zero gradient, and proposing a definition that does not.\n\n\n\n\n\nJan 1, 2022\n\n\n\n\n\n\n\n\n\n\n\n\nStationery Day\n\n\nThe second Tradition Inventing Day festival. Celebrate with squares of yellow paper, a notebook you will never fill, and at least one forfeit.\n\n\n\n\n\nFeb 18, 2016\n\n\n\n\n\n\n\n\n\n\n\n\nTradition Inventing Day\n\n\nEach year on the 18th of February I will invent a new festival day, to be celebrated in the appointed way until the end of time. This is the first.\n\n\n\n\n\nFeb 18, 2015\n\n\n\n\n\n\n\n\n\n\n\n\nHoliday books\n\n\nGeorges Perec’s Species of Spaces, R.D. Laing’s Knots, and both Wittgensteins: notes on a summer’s reading, and on 243 postcards.\n\n\n\n\n\nJul 14, 2010\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -205,42 +205,42 @@
   {
     "objectID": "posts/engram-vs-ple.html",
     "href": "posts/engram-vs-ple.html",
-    "title": "Per-Layer Embeddings vs Engram",
+    "title": "Per-Layer Embeddings vs. Engram",
     "section": "",
     "text": "Google released Gemma 4 this week. Reviewing the architecture, I noticed a familiar-looking mechanism. The smaller models use “Per-Layer Embeddings” (PLE) which are strikingly similar to DeepSeek’s Engram.\nBoth modules follow the same high-level pattern: retrieve a learned embedding from an off-GPU table, gate it against the current hidden state, and inject the result into the residual stream. The motivation is identical too: offload static pattern knowledge from the transformer backbone so that early layers can focus on reasoning rather than rote reconstruction."
   },
   {
     "objectID": "posts/engram-vs-ple.html#oh-wow-so-google-are-taking-inspiration-from-deepseek",
     "href": "posts/engram-vs-ple.html#oh-wow-so-google-are-taking-inspiration-from-deepseek",
-    "title": "Per-Layer Embeddings vs Engram",
+    "title": "Per-Layer Embeddings vs. Engram",
     "section": "Oh wow! So Google are taking inspiration from DeepSeek?",
     "text": "Oh wow! So Google are taking inspiration from DeepSeek?\nNo, because it turns out that PLE originates in Gemma 3n released a full six months before Engram!"
   },
   {
     "objectID": "posts/engram-vs-ple.html#ah-okay-so-deepseek-are-ripping-off-google",
     "href": "posts/engram-vs-ple.html#ah-okay-so-deepseek-are-ripping-off-google",
-    "title": "Per-Layer Embeddings vs Engram",
+    "title": "Per-Layer Embeddings vs. Engram",
     "section": "Ah okay, so DeepSeek are ripping off Google?",
     "text": "Ah okay, so DeepSeek are ripping off Google?\nNo, because the mechanisms are substantially different in detail.\nPLE indexes by single token ID and gates via element-wise modulation (project, GELU, multiply, project back). Engram indexes by hashed N-gram sequences using multi-head hashing, and gates via a scalar attention-style mechanism (Key/Value projections from the retrieved embedding, normalised dot-product against the hidden state).\nAlso, the Engram whitepaper brings a bunch of practical and empirical findings to the table, notably their proposal that 20–25% parameter allocation to the memory. Plus the analysis showing the module frees early layers from static pattern reconstruction is illuminating.\nStill, PLE seems close enough to warrant a citation. The Engram paper cites classical N-gram models, word2vec, Bojanowski, Borgeaud, and DeepSeek’s own MoE work. It does not cite or mention PLE."
   },
   {
     "objectID": "posts/engram-vs-ple.html#okay-so-deepseek-are-bad-after-all",
     "href": "posts/engram-vs-ple.html#okay-so-deepseek-are-bad-after-all",
-    "title": "Per-Layer Embeddings vs Engram",
+    "title": "Per-Layer Embeddings vs. Engram",
     "section": "Okay, so DeepSeek are bad after all?",
     "text": "Okay, so DeepSeek are bad after all?\nNope. Much of the community’s understanding of PLE comes from antimatter15’s reverse-engineering work. Google didn’t publish!\nDeepSeek are to be applauded for continuing to publish their SoTA research in useful detail. If Google had done the same, maybe they’d have got the citation!"
   },
   {
     "objectID": "posts/engram-vs-ple.html#further-reading",
     "href": "posts/engram-vs-ple.html#further-reading",
-    "title": "Per-Layer Embeddings vs Engram",
+    "title": "Per-Layer Embeddings vs. Engram",
     "section": "Further reading",
     "text": "Further reading\nThere is a detailed explainer of Engram’s conditional memory and O(1) lookups on Medium by @sampan090611, which walks through the mechanism block by block. The diagram used as this post’s image is theirs."
   },
   {
     "objectID": "posts/engram-vs-ple.html#acknowledgements",
     "href": "posts/engram-vs-ple.html#acknowledgements",
-    "title": "Per-Layer Embeddings vs Engram",
+    "title": "Per-Layer Embeddings vs. Engram",
     "section": "Acknowledgements",
     "text": "Acknowledgements\nCo-authored by Claude Opus 4.6. Thanks to Gemini 3 for review and suggestions."
   },
