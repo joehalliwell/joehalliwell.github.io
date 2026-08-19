@@ -47,19 +47,19 @@ $grid-column-gutter-width: 30px;
 // Fonts
 // ---------------------------------------------------------------------------
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Spectral+SC:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC&family=Bona+Nova:ital@0;1&family=Source+Serif+4:ital,opsz@0,8..60;1,8..60&display=swap');
 
 :root {
 
   // 1. Body text
-  --body-font-family: "Source Serif 4", "Spectral", serif;
+  --body-font-family: "Bona Nova", "Source Serif 4", serif;
   --body-size-base: 13px;
   --body-size: clamp(var(--body-size-base),
     var(--body-size-base) + 1.0vw,
     var(--body-size-base) * 1.8);
 
   // 2. Fancy huge header
-  --display-font-family: "Spectral", serif;
+  --display-font-family: "Bona Nova", serif;
   --display-size-base: calc(var(--body-size) * 2);
   --display-size: clamp(
       var(--display-size-base),
@@ -68,27 +68,16 @@ $grid-column-gutter-width: 30px;
   --display-tracking: -0.03em;
 
   // 3. All other headers
+  --heading-font: "Bona Nova", serif;
   --heading-size: calc(var(--body-size) * 1.5);
 
   // 4. Folio
-  --folio-font-family: "Spectral SC", serif;
+  --folio-font-family: "Bona Nova SC", serif;
   --folio-size: calc(var(--body-size) * 0.8);
-  --folio-tracking: 0.08em;
+  --folio-tracking: 0.1em;
 
   // Expanded tracking for wire-style emphasis
-  --emphasis-tracking: 0.2em;
-
-
-  // -- Measure -------------------------------------------------------------
-  --measure: 68ch;
-
-  // -- The contents page ---------------------------------------------------
-
-  // Matched to the sidenote track, so the plates line up with where margin
-  // material sits everywhere else on the site.
-  --listing-plate: 180px;
-  --listing-gutter: 2.2rem;
-
+  --emphasis-tracking: 0.3em;
 
   // ---------------------------------------------------------------------------
   // Colours
@@ -109,25 +98,38 @@ $grid-column-gutter-width: 30px;
   // link once the words themselves stay in ink. 75% gives 3.5:1.
   // --rule-quiet: color-mix(in oklch, var(--accent) 25%, var(--paper));
   --rule-quiet: var(--ink);
+
+  // ---------------------------------------------------------------------------
+  // Deprecated things
+// ---------------------------------------------------------------------------
+
+  --measure: 68ch;
+
+  // Matched to the sidenote track, so the plates line up with where margin
+  // material sits everywhere else on the site.
+  --listing-plate: 180px;
+  --listing-gutter: 2.2rem;
 }
+
+
 
 @mixin folio {
   font-family: var(--folio-font-family);
   font-size: var(--folio-size) !important;
-  font-style: normal;;
+  font-style: normal;
   color: var(--ink-quiet);
   text-transform: none !important;
   letter-spacing: var(--folio-tracking);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 @mixin display {
   font-family: var(--display-font-family);;
   font-size: var(--display-size);
+  font-weight: 400 !important;
   font-style: normal;
   color: var(--ink);
   letter-spacing: var(--display-tracking);
-  font-weight: 600;
   line-height: 1.2;
 }
 
@@ -139,13 +141,13 @@ $grid-column-gutter-width: 30px;
 body {
   background: var(--paper);
   color: var(--ink);
-  font-size: var(--body-size);
-  line-height: 1.8;
 
   font-family: var(--body-font-family);
+  font-size: var(--body-size);
   font-optical-sizing: auto;
-  font-variant-numeric: oldstyle-nums proportional-nums;
   font-kerning: normal;
+
+  line-height: 1.8;
 
   text-wrap: pretty;
   hyphens: auto;
@@ -163,6 +165,7 @@ b, strong {
   font-variant-ligatures: none;
 }
 
+// Italics are for headings only
 em, i {
   font-style: normal;
 }
@@ -213,12 +216,14 @@ h4,
 h5,
 h6 {
   color: var(--ink) !important;
+  font-family: var(--heading-font);
   font-style: italic;
   font-size: var(--heading-size);
+  font-weight: 400;
   text-wrap: pretty;
   line-height: 1.2;
   margin: 0px;
-  margin-block-start: 3rem;
+  margin-block-start: 4rem;
   margin-block-end: var(--body-size);
   border-block-end: 0;
 }
@@ -227,15 +232,24 @@ h1 {
   @include display;
 }
 
-
+// Push anchorjs section links into the left margin
+h2 { position: relative; }
+h2 .anchorjs-link {
+  position: absolute;
+  right: 100%;
+  margin-right: 0.5em;
+  opacity: 0;
+  transition: opacity 120ms;
+  font-weight: 400;
+}
+h2:hover .anchorjs-link,
+h2:focus-within .anchorjs-link { color: var(--ink-faint); opacity: 1.0; }
 
 // ===========================================================================
 // Tables
 // ===========================================================================
 // No rules, per the sheet's own constraint. The head is a small-caps label and
-// the columns are held apart by space, which is how a book does it -- if a
-// table here ever gets dense enough that it stops working, that is the honest
-// signal to give the head a hairline back.
+// the columns are held apart by space, which is how a book does it.
 
 table {
   border-collapse: collapse;
@@ -369,9 +383,8 @@ main.content :is(p, .column-margin) + p {
 
 // Override
 #quarto-content section:first-of-type h2:first-of-type {
-  margin-block-start: 3rem;
+  margin-block-start: 4rem;
 }
-
 
 // ===========================================================================
 // Sidenotes
