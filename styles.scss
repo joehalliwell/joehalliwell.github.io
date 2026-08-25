@@ -76,8 +76,6 @@ $grid-column-gutter-width: 30px;
   --folio-size: calc(var(--body-size) * 0.8);
   --folio-tracking: 0.1em;
 
-  // Expanded tracking for wire-style emphasis
-  --emphasis-tracking: 0.3em;
 
   // ---------------------------------------------------------------------------
   // Colours
@@ -160,8 +158,8 @@ body {
 b, strong {
   font-weight: normal;
   font-style: normal;
-  letter-spacing: var(--emphasis-tracking);
-  margin-inline: var(--emphasis-tracking);
+  letter-spacing: 0.3em;
+  margin-inline: 0.7em 0.4em;
   font-variant-ligatures: none;
 }
 

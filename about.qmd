@@ -3,7 +3,7 @@ title: "About"
 # The site-level description in _quarto.yml feeds the RSS channel, not the
 # pages, so anything that wants a meta description states its own.
 description-meta: "Joe Halliwell's website: who I am, what I write about, and where else to find me."
-image: profile.jpg
+image: assets/images/profile.jpg
 about:
   template: jolla
   links:
@@ -24,3 +24,5 @@ This is Joe Halliwell's website.
 Posts appear when they appear, on whatever seems interesting at the time.
 There is a [feed](index.xml) if you would rather not keep checking, and a
 list of [things I have made](things.html) if you would rather not read.
+
+Set in [Bona Nova](https://fonts.google.com/specimen/Bona+Nova).
