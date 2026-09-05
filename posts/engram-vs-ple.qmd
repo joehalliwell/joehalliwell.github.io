@@ -28,6 +28,9 @@ Also, the Engram whitepaper brings a bunch of practical and empirical findings t
 
 Still, PLE seems close enough to warrant a citation. The Engram paper cites classical N-gram models, word2vec, Bojanowski, Borgeaud, and DeepSeek's own MoE work. It does not cite or mention PLE.
 
+![At inference time the host asynchronously prefetches and transfers engram embeddings
+in parallel with the on-device computation of preceding Transformer blocks.](engram-vs-ple-plate.png){#fig-arch}
+
 ## Okay, so DeepSeek are bad after all?
 
 Nope. Much of the community's understanding of PLE comes from [antimatter15's reverse-engineering work](https://github.com/antimatter15/reverse-engineering-gemma-3n). Google didn't publish!
@@ -41,7 +44,7 @@ DeepSeek are to be applauded for continuing to publish their SoTA research in us
 There is a [detailed explainer of Engram's conditional memory and O(1)
 lookups](https://medium.com/@sampan090611/deepseek-engram-explained-how-conditional-memory-and-o-1-lookups-fix-llm-amnesia-50fce3937bb8)
 on Medium by `@sampan090611`, which walks through the mechanism block by block.
-The diagram used as this post's image is theirs.
+
 
 ## Acknowledgements
 

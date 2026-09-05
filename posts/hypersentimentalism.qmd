@@ -6,6 +6,7 @@ description: |
   sentimentalist alternative — and for doing on purpose what the best current
   techniques already do by accident.
 date: "2026-02-22"
+featured: true
 categories: [ethics, ai, safety, sentimentalism]
 draft: false
 ---
