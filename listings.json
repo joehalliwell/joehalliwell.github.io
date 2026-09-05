@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/flat-apis/index.html",
       "/posts/engram-vs-ple.html",
       "/posts/hypersentimentalism.html",
       "/posts/swift-to-harbour.html",

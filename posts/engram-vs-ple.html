@@ -81,7 +81,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <link rel="canonical" href="https://joehalliwell.com/posts/engram-vs-ple.html" />
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -160,9 +160,11 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
@@ -174,12 +176,22 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="oh-wow-so-google-are-taking-inspiration-from-deepseek">Oh wow! So Google are taking inspiration from DeepSeek?</h2>
 <p>No, because it turns out that <a href="https://ai.google.dev/gemma/docs/gemma-3n#ple-caching">PLE originates in Gemma 3n</a> released a full six months before Engram!</p>
 </section>
-<section id="ah-okay-so-deepseek-are-ripping-off-google" class="level2">
+<section id="ah-okay-so-deepseek-are-ripping-off-google" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="ah-okay-so-deepseek-are-ripping-off-google">Ah okay, so DeepSeek are ripping off Google?</h2>
 <p>No, because the mechanisms are substantially different in detail.</p>
 <p>PLE indexes by single token ID and gates via element-wise modulation (project, GELU, multiply, project back). Engram indexes by hashed N-gram sequences using multi-head hashing, and gates via a scalar attention-style mechanism (Key/Value projections from the retrieved embedding, normalised dot-product against the hidden state).</p>
 <p>Also, the Engram whitepaper brings a bunch of practical and empirical findings to the table, notably their proposal that 20–25% parameter allocation to the memory. Plus the analysis showing the module frees early layers from static pattern reconstruction is illuminating.</p>
 <p>Still, PLE seems close enough to warrant a citation. The Engram paper cites classical N-gram models, word2vec, Bojanowski, Borgeaud, and DeepSeek’s own MoE work. It does not cite or mention PLE.</p>
+<div id="fig-arch" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="engram-vs-ple-plate.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: At inference time the host asynchronously prefetches and transfers engram embeddings in parallel with the on-device computation of preceding Transformer blocks.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="okay-so-deepseek-are-bad-after-all" class="level2">
 <h2 class="anchored" data-anchor-id="okay-so-deepseek-are-bad-after-all">Okay, so DeepSeek are bad after all?</h2>
@@ -189,7 +201,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 </section>
 <section id="further-reading" class="level2">
 <h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
-<p>There is a <a href="https://medium.com/@sampan090611/deepseek-engram-explained-how-conditional-memory-and-o-1-lookups-fix-llm-amnesia-50fce3937bb8">detailed explainer of Engram’s conditional memory and O(1) lookups</a> on Medium by <code>@sampan090611</code>, which walks through the mechanism block by block. The diagram used as this post’s image is theirs.</p>
+<p>There is a <a href="https://medium.com/@sampan090611/deepseek-engram-explained-how-conditional-memory-and-o-1-lookups-fix-llm-amnesia-50fce3937bb8">detailed explainer of Engram’s conditional memory and O(1) lookups</a> on Medium by <code>@sampan090611</code>, which walks through the mechanism block by block.</p>
 </section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
