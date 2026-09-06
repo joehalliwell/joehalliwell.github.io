@@ -10,3 +10,5 @@ _quarto_internal_scss_error.scss
 .DS_Store
 *.sublime-project
 *.sublime-workspace
+
+**/*.quarto_ipynb
