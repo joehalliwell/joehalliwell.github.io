@@ -28,7 +28,7 @@ learning, programming, and whatever else seems interesting at the time.
 
 
 
-<p>Live-coding is a performance art form where musician-coders compose code that makes music while you watch:</p>
+<p>Live-coding is a performance form where musician-coders compose code that makes music while you watch:</p>
 <!-- I imagine that live-coding music is the closest one can get to feeling like a
 hacker cruising through cyberspace engaging **ICE** (Intrusion Countermeasures
 Electronics) in hand-to-hand combat that looks like a dance.
@@ -73,7 +73,7 @@ Figure&nbsp;2: The faceplate of the iconic Minimoog: form follows function preci
 <p>Strudel, then, is a knob-per-function API. It exposes each parameter of the synth as a separate method. They can be chained together into a single expression and executed with a satisfying <code>Ctrl-Enter</code>.</p>
 <p>The infinite flexibility of the underlying digital signal processing engine is traded for the immediate kineticism of an analog front panel.</p>
 <p>Libraries for interactive data analysis and other exploratory work share something of this instinct: <code>pandas</code>, <code>numpy</code> and <code>torch</code> have big, flat top-level namespaces stuffed with functions to tab-complete. The pattern recurs wherever the loop needs to be tight.</p>
-<p>What’s lost is the ability to reconfigure the instrument from scratch mid-set. What’s won is the ability to play it.</p>
+<p>It’s a reminder that good design is often a matter of breaking the rules.</p>
 
 
 </section>
