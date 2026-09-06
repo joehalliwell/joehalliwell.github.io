@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Joe Halliwell">
-<meta name="dcterms.date" content="2015-02-18">
-<meta name="description" content="Each year on the 18th of February I will invent a new festival day, to be celebrated in the appointed way until the end of time. This is the first.">
+<meta name="dcterms.date" content="2026-08-30">
+<meta name="description" content="Usually in software design we separate concerns, but when making APIs for interactive work it’s sometimes better not to.">
 
-<title>Tradition Inventing Day – Joe Halliwell</title>
+<title>Knob-per-function APIs – Joe Halliwell</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,19 +72,19 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <link rel="me" href="https://mastodon.social/@joehalliwell">
 
 
-<meta property="og:title" content="Tradition Inventing Day – Joe Halliwell">
-<meta property="og:description" content="Each year on the 18th of February I will invent a new festival day, to be celebrated in the appointed way until the end of time. This is the first.">
-<meta property="og:image" content="https://joehalliwell.com/posts/tradition-inventing-day/traditional-greeting-card.png">
+<meta property="og:title" content="Knob-per-function APIs – Joe Halliwell">
+<meta property="og:description" content="Usually in software design we separate concerns, but when making APIs for interactive work it’s sometimes better not to.">
+<meta property="og:image" content="https://joehalliwell.com/posts/knob-per-function-apis/minimoog.png">
 <meta property="og:site_name" content="Joe Halliwell">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:width" content="1024">
-<meta name="twitter:title" content="Tradition Inventing Day – Joe Halliwell">
-<meta name="twitter:description" content="Each year on the 18th of February I will invent a new festival day, to be celebrated in the appointed way until the end of time. This is the first.">
-<meta name="twitter:image" content="https://joehalliwell.com/posts/tradition-inventing-day/traditional-greeting-card.png">
-<meta name="twitter:image-height" content="1024">
-<meta name="twitter:image-width" content="1024">
+<meta property="og:image:height" content="1202">
+<meta property="og:image:width" content="2464">
+<meta name="twitter:title" content="Knob-per-function APIs – Joe Halliwell">
+<meta name="twitter:description" content="Usually in software design we separate concerns, but when making APIs for interactive work it’s sometimes better not to.">
+<meta name="twitter:image" content="https://joehalliwell.com/posts/knob-per-function-apis/minimoog.png">
+<meta name="twitter:image-height" content="1202">
+<meta name="twitter:image-width" content="2464">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://joehalliwell.com/posts/tradition-inventing-day/" />
+<link rel="canonical" href="https://joehalliwell.com/posts/knob-per-function-apis/" />
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -126,14 +126,14 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tradition Inventing Day</h1>
+      <h1 class="title">Knob-per-function APIs</h1>
                   <div>
         <div class="description">
-          <p>Each year on the 18th of February I will invent a new festival day, to be celebrated in the appointed way until the end of time. This is the first.</p>
+          <p>Usually in software design we separate concerns, but when making APIs for interactive work it’s sometimes better not to.</p>
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">tradition inventing day</div>
+                <div class="quarto-category">software</div>
               </div>
                   </div>
   </div>
@@ -151,7 +151,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 18, 2015</p>
+        <p class="date">August 30, 2026</p>
       </div>
     </div>
     
@@ -172,20 +172,55 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 
 
 
-<p>Feeling slightly cheated by missing Shrove (AKA Pancake) Tuesday for the fourth or fifth year in a row, I’ve decided to take matters into my own hands.</p>
-<p>Each year on the 18th of February I will invent a new festival day . The appointed date will take its rightful place in the calendar and be celebrated in the appointed way from that moment until the end of time.</p>
-<p>Please join me in celebrating today, Tradition Inventing Day.</p>
-<div id="fig-greeting-card" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<p>Live-coding is a performance art form where musician-coders conjour code that makes music as you watch:</p>
+<!-- I imagine that live-coding music is the closest one can get to feeling like a
+hacker cruising through cyberspace engaging **ICE** (Intrusion Countermeasures
+Electronics) in hand-to-hand combat that looks like a dance.
+
+The musician, Switch Angel, has created a microgenre that runs off vicarious
+enjoyment of this. Jack in: -->
+<div id="fig-switchangel" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-greeting-card-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="traditional-greeting-card.png" class="img-fluid figure-img">
+<div aria-describedby="fig-switchangel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/iu5rnQkfO6M" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-greeting-card-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: A traditional greeting card for Tradition Inventing Day
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-switchangel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Switch Angel demonstrates some “old [tɹɑːns] tricks” with the live-coding tool, Strudel.
 </figcaption>
 </figure>
 </div>
+<p>The tool that Switch Angel is using in that video is <a href="https://strudel.cc/workshop/getting-started/">Strudel</a>. Its most striking feature is the use of pattern <strong>microformats</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> to define rhythm and melody.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;The specific microformats Strudel uses are lifted directly from <a href="https://tidalcycles.org/">Tidal Cycles</a>, a Haskell-based tool that pioneered this whole approach to live coding, albeit building on decades of previous work from the SuperCollider community and others.</p></div></div><p>The sounds we hear though, are generated by a synthesizer that combines a basic sampler and standard pipeline of audio FX units. When Switch Angel invokes <code>duck</code> to make the kick drum pump through the bassline, she’s configuring <a href="https://strudel.cc/learn/effects/#duck">one of those standard FX units</a>.</p>
+<p>Other live-coding tools, such as <a href="http://supercollider.github.io">SuperCollider</a>, are infinitely flexible, bound only by your imagination and your CPU. But in Strudel the synthesizer is hard-coded: it’s not possible to vary it within Strudel itself.</p>
+<p>And it’s monolithic: all the functionality is bolted on to a single object, like a Swiss army knife with tweezers, a magnifying glass, a pair of miniature scissors, a tin opener, a tool for doing something to a horse, a corkscrew, a wrench, and three types of nail file.</p>
+<p>A hard-coded monolith runs against normal design instincts in software where we favour modularity, abstraction, and separation of concerns. So, at first blush, it struck me as poor design.</p>
+<p>In fact, it’s the genius of the thing.</p>
+<section id="knob-per-function" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="knob-per-function">Knob-per-function</h2>
+<p>Up until the 1980s, synthesizers had a simple signal pipeline. There were relatively few parameters, and each had a lovely big knob to twist.</p>
+<div id="fig-minimoog" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-minimoog-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="minimoog.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-minimoog-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The faceplate of the iconic Minimoog: form follows function precisely
+</figcaption>
+</figure>
+</div>
+<p>In contrast, the digital synths of the 1980s and 90s offered more power but at a price. Digital synths had hundreds or thousands of parameters, but they were buried behind a tiny LCD screen and a couple of crappy menu buttons.</p>
+<p>The loss of immediacy translated into a professionalisation of sound design. Early dance music runs on live tweaking the six-parameter birdsong of the Roland 303<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Conversely, the hallmark of 90s dance is the manufacturer preset – think of the iconic Korg M1 <a href="https://youtu.be/m_Qr2zqBwYA?si=qFLrv4pZVQeAxeKq">Piano 16ft</a> or Roland D-50 <a href="https://youtu.be/NtqCGy8DKwI?si=ZuZ9MzNZg4WYWAen&amp;t=34">Pizzagogo</a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Aside from its primitive synthesizer, the 303 had a primitive sequencer. This was so obtuse that it forced musicians to discover new patterns rather than write them. Strudel’s microformats do this too, but that’s another essay.</p></div></div><p>Since the 2000s, there has been a marked swing back to “knob-per-function”. It continues to this day with instruments like Hydrasynth. Most knobs never get used, but they’re there and you can tweak them. You can <strong>play</strong> the instrument.</p>
+</section>
+<section id="apis-you-can-play" class="level2">
+<h2 class="anchored" data-anchor-id="apis-you-can-play">APIs you can play</h2>
+<p>Strudel, then, is a knob-per-function API. It exposes each parameter of the synth as a separate method. They can be chained together into a single expression and executed with a satisfying <code>Ctrl-Enter</code>.</p>
+<p>The infinite flexibility of the underlying digital signal processing engine is traded for the immediate kineticism of an analog front panel.</p>
+<p>Libraries for interactive data analysis and other exploratory work share something of this instinct: <code>pandas</code>, <code>numpy</code> and <code>torch</code> have big, flat top-level namespaces stuffed with functions to tab-complete. The pattern recurs wherever the loop needs to be tight.</p>
+<p>What’s lost is the ability to reconfigure the instrument from scratch mid-set. What’s won is the ability to play it.</p>
 
+
+</section>
 
 
 </main> <!-- /main -->
