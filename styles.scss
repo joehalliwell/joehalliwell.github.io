@@ -154,10 +154,17 @@ body {
 b, strong {
   font-weight: normal;
   font-style: normal;
-  letter-spacing: 0.3em;
-  margin-inline: 0.7em 0.4em;
+  letter-spacing: 0.4em;
   font-variant-ligatures: none;
+  margin-inline-end: -0.4em; // cancel extra letter spacing at end
 }
+
+// Extra space around emphasized phrases that collapses at line breaks
+b::before, b::after, strong::before, strong::after {
+  content: " ";
+  word-spacing: 0.1em;
+  white-space: pre-wrap;
+ }
 
 // Italics are for headings only
 em, i {
