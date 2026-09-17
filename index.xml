@@ -17,7 +17,7 @@ learning, programming, and whatever else seems interesting at the time.
 <link>https://joehalliwell.com/</link>
 </image>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Sat, 29 Aug 2026 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 30 Aug 2026 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Knob-per-function APIs</title>
   <dc:creator>Joe Halliwell</dc:creator>
@@ -82,7 +82,7 @@ Figure&nbsp;2: The faceplate of the iconic Minimoog: form follows function preci
  ]]></description>
   <category>software</category>
   <guid>https://joehalliwell.com/posts/knob-per-function-apis/</guid>
-  <pubDate>Sat, 29 Aug 2026 23:00:00 GMT</pubDate>
+  <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
   <media:content url="https://joehalliwell.com/posts/knob-per-function-apis/minimoog.png" medium="image" type="image/png" height="70" width="144"/>
 </item>
 <item>
@@ -142,7 +142,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
   <category>ple</category>
   <category>engram</category>
   <guid>https://joehalliwell.com/posts/engram-vs-ple.html</guid>
-  <pubDate>Fri, 03 Apr 2026 23:00:00 GMT</pubDate>
+  <pubDate>Sat, 04 Apr 2026 04:00:00 GMT</pubDate>
   <media:content url="https://joehalliwell.com/posts/engram-vs-ple-plate.png" medium="image" type="image/png" height="88" width="144"/>
 </item>
 <item>
@@ -291,7 +291,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
   <category>safety</category>
   <category>sentimentalism</category>
   <guid>https://joehalliwell.com/posts/hypersentimentalism.html</guid>
-  <pubDate>Sun, 22 Feb 2026 00:00:00 GMT</pubDate>
+  <pubDate>Sun, 22 Feb 2026 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Swift to Harbour, Slow to Berth</title>
@@ -341,7 +341,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
   <category>bostrom</category>
   <category>anthropic</category>
   <guid>https://joehalliwell.com/posts/swift-to-harbour.html</guid>
-  <pubDate>Sat, 14 Feb 2026 00:00:00 GMT</pubDate>
+  <pubDate>Sat, 14 Feb 2026 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Renovating the command line</title>
@@ -480,7 +480,7 @@ Figure&nbsp;5: Cargo update
   <category>unix</category>
   <category>tools</category>
   <guid>https://joehalliwell.com/posts/rust-tools/</guid>
-  <pubDate>Sat, 09 Sep 2023 23:00:00 GMT</pubDate>
+  <pubDate>Sun, 10 Sep 2023 04:00:00 GMT</pubDate>
   <media:content url="https://joehalliwell.com/posts/rust-tools/exa.png" medium="image" type="image/png" height="59" width="144"/>
 </item>
 <item>
@@ -970,7 +970,7 @@ font-style: inherit;">"clamp_with_grad_proposed"</span>)</span></code></pre></di
  ]]></description>
   <category>pytorch</category>
   <guid>https://joehalliwell.com/posts/clamp-with-grad.html</guid>
-  <pubDate>Sat, 01 Jan 2022 00:00:00 GMT</pubDate>
+  <pubDate>Sat, 01 Jan 2022 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Stationery Day</title>
@@ -1004,7 +1004,7 @@ Figure&nbsp;1: Father Tim Jones was outraged in a local stationary store. Photo 
   <category>moveable feast</category>
   <category>tradition inventing day</category>
   <guid>https://joehalliwell.com/posts/stationery-day/</guid>
-  <pubDate>Thu, 18 Feb 2016 00:00:00 GMT</pubDate>
+  <pubDate>Thu, 18 Feb 2016 05:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Tradition Inventing Day</title>
@@ -1035,7 +1035,7 @@ Figure&nbsp;1: A traditional greeting card for Tradition Inventing Day
  ]]></description>
   <category>tradition inventing day</category>
   <guid>https://joehalliwell.com/posts/tradition-inventing-day/</guid>
-  <pubDate>Wed, 18 Feb 2015 00:00:00 GMT</pubDate>
+  <pubDate>Wed, 18 Feb 2015 05:00:00 GMT</pubDate>
   <media:content url="https://joehalliwell.com/posts/tradition-inventing-day/traditional-greeting-card.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 <item>
@@ -1110,7 +1110,7 @@ Figure&nbsp;1: An old postcard with a sepia photograph of the Great Mosque of Ka
   <category>perec</category>
   <category>wittgenstein</category>
   <guid>https://joehalliwell.com/posts/holiday-books/</guid>
-  <pubDate>Tue, 13 Jul 2010 23:00:00 GMT</pubDate>
+  <pubDate>Wed, 14 Jul 2010 04:00:00 GMT</pubDate>
   <media:content url="https://joehalliwell.com/posts/holiday-books/great-mosque-of-kairouan-postcard.png" medium="image" type="image/png" height="227" width="144"/>
 </item>
 </channel>
