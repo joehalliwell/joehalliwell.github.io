@@ -57,7 +57,7 @@ Figure&nbsp;1: Switch Angel demonstrates some “old [tɹɑːns] tricks” with 
 <div id="fig-minimoog" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-minimoog-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://joehalliwell.com/posts/knob-per-function-apis/minimoog.png" class="img-fluid figure-img">
+<img src="https://joehalliwell.com/posts/knob-per-function-apis/minimoog.jpg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-minimoog-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: The faceplate of the iconic Minimoog: form follows function precisely
@@ -83,7 +83,7 @@ Figure&nbsp;2: The faceplate of the iconic Minimoog: form follows function preci
   <category>software</category>
   <guid>https://joehalliwell.com/posts/knob-per-function-apis/</guid>
   <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
-  <media:content url="https://joehalliwell.com/posts/knob-per-function-apis/minimoog.png" medium="image" type="image/png" height="70" width="144"/>
+  <media:content url="https://joehalliwell.com/posts/knob-per-function-apis/minimoog.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Per-Layer Embeddings vs. Engram</title>
