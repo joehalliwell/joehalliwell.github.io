@@ -1,12 +1,12 @@
 ---
 title: "Knob-per-function APIs"
 description: |
-  Usually in software design we separate concerns, but when making APIs for
+  Usually in software we avoid hard-coded or monolithic designs, but when making APIs for
   interactive work it's sometimes better not to.
 date: "2026-08-30"
 categories: [software]
 aliases: [/posts/flat-apis/]
-image: minimoog.png
+image: minimoog.jpg
 draft: false
 ---
 
@@ -66,7 +66,7 @@ In fact, it's the **genius** of the thing.
 Up until the 1980s, synthesizers had a simple signal pipeline. There were
 relatively few parameters, and each had a lovely big knob to twist.
 
-![The faceplate of the iconic Minimoog:  form follows function precisely](minimoog.png){#fig-minimoog}
+![The faceplate of the iconic Minimoog:  form follows function precisely](minimoog.jpg){#fig-minimoog}
 
 In contrast, the digital synths of the 1980s and 90s offered more power but at a
 price. Digital synths had hundreds or thousands of parameters, but they were
