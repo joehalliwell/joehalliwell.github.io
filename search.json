@@ -67,7 +67,7 @@
     "href": "posts/openai-maths.html",
     "title": "Does any of the OpenAI maths have real-world consequences?",
     "section": "",
-    "text": "OpenAI just dropped 722 maths papers in a single day, with machine-checked proofs in Lean for 42% of the headline results. Here’s the studiedly low-key release note with full detail in a Github repo.\nThe release went up on 6 October. On 7 October, OpenAI withdrew three of the papers. A single sign error in one Hodge-theory paper unravelled it and the two papers built on it. Read that as a huge caveat on all that follows."
+    "text": "OpenAI just dropped 722 maths papers in a single day, with machine-checked proofs in Lean for 42% of the headline results. Here’s the studiedly low-key release note with full detail in a Github repo.\nThe release went up on 6 October. On 7 October, OpenAI withdrew three of the papers. A sign error in one Hodge-theory paper unravelled it and the two papers built on it. Read that as a huge caveat on all that follows."
   },
   {
     "objectID": "posts/openai-maths.html#the-most-significant-moment-in-mathematical-history",
