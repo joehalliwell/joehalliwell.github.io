@@ -246,6 +246,14 @@ h2 .anchorjs-link {
 h2:hover .anchorjs-link,
 h2:focus-within .anchorjs-link { color: var(--ink-faint); opacity: 1.0; }
 
+h3 {
+  font-family: var(--body-font-family);
+  font-size: var(--body-size);
+  font-weight: bold;
+  font-style: normal;
+  font-variant: normal;
+}
+
 // ===========================================================================
 // Tables
 // ===========================================================================
@@ -475,6 +483,8 @@ div.quarto-post {
 }
 
 .quarto-post .listing-title {
+  font-family: var(--heading-font);
+  font-size: var(--heading-size);
   margin-bottom: var(--body-size) !important;
 }
 
