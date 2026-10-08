@@ -1,0 +1,76 @@
+---
+title: "Does any of the OpenAI maths have real-world consequences?"
+description: |
+ OpenAI just shocked the maths community by releasing a torrent of papers that
+ felled prize problems and answered foundational questions across a dozen fields.
+ But does any of it matter outwith the halls of academe?
+date: "2026-10-08"
+categories: [ai, mathematics]
+draft: false
+---
+
+OpenAI just dropped 722 maths papers in a single day, with machine-checked proofs in Lean for 42% of them. [The release](https://openai.com/index/sharing-ai-progress-in-mathematics/) · [the repo](https://github.com/openai/math)
+
+The release went up on 6 October. On 7 October, OpenAI [withdrew three of the papers](https://github.com/openai/math/blob/main/history.md). A single sign error in one Hodge-theory paper unravelled it and the two papers built on it. Read that as a huge caveat on all that follows.
+
+## "The most significant moment in mathematical history"
+
+Even so, it's hard to convey how significant the release is for an already shell-shocked maths community[^levent]. Dozens of the results would be career-defining. The most spectacular is the quasi-Riemann hypothesis, a big step towards the Millennium Prize problem: no Dirichlet L-function, ζ included, has a zero with real part above 7/8.
+
+Other prize problems have fallen or been given a damn good shake: a $5,000 Erdős conjecture on arithmetic progressions, uniform bounds in Hilbert's sixteenth problem and, from a second Millennium problem, Hodge for CM abelian varieties[^hodge]. Foundational questions across whole fields have been answered in one go: in operator algebras alone, the free group factors, Kadison's similarity problem and the generator problem.
+
+At human pace it would take decades to absorb...
+
+But, hey, all that maths stuff is quite rarefied! Is any of it going to make a difference to our daily lives? When are we getting **flying cars**? I worked with Claude to figure out which results have the greatest potential real-world impact.
+
+## It works in practice; now it works in theory
+
+A few results provide comfort that maths we're already doing doesn't go horribly awry:
+
+*1. [Polynomial Mixing of the Switch Chain for Every Graphical Degree Sequence](https://github.com/openai/math/blob/main/preprints/Polynomial-Mixing-of-the-Switch-Chain-for-Every-Graphical-Degree-Sequence-September-25-2026/main.pdf)* *(Lean-verified)*
+*So what?* It's how you tell a real pattern from an accident of popularity. Is your protein network's clustering meaningful, or just what any network with the same hub sizes would show? To find out, scientists compare against random networks with exactly the same degrees, made by repeatedly swapping edge pairs: A–B and C–D become A–D and C–B. Biologists, ecologists and social-network analysts have leaned on this null model for decades, with proofs that it properly randomises only in special cases. Now there's one for every degree sequence. Phew.
+
+*2. [Optimal-order mixing of the Thorp shuffle](https://github.com/openai/math/blob/main/preprints/Optimal-order-mixing-of-the-Thorp-shuffle-September-26-2026/paper.pdf)* *(Lean-verified)*
+*So what?* It lets you encrypt data without changing its shape: a card number stays a valid 16-digit number, so legacy databases and validation checks don't notice. The trick is to imagine one card for every possible number and shuffle the deck with a secret key: cut it in half, pair the cards up, and flip a keyed coin to order each pair. Your ciphertext is wherever your card lands, and you can follow one card without shuffling the whole deck. This proves $O(\log n)$ rounds suffice for a deck of $2^d$ cards, down from $O(\log^3 n)$. The Thorp shuffle is an extreme cousin of the Feistel designs in today's standards, and the constant is 1,600 (512 in a companion paper), so your bank's encryption won't change this week.
+
+## Castles in the air
+
+A few results break long-standing bounds on practical problems.
+
+In most cases[^exist], these provide new algorithms, but whether anyone could run them is another matter: "polynomial time" is doing heroic work in this release. One Lean-verified paper settles a 1970s scheduling problem in [$O((L+2)^{150020})$ steps](https://github.com/openai/math/blob/main/preprints/A-polynomial-time-algorithm-for-three-machine-unit-job-scheduling-September-24-2026/paper.pdf). Its authors note that "no practical running-time claim is made"[^crazy].
+
+The four below are less cyclopean, but none comes with a benchmark in seconds.
+
+*3. [Almost-Linear-Time Maximum-Cardinality Matching in General Graphs](https://github.com/openai/math/blob/main/preprints/Almost-Linear-Time-Maximum-Cardinality-Matching-in-Sparse-General-Graphs-September-24-2026/main.pdf)*
+*So what?* Ride-pooling, crew rostering and pairwise kidney swaps could one day be solved optimally at vastly bigger scales. Matching pairs things off along edges, with no node used twice. If your graph is *bipartite* (two sides, edges only between them, like workers and jobs), matching is secretly a flow problem, and flow got almost-linear in 2022. Real life is rarely so tidy: in a kidney exchange, any pair can potentially swap with any other, and the resulting odd cycles have kept the best bound for sparse graphs at Micali and Vazirani's 1980 $O(m\sqrt{n})$. This randomised algorithm unblocks that.
+
+*4. [An Almost-Linear Approximation Scheme for Edit Distance](https://github.com/openai/math/blob/main/preprints/An-Almost-Linear-Approximation-Scheme-for-Edit-Distance-September-24-2026/paper.pdf)* *(Lean-verified)*
+*So what?* Comparing long strings fast: DNA reads against genomes, documents against near-duplicates, code against code. Edit distance counts the insertions, deletions and substitutions needed to turn one string into another. Computing it exactly takes quadratic time, and that's believed to be essentially unavoidable, which is painful when your strings are billions of letters long. The new technique gets within any fixed percentage of the true answer in almost-linear time; previous fast methods were only accurate to within a constant factor. The catch: it estimates the distance without producing the actual edits, so it won't replace `diff`, and the $o(1)$ in the exponent hides who-knows-what.
+
+*5. [Ultraflat real Littlewood polynomials](https://github.com/openai/math/blob/main/preprints/Ultraflat-real-Littlewood-polynomials-October-5-2026/ultraflat-real-littlewood-polynomials.pdf)* *(companion result Lean-verified)*
+*So what?* Radar that sees fewer ghosts, and radios that waste less power. Radar finds targets by matching each echo against the pulse it sent. If the pulse resembles a shifted copy of itself, you get phantom targets and hidden real ones. The dream pulse resembles itself only at zero shift. Turyn bet that ±1 sequences could never get arbitrarily close to that dream. He loses, at least for sufficiently long sequences, although we don't yet know how long, still less how to design the perfect pulse.
+
+*6. [Subpolynomial query complexity for well-conditioned log-concave sampling](https://github.com/openai/math/blob/main/preprints/Subpolynomial-query-complexity-for-well-conditioned-log-concave-sampling-September-26-2026/article.pdf)* *(Lean-verified)*
+*So what?* The "curse of dimensionality" in Bayesian sampling turns out to be more of a mild hex. Samplers like Langevin and HMC follow the gradient of the log-posterior, and every gradient costs a pass over your data. The best known methods need about $d^{1/6}$ of them. This proves that you can get away with fewer than *any* power of $d$, though only for very tame posteriors: single-humped, with curvature varying by at most a factor of two, and with the peak handed to you in advance. It also economises on gradients by permitting itself unlimited thinking time in between, which is rather like saving on petrol by walking.
+
+## So… flying cars?
+
+Not yet. But step back and the scale is still dizzying. A single release has felled prize problems, answered foundational questions across a dozen fields and furnished missing proofs for everyday tools on which scientists rely.
+
+In researching this post, Claude did all the reading. My job was mostly saying "that doesn't sound right, are you sure?", "that doesn't seem very practical" and "what's the actual benefit?". The maths community now faces the same job, and the sign error shows why it can't be skipped.
+
+The applied dividends will take longer, and human attention is the bottleneck.
+
+For now.
+
+## Acknowledgements
+
+*This post was coauthored by Claude Opus 5.5.*
+
+[^exist]: The exception is the Littlewood result (5), which proves the sequences exist without giving any way to find them.
+
+[^crazy]: Even for an input one bit long, that bound allows around $10^{71578}$ steps. There are about $10^{80}$ atoms in the observable universe.
+
+[^hodge]: No Lean proof, but this Hodge result was not one of the ones that were withdrawn.
+
+[^levent]: The title quote is from [Levent Alpöge](https://x.com/__alpoge__/status/2107616859595981117) -- that guy from Anthropic who OpenAI maybe tried to exclude from the Navier-Stokes result -- but it reflects community feeling pretty well.
