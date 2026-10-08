@@ -1,2 +1,615 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Joe Halliwell">
+<meta name="dcterms.date" content="2026-10-08">
+<meta name="description" content="OpenAI just shocked the maths community by releasing a torrent of new maths but does any of it have practical consequences?">
+
+<title>Do any of the OpenAI maths have real-world consequences? – Joe Halliwell</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-da55678d2d5139bafe0a0e737433f145.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-845c74ce5e40f3c62c402765bfb567c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-7CDJ5Z8MGP"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
+</script>
+<link rel="me" href="https://mastodon.social/@joehalliwell">
+
+
+<meta property="og:title" content="Do any of the OpenAI maths have real-world consequences? – Joe Halliwell">
+<meta property="og:description" content="OpenAI just shocked the maths community by releasing a torrent of new maths but does any of it have practical consequences?">
+<meta property="og:image" content="https://joehalliwell.com/profile.jpg">
+<meta property="og:site_name" content="Joe Halliwell">
+<meta name="twitter:title" content="Do any of the OpenAI maths have real-world consequences? – Joe Halliwell">
+<meta name="twitter:description" content="OpenAI just shocked the maths community by releasing a torrent of new maths but does any of it have practical consequences?">
+<meta name="twitter:image" content="https://joehalliwell.com/profile.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://joehalliwell.com/posts/openai-maths.html" />
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Joe Halliwell</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/joehalliwell"> 
+<span class="menu-text">Github</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://mastodon.social/@joehalliwell"> 
+<span class="menu-text">Mastodon</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Do any of the OpenAI maths have real-world consequences?</h1>
+                  <div>
+        <div class="description">
+          <p>OpenAI just shocked the maths community by releasing a torrent of new maths but does any of it have practical consequences?</p>
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">ai</div>
+                <div class="quarto-category">mathematics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Joe Halliwell </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 8, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+<p><strong>OpenAI just dropped 722 maths papers in a single day</strong>, grouped into 372 results, with machine-checked proofs in Lean for about 42% of the top-line results. <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/">The release</a> · <a href="https://github.com/openai/math">the repo</a></p>
+<p>The release went up on 6 October. On 7 October, OpenAI <a href="https://github.com/openai/math/blob/main/history.md">withdrew three of the papers</a>. A single sign error in one Hodge-theory paper unravelled it and the two papers built on it. All three sit in the same family as the Hodge result I cite below, and that family has no Lean proof at all. Fourteen more papers were patched the same day. That’s the deal on offer: the Lean-checked results are bedrock, and the rest is the world’s most prolific, most confident preprint server.</p>
+<p>Even so, it’s hard to convey how significant the release is for an already shell-shocked maths community. Dozens of the results would be career-defining. The most spectacular is the quasi-Riemann hypothesis, a big step towards the Millennium Prize problem: no Dirichlet L-function, ζ included, has a zero with real part above 7/8, which also rules out the notorious Siegel zeros. Other prize problems have fallen or been given a damn good shake: Erdős’s $5,000 conjecture on arithmetic progressions, uniform bounds in Hilbert’s sixteenth problem and, from a second Millennium problem, Hodge for CM abelian varieties. Foundational questions across whole fields have been answered in one go: in operator algebras alone, the free group factors, Kadison’s similarity problem and the generator problem.</p>
+<p>One number theorist called it <a href="https://x.com/__alpoge__/status/2107616859595981117">“the most significant moment in mathematical history”</a>. At human pace it would take decades to absorb.</p>
+<p>But it’s all quite rarefied! Is any of it going to make a difference to our daily lives? When are we getting flying cars?</p>
+<p>I worked with Claude to figure out which results have the greatest potential real-world impact.</p>
+<section id="it-works-in-practice-now-it-works-in-theory" class="level2">
+<h2 class="anchored" data-anchor-id="it-works-in-practice-now-it-works-in-theory">It works in practice; now it works in theory</h2>
+<p>A few results provide comfort that maths we’re already doing doesn’t go horribly awry:</p>
+<p><strong>1. <a href="https://github.com/openai/math/blob/main/preprints/Polynomial-Mixing-of-the-Switch-Chain-for-Every-Graphical-Degree-Sequence-September-25-2026/main.pdf">Polynomial Mixing of the Switch Chain for Every Graphical Degree Sequence</a></strong> <em>(Lean-verified)</em> <strong>So what?</strong> It’s how you tell a real pattern from an accident of popularity. Is your protein network’s clustering meaningful, or just what any network with the same hub sizes would show? To find out, scientists compare against random networks with exactly the same degrees, made by repeatedly swapping edge pairs: A–B and C–D become A–D and C–B. Biologists, ecologists and social-network analysts have leaned on this null model for decades, with proofs that it properly randomises only in special cases. Now there’s one for every degree sequence. Phew.</p>
+<p><strong>2. <a href="https://github.com/openai/math/blob/main/preprints/Optimal-order-mixing-of-the-Thorp-shuffle-September-26-2026/paper.pdf">Optimal-order mixing of the Thorp shuffle</a></strong> <em>(Lean-verified)</em> <strong>So what?</strong> It lets you encrypt data without changing its shape: a card number stays a valid 16-digit number, so legacy databases and validation checks don’t notice. The trick is to imagine one card for every possible number and shuffle the deck with a secret key: cut it in half, pair the cards up, and flip a keyed coin to order each pair. Your ciphertext is wherever your card lands, and you can follow one card without shuffling the whole deck. This proves O(log n) rounds suffice for a deck of 2^d cards, down from O(log³ n). The Thorp shuffle is an extreme cousin of the Feistel designs in today’s standards, and the constant is 1,600 (512 in a companion paper), so your bank’s encryption won’t change this week.</p>
+</section>
+<section id="castles-in-the-air" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="castles-in-the-air">Castles in the air</h2>
+<p>A few results break long-standing bounds on practical problems.</p>
+<p>In most cases<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, these provide new algorithms, but whether anyone could run them is another matter: “polynomial time” is doing heroic work in this release. One Lean-verified paper settles a 1970s scheduling problem in <a href="https://github.com/openai/math/blob/main/preprints/A-polynomial-time-algorithm-for-three-machine-unit-job-scheduling-September-24-2026/paper.pdf">O((L+2)^150020) steps</a>, and its authors note, with admirable restraint, that “no practical running-time claim is made”. Machine-certain and practically absurd. The four below are less cyclopean, but none comes with a benchmark.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;The exception is the Littlewood result (5), which proves the sequences exist without giving any way to find them.</p></div></div><p><strong>3. <a href="https://github.com/openai/math/blob/main/preprints/Almost-Linear-Time-Maximum-Cardinality-Matching-in-Sparse-General-Graphs-September-24-2026/main.pdf">Almost-Linear-Time Maximum-Cardinality Matching in General Graphs</a></strong> <strong>So what?</strong> Ride-pooling, crew rostering and pairwise kidney swaps could one day be solved optimally at vastly bigger scales. Matching pairs things off along edges, with no node used twice. If your graph is <em>bipartite</em> (two sides, edges only between them, like workers and jobs), matching is secretly a flow problem, and flow got almost-linear in 2022. Real life is rarely so tidy: in a kidney exchange, any pair can swap with any other, and the resulting odd cycles have kept the best general bound at Micali and Vazirani’s 1980 O(m√n). This randomised algorithm unjams them, though it rides on max-flow machinery nobody yet runs in anger. (Real exchanges also use three-way cycles and donor chains, which are NP-hard, so this covers the pairwise core.)</p>
+<p><strong>4. <a href="https://github.com/openai/math/blob/main/preprints/An-Almost-Linear-Approximation-Scheme-for-Edit-Distance-September-24-2026/paper.pdf">An Almost-Linear Approximation Scheme for Edit Distance</a></strong> <em>(Lean-verified)</em> <strong>So what?</strong> Comparing long strings fast: DNA reads against genomes, documents against near-duplicates, code against code. Edit distance counts the insertions, deletions and substitutions needed to turn one string into another. Computing it exactly takes quadratic time, and that’s believed to be essentially unavoidable, which is painful when your strings are billions of letters long. This gets within any fixed percentage of the true answer in almost-linear time; previous fast methods were only accurate to within a constant factor. The catch: it estimates the distance without producing the actual edits, so it won’t replace <code>diff</code>, and the o(1) in the exponent hides who-knows-what.</p>
+<p><strong>5. <a href="https://github.com/openai/math/blob/main/preprints/Ultraflat-real-Littlewood-polynomials-October-5-2026/ultraflat-real-littlewood-polynomials.pdf">Ultraflat real Littlewood polynomials</a></strong> <em>(companion result Lean-verified)</em> <strong>So what?</strong> Radar that sees fewer ghosts, and radios that waste less power. Radar finds targets by matching each echo against the pulse it sent. If the pulse resembles a shifted copy of itself, you get phantom targets and hidden real ones. The dream pulse resembles itself only at zero shift; equivalently, its spectrum is perfectly flat. Turyn bet that ±1 sequences could never get arbitrarily close to that dream. He loses, at least for sufficiently long sequences. But it’s pure existence, with no recipe for finding them: the perfect chirp exists, but nobody can whistle it.</p>
+<p><strong>6. <a href="https://github.com/openai/math/blob/main/preprints/Subpolynomial-query-complexity-for-well-conditioned-log-concave-sampling-September-26-2026/article.pdf">Subpolynomial query complexity for well-conditioned log-concave sampling</a></strong> <em>(Lean-verified)</em> <strong>So what?</strong> The “curse of dimensionality” in Bayesian sampling turns out to be more of a mild hex. Samplers like Langevin and HMC follow the gradient of the log-posterior, and every gradient costs a pass over your data. The best known methods need about d^(1/6) of them. This proves that you can get away with fewer than <em>any</em> power of d, though only for very tame posteriors: single-humped, with curvature varying by at most a factor of two, and with the peak handed to you in advance. The algorithm that does it is a proof device, not something you’d run.</p>
+</section>
+<section id="so-flying-cars" class="level2">
+<h2 class="anchored" data-anchor-id="so-flying-cars">So… flying cars?</h2>
+<p>Not yet. But step back and the scale is still dizzying. A single release has felled prize problems, answered foundational questions across a dozen fields and furnished missing proofs for everyday tools that scientists and cryptographers rely on.</p>
+<p>In researching this post, Claude did all the reading. My job was mostly saying “that doesn’t sound right, are you sure?”, “that doesn’t seem very practical” and “what’s the actual benefit?”. The maths community now faces the same job, and the sign error shows why it can’t be skipped.</p>
+<p>The applied dividends will take longer, and human attention is the bottleneck.</p>
+<p>For now.</p>
+<p><em>Caveat: nothing here is peer-reviewed or benchmarked yet.</em></p>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p><em>This post was coauthored by Claude Opus 5.5.</em></p>
+
+
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/joehalliwell\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

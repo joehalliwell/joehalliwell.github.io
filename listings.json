@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/openai-maths.html",
       "/posts/knob-per-function-apis/index.html",
       "/posts/engram-vs-ple.html",
       "/posts/hypersentimentalism.html",
