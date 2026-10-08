@@ -67,7 +67,7 @@
     "href": "posts/openai-maths.html",
     "title": "Does any of the OpenAI maths have real-world consequences?",
     "section": "",
-    "text": "OpenAI just dropped 722 maths papers in a single day, with machine-checked proofs in Lean for 42% of the headline results. Here’s the studiedly low-key release note with full detail in a Github repo.\nThe release went up on 6 October. On 7 October, OpenAI withdrew three of the papers. A sign error in one Hodge-theory paper unravelled it and the two papers built on it. Read that as a huge caveat on all that follows."
+    "text": "OpenAI just dropped 722 maths papers in a single day, with machine-checked proofs in Lean for 42% of the headline results. The press release was studiedly low-key. The gory details are in a Github repo.\nOne day after the release, OpenAI withdrew three of the papers. A sign error in one Hodge-theory paper unravelled it and the two papers built on it. This is an evolving situation live situation, which you can read that as a huge caveat on all that follows. Nevertheless."
   },
   {
     "objectID": "posts/openai-maths.html#the-most-significant-moment-in-mathematical-history",
@@ -95,14 +95,14 @@
     "href": "posts/openai-maths.html#so-flying-cars",
     "title": "Does any of the OpenAI maths have real-world consequences?",
     "section": "So… flying cars?",
-    "text": "So… flying cars?\nNot yet. So far the most tangible real-world consequence is sociological. Proof is the currency of a mathematical career, and a lot of mathematicians have just watched it inflate overnight. Many are dismayed: about credit, about norms, and about what’s left for them to do.\nBut step back and the scale is still dizzying. A single release has felled prize problems, answered foundational questions across a dozen fields and furnished missing proofs for everyday tools on which scientists rely.\nIn researching this post, Claude did all the reading. My job was mostly saying “that doesn’t sound right, are you sure?”, “that doesn’t seem very practical” and “what’s the actual benefit?”. The maths community now faces the same job, and the sign error shows why it can’t be skipped.\nThe applied dividends will take longer, and human attention is the bottleneck.\nFor now."
+    "text": "So… flying cars?\nNot yet.\nBut step back and the achivement is still dizzying. A single release has felled prize problems, answered foundational questions across a dozen fields and furnished missing proofs for everyday tools on which scientists rely.\nSo, the most tangible real-world consequences are sociological. Many mathematicians are dismayed: about credit, about norms, and about what’s left for them to do.\nIn researching this post, Claude did all the reading. My job was mostly saying “that doesn’t sound right, are you sure?”, “that doesn’t seem very practical” and “what’s the actual benefit?”. The maths community now faces the same job, and the sign error shows why it can’t be skipped.\nFor now."
   },
   {
     "objectID": "posts/openai-maths.html#acknowledgements",
     "href": "posts/openai-maths.html#acknowledgements",
     "title": "Does any of the OpenAI maths have real-world consequences?",
     "section": "Acknowledgements",
-    "text": "Acknowledgements\nThis post was co-authored by Claude Opus 5.5.\nHeader image: “At School”, from the French “En l’an 2000” series of cards imagining life in the year 2000, attributed to Jean-Marc Côté (c. 1901) or Villemard (1910). Public domain, via Wikimedia Commons."
+    "text": "Acknowledgements\nThis post was co-authored by Claude Opus 5.5.\nThe illustration (below) for this piece is from the “En l’an 2000” series of cards imagining life in the year 2000, attributed to Jean-Marc Côté (c. 1901) or Villemard (1910). Public domain, via Wikimedia Commons.\n\n\n\nA photograph of working mathematicians in 2026"
   },
   {
     "objectID": "posts/holiday-books/index.html",

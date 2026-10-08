@@ -28,8 +28,8 @@ learning, programming, and whatever else seems interesting at the time.
 
 
 
-<p>OpenAI just dropped 722 maths papers in a single day, with machine-checked proofs in Lean for 42% of the headline results. Here’s the <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/">studiedly low-key release note</a> with full detail in <a href="https://github.com/openai/math">a Github repo</a>.</p>
-<p>The release went up on 6 October. On 7 October, OpenAI <a href="https://github.com/openai/math/blob/main/history.md">withdrew three of the papers</a>. A sign error in one Hodge-theory paper unravelled it and the two papers built on it. Read that as a <strong>huge</strong> caveat on all that follows.</p>
+<p>OpenAI just dropped 722 maths papers in a single day, with machine-checked proofs in Lean for 42% of the headline results. The press release was <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/">studiedly low-key</a>. The gory details are in <a href="https://github.com/openai/math">a Github repo</a>.</p>
+<p>One day after the release, OpenAI <a href="https://github.com/openai/math/blob/main/history.md">withdrew three of the papers</a>. A sign error in one Hodge-theory paper unravelled it and the two papers built on it. This is an evolving situation live situation, which you can read that as a <strong>huge</strong> caveat on all that follows. Nevertheless.</p>
 <section id="the-most-significant-moment-in-mathematical-history" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="the-most-significant-moment-in-mathematical-history">“The most significant moment in mathematical history”</h2>
 <p>It’s hard to convey how significant the release is for an already shell-shocked maths community<sup>1</sup>. Dozens of the results would be career-defining. The most spectacular is the quasi-Riemann hypothesis, a big step towards the famous Millennium Prize problem: no Dirichlet L-function, ζ included, has a zero with real part above 7/8.</p>
@@ -79,16 +79,22 @@ learning, programming, and whatever else seems interesting at the time.
 </section>
 <section id="so-flying-cars" class="level2">
 <h2 class="anchored" data-anchor-id="so-flying-cars">So… flying cars?</h2>
-<p>Not yet. So far the most tangible real-world consequence is sociological. Proof is the currency of a mathematical career, and a lot of mathematicians have just watched it inflate overnight. Many are <a href="https://startupfortune.com/openai-drops-722-ai-math-proofs-and-mathematicians-are-not-impressed/">dismayed</a>: about credit, about norms, and about what’s left for them to do.</p>
-<p>But step back and the scale is still dizzying. A single release has felled prize problems, answered foundational questions across a dozen fields and furnished missing proofs for everyday tools on which scientists rely.</p>
+<p>Not yet.</p>
+<p>But step back and the achivement is still dizzying. A single release has felled prize problems, answered foundational questions across a dozen fields and furnished missing proofs for everyday tools on which scientists rely.</p>
+<p>So, the most tangible real-world consequences are sociological. Many mathematicians are <a href="https://startupfortune.com/openai-drops-722-ai-math-proofs-and-mathematicians-are-not-impressed/">dismayed</a>: about credit, about norms, and about what’s left for them to do.</p>
 <p>In researching this post, Claude did all the reading. My job was mostly saying “that doesn’t sound right, are you sure?”, “that doesn’t seem very practical” and “what’s the actual benefit?”. The maths community now faces the same job, and the sign error shows why it can’t be skipped.</p>
-<p>The applied dividends will take longer, and human attention is the bottleneck.</p>
 <p>For now.</p>
 </section>
-<section id="acknowledgements" class="level2">
+<section id="acknowledgements" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
 <p>This post was co-authored by Claude Opus 5.5.</p>
-<p>Header image: “At School”, from the French “En l’an 2000” series of cards imagining life in the year 2000, attributed to Jean-Marc Côté (c.&nbsp;1901) or Villemard (1910). Public domain, via <a href="https://commons.wikimedia.org/wiki/File:France_in_XXI_Century._School.jpg">Wikimedia Commons</a>.</p>
+<p>The illustration (below) for this piece is from the “En l’an 2000” series of cards imagining life in the year 2000, attributed to Jean-Marc Côté (c.&nbsp;1901) or Villemard (1910). Public domain, via <a href="https://commons.wikimedia.org/wiki/File:France_in_XXI_Century._School.jpg">Wikimedia Commons</a>.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://joehalliwell.com/assets/images/la-culture-generale-ecole-du-futur.webp" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">A photograph of working mathematicians in 2026</figcaption>
+</figure>
+</div>
 
 
 </section>
