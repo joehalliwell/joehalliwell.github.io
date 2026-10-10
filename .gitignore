@@ -12,3 +12,7 @@ _quarto_internal_scss_error.scss
 *.sublime-workspace
 
 **/*.quarto_ipynb
+
+# Claude Code (local settings and agent worktrees)
+.claude/settings.local.json
+.claude/worktrees/
