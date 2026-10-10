@@ -415,6 +415,16 @@ caption {
   text-decoration: none;
 }
 
+// A footnote on a heading is emitted after the heading's whole <section>, but
+// lands level with the top of that section -- i.e. the top of the heading's
+// margin-block-start. Drop it by the same amount so it sits beside the heading.
+// Only while notes are in the margin: below md Quarto brings them inline.
+@media (min-width: 768px) {
+  section + .column-margin {
+    margin-block-start: 4rem;
+  }
+}
+
 // ===========================================================================
 // Navbar
 // ===========================================================================
