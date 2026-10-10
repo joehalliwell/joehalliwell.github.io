@@ -91,7 +91,7 @@ Paper: [Asymptotically minimal maxima of real Littlewood polynomials](https://gi
 
 ### 7. Ultra-efficient statistics engine could be slightly more efficient
 
-From epidemic forecasts to drug trials to financial risk models, a vast amount of science and industry runs on one engine: Markov chain Monte Carlo, a randomised method for working out which settings of a model's unknown parameters fit the data, and how sure we can be. The engine runs on expensive model evaluations and, on well-behaved problems, is already stupendously fuel-efficient. The new result proves it can be very, very slightly more so. The catch: you have to be told the best fit in advance, and not count the extra work done outside the engine. Arguably, it saves petrol by getting out and pushing.
+From epidemic forecasts to drug trials to financial risk models, a vast amount of science and industry runs on one engine: Markov chain Monte Carlo, a randomised method for working out which settings of a model's unknown parameters fit the data, and how sure we can be. The engine runs on expensive model evaluations but, on well-behaved problems, it is already stupendously fuel-efficient. The new result proves it can be very, very slightly more so. The catch: you have to be told the best fit in advance, and not count the extra work done outside the engine. Arguably, it saves petrol by getting out and pushing.
 
 Paper: [Subpolynomial query complexity for well-conditioned log-concave sampling](https://github.com/openai/math/blob/main/preprints/Subpolynomial-query-complexity-for-well-conditioned-log-concave-sampling-September-26-2026/article.pdf) *(Lean-verified)*
 
