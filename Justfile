@@ -10,9 +10,11 @@ fonts:
 measure page="posts/rust-tools/index.html" width="1440":
     bash _scripts/measure-column.sh {{page}} {{width}}
 
-# Render, then assert that no previously-served URL has gone missing
+# Render, then assert that no previously-served URL has gone missing and no
+# page uses a heading the stylesheet doesn't support (h4 and below)
 check: render
     bash _scripts/check-urls.sh
+    bash _scripts/check-headings.sh
 
 # --no-render matters: without it quarto renders a second time into its own
 # worktree and publishes that, so the build `check` just validated is not the

@@ -241,12 +241,13 @@ h1 {
   @include display;
 }
 
+// h4-h6 are unsupported (`just check` refuses them) and fall back to h3.
 h2,
-h3 {
+h3, h4, h5, h6 {
   margin-block-end: var(--heading-after);
 }
 h2 { margin-block-start: var(--h2-space); }
-h3 { margin-block-start: var(--h3-space); }
+h3, h4, h5, h6 { margin-block-start: var(--h3-space); }
 
 // Whatever precedes a heading gives up its bottom margin, so the heading's own
 // space is the whole gap. In block flow the margins would collapse anyway, but
@@ -269,7 +270,7 @@ h2 .anchorjs-link {
 h2:hover .anchorjs-link,
 h2:focus-within .anchorjs-link { color: var(--ink-faint); opacity: 1.0; }
 
-h3 {
+h3, h4, h5, h6 {
   font-family: var(--body-font-family);
   font-size: var(--body-size);
   font-weight: bold;
@@ -453,7 +454,7 @@ caption {
   section.level2 + .column-margin:has(> [id^="fn"]) {
     margin-block-start: var(--h2-space);
   }
-  section.level3 + .column-margin:has(> [id^="fn"]) {
+  section:is(.level3, .level4, .level5, .level6) + .column-margin:has(> [id^="fn"]) {
     margin-block-start: var(--h3-space);
   }
 }
