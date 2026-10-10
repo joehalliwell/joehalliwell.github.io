@@ -42,7 +42,7 @@ See: [Optimal-order mixing of the Thorp shuffle](https://github.com/openai/math/
 
 ### 3. Big Brother can't help being dumb
 
-Say you're a surveillance state that wants every street watched from at least one end. Here's the dumbest method imaginable: find a street nobody's watching, bolt cameras to *both* ends, repeat. It's guaranteed never to install more than twice as many cameras as you need. Incredibly, fifty years of despotic cunning have failed to improve on that guarantee in any meaningful way, and now we know why: unless P = NP, nothing can.
+Say you're a surveillance state that wants every street watched from at least one end. Here's the dumbest method imaginable: find a street nobody's watching, bolt cameras to *both* ends, repeat. It's guaranteed never to install more than twice as many cameras as you need. Incredibly, fifty years of despotic cunning have failed to improve on that guarantee in any meaningful way, and now we know why: unless P = NP, nothing can[^pnp].
 
 See: [The Unique Games Theorem](https://github.com/openai/math/blob/main/preprints/The-Unique-Games-Theorem-September-23-2026/paper.pdf) *(Lean-verified)*
 
@@ -54,19 +54,19 @@ Whether anyone could run them is another matter: "polynomial time" is doing hero
 
 The four below are less cyclopean, but none comes with a benchmark in seconds.
 
-### 4. Pairing up riders at scale
+### 4. Speed dating, sped up
 
-Ride-pooling could one day be solved optimally at much bigger scales. Matching pairs things off along edges, with no node used twice. If your graph is *bipartite* (two sides, edges only between them, like workers and jobs), matching is secretly a flow problem, and flow got almost-linear in 2022. Real life is rarely so tidy: when pooling rides, any rider can potentially share with any other, and the resulting odd cycles have kept the best bound at Micali and Vazirani's 1980 $O(m\sqrt{n})$. This randomised algorithm unblocks that, though only for the unweighted problem: it maximises the number of pairs, not how well-matched they are.
+Say a dating app wants to set up as many dates as possible tonight, between people who've both swiped right on each other. That's matching: pairing things off along edges, with no node used twice. For *bipartite* graphs, where the nodes split into two sides and edges only run between them, matching is secretly a flow problem, and flow got almost-linear in 2022. But dating doesn't work like that: anyone can fancy anyone, and the resulting love triangles (odd cycles, to a graph theorist) have kept the best bound at Micali and Vazirani's 1980 $O(m\sqrt{n})$. This randomised algorithm unblocks that, though it maximises the number of dates, not how well they go.
 
 See: [Almost-linear-time maximum-cardinality matching in general graphs](https://github.com/openai/math/blob/main/preprints/Almost-Linear-Time-Maximum-Cardinality-Matching-in-Sparse-General-Graphs-September-24-2026/main.pdf) *(not Lean-verified)*
 
-### 5. Comparing genomes, documents and code, fast
+### 5. Comparing genomes, fast (for sufficiently large genomes)
 
-Edit distance counts the insertions, deletions and substitutions needed to turn one string into another. Computing it exactly takes quadratic time, and that's believed to be essentially unavoidable, which is painful when your strings are billions of letters long. The new technique gets within any fixed percentage of the true answer in almost-linear time; previous fast methods were only accurate to within a constant factor. The catch: it estimates the distance without producing the actual edits, so it won't replace `diff`. And the speed-up only kicks in for "sufficiently large" inputs, with the authors making "no efficiency claim" as you tighten the accuracy.
+Edit distance counts the insertions, deletions and substitutions needed to turn one string into another. Computing it exactly takes quadratic time, and that's believed to be essentially unavoidable, which is painful when your strings are billions of letters long, like DNA. The new technique gets within any fixed percentage of the true answer in almost-linear time; previous fast methods were only accurate to within a constant factor. The catch: it estimates the distance without producing the actual edits, so it won't replace `diff`. And the speed-up only kicks in for "sufficiently large" inputs, with the authors making "no efficiency claim" as you tighten the accuracy.
 
 See: [An almost-linear approximation scheme for edit distance](https://github.com/openai/math/blob/main/preprints/An-Almost-Linear-Approximation-Scheme-for-Edit-Distance-September-24-2026/paper.pdf) *(Lean-verified)*
 
-### 6. Radar with fewer ghosts
+### 6. Perfect radar exists; we just can't locate it
 
 Radar finds targets by matching each echo against the pulse it sent. If the pulse resembles a shifted copy of itself, you get phantom targets and hidden real ones. The dream pulse resembles itself only at zero shift, and as a bonus would let radios waste less power. Turyn bet that ±1 sequences could never get arbitrarily close to that dream. He loses, at least for sufficiently long sequences, although we don't yet know how long, still less how to design the perfect pulse.
 
@@ -97,6 +97,8 @@ The illustration (below) for this piece is from the "En l'an 2000" series of car
 [^exist]: The exception is the Radar/Littlewood result, which proves the sequences exist without giving any way to find them.
 
 [^crazy]: Even for an input one bit long, that bound allows around $10^{71578}$ steps. There are about $10^{80}$ atoms in the observable universe.
+
+[^pnp]: P = NP would mean that any problem whose answers are easy to check is also easy to solve. Almost no-one believes it, but it's never been disproven.
 
 [^hodge]: No Lean proof, and it shared a result family with the three withdrawn papers. It survived, so far.
 
