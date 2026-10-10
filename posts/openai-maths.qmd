@@ -99,9 +99,9 @@ Paper: [Subpolynomial query complexity for well-conditioned log-concave sampling
 
 Not yet. In researching this post, Claude did all the reading. My job was mostly saying "that doesn't sound right, are you sure?", "that doesn't seem very practical" and "you're missing the point". The maths community now faces the same job.
 
-That's the most practical consequence so far, and it's sociological. Many mathematicians are [dismayed](https://theprint.in/tech/weeks-after-claiming-ai-cracked-90-yr-old-maths-puzzle-openai-drops-the-mother-lode-on-mathematicians/3064174/): about credit, about norms and, most existentially, about whether there's anything left for them to do.
+That's the most practical consequence so far, and it's sociological. Mathematicians are split. Many are [dismayed](https://theprint.in/tech/weeks-after-claiming-ai-cracked-90-yr-old-maths-puzzle-openai-drops-the-mother-lode-on-mathematicians/3064174/): about credit, about norms and, most existentially, about whether there's anything left for them to do. Others, this mathematician turned software developer included, are excited about the potential, the progress, the sense of a page turning.
 
-The rest of us won't be far behind.
+Software developers got here first. Mathematicians are feeling it now. Everyone else won't be far behind.
 
 ## Acknowledgements
 
