@@ -10,9 +10,9 @@ image: /assets/images/la-culture-generale-ecole-du-futur.webp
 draft: false
 ---
 
-OpenAI just dropped 722 maths papers in a single day, with machine-checked proofs in Lean for 42% of the headline results. The press release was [studiedly low-key](https://openai.com/index/sharing-ai-progress-in-mathematics/). The gory details are in [a GitHub repo](https://github.com/openai/math).
+OpenAI just dropped 722 maths papers in a single day, with machine-checked proofs in Lean for 42% of the headline results. The press release was [studiedly low-key](https://openai.com/index/sharing-ai-progress-in-mathematics/); the gory details are in [a GitHub repo](https://github.com/openai/math).
 
-One day after the release, OpenAI [withdrew three of the papers](https://github.com/openai/math/blob/main/history.md). A sign error in one Hodge-theory paper unravelled it and the two papers built on it. This is a live situation; read it as a **huge** caveat on all that follows. Nevertheless.
+A day later, OpenAI [withdrew three of the papers](https://github.com/openai/math/blob/main/history.md). A sign error in one Hodge-theory paper unravelled it and the two papers built on it. This is a live situation; read it as a **huge** caveat on all that follows. Nevertheless.
 
 ## "The most significant moment in mathematical history"
 
@@ -28,15 +28,15 @@ But is any of it going to make a difference to our daily lives? When are we gett
 
 A few results provide comfort that the maths we're already doing isn't horribly wrong.
 
-### 1. Telling real patterns from accidents of popularity
+### 1. Telling real patterns from random ones
 
-Is your protein network's clustering meaningful, or just what any network with the same hub sizes would show? To find out, scientists compare against random networks with exactly the same degrees, made by repeatedly swapping edge pairs: A–B and C–D become A–D and C–B. Biologists, ecologists and social-network analysts have leaned on this null model for decades, with proofs that it properly randomises only in special cases. Now there's one for every degree sequence. Phew.
+Is your protein network's clustering meaningful, or just what any network with the same hub sizes would show? To find out, scientists compare against random networks with exactly the same degrees, made by repeatedly swapping edge pairs: A–B and C–D become A–D and C–B. Biologists, ecologists and social-network analysts have leaned on this "null model" for decades, with proofs that it properly randomises only in special cases. Now there's one for every degree sequence. Phew.
 
 See: [Polynomial mixing of the switch chain for every graphical degree sequence](https://github.com/openai/math/blob/main/preprints/Polynomial-Mixing-of-the-Switch-Chain-for-Every-Graphical-Degree-Sequence-September-25-2026/main.pdf) *(Lean-verified)*
 
 ### 2. Encrypting card numbers so they still look like card numbers
 
-Format-preserving encryption keeps a card number a valid 16-digit number, so legacy databases and validation checks don't notice. The trick is to imagine one card for every possible number and shuffle the deck with a secret key: cut it in half, pair the cards up, and flip a keyed coin to order each pair. Your ciphertext is wherever your card lands, and you can follow one card without shuffling the whole deck. This is the Thorp shuffle, and a new result proves $O(\log n)$ rounds suffice for a deck of $n = 2^d$ cards, down from $O(\log^3 n)$. The constant is 1,600, so your bank's encryption won't change this week.
+Format-preserving encryption turns a valid card number into another valid card number, checksum and all, so your bank's legacy databases and validation checks don't notice. The provably secure trick is to treat the valid numbers like a deck of playing cards: repeatedly cut and riffle, with a secret key deciding how they interleave. But how many riffles do you need? A simple counting argument says at least two per bit, but the best guarantee grew with the cube of the bit count. The new result proves a fixed number per bit is enough, though nobody yet knows the smallest one.
 
 See: [Optimal-order mixing of the Thorp shuffle](https://github.com/openai/math/blob/main/preprints/Optimal-order-mixing-of-the-Thorp-shuffle-September-26-2026/paper.pdf) *(Lean-verified)*
 
@@ -54,9 +54,9 @@ Whether anyone could run them is another matter: "polynomial time" is doing hero
 
 The four below are less cyclopean, but none comes with a benchmark in seconds.
 
-### 4. Speed dating, sped up
+### 4. Love triangles are no longer a problem[^triangles]
 
-Say a dating app wants to set up as many dates as possible tonight, between people who've both swiped right on each other. That's matching: pairing things off along edges, with no node used twice. For *bipartite* graphs, where the nodes split into two sides and edges only run between them, matching is secretly a flow problem, and flow got almost-linear in 2022. But dating doesn't work like that: anyone can fancy anyone, and the resulting love triangles (odd cycles, to a graph theorist) have kept the best bound at Micali and Vazirani's 1980 $O(m\sqrt{n})$. This randomised algorithm unblocks that, though it maximises the number of dates, not how well they go.
+Say a dating app wants to set up as many dates as possible tonight, one per person, between people who've both swiped right on each other. If the users split neatly into two groups who only date each other, a method from 2022 does this almost as fast as you can read the list of matches. But anyone can fancy anyone, and the resulting love triangles have kept the general case stuck at a 1980 method that's much slower on big networks. This randomised algorithm brings the general case up to the same speed, though it maximises the number of dates, not how well they go.
 
 See: [Almost-linear-time maximum-cardinality matching in general graphs](https://github.com/openai/math/blob/main/preprints/Almost-Linear-Time-Maximum-Cardinality-Matching-in-Sparse-General-Graphs-September-24-2026/main.pdf) *(not Lean-verified)*
 
@@ -99,6 +99,8 @@ The illustration (below) for this piece is from the "En l'an 2000" series of car
 [^crazy]: Even for an input one bit long, that bound allows around $10^{71578}$ steps. There are about $10^{80}$ atoms in the observable universe.
 
 [^pnp]: P = NP would mean that any problem whose answers are easy to check is also easy to solve. Almost no-one believes it, but it's never been disproven.
+
+[^triangles]: Computationally speaking.
 
 [^hodge]: No Lean proof, and it shared a result family with the three withdrawn papers. It survived, so far.
 
