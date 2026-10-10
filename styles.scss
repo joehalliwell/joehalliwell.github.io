@@ -415,12 +415,19 @@ caption {
   text-decoration: none;
 }
 
-// A footnote on a heading is emitted after the heading's whole <section>, but
-// lands level with the top of that section -- i.e. the top of the heading's
-// margin-block-start. Drop it by the same amount so it sits beside the heading.
 // Only while notes are in the margin: below md Quarto brings them inline.
 @media (min-width: 768px) {
-  section + .column-margin {
+  // A note's box starts level with the top of the paragraph beside it, but at
+  // folio size with the same 1.8 leading its first baseline sits 0.3 of a body
+  // size higher (less half-leading, less ascent). Drop it onto the body's.
+  .column-margin:has(> [id^="fn"]) {
+    margin-block-start: calc(var(--body-size) * 0.3);
+  }
+
+  // A footnote on a heading is emitted after the heading's whole <section>,
+  // but lands level with the top of that section -- i.e. the top of the
+  // heading's margin-block-start. Drop it by that too.
+  section + .column-margin:has(> [id^="fn"]) {
     margin-block-start: 4rem;
   }
 }
