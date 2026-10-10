@@ -10,7 +10,7 @@ image: /assets/images/la-culture-generale-ecole-du-futur.webp
 draft: false
 ---
 
-OpenAI just dropped [722 maths papers](https://github.com/openai/math) in a single day[^lean]. The [press release](https://openai.com/index/sharing-ai-progress-in-mathematics/) was studiedly low-key barely touching on the scale or significance of the results.
+OpenAI just dropped [722 maths papers](https://github.com/openai/math) in a single day[^lean]. The [press release](https://openai.com/index/sharing-ai-progress-in-mathematics/) was studiedly low-key, barely touching on the impact of the results.
 
 [^lean]: Formal proofs for 42% of the headline results were verified using a proof-checking tool called Lean. A day later, OpenAI [withdrew three of the papers](https://github.com/openai/math/blob/main/history.md): a sign error in one Hodge-theory paper, one without a Lean-verified proof, unravelled it and the two papers built on it. The situation is evolving.
 
