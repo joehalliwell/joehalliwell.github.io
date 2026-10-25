@@ -1,112 +1,213 @@
 ---
-title: "Does any of the OpenAI maths have real-world consequences?"
+categories: [ai, mathematics]
+date: "2026-10-08"
 description: |
  OpenAI just shocked the maths community by releasing a torrent of papers that
  felled prize problems and answered foundational questions across a dozen fields.
  But does any of it matter outwith the halls of academe?
-date: "2026-10-08"
-categories: [ai, mathematics]
-image: /assets/images/la-culture-generale-ecole-du-futur.webp
 draft: false
+image: /assets/images/la-culture-generale-ecole-du-futur.webp
+title: "Does any of the OpenAI maths have real-world consequences?"
 ---
 
-OpenAI just dropped [722 maths papers](https://github.com/openai/math) in a single day[^lean]. The [press release](https://openai.com/index/sharing-ai-progress-in-mathematics/) was studiedly low-key, barely touching on the impact of the results.
+OpenAI just dropped [722 maths papers](https://github.com/openai/math) in a single day[^lean]. The
+[press release](https://openai.com/index/sharing-ai-progress-in-mathematics/)
+was studiedly low-key, barely touching on the impact of the results.
 
-[^lean]: Formal proofs for 42% of the headline results were verified using a proof-checking tool called Lean. A day later, OpenAI [withdrew three of the papers](https://github.com/openai/math/blob/main/history.md): a sign error in one Hodge-theory paper, one without a Lean-verified proof, unravelled it and the two papers built on it. The situation is evolving.
+[^lean]: Formal proofs for 42% of the headline results were verified using a
+    proof-checking tool called Lean. A day later, OpenAI
+    [withdrew three of the papers](https://github.com/openai/math/blob/main/history.md):
+    a sign error in one Hodge-theory paper, one without a Lean-verified
+    proof, unravelled it and the two papers built on it. The situation is
+    evolving.
 
-## "The most significant moment in mathematical history"
+## "The Most Significant Moment in Mathematical History"
 
-It's hard to convey how significant the release is for an already shell-shocked maths community[^levent]. Dozens of the results would be career-defining. The most spectacular is the quasi-Riemann hypothesis, a big step towards the Riemann hypothesis, a $1 million Millennium Prize problem and arguably the most famous open question in maths.
+It's hard to convey how significant the release is for an already shell-shocked maths
+community[^levent]. Dozens of the results would be career-defining. The most spectacular is the
+quasi-Riemann hypothesis, a big step towards the Riemann hypothesis, a $1 million Millennium Prize
+problem and arguably the most famous open question in maths.
 
-[^levent]: The heading quotes [Levent Alpöge](https://x.com/__alpoge__/status/2107616859595981117), an Anthropic mathematician who was at the centre of [last month's Navier–Stokes dispute](https://fortune.com/2026/09/08/openai-says-it-cracked-navier-stokes-math-grand-challenge-buckmaster-accusation-cheating-intimidation-tao-lament/) with OpenAI. So hardly a cheerleader, which makes the praise all the more telling.
+[^levent]: The heading quotes [Levent Alpöge](https://x.com/__alpoge__/status/2107616859595981117), an Anthropic mathematician who was at the centre of
+    [last month's Navier–Stokes dispute](https://fortune.com/2026/09/08/openai-says-it-cracked-navier-stokes-math-grand-challenge-buckmaster-accusation-cheating-intimidation-tao-lament/) with OpenAI. So hardly a cheerleader, which makes
+    the praise all the more telling.
 
-Other, only marginally less famous, prize problems have fallen or been given a damn good shake: a $5,000 Erdős conjecture[^erdos] on arithmetic progressions, uniform bounds in Hilbert's sixteenth problem and, from a second Millennium problem, the Hodge conjecture for CM abelian varieties[^hodge].
+Other, only marginally less famous, prize problems have fallen or been given a damn good shake: a
+$5,000 Erdős conjecture[^erdos] on arithmetic progressions, uniform bounds in Hilbert's sixteenth
+problem and, from a second Millennium problem, the Hodge conjecture for CM abelian
+varieties[^hodge].
 
-[^erdos]: Erdős was a famously brilliant, varied and peripatetic mathematician. He was not a wealthy man. His $5,000 is worth more than $1 million.
+[^erdos]: Erdős was a famously brilliant, varied and peripatetic mathematician.
+    He was not a wealthy man. His $5,000 is worth more than $1 million.
 
-[^hodge]: No Lean proof, and it shared a result family with the three withdrawn papers. It survived, so far.
+[^hodge]: No Lean proof, and it shared a result family with the three withdrawn
+    papers. It survived, so far.
 
-As Scott Aaronson [put it](https://scottaaronson.blog/?p=10169), "no human has understood just about any of these proofs yet; the race to do so has just started." At human pace it could take decades.
+As Scott Aaronson [put it](https://scottaaronson.blog/?p=10169), "no human has understood just about any of these proofs yet; the race to
+do so has just started." At human pace it could take decades.
 
-But is any of it going to make a difference to our daily lives? When are we getting our flying cars, damn it? I worked with Claude to figure out which results have the greatest potential real-world impact.
+But is any of it going to make a difference to our daily lives? When are we getting our flying cars,
+damn it? I worked with Claude to figure out which results have the greatest potential real-world
+impact.
 
-## It works in practice; now it works in theory
+## It Works in Practice; Now It Works in Theory
 
-Two results offer comfort, or at least a little bit of closure, about mathematical tools scientists have relied on for decades.
+Two results offer comfort, or at least a little bit of closure, about mathematical tools scientists
+have relied on for decades.
 
-### 1. Big Brother can't help being dumb
+### 1. Big Brother Can't Help Being Dumb
 
-Say you're a surveillance state that wants every street watched from at least one end. Here's the dumbest method imaginable: find a street nobody's watching, bolt cameras to *both* ends, repeat. That's obviously going to be excessive for most towns, but in the worst possible case, it will only install twice as many cameras as you actually need. Incredibly, fifty years of despotic cunning have failed to improve on it, and now we know why: nothing can[^pnp].
+Say you're a surveillance state that wants every street watched from at least one end. Here's the
+dumbest method imaginable: find a street nobody's watching, bolt cameras to *both* ends, repeat.
+That's obviously going to be excessive for most towns, but in the worst possible case, it will only
+install twice as many cameras as you actually need. Incredibly, fifty years of despotic cunning have
+failed to improve on it, and now we know why: nothing can[^pnp].
 
-Paper: [The Unique Games Theorem](https://github.com/openai/math/blob/main/preprints/The-Unique-Games-Theorem-September-23-2026/paper.pdf) *(Lean-verified)*
+Paper:
+[The Unique Games Theorem](https://github.com/openai/math/blob/main/preprints/The-Unique-Games-Theorem-September-23-2026/paper.pdf)
+*(Lean-verified)*
 
-[^pnp]: Unless P = NP, that is: unless every problem whose answers are easy to check is also easy to solve. That's the most famous open question in computer science, and another $1 million Millennium Prize problem, but almost no-one doubts the answer is no. The paper here proves the "Unique Games Conjecture", which is another of the field's biggest open questions and one where there was no clear consensus. The Big Brother thing is just one of many consequences. The proof is a very big deal.
+[^pnp]: Unless P = NP, that is: unless every problem whose answers are easy to
+    check is also easy to solve. That's the most famous open question in
+    computer science, and another $1 million Millennium Prize problem, but
+    almost no-one doubts the answer is no. The paper here proves the "Unique
+    Games Conjecture", which is another of the field's biggest open
+    questions and one where there was no clear consensus. The Big Brother
+    thing is just one of many consequences. The proof is a very big deal.
 
+### 2. Random Networks Really Are Random (Eventually)
 
-### 2. Random networks really are random (eventually)
+Is your protein network's clustering meaningful, or just what any network with the same hub sizes
+would show? To find out, scientists compare against random networks in which every node keeps
+exactly the same number of connections, made by repeatedly swapping edge pairs: A–B and C–D become
+A–D and C–B. Biologists, ecologists and social-network analysts have leaned on this "null model" for
+decades, but with proofs that it properly randomises only for special cases. Now there's one for
+every network. Phew[^switch].
 
-Is your protein network's clustering meaningful, or just what any network with the same hub sizes would show? To find out, scientists compare against random networks in which every node keeps exactly the same number of connections, made by repeatedly swapping edge pairs: A–B and C–D become A–D and C–B. Biologists, ecologists and social-network analysts have leaned on this "null model" for decades, but with proofs that it properly randomises only for special cases. Now there's one for every network. Phew[^switch].
+Paper:
+[Polynomial mixing of the switch chain for every graphical degree sequence](https://github.com/openai/math/blob/main/preprints/Polynomial-Mixing-of-the-Switch-Chain-for-Every-Graphical-Degree-Sequence-September-25-2026/main.pdf)
+*(Lean-verified)*
 
-Paper: [Polynomial mixing of the switch chain for every graphical degree sequence](https://github.com/openai/math/blob/main/preprints/Polynomial-Mixing-of-the-Switch-Chain-for-Every-Graphical-Degree-Sequence-September-25-2026/main.pdf) *(Lean-verified)*
+[^switch]: Except that the proof only guarantees randomness after $2n^8$ swap
+    attempts for a network of $n$ nodes, which is way more than anyone
+    runs in practice.
 
-[^switch]: Except that the proof only guarantees randomness after $2n^8$ swap attempts for a network of $n$ nodes, which is way more than anyone runs in practice.
+## Castles in the Air
 
-## Castles in the air
+A few results break long-standing bounds on practical problems, but that doesn't necessarily
+translate into real-world benefit.
 
-A few results break long-standing bounds on practical problems, but that doesn't necessarily translate into real-world benefit.
+Computer scientists think that an algorithm is pretty efficient if it runs in "polytime", that is,
+if its running time grows like some polynomial function of the size of the input. But that can mask
+**horrors**. One Lean-verified paper here
+[settles a 1970s scheduling problem](https://github.com/openai/math/blob/main/preprints/A-polynomial-time-algorithm-for-three-machine-unit-job-scheduling-September-24-2026/paper.pdf)
+in polytime. Its authors note that "no practical running-time claim is made" for the algorithm.
 
-Computer scientists think that an algorithm is pretty efficient if it runs in "polytime", that is, if its running time grows like some polynomial function of the size of the input. But that can mask **horrors**. One Lean-verified paper here [settles a 1970s scheduling problem](https://github.com/openai/math/blob/main/preprints/A-polynomial-time-algorithm-for-three-machine-unit-job-scheduling-September-24-2026/paper.pdf) in polytime. Its authors note that "no practical running-time claim is made" for the algorithm.
+Given that our entire universe isn't big or old enough to solve the smallest possible problem using
+it[^scheduling], this is something of an understatement.
 
-Given that our entire universe isn't big or old enough to solve the smallest possible problem using it[^scheduling], this is something of an understatement.
-
-[^scheduling]: The new algorithm is $O((L+2)^{150020})$ where $L$ is the size of the input. So, yes, a polynomial, just one of degree 150,020. Even for a one-bit input, that bound allows about $10^{71578}$ steps. If each of the roughly $10^{80}$ atoms in the observable universe had been doing a trillion steps a second since the Big Bang, they would have completed a fraction of the task with more than 71,000 zeros after the decimal point.
+[^scheduling]: The new algorithm is $O((L+2)^{150020})$ where $L$ is the size of
+    the input. So, yes, a polynomial, just one of degree 150,020.
+    Even for a one-bit input, that bound allows about $10^{71578}$
+    steps. If each of the roughly $10^{80}$ atoms in the observable
+    universe had been doing a trillion steps a second since the Big
+    Bang, they would have completed a fraction of the task with more
+    than 71,000 zeros after the decimal point.
 
 The five below are less cyclopean, but none comes with a benchmark in seconds.
 
-### 3. Encrypting card numbers so they still look like card numbers
+### 3. Encrypting Card Numbers so They Still Look Like Card Numbers
 
-Format-preserving encryption turns a valid card number into another valid card number, checksum and all, so your bank's legacy databases and validation checks don't notice. The provably secure trick is to treat the valid numbers like a deck of playing cards: repeatedly cut and riffle, with a secret key deciding how they interleave. But how many riffles do you need? The new result proves that, for large enough decks, it's fewer than 1,600 per bit. Your bank runs on algorithms without such guarantees, and this isn't going to change that.
+Format-preserving encryption turns a valid card number into another valid card number, checksum and
+all, so your bank's legacy databases and validation checks don't notice. The provably secure trick
+is to treat the valid numbers like a deck of playing cards: repeatedly cut and riffle, with a secret
+key deciding how they interleave. But how many riffles do you need? The new result proves that, for
+large enough decks, it's fewer than 1,600 per bit. Your bank runs on algorithms without such
+guarantees, and this isn't going to change that.
 
-Paper: [Optimal-order mixing of the Thorp shuffle](https://github.com/openai/math/blob/main/preprints/Optimal-order-mixing-of-the-Thorp-shuffle-September-26-2026/paper.pdf) *(Lean-verified)*
+Paper:
+[Optimal-order mixing of the Thorp shuffle](https://github.com/openai/math/blob/main/preprints/Optimal-order-mixing-of-the-Thorp-shuffle-September-26-2026/paper.pdf)
+*(Lean-verified)*
 
-### 4. Love triangles are no longer a problem[^triangles]
+### 4. Love Triangles Are No Longer a Problem[^triangles]
 
 [^triangles]: Computationally speaking.
 
-Say a dating app wants to set up as many dates as possible tonight, one per person, between people who've both swiped right on each other. If the users split neatly into two groups who only date each other, a method from 2022 does this almost as fast as you can read the list of matches. But anyone can fancy anyone, and the resulting love triangles have kept the general case stuck at a 1980 method that's much slower on big networks. This randomised algorithm brings the general case up to the same speed, though it maximises the number of dates, not how well they go.
+Say a dating app wants to set up as many dates as possible tonight, one per person, between people
+who've both swiped right on each other. If the users split neatly into two groups who only date each
+other, a method from 2022 does this almost as fast as you can read the list of matches. But anyone
+can fancy anyone, and the resulting love triangles have kept the general case stuck at a 1980 method
+that's much slower on big networks. This randomised algorithm brings the general case up to the same
+speed, though it maximises the number of dates, not how well they go.
 
-Paper: [Almost-linear-time maximum-cardinality matching in general graphs](https://github.com/openai/math/blob/main/preprints/Almost-Linear-Time-Maximum-Cardinality-Matching-in-Sparse-General-Graphs-September-24-2026/main.pdf) *(not Lean-verified)*
+Paper:
+[Almost-linear-time maximum-cardinality matching in general graphs](https://github.com/openai/math/blob/main/preprints/Almost-Linear-Time-Maximum-Cardinality-Matching-in-Sparse-General-Graphs-September-24-2026/main.pdf)
+*(not Lean-verified)*
 
-### 5. Comparing genomes, fast (for sufficiently large genomes)
+### 5. Comparing Genomes, Fast (For Sufficiently Large Genomes)
 
-Edit distance counts the insertions, deletions and substitutions needed to turn one string into another. Computing it exactly takes quadratic time, and that's believed to be essentially unavoidable, which is painful when your strings are billions of letters long, like DNA. The new technique gets within any fixed percentage of the true answer in almost-linear time; previous fast methods were only accurate to within a constant factor. The catch: it estimates the distance without producing the actual edits, so it can't tell you *what* changed. And the speed-up only kicks in for "sufficiently large" inputs, with the authors making "no efficiency claim" as you tighten the accuracy.
+Edit distance counts the insertions, deletions and substitutions needed to turn one string into
+another. Computing it exactly takes quadratic time, and that's believed to be essentially
+unavoidable, which is painful when your strings are billions of letters long, like DNA. The new
+technique gets within any fixed percentage of the true answer in almost-linear time; previous fast
+methods were only accurate to within a constant factor. The catch: it estimates the distance without
+producing the actual edits, so it can't tell you *what* changed. And the speed-up only kicks in for
+"sufficiently large" inputs, with the authors making "no efficiency claim" as you tighten the
+accuracy.
 
-Paper: [An almost-linear approximation scheme for edit distance](https://github.com/openai/math/blob/main/preprints/An-Almost-Linear-Approximation-Scheme-for-Edit-Distance-September-24-2026/paper.pdf) *(Lean-verified)*
+Paper:
+[An almost-linear approximation scheme for edit distance](https://github.com/openai/math/blob/main/preprints/An-Almost-Linear-Approximation-Scheme-for-Edit-Distance-September-24-2026/paper.pdf)
+*(Lean-verified)*
 
-### 6. Perfect radar exists; we just can't locate it
+### 6. Perfect Radar Exists; We Just Can't Locate It
 
-Radar finds targets by matching each echo against the pulse it sent. If the pulse resembles a shifted copy of itself, you get phantom targets and hidden real ones. The dream pulse resembles itself only at zero shift, and as a bonus would let radios waste less power. The mathematician Richard Turyn bet that ±1 sequences could never get arbitrarily close to that dream. He loses, at least for sufficiently long sequences, although we don't yet know how long, still less how to design the perfect pulse.
+Radar finds targets by matching each echo against the pulse it sent. If the pulse resembles a
+shifted copy of itself, you get phantom targets and hidden real ones. The dream pulse resembles
+itself only at zero shift, and as a bonus would let radios waste less power. The mathematician
+Richard Turyn bet that ±1 sequences could never get arbitrarily close to that dream. He loses, at
+least for sufficiently long sequences, although we don't yet know how long, still less how to design
+the perfect pulse.
 
-Paper: [Asymptotically minimal maxima of real Littlewood polynomials](https://github.com/openai/math/blob/main/preprints/Asymptotically-minimal-maxima-of-real-Littlewood-polynomials-September-23-2026/paper.pdf) *(Lean-verified)*
+Paper:
+[Asymptotically minimal maxima of real Littlewood polynomials](https://github.com/openai/math/blob/main/preprints/Asymptotically-minimal-maxima-of-real-Littlewood-polynomials-September-23-2026/paper.pdf)
+*(Lean-verified)*
 
-### 7. Ultra-efficient statistics engine could be slightly more efficient
+### 7. Ultra-Efficient Statistics Engine Could Be Slightly More Efficient
 
-From epidemic forecasts to drug trials to financial risk models, a vast amount of science and industry runs on one engine: Markov chain Monte Carlo, a randomised method for working out which settings of a model's unknown parameters fit the data, and how sure we can be. The engine runs on expensive model evaluations but, on well-behaved problems, it is already stupendously fuel-efficient. The new result proves it can be very, very slightly more so. The catch: you have to be told the best fit in advance, and not count the extra work done outside the engine. Arguably, it saves petrol by getting out and pushing.
+From epidemic forecasts to drug trials to financial risk models, a vast amount of science and
+industry runs on one engine: Markov chain Monte Carlo, a randomised method for working out which
+settings of a model's unknown parameters fit the data, and how sure we can be. The engine runs on
+expensive model evaluations but, on well-behaved problems, it is already stupendously
+fuel-efficient. The new result proves it can be very, very slightly more so. The catch: you have to
+be told the best fit in advance, and not count the extra work done outside the engine. Arguably, it
+saves petrol by getting out and pushing.
 
-Paper: [Subpolynomial query complexity for well-conditioned log-concave sampling](https://github.com/openai/math/blob/main/preprints/Subpolynomial-query-complexity-for-well-conditioned-log-concave-sampling-September-26-2026/article.pdf) *(Lean-verified)*
+Paper:
+[Subpolynomial query complexity for well-conditioned log-concave sampling](https://github.com/openai/math/blob/main/preprints/Subpolynomial-query-complexity-for-well-conditioned-log-concave-sampling-September-26-2026/article.pdf)
+*(Lean-verified)*
 
-## So... flying cars?
+## So... Flying Cars?
 
-Not yet. In researching this post, Claude did all the reading. My job was mostly saying "that doesn't sound right, are you sure?", "that doesn't seem very practical" and "you're missing the point". The maths community now faces the same job.
+Not yet. In researching this post, Claude did all the reading. My job was mostly saying "that
+doesn't sound right, are you sure?", "that doesn't seem very practical" and "you're missing the
+point". The maths community now faces the same job.
 
-That's the most practical consequence so far, and it's sociological. Mathematicians are split. Many are [dismayed](https://theprint.in/tech/weeks-after-claiming-ai-cracked-90-yr-old-maths-puzzle-openai-drops-the-mother-lode-on-mathematicians/3064174/): about credit, about norms and, most existentially, about whether there's anything left for them to do. Others, this mathematician turned software developer included, are excited about the potential, the progress, the sense of a page turning.
+That's the most practical consequence so far, and it's sociological. Mathematicians are split. Many
+are
+[dismayed](https://theprint.in/tech/weeks-after-claiming-ai-cracked-90-yr-old-maths-puzzle-openai-drops-the-mother-lode-on-mathematicians/3064174/):
+about credit, about norms and, most existentially, about whether there's anything left for them to
+do. Others, this mathematician turned software developer included, are excited about the potential,
+the progress, the sense of a page turning.
 
-Software developers got here first. Mathematicians are feeling it now. Everyone else won't be far behind.
+Software developers got here first. Mathematicians are feeling it now. Everyone else won't be far
+behind.
 
 ## Acknowledgements
 
 This post was co-authored by Claude Opus 5.5.
 
-The illustration (below) for this piece is from the "En l'an 2000" series of cards imagining life in the year 2000, attributed to Jean-Marc Côté (c. 1901) or Villemard (1910). Public domain, via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:France_in_XXI_Century._School.jpg).
+The illustration (below) for this piece is from the "En l'an 2000" series of cards imagining life in
+the year 2000, attributed to Jean-Marc Côté (c. 1901) or Villemard (1910). Public domain, via
+[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:France_in_XXI_Century._School.jpg).
 
 ![A photograph of working mathematicians in 2026](/assets/images/la-culture-generale-ecole-du-futur.webp)

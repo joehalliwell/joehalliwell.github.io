@@ -1,5 +1,8 @@
 # Render the site
-render:
+lint:
+    rumdl check --fix posts
+
+render: lint
     quarto render
 
 # Rebuild the subsetted webfonts in assets/fonts/ (rarely needed; they're committed)
