@@ -1,0 +1,168 @@
+---
+categories: [ai, mathematics, singularity]
+date: "2026-10-25"
+description: |
+    In a recent post entitled "Where's the Intelligence Explosion?", the futurologist
+    Ramez Naam explains why he's not worried about Recursive Self-Improvement.
+    I explain why things are about to get very weird anyway.
+draft: false
+title: "Here's the intelligence explosion"
+---
+
+In his recent guest post on Noahpinion,
+[Where's the "intelligence explosion"?](https://www.noahpinion.blog/p/wheres-the-intelligence-explosion)
+futurologist Ramez Naam explains why he's skeptical about Recursive Self-Improvement takeoff sometimes called
+"FOOM"[^foom].
+
+[^foom]: FOOM is not an acronym. It's the sound of a LOUD explosion.
+    [Yudkowsky attributes it to IJ Good](https://youtube.com/watch?v=722LXkh5OGs&t=225s), but I couldn't find a
+    clear citation.
+
+The post is worth reading in its entirety, but in a nutshell there are many factors that could drive recursive
+self-improvement. And the frontier labs are spending an absolute fortune applying AI to accelerating the development of
+AI. Anthropic claim that
+[26% of their AI research is led by AI](https://www.anthropic.com/institute/measuring-pace-of-ai-development). It's also
+why they are profitable
+[unless you take into account the stupendous sums of money spent on developing the next AI](https://futurism.com/future-society/anthropic-claude-profit-ai-safety-development-finances).
+
+Naam's point, buttressed by evidence from the labs themselves, is that these all face "diminishing returns".
+
+![Key infographic from the Naam post, which acknowledges that AI is speeding up AI development, but claims this somehow falls short of "fast takeoff"](/assets/images/rsi-chart.webp){#fig-naam}
+
+## The Maths Bit
+
+Wisely, perhaps, he doesn't include a formula.
+
+The underlying assumption is that the speed of **progress** (scientific, economic, etc.[^social]) is linked to the
+current level of progress. The more progress we make, the faster progress becomes. Because, roughly, we're building and
+improving tools all the time.
+
+[^social]: We don't talk about social progress. The idea of social progress has the unmistakable whiff of socialism.
+Indeed one might say the very idea of social progress is characteristic of socialism.
+
+A simple mathematical model of this sort is that the speed with which progress, ahem, progresses (written
+$\frac{dP}{dt}$) is proportional to the $k$-th power of the current level of progress ($P^k$).
+
+$$
+\frac{dP}{dt} \propto P^k
+$$
+
+This is a "differential equation" that characterizes the behaviour of the system. Solving it gives very different curves
+depending on $k$: power-law growth for $k<1$, exponential growth for $k=1$, and a blow-up to infinity in finite time for
+$k>1$.
+
+What this means is that the behaviour of the system depends on the value we estimate for $k$.
+
+We can fit it to data.
+
+Naam cites the following evidence:
+
+- At OpenAI, researchers used 124× more tokens per person and shipped about 7× as many lines of code, but ran only 1.6×
+  as many experiments.
+- At Anthropic, staff report a productivity uplift of around 4×. Naam reckons doubling the pace of progress would need
+  about 40×.
+
+From this he estimates that each extra point of AI capability (on Epoch's ECI benchmark) buys 2–3% more research
+productivity, against the 15–19% needed for the loop to sustain itself. Very roughly, that puts $k$ at about 0.15. These
+are the "diminishing returns".
+
+Nothing to worry about, see?
+
+## Straw Man Singularity ($K>1$)
+
+Well no.
+
+First up, it's worth noting that $k>1$ is utterly implausible. It hits infinity in finite time, which is not something
+that anything actually does.
+
+(move to footnote? needs to be accessible for general reader)
+
+Suppose for the sake of argument that we're at progress level 0.1, and that $k=2$. We can show that the progress at time
+$t$ is
+
+$$
+P(t) = \frac{0.1}{1 - 0.1t}
+$$
+
+So at time 10, the denominator goes to zero; progress has gone infinite.
+
+Like the [Navier-Stokes result](FIXME) it points to a problem in our model. And it's not clear that anyone really
+believes that $k>1$.
+
+(Something about exponential) (Does anyone seriously claim k>1?)
+
+Naam does seem to equate FOOM with k>1. That has to be a straw man.
+
+## Subjective Singularity ($K\leq1$)
+
+In general, futurologists do seem to believe that $k\leq1$. Kurzweil -- possibly the most influential thinker (did he
+originate?) -- has spent a career arguing that $k=1$.
+
+When $k=1$ the rate just keeps getting faster, forever. Progress never hits infinity, nor does the rate of progress. But
+wait long enough and they are arbitrarily large. (Insert quote about how crazy this will feel -- centuries of innovation
+in a week etc.)
+
+And -- here's the thing -- $k<1$ is not much less bonkers. The "diminishing returns" are not a slowing to a halt. The
+rate of progress keeps climbing forever, just ever more gently.
+
+For all values of $k$ progress continues apace! When $k<1$ it still grows -- it never stops! -- but the rate of growth
+decreases over time.
+
+Either way, it's still a very strange world for primates who spent millennia figuring out how to use twigs to catch
+ants.
+
+But it doesn't have to be. $dP / dt$ is still ticking up and arguably it just has to be fast enough to give us future
+shock. We don't need to stay exponential.
+
+If say we start making mathematical breakthroughs every day, that's going to feel disorientating. It doesn't have to be
+every hour.
+
+Anthropic's CEO Dario Amodei, for one, doesn't need an explosion to predict
+[a "compressed 21st century"](https://www.darioamodei.com/essay/machines-of-loving-grace):
+
+> AI-enabled biology and medicine will allow us to compress the progress that human biologists would have achieved over
+> the next 50-100 years into 5-10 years.
+
+And beyond a certain point, progress might be effectively infinite for our dumb primate brains.
+
+Some weeks it feels like we're there already.
+
+Alvin Toffler had a name for this back in 1970. "Future shock" is
+
+> the shattering stress and disorientation that we induce in individuals by subjecting them to too much change in too
+> short a time.
+
+## Acknowledgements
+
+This post was co-authored by Claude Opus 5.5.
+
+The "FOOM" etymology is from
+[u/This-Winter-1866](https://www.reddit.com/r/singularity/comments/12bisxu/what_does_foom_stand_for_who_coined_this_term/).
+
+<!--
+## The steam engine runs out of steam
+
+Arguably this family of models of progress is wrong.
+
+A more nuanced account is provided by Jones:
+https://web.stanford.edu/~chadj/AIandEconomicFuture.pdf
+
+
+Jones offers another scenario one where gradually
+things that can be automated are automated. This is a task-oriented view where
+"automation" gradually reduces the time taken to complete a task to zero. But, the argument
+goes most tasks are composite. A composite task bottlenecks on the slowest component.
+
+This has been introduced to explain what we observe (is this the Productivity Paradox?)
+"To see a familiar example of this phenomenon, just look at your computer. You
+have on your desk roughly 100 million times the computing power that was available
+on the best computers from the early 1970s. But you and I are not 100 million times
+more productive than the economists of that time."
+
+Include graph where time of everything goes to zero.
+
+$$\left(\frac{1}{1-2}\right)^{(\frac{\sigma}{1-\sigma})}$$
+
+$\sigma$ is estimated at 0.2
+
+As the share of things that can be automated goes to 1 GDP goes to infinity -->
