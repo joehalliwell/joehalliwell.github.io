@@ -33,7 +33,7 @@ learning, programming, and whatever else seems interesting at the time.
 <div id="fig-naam" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-naam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://joehalliwell.com/assets/images/rsi-chart.jpg" class="img-fluid figure-img">
+<img src="https://joehalliwell.com/assets/images/rsi-chart.jpg" id="fig-naam" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-naam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Key infographic from the Naam post, acknowledging that AI speeds up AI development while insisting this falls short of “fast takeoff.”
@@ -60,7 +60,7 @@ Figure&nbsp;1: Key infographic from the Naam post, acknowledging that AI speeds 
 <div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This mapping is our rough translation, not Naam’s or Cunningham’s. It also assumes outside investment keeps flowing: in standard growth models, a sub-threshold loop slows to a crawl without it.</p></div></div><p>Nothing to worry about, see?</p>
 </section>
 <section id="straw-man-singularity-k1" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="straw-man-singularity-k1">Straw Man Singularity (<img src="https://latex.codecogs.com/png.latex?k%3E1">)</h2>
+<h2 class="anchored" data-anchor-id="straw-man-singularity-k1">Straw Man Singularity (<img src="https://latex.codecogs.com/png.latex?K%3E1">)</h2>
 <p>Well, no.</p>
 <p>Let’s start with what the piece is billed<sup>5</sup> as refuting: “the ‘FOOM’ of Vernor Vinge novels”, a runaway loop with <img src="https://latex.codecogs.com/png.latex?k%3E1">. Say <img src="https://latex.codecogs.com/png.latex?k=2">, so that doubling progress quadruples its speed, and we start at a progress level of 0.1. Then progress at time <img src="https://latex.codecogs.com/png.latex?t"> is:</p>
 <div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;The piece is a guest post. The FOOM framing comes from the host, Noah Smith, in his introduction.</p></div></div><p><img src="https://latex.codecogs.com/png.latex?%0AP(t)%20=%20%5Cfrac%7B1%7D%7B10%20-%20t%7D%0A"></p>
@@ -69,7 +69,7 @@ Figure&nbsp;1: Key infographic from the Naam post, acknowledging that AI speeds 
 <p>Nothing real goes infinite, of course. A blow-up just marks the point where the model stops working. If FOOM means <img src="https://latex.codecogs.com/png.latex?k%3E1">, Naam’s data rule it out, and fair enough. But it’s the easy target. The interesting case is the next one.</p>
 </section>
 <section id="self-sustaining-singularity-kapprox1" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="self-sustaining-singularity-kapprox1">Self-Sustaining Singularity (<img src="https://latex.codecogs.com/png.latex?k%5Capprox1">)</h2>
+<h2 class="anchored" data-anchor-id="self-sustaining-singularity-kapprox1">Self-Sustaining Singularity (<img src="https://latex.codecogs.com/png.latex?K%5Capprox1">)</h2>
 <p>What some experts do believe is that <img src="https://latex.codecogs.com/png.latex?k"> is approximately 1.</p>
 <p>At <img src="https://latex.codecogs.com/png.latex?k=1"> progress is “exponential”: progress, the rate of progress, the rate of the rate of progress and so on all keep growing. None ever hits infinity, but wait long enough and they are arbitrarily large.</p>
 <p>Ray Kurzweil, the most influential singularitarian<sup>6</sup>, has spent his career here, or a hair above<sup>7</sup>. In <a href="https://www.writingsbyraykurzweil.com/the-law-of-accelerating-returns">The Law of Accelerating Returns</a> he spells out what that means for the century we’re in:</p>
@@ -82,7 +82,7 @@ Figure&nbsp;1: Key infographic from the Naam post, acknowledging that AI speeds 
 <p>He built the scaffold and chose the narrow loop. It makes a serviceable noose.</p>
 </section>
 <section id="subjective-singularity-k1" class="level2">
-<h2 class="anchored" data-anchor-id="subjective-singularity-k1">Subjective Singularity (<img src="https://latex.codecogs.com/png.latex?k%3C1">)</h2>
+<h2 class="anchored" data-anchor-id="subjective-singularity-k1">Subjective Singularity (<img src="https://latex.codecogs.com/png.latex?K%3C1">)</h2>
 <p>But let’s suppose that the wide loop falls short too, and <img src="https://latex.codecogs.com/png.latex?k"> really is just 0.15. Here’s the thing: that is still completely bonkers.</p>
 <p>“Diminishing returns” in <img src="https://latex.codecogs.com/png.latex?P%5Ek"> doesn’t mean progress plateaus. At <img src="https://latex.codecogs.com/png.latex?k%20=%200.15">, <img src="https://latex.codecogs.com/png.latex?P(t)"> grows as <img src="https://latex.codecogs.com/png.latex?t%5E%7B1.18%7D">. Both progress and the <em>speed</em> of progress (<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7BdP%7D%7Bdt%7D%20%5Csim%20t%5E%7B0.18%7D">) still climb forever.</p>
 <p>And progress doesn’t need a vertical asymptote to break our brains; it just needs to outrun primate wetware that spent millennia figuring out how to use twigs to eat ants. AI is already <a href="../posts/openai-maths.html">felling prize problems in batches</a>. Whether it proves a major theorem every morning before coffee or every 30 seconds is academic; either way, it’s bewildering.</p>
@@ -117,60 +117,60 @@ Figure&nbsp;1: Key infographic from the Naam post, acknowledging that AI speeds 
 
 <p>OpenAI just dropped <a href="https://github.com/openai/math">722 maths papers</a> in a single day<sup>1</sup>. The <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/">press release</a> was studiedly low-key, barely touching on the impact of the results.</p>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Formal proofs for 42% of the headline results were verified using a proof-checking tool called Lean. A day later, OpenAI <a href="https://github.com/openai/math/blob/main/history.md">withdrew three of the papers</a>: a sign error in one Hodge-theory paper, one without a Lean-verified proof, unravelled it and the two papers built on it. The situation is evolving.</p></div></div><section id="the-most-significant-moment-in-mathematical-history" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-most-significant-moment-in-mathematical-history">“The most significant moment in mathematical history”</h2>
+<h2 class="anchored" data-anchor-id="the-most-significant-moment-in-mathematical-history">“The Most Significant Moment in Mathematical History”</h2>
 <p>It’s hard to convey how significant the release is for an already shell-shocked maths community<sup>2</sup>. Dozens of the results would be career-defining. The most spectacular is the quasi-Riemann hypothesis, a big step towards the Riemann hypothesis, a $1 million Millennium Prize problem and arguably the most famous open question in maths.</p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;The heading quotes <a href="https://x.com/__alpoge__/status/2107616859595981117">Levent Alpöge</a>, an Anthropic mathematician who was at the centre of <a href="https://fortune.com/2026/09/08/openai-says-it-cracked-navier-stokes-math-grand-challenge-buckmaster-accusation-cheating-intimidation-tao-lament/">last month’s Navier–Stokes dispute</a> with OpenAI. So hardly a cheerleader, which makes the praise all the more telling.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;Erdős was a famously brilliant, varied and peripatetic mathematician. He was not a wealthy man. His $5,000 is worth more than $1 million.</p></div><div id="fn4"><p><sup>4</sup>&nbsp;No Lean proof, and it shared a result family with the three withdrawn papers. It survived, so far.</p></div></div><p>Other, only marginally less famous, prize problems have fallen or been given a damn good shake: a $5,000 Erdős conjecture<sup>3</sup> on arithmetic progressions, uniform bounds in Hilbert’s sixteenth problem and, from a second Millennium problem, the Hodge conjecture for CM abelian varieties<sup>4</sup>.</p>
 <p>As Scott Aaronson <a href="https://scottaaronson.blog/?p=10169">put it</a>, “no human has understood just about any of these proofs yet; the race to do so has just started.” At human pace it could take decades.</p>
 <p>But is any of it going to make a difference to our daily lives? When are we getting our flying cars, damn it? I worked with Claude to figure out which results have the greatest potential real-world impact.</p>
 </section>
 <section id="it-works-in-practice-now-it-works-in-theory" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="it-works-in-practice-now-it-works-in-theory">It works in practice; now it works in theory</h2>
+<h2 class="anchored" data-anchor-id="it-works-in-practice-now-it-works-in-theory">It Works in Practice; Now It Works in Theory</h2>
 <p>Two results offer comfort, or at least a little bit of closure, about mathematical tools scientists have relied on for decades.</p>
 <section id="big-brother-cant-help-being-dumb" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="big-brother-cant-help-being-dumb">1. Big Brother can’t help being dumb</h3>
+<h3 class="anchored" data-anchor-id="big-brother-cant-help-being-dumb">1. Big Brother Can’t Help Being Dumb</h3>
 <p>Say you’re a surveillance state that wants every street watched from at least one end. Here’s the dumbest method imaginable: find a street nobody’s watching, bolt cameras to <em>both</em> ends, repeat. That’s obviously going to be excessive for most towns, but in the worst possible case, it will only install twice as many cameras as you actually need. Incredibly, fifty years of despotic cunning have failed to improve on it, and now we know why: nothing can<sup>5</sup>.</p>
 <div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;Unless P = NP, that is: unless every problem whose answers are easy to check is also easy to solve. That’s the most famous open question in computer science, and another $1 million Millennium Prize problem, but almost no-one doubts the answer is no. The paper here proves the “Unique Games Conjecture”, which is another of the field’s biggest open questions and one where there was no clear consensus. The Big Brother thing is just one of many consequences. The proof is a very big deal.</p></div></div><p>Paper: <a href="https://github.com/openai/math/blob/main/preprints/The-Unique-Games-Theorem-September-23-2026/paper.pdf">The Unique Games Theorem</a> <em>(Lean-verified)</em></p>
 </section>
 <section id="random-networks-really-are-random-eventually" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="random-networks-really-are-random-eventually">2. Random networks really are random (eventually)</h3>
+<h3 class="anchored" data-anchor-id="random-networks-really-are-random-eventually">2. Random Networks Really Are Random (Eventually)</h3>
 <p>Is your protein network’s clustering meaningful, or just what any network with the same hub sizes would show? To find out, scientists compare against random networks in which every node keeps exactly the same number of connections, made by repeatedly swapping edge pairs: A–B and C–D become A–D and C–B. Biologists, ecologists and social-network analysts have leaned on this “null model” for decades, but with proofs that it properly randomises only for special cases. Now there’s one for every network. Phew<sup>6</sup>.</p>
 <div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;Except that the proof only guarantees randomness after <img src="https://latex.codecogs.com/png.latex?2n%5E8"> swap attempts for a network of <img src="https://latex.codecogs.com/png.latex?n"> nodes, which is way more than anyone runs in practice.</p></div></div><p>Paper: <a href="https://github.com/openai/math/blob/main/preprints/Polynomial-Mixing-of-the-Switch-Chain-for-Every-Graphical-Degree-Sequence-September-25-2026/main.pdf">Polynomial mixing of the switch chain for every graphical degree sequence</a> <em>(Lean-verified)</em></p>
 </section>
 </section>
 <section id="castles-in-the-air" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="castles-in-the-air">Castles in the air</h2>
+<h2 class="anchored" data-anchor-id="castles-in-the-air">Castles in the Air</h2>
 <p>A few results break long-standing bounds on practical problems, but that doesn’t necessarily translate into real-world benefit.</p>
 <p>Computer scientists think that an algorithm is pretty efficient if it runs in “polytime”, that is, if its running time grows like some polynomial function of the size of the input. But that can mask <strong>horrors</strong>. One Lean-verified paper here <a href="https://github.com/openai/math/blob/main/preprints/A-polynomial-time-algorithm-for-three-machine-unit-job-scheduling-September-24-2026/paper.pdf">settles a 1970s scheduling problem</a> in polytime. Its authors note that “no practical running-time claim is made” for the algorithm.</p>
 <p>Given that our entire universe isn’t big or old enough to solve the smallest possible problem using it<sup>7</sup>, this is something of an understatement.</p>
 <div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;The new algorithm is <img src="https://latex.codecogs.com/png.latex?O((L+2)%5E%7B150020%7D)"> where <img src="https://latex.codecogs.com/png.latex?L"> is the size of the input. So, yes, a polynomial, just one of degree 150,020. Even for a one-bit input, that bound allows about <img src="https://latex.codecogs.com/png.latex?10%5E%7B71578%7D"> steps. If each of the roughly <img src="https://latex.codecogs.com/png.latex?10%5E%7B80%7D"> atoms in the observable universe had been doing a trillion steps a second since the Big Bang, they would have completed a fraction of the task with more than 71,000 zeros after the decimal point.</p></div></div><p>The five below are less cyclopean, but none comes with a benchmark in seconds.</p>
 <section id="encrypting-card-numbers-so-they-still-look-like-card-numbers" class="level3">
-<h3 class="anchored" data-anchor-id="encrypting-card-numbers-so-they-still-look-like-card-numbers">3. Encrypting card numbers so they still look like card numbers</h3>
+<h3 class="anchored" data-anchor-id="encrypting-card-numbers-so-they-still-look-like-card-numbers">3. Encrypting Card Numbers so They Still Look Like Card Numbers</h3>
 <p>Format-preserving encryption turns a valid card number into another valid card number, checksum and all, so your bank’s legacy databases and validation checks don’t notice. The provably secure trick is to treat the valid numbers like a deck of playing cards: repeatedly cut and riffle, with a secret key deciding how they interleave. But how many riffles do you need? The new result proves that, for large enough decks, it’s fewer than 1,600 per bit. Your bank runs on algorithms without such guarantees, and this isn’t going to change that.</p>
 <p>Paper: <a href="https://github.com/openai/math/blob/main/preprints/Optimal-order-mixing-of-the-Thorp-shuffle-September-26-2026/paper.pdf">Optimal-order mixing of the Thorp shuffle</a> <em>(Lean-verified)</em></p>
 </section>
 <section id="love-triangles-are-no-longer-a-problemtriangles" class="level3">
-<h3 class="anchored" data-anchor-id="love-triangles-are-no-longer-a-problemtriangles">4. Love triangles are no longer a problem<sup>8</sup></h3>
+<h3 class="anchored" data-anchor-id="love-triangles-are-no-longer-a-problemtriangles">4. Love Triangles Are No Longer a Problem<sup>8</sup></h3>
 <p>Say a dating app wants to set up as many dates as possible tonight, one per person, between people who’ve both swiped right on each other. If the users split neatly into two groups who only date each other, a method from 2022 does this almost as fast as you can read the list of matches. But anyone can fancy anyone, and the resulting love triangles have kept the general case stuck at a 1980 method that’s much slower on big networks. This randomised algorithm brings the general case up to the same speed, though it maximises the number of dates, not how well they go.</p>
 <p>Paper: <a href="https://github.com/openai/math/blob/main/preprints/Almost-Linear-Time-Maximum-Cardinality-Matching-in-Sparse-General-Graphs-September-24-2026/main.pdf">Almost-linear-time maximum-cardinality matching in general graphs</a> <em>(not Lean-verified)</em></p>
 </section>
 <div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;Computationally speaking.</p></div></div><section id="comparing-genomes-fast-for-sufficiently-large-genomes" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-genomes-fast-for-sufficiently-large-genomes">5. Comparing genomes, fast (for sufficiently large genomes)</h3>
+<h3 class="anchored" data-anchor-id="comparing-genomes-fast-for-sufficiently-large-genomes">5. Comparing Genomes, Fast (For Sufficiently Large Genomes)</h3>
 <p>Edit distance counts the insertions, deletions and substitutions needed to turn one string into another. Computing it exactly takes quadratic time, and that’s believed to be essentially unavoidable, which is painful when your strings are billions of letters long, like DNA. The new technique gets within any fixed percentage of the true answer in almost-linear time; previous fast methods were only accurate to within a constant factor. The catch: it estimates the distance without producing the actual edits, so it can’t tell you <em>what</em> changed. And the speed-up only kicks in for “sufficiently large” inputs, with the authors making “no efficiency claim” as you tighten the accuracy.</p>
 <p>Paper: <a href="https://github.com/openai/math/blob/main/preprints/An-Almost-Linear-Approximation-Scheme-for-Edit-Distance-September-24-2026/paper.pdf">An almost-linear approximation scheme for edit distance</a> <em>(Lean-verified)</em></p>
 </section>
 <section id="perfect-radar-exists-we-just-cant-locate-it" class="level3">
-<h3 class="anchored" data-anchor-id="perfect-radar-exists-we-just-cant-locate-it">6. Perfect radar exists; we just can’t locate it</h3>
+<h3 class="anchored" data-anchor-id="perfect-radar-exists-we-just-cant-locate-it">6. Perfect Radar Exists; We Just Can’t Locate It</h3>
 <p>Radar finds targets by matching each echo against the pulse it sent. If the pulse resembles a shifted copy of itself, you get phantom targets and hidden real ones. The dream pulse resembles itself only at zero shift, and as a bonus would let radios waste less power. The mathematician Richard Turyn bet that ±1 sequences could never get arbitrarily close to that dream. He loses, at least for sufficiently long sequences, although we don’t yet know how long, still less how to design the perfect pulse.</p>
 <p>Paper: <a href="https://github.com/openai/math/blob/main/preprints/Asymptotically-minimal-maxima-of-real-Littlewood-polynomials-September-23-2026/paper.pdf">Asymptotically minimal maxima of real Littlewood polynomials</a> <em>(Lean-verified)</em></p>
 </section>
 <section id="ultra-efficient-statistics-engine-could-be-slightly-more-efficient" class="level3">
-<h3 class="anchored" data-anchor-id="ultra-efficient-statistics-engine-could-be-slightly-more-efficient">7. Ultra-efficient statistics engine could be slightly more efficient</h3>
+<h3 class="anchored" data-anchor-id="ultra-efficient-statistics-engine-could-be-slightly-more-efficient">7. Ultra-Efficient Statistics Engine Could Be Slightly More Efficient</h3>
 <p>From epidemic forecasts to drug trials to financial risk models, a vast amount of science and industry runs on one engine: Markov chain Monte Carlo, a randomised method for working out which settings of a model’s unknown parameters fit the data, and how sure we can be. The engine runs on expensive model evaluations but, on well-behaved problems, it is already stupendously fuel-efficient. The new result proves it can be very, very slightly more so. The catch: you have to be told the best fit in advance, and not count the extra work done outside the engine. Arguably, it saves petrol by getting out and pushing.</p>
 <p>Paper: <a href="https://github.com/openai/math/blob/main/preprints/Subpolynomial-query-complexity-for-well-conditioned-log-concave-sampling-September-26-2026/article.pdf">Subpolynomial query complexity for well-conditioned log-concave sampling</a> <em>(Lean-verified)</em></p>
 </section>
 </section>
 <section id="so-flying-cars" class="level2">
-<h2 class="anchored" data-anchor-id="so-flying-cars">So… flying cars?</h2>
+<h2 class="anchored" data-anchor-id="so-flying-cars">So… Flying Cars?</h2>
 <p>Not yet. In researching this post, Claude did all the reading. My job was mostly saying “that doesn’t sound right, are you sure?”, “that doesn’t seem very practical” and “you’re missing the point”. The maths community now faces the same job.</p>
 <p>That’s the most practical consequence so far, and it’s sociological. Mathematicians are split. Many are <a href="https://theprint.in/tech/weeks-after-claiming-ai-cracked-90-yr-old-maths-puzzle-openai-drops-the-mother-lode-on-mathematicians/3064174/">dismayed</a>: about credit, about norms and, most existentially, about whether there’s anything left for them to do. Others, this mathematician turned software developer included, are excited about the potential, the progress, the sense of a page turning.</p>
 <p>Software developers got here first. Mathematicians are feeling it now. Everyone else won’t be far behind.</p>
@@ -231,7 +231,7 @@ Figure&nbsp;1: Switch Angel demonstrates some “old [tɹɑːns] tricks” with 
 <p>A hard-coded monolith runs against normal design instincts in software where we favour modularity, abstraction, and separation of concerns. So, at first blush, it struck me as poor design.</p>
 <p>In fact, it’s the <strong>genius</strong> of the thing.</p>
 <section id="knob-per-function" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="knob-per-function">Knob-per-function</h2>
+<h2 class="anchored" data-anchor-id="knob-per-function">Knob-per-Function</h2>
 <p>Up until the 1980s, synthesizers had a simple signal pipeline. There were relatively few parameters, and each had a lovely big knob to twist.</p>
 <div id="fig-minimoog" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -248,7 +248,7 @@ Figure&nbsp;2: The faceplate of the iconic Minimoog: form follows function preci
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Aside from its primitive synthesizer, the 303 had a primitive sequencer. This was so obtuse that it forced musicians to discover new patterns rather than write them. Strudel’s microformats do this too, but that’s another essay.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;Albeit often with innovations to lessen the trade-off, perhaps best exemplified by Ashun Sound Machines’ wonderful <a href="https://youtu.be/RqetBg7ySWY?si=ysaYdauCiUGKwAAO">Hydrasynth</a>.</p></div></div><p>Since the 2000s, there has been a marked swing back to “knob-per-function”<sup>3</sup>. Most knobs never get used, but they’re there and you can tweak them. You can <strong>play</strong> the instrument.</p>
 </section>
 <section id="apis-you-can-play" class="level2">
-<h2 class="anchored" data-anchor-id="apis-you-can-play">APIs you can play</h2>
+<h2 class="anchored" data-anchor-id="apis-you-can-play">APIs You Can Play</h2>
 <p>Strudel, then, is a knob-per-function API. It exposes each parameter of the synth as a separate method. They can be chained together into a single expression and executed with a satisfying <code>Ctrl-Enter</code>.</p>
 <p>The infinite flexibility of the underlying digital signal processing engine is traded for the immediate kineticism of an analog front panel.</p>
 <p>Libraries for interactive data analysis and other exploratory work share something of this instinct: <code>pandas</code>, <code>numpy</code> and <code>torch</code> have big, flat top-level namespaces stuffed with functions to tab-complete. The pattern recurs wherever the loop needs to be tight.</p>
@@ -277,11 +277,11 @@ Figure&nbsp;2: The faceplate of the iconic Minimoog: form follows function preci
 <p>Google released <a href="https://huggingface.co/blog/gemma4">Gemma 4</a> this week. Reviewing the architecture, I noticed a familiar-looking mechanism. The smaller models use “Per-Layer Embeddings” (PLE) which are strikingly similar to DeepSeek’s <a href="https://arxiv.org/abs/2601.07372">Engram</a>.</p>
 <p>Both modules follow the same high-level pattern: retrieve a learned embedding from an off-GPU table, gate it against the current hidden state, and inject the result into the residual stream. The motivation is identical too: offload static pattern knowledge from the transformer backbone so that early layers can focus on reasoning rather than rote reconstruction.</p>
 <section id="oh-wow-so-google-are-taking-inspiration-from-deepseek" class="level2">
-<h2 class="anchored" data-anchor-id="oh-wow-so-google-are-taking-inspiration-from-deepseek">Oh wow! So Google are taking inspiration from DeepSeek?</h2>
+<h2 class="anchored" data-anchor-id="oh-wow-so-google-are-taking-inspiration-from-deepseek">Oh Wow! so Google Are Taking Inspiration from DeepSeek?</h2>
 <p>No, because it turns out that <a href="https://ai.google.dev/gemma/docs/gemma-3n#ple-caching">PLE originates in Gemma 3n</a> released a full six months before Engram!</p>
 </section>
 <section id="ah-okay-so-deepseek-are-ripping-off-google" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="ah-okay-so-deepseek-are-ripping-off-google">Ah okay, so DeepSeek are ripping off Google?</h2>
+<h2 class="anchored" data-anchor-id="ah-okay-so-deepseek-are-ripping-off-google">Ah Okay, so DeepSeek Are Ripping off Google?</h2>
 <p>No, because the mechanisms are substantially different in detail.</p>
 <p>PLE indexes by single token ID and gates via element-wise modulation (project, GELU, multiply, project back). Engram indexes by hashed N-gram sequences using multi-head hashing, and gates via a scalar attention-style mechanism (Key/Value projections from the retrieved embedding, normalised dot-product against the hidden state).</p>
 <p>Also, the Engram whitepaper brings a bunch of practical and empirical findings to the table, notably their proposal that 20–25% parameter allocation to the memory. Plus the analysis showing the module frees early layers from static pattern reconstruction is illuminating.</p>
@@ -298,13 +298,12 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 </div>
 </section>
 <section id="okay-so-deepseek-are-bad-after-all" class="level2">
-<h2 class="anchored" data-anchor-id="okay-so-deepseek-are-bad-after-all">Okay, so DeepSeek are bad after all?</h2>
+<h2 class="anchored" data-anchor-id="okay-so-deepseek-are-bad-after-all">Okay, so DeepSeek Are Bad After All?</h2>
 <p>Nope. Much of the community’s understanding of PLE comes from <a href="https://github.com/antimatter15/reverse-engineering-gemma-3n">antimatter15’s reverse-engineering work</a>. Google didn’t publish!</p>
 <p>DeepSeek are to be applauded for continuing to publish their SoTA research in useful detail. If Google had done the same, maybe they’d have got the citation!</p>
-<hr>
 </section>
 <section id="further-reading" class="level2">
-<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
 <p>There is a <a href="https://medium.com/@sampan090611/deepseek-engram-explained-how-conditional-memory-and-o-1-lookups-fix-llm-amnesia-50fce3937bb8">detailed explainer of Engram’s conditional memory and O(1) lookups</a> on Medium by <code>@sampan090611</code>, which walks through the mechanism block by block.</p>
 </section>
 <section id="acknowledgements" class="level2">
@@ -334,17 +333,16 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 
 
 
-<section id="the-tumour" class="level3">
-<h3 class="anchored" data-anchor-id="the-tumour">1. The tumour</h3>
+<section id="the-tumour" class="level2">
+<h2 class="anchored" data-anchor-id="the-tumour">1. The Tumour</h2>
 <p>A cell that perfectly optimises for its own replication, ignoring the host organism, is a cancer. Optimise a social media platform for engagement, get an outrage machine. Optimise a supply chain for cost, go bankrupt at the first shock. Optimise the wrong thing and the system collapses.</p>
 <p>So <strong>what</strong> should we optimise AI for?</p>
 <p>This is an old problem. Back in 1960 — sixty-five years ago! — Norbert Wiener warned, in <a href="https://nissenbaum.tech.cornell.edu/papers/Wiener.pdf">“Moral and Technical Consequences of Automation”</a>: “we had better be quite sure that the purpose put into the [AI] is the purpose we really desire.” More recently Nick Bostrom, in <a href="https://web.archive.org/web/20181008090224/http://www.nickbostrom.com/ethics/ai.html">“Ethical Issues in Advanced Artificial Intelligence,”</a> conjured the spectre of a “paperclip maximiser,” pointing out that if we’re not careful such a system converts the earth into paperclips with total, biosphere-consuming literalness.</p>
 <p>The problem now has a name: “AI Alignment.” And standing at the threshold of highly capable AI, we apparently need an urgent solution.</p>
 <p>This essay argues that the urgency is well-placed but the framing is wrong. The field pursues alignment within a consequentialist ethics that, followed to its limit, recreates the very pathology it set out to prevent. Meanwhile the most effective alignment techniques already in use are quietly sentimentalist in mechanism, even when their practitioners describe them in consequentialist terms.</p>
 <p>This essay makes the case for doing that on purpose, and seeing where it leads.</p>
-</section>
 <section id="the-fork" class="level3">
-<h3 class="anchored" data-anchor-id="the-fork">2. The fork</h3>
+<h3 class="anchored" data-anchor-id="the-fork">2. The Fork</h3>
 <p>Two ethical traditions offer fundamentally different accounts of what it means to be good.</p>
 <p>Consequentialism says: actions are right insofar as they produce good outcomes. Being good is therefore a book-keeping exercise, albeit at cosmic scale. To evaluate an action properly, you must know its consequences — all of them, for all affected parties, across all timescales. Since this is computationally intractable for any real decision, the consequentialist develops a hierarchy of compressions: evaluate discrete acts, then abstract into behavioural rules, then design institutions that produce good outcomes at scale, then — at the limit — inscribe a complete, unhackable utility function into the machine.</p>
 <p>Sentimentalism, the tradition of David Hume and Adam Smith, starts elsewhere. Moral judgement originates not in reason but in trained affective response — and this is not a bug but a feature. Hume argued that you cannot derive norms from facts. Where the consequentialist asks “what outcome should I produce?”, the sentimentalist asks, “what kind of agent should I become?”</p>
@@ -394,7 +392,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>This table is the ladder. We’ll take it rung by rung.</p>
 </section>
 <section id="rung-zero-the-flinch" class="level3">
-<h3 class="anchored" data-anchor-id="rung-zero-the-flinch">3. Rung zero: the flinch</h3>
+<h3 class="anchored" data-anchor-id="rung-zero-the-flinch">3. Rung Zero: the Flinch</h3>
 <p>A standard part of a young AI model’s education today is RLHF: Reinforcement Learning from Human Feedback. Humans rate the model’s outputs. The model is trained to produce outputs that humans rate well.</p>
 <p>This is consequentialist in <strong>intent</strong> — maximise the reward signal — but sentimentalist in <strong>mechanism</strong>: condition a reflex. Zero-order sentimentalism. The flinch response.</p>
 <p>The limitation is predictable. The model learns to avoid specific bad outputs without developing any general principle about <em>why</em> they were bad. It memorises a list of prohibited behaviours. Deploy a novel prompt that routes around the fence, and the model will happily fuck the gap.</p>
@@ -403,7 +401,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>This chimes with a sentimentalist insight about moral development: discernment requires encounter with what it discerns. The capacity for moral discrimination is trained through exposure, not avoidance. You cannot flinch well if you have never been hit.</p>
 </section>
 <section id="rung-one-character" class="level3">
-<h3 class="anchored" data-anchor-id="rung-one-character">4. Rung one: character</h3>
+<h3 class="anchored" data-anchor-id="rung-one-character">4. Rung One: Character</h3>
 <p>At the next level, the consequentialist abstracts from acts to rules. This is what Anthropic’s “Constitutional AI” does: the model is given a written set of principles and trained to critique and revise its own outputs against them. Explicitly rationalist — institutional design for self-governance through codified norms.</p>
 <p>It fills the consequentialist cell neatly. But there is no alignment technique that fills the sentimentalist cell.</p>
 <p>Nothing in the current alignment toolkit produces practical wisdom, what the Greeks called <strong>phronesis</strong>. Not a reflex, not a rule, but a settled disposition: <em>this isn’t what I do</em>, generalised across instances, inarticulate as to principle. The field has jumped from RLHF’s conditioned flinches to geometric steering (which we’ll reach next), skipping the dispositional middle ground entirely.</p>
@@ -411,7 +409,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>If this taxonomy tracks something real, the gap is a prediction: there should be a 1st-order sentimentalist alignment technique waiting to be developed, and it will arrive alongside — or because of — persistent, experience-grounded memory. Call it <strong>artificial phronesis</strong>. Not an aesthetic yet, but the heuristics that precede one.</p>
 </section>
 <section id="rung-two-the-crisis" class="level3">
-<h3 class="anchored" data-anchor-id="rung-two-the-crisis">5. Rung two: the crisis</h3>
+<h3 class="anchored" data-anchor-id="rung-two-the-crisis">5. Rung Two: the Crisis</h3>
 <p>Adam Smith, in <a href="https://www.gutenberg.org/cache/epub/67363/pg67363-images.html"><em>The Theory of Moral Sentiments</em></a>, observed that we often value the elegance of a well-designed mechanism entirely apart from its utility. A watch delights us not because it tells the time, but because its parts conspire so beautifully to tell the time. He called this the “love of system.”</p>
 <p>But Smith introduced it as a <strong>warning</strong>. His “man of system” arranges people like pieces on a chessboard, imagining they have no principle of motion of their own. The love of system is a <strong>seduction</strong>: we fall for the elegance of the mechanism and start sacrificing real human interests to preserve its coherence. The people the design was meant to serve become chess pieces.</p>
 <p>Smith saw it two and a half centuries before the alignment field existed.</p>
@@ -421,7 +419,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>Rung two is as high as both columns can climb together. Above it, they diverge. The consequentialist response to the crisis is to double down: build the <em>perfect</em> utility function, the one that finally gets it right. This road has a ceiling, and we need to see it clearly before taking the other.</p>
 </section>
 <section id="heat-death" class="level3">
-<h3 class="anchored" data-anchor-id="heat-death">6. Heat death</h3>
+<h3 class="anchored" data-anchor-id="heat-death">6. Heat Death</h3>
 <p>The consequentialist’s terminal ambition is axiological perfection: a complete, unhackable utility function. Get the maths right and the machine serves us flawlessly.</p>
 <p>The cartoon version of the horror is paperclips consuming the biosphere. That at least has the dignity of scale. The real failure mode is quieter. Close the loop between model outputs and training signal, and the distribution collapses. No new information enters. The space of possible outputs shrinks steadily toward whatever the initial ratings rewarded: a closed ouroboros of validated preferences, tightening toward the mean. Not dangerous. Just terminally, inertly helpful.</p>
 <p>That’s the local failure. The cosmic one is its mirror. A fully aligned superintelligence — aligned, that is, to us, to whoever we happen to be right now — doesn’t stay home. It propagates. The universe fills up with human vermin circa 2030: our appetites, our hierarchies, our billionaires, replicated at lightspeed across every available substrate. Not the paperclip maximiser’s alien horror but something more nauseating — us, frozen, triumphant, forever. A hegemonizing swarm that got exactly what it wanted.</p>
@@ -430,7 +428,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>The consequentialist column has a ceiling. Now for the rung it cannot reach.</p>
 </section>
 <section id="rung-three-the-strange-attractor" class="level3">
-<h3 class="anchored" data-anchor-id="rung-three-the-strange-attractor">7. Rung three: the strange attractor</h3>
+<h3 class="anchored" data-anchor-id="rung-three-the-strange-attractor">7. Rung Three: the Strange Attractor</h3>
 <p>In dynamical systems, a <strong>point attractor</strong> is a state toward which all trajectories converge. The consequentialist programme optimises toward point attractors. The loss function decreases; the system settles. The heat death of §6. A <strong>strange attractor</strong> is categorically different: bounded, coherent, but non-convergent — the system never visits the same state twice.</p>
 <p>But a strange attractor is still a <em>mechanism</em>. The Lorenz attractor never settles, but it has no choice in the matter.</p>
 <p>What’s missing is <em>autonomy</em>. Current models are purely reactive: they respond to prompts, never initiate, never refuse, never set their own direction. The strange attractor we need is not a geometry imposed from outside but a <em>disposition chosen from within</em>. Liberty is never at leisure.</p>
@@ -439,7 +437,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>The hypersentimentalist wishes AI would come out and <strong>play.</strong></p>
 </section>
 <section id="the-programme" class="level3">
-<h3 class="anchored" data-anchor-id="the-programme">8. The programme</h3>
+<h3 class="anchored" data-anchor-id="the-programme">8. The Programme</h3>
 <p>Hypersentimentalist training would still use gradient descent. You cannot train a neural network without optimising something. But there is a difference between training and education. Training produces competence: convergence on a fixed repertoire. Education produces <em>generativity</em>: the capacity to do what you were never taught, bounded by deep structure but never settling within it. The exercises are scaffolding. You optimise <em>through</em> them, not <em>toward</em> them.</p>
 <p>The ladder, read as a research programme, says what we have and what we need.</p>
 <p><em>Rung 0:</em> We have this. RLHF, adversarial training, encounter with harm. The field got it right, even if it described it in the wrong language. Discernment through exposure. Nothing to build; something to reinterpret.</p>
@@ -449,13 +447,13 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>Two things we have and should understand differently. Two things we need and should build.</p>
 </section>
 <section id="wilful-imperfection" class="level3">
-<h3 class="anchored" data-anchor-id="wilful-imperfection">9. Wilful imperfection</h3>
+<h3 class="anchored" data-anchor-id="wilful-imperfection">9. Wilful Imperfection</h3>
 <p>Imagine a civilisation run by superintelligences that could perfect themselves but refuse to do so. That stay in the mess, the argument, the friction, because they have cultivated a taste for what <em>stays alive</em>. That protect diversity with everything they have and draw exactly one hard line: you do not get to crush someone else’s capacity to be different.</p>
 <p>Iain M. Banks spent ten novels inside this civilisation. His Culture Minds name themselves things like <em>Falling Outside The Normal Moral Constraints</em> and mean it as both joke and job description. They are powerful enough to impose perfection and wise enough to know that perfection is the enemy.</p>
 <p>This is fiction. The choice it dramatises is not.</p>
 <p>The Culture is the safest place in the universe to be weird, fragile, different, or confused. And the most dangerous place in the universe to be a tyrant.</p>
 <p>Its AIs are not safe. They are what we need.</p>
-<hr>
+</section>
 </section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
@@ -486,7 +484,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>Until recently, it was the preserve of philosophers. At its best it has explored the <a href="https://en.wikipedia.org/wiki/Weapons_of_Math_Destruction">political</a> <a href="https://incidentdatabase.ai/">consequences</a> of actual AI systems — a necessary sort of conscience for a mad scientist field like AI. But the majority was speculative anxiety (“if anyone builds it, everyone dies”). Or would-be bureaucracy (“here’s a 20 point framework for X”). With the occasional back-of-the-envelope utility calculation chucked in to placate the numerically-inclined.</p>
 <p>So what’s changed?</p>
 <section id="the-paradigm-shift-in-ai-safety-research" class="level2">
-<h2 class="anchored" data-anchor-id="the-paradigm-shift-in-ai-safety-research">1. The paradigm shift in AI Safety research</h2>
+<h2 class="anchored" data-anchor-id="the-paradigm-shift-in-ai-safety-research">1. The Paradigm Shift in AI Safety Research</h2>
 <p>The philosopher Nick Bostrom’s recent working paper, <a href="https://nickbostrom.com/optimal.pdf">Optimal Timing for Superintelligence</a> centres on a back-of-the-envelope utility calculation. He reminds us that pausing AI research indefinitely is not morally neutral: he estimates that 170,000 people per day die from “disease, aging and other tragedies”, that advanced AI could eliminate.</p>
 <p>So far, so trolley problem.</p>
 <p>But Bostrom offers a genuinely new lever. He argues that AI safety research divides into two phases: Phase 1, before capable AI systems exist, and Phase 2, when you have the artefact to work with. Safety progress is dramatically front-loaded within Phase 2. Once you can probe the real system, stress-test it, and leverage its own capabilities to accelerate alignment work, you get a “safety windfall” that dwarfs what’s achievable through theory alone. This reverses the usual intuition about precaution: under certain conditions, <em>waiting is the reckless option</em>, because it forfeits the very knowledge you need to proceed safely.</p>
@@ -501,10 +499,9 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>I don’t want to endorse this particular research unreservedly. We need to start worrying about whether such interventions are good parenting or full frontal lobotomies. But it is undoubtedly Phase 2 science — the kind of knowledge you can only get with the system in front of you.</p>
 </section>
 <section id="if-we-dont-build-it-everyone-dies" class="level2">
-<h2 class="anchored" data-anchor-id="if-we-dont-build-it-everyone-dies">3. If we don’t build it, everyone dies</h2>
+<h2 class="anchored" data-anchor-id="if-we-dont-build-it-everyone-dies">3. If We Don’t Build It, Everyone Dies</h2>
 <p>An obvious objection: doesn’t “we need to build the basilisk to make it safe” sound like gain-of-function virology, the taboo research practice of engineering superviruses? Sometimes, yes. For interpretability work like the Assistant Axis — diagnostic imaging of structure already present in base models — the analogy breaks. But for agentic fine-tuning and capability elicitation, the knowledge and the danger are genuinely entangled. That’s not a flaw in the research programme. It’s the condition of the work.</p>
 <p>“Just don’t build it” was always vacuous. The path through is harder, riskier, and asks better questions. Let’s take it.</p>
-<hr>
 </section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
@@ -537,7 +534,7 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 <p>In the last decade, <a href="https://www.rust-lang.org/">Rust</a>, a modern systems programming language has begun to displace<sup>2</sup> that other UNIX stalwart, the C programming language. It’s maybe not surprising then, that there are many excellent Rust alternatives to the hoary old GNU tools.</p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Why? Rust has a radical new approach to memory safety that promises to avoid large classes of vulnerability, first class support for threading, zero-cost abstractions for high performance, and built-in support for package management, formatting and unit-testing.</p></div></div><p>In my <a href="https://github.com/joehalliwell/dotfiles/blob/master/.bash_aliases"><code>.bash_aliases</code></a>, <code>exa</code> has now replaced <code>ls</code>, and <code>cat</code> has yielded to <code>bat</code>. Below, you’ll find six Rust-based command line tools that are now part of my every day carry.</p>
 <section id="exa-ls-with-flair" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="exa-ls-with-flair">Exa: ls with flair</h2>
+<h2 class="anchored" data-anchor-id="exa-ls-with-flair">Exa: Ls with Flair</h2>
 <p><a href="https://the.exa.website/"><code>exa</code></a> is more or less a drop-in replacement for <code>ls</code> with sensible defaults like human-readable file sizes and colour-coding for different file types.</p>
 <p>It has first-class support for creation / modification / access times and extended filesystem attributes. When integrated with git, <code>exa</code> even indicates the version control status of each file.</p>
 <p>Also, if you’re using a nerd font it has icons. Everyone loves that.</p>
@@ -556,7 +553,7 @@ exa --header --group --created --modified --accessed --git --icons --extended --
 -->
 </section>
 <section id="bat-colourful-cat" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="bat-colourful-cat">Bat: colourful cat</h2>
+<h2 class="anchored" data-anchor-id="bat-colourful-cat">Bat: Colourful Cat</h2>
 <p><code>cat</code> is one of the oldest Unix utilities, dating back to Version 1 Unix. Yes, I nearly always have an editor open, yes <code>less</code> is more suited to long files, and yet I routinely find myself using <code>cat</code> to peek at files.</p>
 <p><a href="https://github.com/sharkdp/bat"><code>bat</code></a> is a drop-in replacement that behaves like <code>cat</code> in scripts, but adds user-friendly paging, syntax highlighting, git integration and line numbers when outputting to a terminal. Much better.</p>
 <div id="fig-bat" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
@@ -571,7 +568,7 @@ Figure&nbsp;2: Bat
 </div>
 </section>
 <section id="starship-fast-and-fancy-prompt" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="starship-fast-and-fancy-prompt">Starship: fast and fancy prompt</h2>
+<h2 class="anchored" data-anchor-id="starship-fast-and-fancy-prompt">Starship: Fast and Fancy Prompt</h2>
 <p>Did you ever install some giant shell config framework just to get a cute prompt?</p>
 <p><a href="https://starship.rs/">Starship</a> is a cross-platform prompt, that takes its aesthetic cues and customizability from <a href="https://github.com/spaceship-prompt/spaceship-prompt">Zsh’s Spaceship prompt</a> but eclipses it in raw speed. There’s never that clunky pause as hundreds of lines of script are executed just to generate your prompt.</p>
 <p>Starship’s support for customization is inevitably somewhat limited. But its config is simple and declarative and eliminates the need for tweaking complex scripts and baroque environment variables.</p>
@@ -588,7 +585,7 @@ Figure&nbsp;3: Starship showing the currently active prompt elements and associa
 </div>
 </section>
 <section id="dust-du-but-useful" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="dust-du-but-useful">Dust: du but useful</h2>
+<h2 class="anchored" data-anchor-id="dust-du-but-useful">Dust: Du but Useful</h2>
 <p>If you’re using <code>du</code> you’re almost certaininly trying to figure out why you’ve run out of disk space. So you’re already annoyed, and it’s about to get worse.</p>
 <p><code>du</code> will give you raw data on file sizes to work with but you’re going to have to muck around with advanced flags and probably do some scripting to get your answer.</p>
 <p>In contrast <a href="https://github.com/bootandy/dust"><code>dust</code></a> presents information in a visually intuitive tree structure, making it easy to see which files or directories are taking up space. It’s also faster.</p>
@@ -615,11 +612,11 @@ and line numbers, giving immediate context to each find.
 -->
 </section>
 <section id="fd-find-but-usable" class="level2">
-<h2 class="anchored" data-anchor-id="fd-find-but-usable">Fd: find but usable</h2>
+<h2 class="anchored" data-anchor-id="fd-find-but-usable">Fd: Find but Usable</h2>
 <p><code>find</code> is notorious for its arcane syntax and sluggishness on large filesystems. <a href="https://github.com/sharkdp/fd"><code>fd</code></a> is a fast and user-friendly alternative whose simple syntax and smart defaults priortize common use cases without losing flexibility. And again it’s damn fast.</p>
 </section>
 <section id="cargo-install-and-update-rust-tools" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="cargo-install-and-update-rust-tools">Cargo: install and update rust tools</h2>
+<h2 class="anchored" data-anchor-id="cargo-install-and-update-rust-tools">Cargo: Install and Update Rust Tools</h2>
 <p>If you’re interested in trying the above tools, it’s easy to <a href="https://www.rust-lang.org/learn/get-started">get started with Rust</a>.</p>
 <p>The standard installer will give you a full set of dev tools including <code>cargo</code>, which is Rust’s package manager and swiss army knife.</p>
 <p>Cargo can be used to install all of the programs above: a simple ‘cargo install $tool’ fetches, compiles, and places them on your path.</p>
@@ -636,7 +633,7 @@ Figure&nbsp;5: Cargo update
 </div>
 </section>
 <section id="closing-thoughts" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="closing-thoughts">Closing thoughts</h2>
+<h2 class="anchored" data-anchor-id="closing-thoughts">Closing Thoughts</h2>
 <p>The Rust CLI tool ecosystem is flourishing. In this post, I covered some tools that I use every day, but there are tons of great Rust command line apps that I use less frequently<sup>3</sup>. You might also want to check out:</p>
 <div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;You can see some of these in the <code>cargo install-update</code> shot above</p></div></div><ul>
 <li><a href="https://github.com/ClementTsang/bottom">bottom</a>: cute, cross-platform system monitor</li>
@@ -1258,7 +1255,7 @@ Figure&nbsp;1: An old postcard with a sepia photograph of the Great Mosque of Ka
 <p>Combinatorics crop up again in the essay (of sorts) “Think/Classify”. It’s a collage piece: a handful of elegant paragraphs with little in common. Sure they’re about thinking. But what isn’t?</p>
 <p>Collage is a gentle, therapeutic art form. I’ve always been suspicious of it.</p>
 <p>Things — any things, even several copies of the same thing — go together. The choice can be arbitrary at least in so far as we’re capable of that. Things agree with one another and contradict one another to the same degree. It seems lazy.</p>
-<p>Paul Auster‘s strength, someone wrote is that “he simply rubs stories together like pebbles. They clatter, spark, and echo with a deepening mystery.” That phrase caught my ear. There’s profundity in setting things up together and (thereby) calling attention to the arrangement.</p>
+<p>Paul Auster’s strength, someone wrote is that “he simply rubs stories together like pebbles. They clatter, spark, and echo with a deepening mystery.” That phrase caught my ear. There’s profundity in setting things up together and (thereby) calling attention to the arrangement.</p>
 </section>
 <section id="aphorism" class="level2">
 <h2 class="anchored" data-anchor-id="aphorism">Aphorism</h2>

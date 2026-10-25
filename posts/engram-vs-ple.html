@@ -179,11 +179,11 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>Google released <a href="https://huggingface.co/blog/gemma4">Gemma 4</a> this week. Reviewing the architecture, I noticed a familiar-looking mechanism. The smaller models use “Per-Layer Embeddings” (PLE) which are strikingly similar to DeepSeek’s <a href="https://arxiv.org/abs/2601.07372">Engram</a>.</p>
 <p>Both modules follow the same high-level pattern: retrieve a learned embedding from an off-GPU table, gate it against the current hidden state, and inject the result into the residual stream. The motivation is identical too: offload static pattern knowledge from the transformer backbone so that early layers can focus on reasoning rather than rote reconstruction.</p>
 <section id="oh-wow-so-google-are-taking-inspiration-from-deepseek" class="level2">
-<h2 class="anchored" data-anchor-id="oh-wow-so-google-are-taking-inspiration-from-deepseek">Oh wow! So Google are taking inspiration from DeepSeek?</h2>
+<h2 class="anchored" data-anchor-id="oh-wow-so-google-are-taking-inspiration-from-deepseek">Oh Wow! so Google Are Taking Inspiration from DeepSeek?</h2>
 <p>No, because it turns out that <a href="https://ai.google.dev/gemma/docs/gemma-3n#ple-caching">PLE originates in Gemma 3n</a> released a full six months before Engram!</p>
 </section>
 <section id="ah-okay-so-deepseek-are-ripping-off-google" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="ah-okay-so-deepseek-are-ripping-off-google">Ah okay, so DeepSeek are ripping off Google?</h2>
+<h2 class="anchored" data-anchor-id="ah-okay-so-deepseek-are-ripping-off-google">Ah Okay, so DeepSeek Are Ripping off Google?</h2>
 <p>No, because the mechanisms are substantially different in detail.</p>
 <p>PLE indexes by single token ID and gates via element-wise modulation (project, GELU, multiply, project back). Engram indexes by hashed N-gram sequences using multi-head hashing, and gates via a scalar attention-style mechanism (Key/Value projections from the retrieved embedding, normalised dot-product against the hidden state).</p>
 <p>Also, the Engram whitepaper brings a bunch of practical and empirical findings to the table, notably their proposal that 20–25% parameter allocation to the memory. Plus the analysis showing the module frees early layers from static pattern reconstruction is illuminating.</p>
@@ -200,13 +200,12 @@ Figure&nbsp;1: At inference time the host asynchronously prefetches and transfer
 </div>
 </section>
 <section id="okay-so-deepseek-are-bad-after-all" class="level2">
-<h2 class="anchored" data-anchor-id="okay-so-deepseek-are-bad-after-all">Okay, so DeepSeek are bad after all?</h2>
+<h2 class="anchored" data-anchor-id="okay-so-deepseek-are-bad-after-all">Okay, so DeepSeek Are Bad After All?</h2>
 <p>Nope. Much of the community’s understanding of PLE comes from <a href="https://github.com/antimatter15/reverse-engineering-gemma-3n">antimatter15’s reverse-engineering work</a>. Google didn’t publish!</p>
 <p>DeepSeek are to be applauded for continuing to publish their SoTA research in useful detail. If Google had done the same, maybe they’d have got the citation!</p>
-<hr>
 </section>
 <section id="further-reading" class="level2">
-<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
 <p>There is a <a href="https://medium.com/@sampan090611/deepseek-engram-explained-how-conditional-memory-and-o-1-lookups-fix-llm-amnesia-50fce3937bb8">detailed explainer of Engram’s conditional memory and O(1) lookups</a> on Medium by <code>@sampan090611</code>, which walks through the mechanism block by block.</p>
 </section>
 <section id="acknowledgements" class="level2">

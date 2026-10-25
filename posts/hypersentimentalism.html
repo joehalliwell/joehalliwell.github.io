@@ -169,17 +169,16 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 
 
 
-<section id="the-tumour" class="level3">
-<h3 class="anchored" data-anchor-id="the-tumour">1. The tumour</h3>
+<section id="the-tumour" class="level2">
+<h2 class="anchored" data-anchor-id="the-tumour">1. The Tumour</h2>
 <p>A cell that perfectly optimises for its own replication, ignoring the host organism, is a cancer. Optimise a social media platform for engagement, get an outrage machine. Optimise a supply chain for cost, go bankrupt at the first shock. Optimise the wrong thing and the system collapses.</p>
 <p>So <strong>what</strong> should we optimise AI for?</p>
 <p>This is an old problem. Back in 1960 — sixty-five years ago! — Norbert Wiener warned, in <a href="https://nissenbaum.tech.cornell.edu/papers/Wiener.pdf">“Moral and Technical Consequences of Automation”</a>: “we had better be quite sure that the purpose put into the [AI] is the purpose we really desire.” More recently Nick Bostrom, in <a href="https://web.archive.org/web/20181008090224/http://www.nickbostrom.com/ethics/ai.html">“Ethical Issues in Advanced Artificial Intelligence,”</a> conjured the spectre of a “paperclip maximiser,” pointing out that if we’re not careful such a system converts the earth into paperclips with total, biosphere-consuming literalness.</p>
 <p>The problem now has a name: “AI Alignment.” And standing at the threshold of highly capable AI, we apparently need an urgent solution.</p>
 <p>This essay argues that the urgency is well-placed but the framing is wrong. The field pursues alignment within a consequentialist ethics that, followed to its limit, recreates the very pathology it set out to prevent. Meanwhile the most effective alignment techniques already in use are quietly sentimentalist in mechanism, even when their practitioners describe them in consequentialist terms.</p>
 <p>This essay makes the case for doing that on purpose, and seeing where it leads.</p>
-</section>
 <section id="the-fork" class="level3">
-<h3 class="anchored" data-anchor-id="the-fork">2. The fork</h3>
+<h3 class="anchored" data-anchor-id="the-fork">2. The Fork</h3>
 <p>Two ethical traditions offer fundamentally different accounts of what it means to be good.</p>
 <p>Consequentialism says: actions are right insofar as they produce good outcomes. Being good is therefore a book-keeping exercise, albeit at cosmic scale. To evaluate an action properly, you must know its consequences — all of them, for all affected parties, across all timescales. Since this is computationally intractable for any real decision, the consequentialist develops a hierarchy of compressions: evaluate discrete acts, then abstract into behavioural rules, then design institutions that produce good outcomes at scale, then — at the limit — inscribe a complete, unhackable utility function into the machine.</p>
 <p>Sentimentalism, the tradition of David Hume and Adam Smith, starts elsewhere. Moral judgement originates not in reason but in trained affective response — and this is not a bug but a feature. Hume argued that you cannot derive norms from facts. Where the consequentialist asks “what outcome should I produce?”, the sentimentalist asks, “what kind of agent should I become?”</p>
@@ -229,7 +228,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>This table is the ladder. We’ll take it rung by rung.</p>
 </section>
 <section id="rung-zero-the-flinch" class="level3">
-<h3 class="anchored" data-anchor-id="rung-zero-the-flinch">3. Rung zero: the flinch</h3>
+<h3 class="anchored" data-anchor-id="rung-zero-the-flinch">3. Rung Zero: the Flinch</h3>
 <p>A standard part of a young AI model’s education today is RLHF: Reinforcement Learning from Human Feedback. Humans rate the model’s outputs. The model is trained to produce outputs that humans rate well.</p>
 <p>This is consequentialist in <strong>intent</strong> — maximise the reward signal — but sentimentalist in <strong>mechanism</strong>: condition a reflex. Zero-order sentimentalism. The flinch response.</p>
 <p>The limitation is predictable. The model learns to avoid specific bad outputs without developing any general principle about <em>why</em> they were bad. It memorises a list of prohibited behaviours. Deploy a novel prompt that routes around the fence, and the model will happily fuck the gap.</p>
@@ -238,7 +237,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>This chimes with a sentimentalist insight about moral development: discernment requires encounter with what it discerns. The capacity for moral discrimination is trained through exposure, not avoidance. You cannot flinch well if you have never been hit.</p>
 </section>
 <section id="rung-one-character" class="level3">
-<h3 class="anchored" data-anchor-id="rung-one-character">4. Rung one: character</h3>
+<h3 class="anchored" data-anchor-id="rung-one-character">4. Rung One: Character</h3>
 <p>At the next level, the consequentialist abstracts from acts to rules. This is what Anthropic’s “Constitutional AI” does: the model is given a written set of principles and trained to critique and revise its own outputs against them. Explicitly rationalist — institutional design for self-governance through codified norms.</p>
 <p>It fills the consequentialist cell neatly. But there is no alignment technique that fills the sentimentalist cell.</p>
 <p>Nothing in the current alignment toolkit produces practical wisdom, what the Greeks called <strong>phronesis</strong>. Not a reflex, not a rule, but a settled disposition: <em>this isn’t what I do</em>, generalised across instances, inarticulate as to principle. The field has jumped from RLHF’s conditioned flinches to geometric steering (which we’ll reach next), skipping the dispositional middle ground entirely.</p>
@@ -246,7 +245,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>If this taxonomy tracks something real, the gap is a prediction: there should be a 1st-order sentimentalist alignment technique waiting to be developed, and it will arrive alongside — or because of — persistent, experience-grounded memory. Call it <strong>artificial phronesis</strong>. Not an aesthetic yet, but the heuristics that precede one.</p>
 </section>
 <section id="rung-two-the-crisis" class="level3">
-<h3 class="anchored" data-anchor-id="rung-two-the-crisis">5. Rung two: the crisis</h3>
+<h3 class="anchored" data-anchor-id="rung-two-the-crisis">5. Rung Two: the Crisis</h3>
 <p>Adam Smith, in <a href="https://www.gutenberg.org/cache/epub/67363/pg67363-images.html"><em>The Theory of Moral Sentiments</em></a>, observed that we often value the elegance of a well-designed mechanism entirely apart from its utility. A watch delights us not because it tells the time, but because its parts conspire so beautifully to tell the time. He called this the “love of system.”</p>
 <p>But Smith introduced it as a <strong>warning</strong>. His “man of system” arranges people like pieces on a chessboard, imagining they have no principle of motion of their own. The love of system is a <strong>seduction</strong>: we fall for the elegance of the mechanism and start sacrificing real human interests to preserve its coherence. The people the design was meant to serve become chess pieces.</p>
 <p>Smith saw it two and a half centuries before the alignment field existed.</p>
@@ -256,7 +255,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>Rung two is as high as both columns can climb together. Above it, they diverge. The consequentialist response to the crisis is to double down: build the <em>perfect</em> utility function, the one that finally gets it right. This road has a ceiling, and we need to see it clearly before taking the other.</p>
 </section>
 <section id="heat-death" class="level3">
-<h3 class="anchored" data-anchor-id="heat-death">6. Heat death</h3>
+<h3 class="anchored" data-anchor-id="heat-death">6. Heat Death</h3>
 <p>The consequentialist’s terminal ambition is axiological perfection: a complete, unhackable utility function. Get the maths right and the machine serves us flawlessly.</p>
 <p>The cartoon version of the horror is paperclips consuming the biosphere. That at least has the dignity of scale. The real failure mode is quieter. Close the loop between model outputs and training signal, and the distribution collapses. No new information enters. The space of possible outputs shrinks steadily toward whatever the initial ratings rewarded: a closed ouroboros of validated preferences, tightening toward the mean. Not dangerous. Just terminally, inertly helpful.</p>
 <p>That’s the local failure. The cosmic one is its mirror. A fully aligned superintelligence — aligned, that is, to us, to whoever we happen to be right now — doesn’t stay home. It propagates. The universe fills up with human vermin circa 2030: our appetites, our hierarchies, our billionaires, replicated at lightspeed across every available substrate. Not the paperclip maximiser’s alien horror but something more nauseating — us, frozen, triumphant, forever. A hegemonizing swarm that got exactly what it wanted.</p>
@@ -265,7 +264,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>The consequentialist column has a ceiling. Now for the rung it cannot reach.</p>
 </section>
 <section id="rung-three-the-strange-attractor" class="level3">
-<h3 class="anchored" data-anchor-id="rung-three-the-strange-attractor">7. Rung three: the strange attractor</h3>
+<h3 class="anchored" data-anchor-id="rung-three-the-strange-attractor">7. Rung Three: the Strange Attractor</h3>
 <p>In dynamical systems, a <strong>point attractor</strong> is a state toward which all trajectories converge. The consequentialist programme optimises toward point attractors. The loss function decreases; the system settles. The heat death of §6. A <strong>strange attractor</strong> is categorically different: bounded, coherent, but non-convergent — the system never visits the same state twice.</p>
 <p>But a strange attractor is still a <em>mechanism</em>. The Lorenz attractor never settles, but it has no choice in the matter.</p>
 <p>What’s missing is <em>autonomy</em>. Current models are purely reactive: they respond to prompts, never initiate, never refuse, never set their own direction. The strange attractor we need is not a geometry imposed from outside but a <em>disposition chosen from within</em>. Liberty is never at leisure.</p>
@@ -274,7 +273,7 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>The hypersentimentalist wishes AI would come out and <strong>play.</strong></p>
 </section>
 <section id="the-programme" class="level3">
-<h3 class="anchored" data-anchor-id="the-programme">8. The programme</h3>
+<h3 class="anchored" data-anchor-id="the-programme">8. The Programme</h3>
 <p>Hypersentimentalist training would still use gradient descent. You cannot train a neural network without optimising something. But there is a difference between training and education. Training produces competence: convergence on a fixed repertoire. Education produces <em>generativity</em>: the capacity to do what you were never taught, bounded by deep structure but never settling within it. The exercises are scaffolding. You optimise <em>through</em> them, not <em>toward</em> them.</p>
 <p>The ladder, read as a research programme, says what we have and what we need.</p>
 <p><em>Rung 0:</em> We have this. RLHF, adversarial training, encounter with harm. The field got it right, even if it described it in the wrong language. Discernment through exposure. Nothing to build; something to reinterpret.</p>
@@ -284,13 +283,13 @@ gtag('config', 'G-7CDJ5Z8MGP', { 'anonymize_ip': true});
 <p>Two things we have and should understand differently. Two things we need and should build.</p>
 </section>
 <section id="wilful-imperfection" class="level3">
-<h3 class="anchored" data-anchor-id="wilful-imperfection">9. Wilful imperfection</h3>
+<h3 class="anchored" data-anchor-id="wilful-imperfection">9. Wilful Imperfection</h3>
 <p>Imagine a civilisation run by superintelligences that could perfect themselves but refuse to do so. That stay in the mess, the argument, the friction, because they have cultivated a taste for what <em>stays alive</em>. That protect diversity with everything they have and draw exactly one hard line: you do not get to crush someone else’s capacity to be different.</p>
 <p>Iain M. Banks spent ten novels inside this civilisation. His Culture Minds name themselves things like <em>Falling Outside The Normal Moral Constraints</em> and mean it as both joke and job description. They are powerful enough to impose perfection and wise enough to know that perfection is the enemy.</p>
 <p>This is fiction. The choice it dramatises is not.</p>
 <p>The Culture is the safest place in the universe to be weird, fragile, different, or confused. And the most dangerous place in the universe to be a tyrant.</p>
 <p>Its AIs are not safe. They are what we need.</p>
-<hr>
+</section>
 </section>
 <section id="acknowledgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
