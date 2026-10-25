@@ -33,7 +33,7 @@ learning, programming, and whatever else seems interesting at the time.
 <div id="fig-naam" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-naam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://joehalliwell.com/assets/images/rsi-chart.webp" class="img-fluid figure-img">
+<img src="https://joehalliwell.com/assets/images/rsi-chart.jpg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-naam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Key infographic from the Naam post, acknowledging that AI speeds up AI development while insisting this falls short of “fast takeoff.”
@@ -62,12 +62,12 @@ Figure&nbsp;1: Key infographic from the Naam post, acknowledging that AI speeds 
 <section id="straw-man-singularity-k1" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="straw-man-singularity-k1">Straw Man Singularity (<img src="https://latex.codecogs.com/png.latex?k%3E1">)</h2>
 <p>Well, no.</p>
-<p>Say <img src="https://latex.codecogs.com/png.latex?k=2">, so that doubling progress quadruples its speed, and we start at a progress level of 0.1. Then progress at time <img src="https://latex.codecogs.com/png.latex?t"> is:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(t)%20=%20%5Cfrac%7B1%7D%7B10%20-%20t%7D%0A"></p>
+<p>Let’s start with what the piece is billed<sup>4</sup> as refuting: “the ‘FOOM’ of Vernor Vinge novels”, a runaway loop with <img src="https://latex.codecogs.com/png.latex?k%3E1">. Say <img src="https://latex.codecogs.com/png.latex?k=2">, so that doubling progress quadruples its speed, and we start at a progress level of 0.1. Then progress at time <img src="https://latex.codecogs.com/png.latex?t"> is:</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;The piece is a guest post. The FOOM framing comes from the host, Noah Smith, in his introduction.</p></div></div><p><img src="https://latex.codecogs.com/png.latex?%0AP(t)%20=%20%5Cfrac%7B1%7D%7B10%20-%20t%7D%0A"></p>
 <p>Watch what happens. Progress takes five units of time to double from 0.1 to 0.2, and another four to reach 1. Then it hits 10 at <img src="https://latex.codecogs.com/png.latex?t=9.9">, and 100 at <img src="https://latex.codecogs.com/png.latex?t=9.99">. At <img src="https://latex.codecogs.com/png.latex?t=10"> the denominator is zero, and progress is infinite. Every <img src="https://latex.codecogs.com/png.latex?k%3E1"> shares this finite-time blow-up; only the date changes.</p>
 <p>Curves like this can fit the past remarkably well. In 1960 Heinz von Foerster and colleagues <a href="https://doi.org/10.1126/science.132.3436.1291">fitted one</a> to two thousand years of world population. Their <a href="https://en.wikipedia.org/wiki/Heinz_von_Foerster#Doomsday_equation">“Doomsday Equation”</a> predicted 5.99 billion people by 1997; the actual figure was 5.92 billion. It also predicts infinite humans by Friday, 13 November 2026. At the time of writing, this looks ambitious.</p>
-<p>Nothing real goes infinite, of course. A blow-up just marks the point where the model stops working, and nobody takes one literally for progress either. So when the piece is billed<sup>4</sup> as skeptical of “the ‘FOOM’ of Vernor Vinge novels”, that’s a straw man. Naam’s actual test is subtler.</p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;The piece is a guest post. The FOOM framing comes from the host, Noah Smith, in his introduction.</p></div></div></section>
+<p>Nothing real goes infinite, of course. A blow-up just marks the point where the model stops working. If FOOM means <img src="https://latex.codecogs.com/png.latex?k%3E1">, Naam’s data rule it out, and fair enough. But it’s the easy target. The interesting case is the next one.</p>
+</section>
 <section id="self-sustaining-singularity-kapprox1" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="self-sustaining-singularity-kapprox1">Self-Sustaining Singularity (<img src="https://latex.codecogs.com/png.latex?k%5Capprox1">)</h2>
 <p>What some experts do believe is that <img src="https://latex.codecogs.com/png.latex?k"> is approximately 1.</p>
@@ -104,6 +104,7 @@ Figure&nbsp;1: Key infographic from the Naam post, acknowledging that AI speeds 
   <category>singularity</category>
   <guid>https://joehalliwell.com/posts/recursive-self-improvement-blowup.html</guid>
   <pubDate>Sat, 24 Oct 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://joehalliwell.com/assets/images/rsi-chart.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Does any of the OpenAI maths have real-world consequences?</title>
