@@ -16,8 +16,95 @@ learning, programming, and whatever else seems interesting at the time.
 <title>Joe Halliwell</title>
 <link>https://joehalliwell.com/</link>
 </image>
-<generator>quarto-1.10.18</generator>
-<lastBuildDate>Wed, 07 Oct 2026 23:00:00 GMT</lastBuildDate>
+<generator>quarto-1.10.19</generator>
+<lastBuildDate>Sat, 24 Oct 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Here’s the intelligence explosion</title>
+  <dc:creator>Joe Halliwell</dc:creator>
+  <link>https://joehalliwell.com/posts/recursive-self-improvement-blowup.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Frontier labs are spending an absolute fortune<sup>1</sup> applying AI to build better AI. Anthropic claims that <a href="https://www.anthropic.com/institute/measuring-pace-of-ai-development">26% of its AI research is now led by AI</a>. Many believe that we’re on a clear and accelerating path towards superintelligence in our lifetimes.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;maybe $1BN a year for Anthropic, based on their <a href="https://thenextweb.com/news/anthropic-s-1-750bn-compute-80-7bn-loss">current compute spend</a>. Claude Code’s creator alone <a href="https://app.dealroom.co/news/note/boris-cherny-on-coding-from-his-phone-and-the-post-coding-bottleneck">used over 8 billion tokens in three months</a> and that will be dwarfed by automated experiments.</p></div></div><p>Not so fast, says the futurologist Ramez Naam. In <a href="https://www.noahpinion.blog/p/wheres-the-intelligence-explosion">Where’s the “intelligence explosion”?</a>, he explores five overlapping ways AI can improve AI, and argues that a runaway takeoff can’t happen while all of them face “diminishing returns”.</p>
+<div id="fig-naam" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-naam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://joehalliwell.com/assets/images/rsi-chart.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-naam-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Key infographic from the Naam post, acknowledging that AI speeds up AI development while insisting this falls short of “fast takeoff.”
+</figcaption>
+</figure>
+</div>
+<section id="the-maths-bit" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-maths-bit">The Maths Bit</h2>
+<p>Wisely, perhaps, Naam avoids equations. But the underlying assumption is simple: we keep building better tools, so the speed of <strong>progress</strong> (scientific or economic<sup>2</sup>) depends on how much progress we’ve already made.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;We don’t talk about social progress. The very idea of social progress has the unmistakable whiff of socialism, which makes it a tough sell in Silicon Valley.</p></div></div><p>The simplest toy model of this sort is that the speed with which progress, ahem, progresses (written <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7BdP%7D%7Bdt%7D">) is proportional to the <img src="https://latex.codecogs.com/png.latex?k">-th power of the current level of progress (<img src="https://latex.codecogs.com/png.latex?P%5Ek">).</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7BdP%7D%7Bdt%7D%20%5Cpropto%20P%5Ek%0A"></p>
+<p>Solving this differential equation gives very different futures depending on the exponent <img src="https://latex.codecogs.com/png.latex?k">, which we can try to estimate from data.</p>
+<p>Naam’s evidence includes:</p>
+<ul>
+<li>At OpenAI, researchers used 124× more tokens per person and shipped about 7× as many lines of code, but ran only 1.6× as many experiments.</li>
+<li>At Anthropic, staff report a productivity uplift of around 4×. Naam reckons doubling the pace of progress would need about 40×.</li>
+<li>Elsewhere, from chess engines to experiments across the sciences, more effort buys steeply diminishing returns.</li>
+</ul>
+<p>Overall, Naam concludes:</p>
+<div class="page-columns page-full"><blockquote class="blockquote">
+<p>Given our best current data, the AI self-improvement loop would need to be roughly 5–10× stronger to sustain itself, let alone run away.<sup>3</sup></p>
+</blockquote><div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Concretely, he estimates that each extra point of AI capability (on Epoch’s ECI benchmark) buys 2–3% more research productivity, against a threshold of 15–19% from a model of the feedback loop by <a href="https://arxiv.org/abs/2609.15802">Tom Cunningham and colleagues</a>.</p></div></div></div>
+<p>In our toy model, a loop that just sustains itself has <img src="https://latex.codecogs.com/png.latex?k=1">. Being 5–10× too weak puts <img src="https://latex.codecogs.com/png.latex?k"> at very roughly 0.15. These are the “diminishing returns”.</p>
+<p>Nothing to worry about, see?</p>
+</section>
+<section id="straw-man-singularity-k1" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="straw-man-singularity-k1">Straw Man Singularity (<img src="https://latex.codecogs.com/png.latex?k%3E1">)</h2>
+<p>Well, no.</p>
+<p>Say <img src="https://latex.codecogs.com/png.latex?k=2">, so that doubling progress quadruples its speed, and we start at a progress level of 0.1. Then progress at time <img src="https://latex.codecogs.com/png.latex?t"> is:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(t)%20=%20%5Cfrac%7B1%7D%7B10%20-%20t%7D%0A"></p>
+<p>Watch what happens. Progress takes five units of time to double from 0.1 to 0.2, and another four to reach 1. Then it hits 10 at <img src="https://latex.codecogs.com/png.latex?t=9.9">, and 100 at <img src="https://latex.codecogs.com/png.latex?t=9.99">. At <img src="https://latex.codecogs.com/png.latex?t=10"> the denominator is zero, and progress is infinite. Every <img src="https://latex.codecogs.com/png.latex?k%3E1"> shares this finite-time blow-up; only the date changes.</p>
+<p>Curves like this can fit the past remarkably well. In 1960 Heinz von Foerster and colleagues <a href="https://doi.org/10.1126/science.132.3436.1291">fitted one</a> to two thousand years of world population. Their <a href="https://en.wikipedia.org/wiki/Heinz_von_Foerster#Doomsday_equation">“Doomsday Equation”</a> predicted 5.99 billion people by 1997; the actual figure was 5.92 billion. It also predicts infinite humans by Friday, 13 November 2026. At the time of writing, this looks ambitious.</p>
+<p>Nothing real goes infinite, of course. A blow-up just marks the point where the model stops working, and nobody takes one literally for progress either. So when the piece is billed<sup>4</sup> as skeptical of “the ‘FOOM’ of Vernor Vinge novels”, that’s a straw man. Naam’s actual test is subtler.</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;The piece is a guest post. The FOOM framing comes from the host, Noah Smith, in his introduction.</p></div></div></section>
+<section id="self-sustaining-singularity-kapprox1" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="self-sustaining-singularity-kapprox1">Self-Sustaining Singularity (<img src="https://latex.codecogs.com/png.latex?k%5Capprox1">)</h2>
+<p>What some experts do believe is that <img src="https://latex.codecogs.com/png.latex?k"> is approximately 1.</p>
+<p>At <img src="https://latex.codecogs.com/png.latex?k=1"> progress is “exponential”: progress, the rate of progress, the rate of the rate of progress and so on all keep growing. None ever hits infinity, but wait long enough and they are arbitrarily large.</p>
+<p>Ray Kurzweil, the most influential singularitarian<sup>5</sup>, has spent his career here, or a hair above<sup>6</sup>. In <a href="https://www.writingsbyraykurzweil.com/the-law-of-accelerating-returns">The Law of Accelerating Returns</a> he spells out what that means for the century we’re in:</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;He didn’t coin the term “singularity”. That was John von Neumann, as <a href="https://www.ams.org/journals/bull/1958-64-03/S0002-9904-1958-10189-5/S0002-9904-1958-10189-5.pdf">recalled by Stanislaw Ulam</a> in 1958. But Kurzweil did the most to popularise it.</p></div><div id="fn6"><p><sup>6</sup>&nbsp;Strictly, he argues for a “double” exponential, “meaning that the rate of exponential growth is itself growing exponentially”. If <img src="https://latex.codecogs.com/png.latex?P%20=%20e%5E%7Be%5Et%7D"> then <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7BdP%7D%7Bdt%7D%20=%20P%20%5Cln%20P">: faster than <img src="https://latex.codecogs.com/png.latex?P%5E1">, slower than <img src="https://latex.codecogs.com/png.latex?P%5Ek"> for any <img src="https://latex.codecogs.com/png.latex?k%3E1">, so it still never reaches infinity in finite time.</p></div></div><blockquote class="blockquote">
+<p>it isn’t the case that we’ll experience 100 years of progress in the 21st century. Rather we’ll witness on the order of twenty thousand years of progress — at today’s rate of progress, that is.</p>
+</blockquote>
+<p>Naam’s threshold asks whether the loop can sustain itself (<img src="https://latex.codecogs.com/png.latex?k%20%5Cgeq%201">), “let alone run away”. The catch is that he only measures one narrow loop: AI writing better AI software, holding hardware, energy, and capital fixed.</p>
+<p>But no-one thinks AI progress happens in isolation. Google has used AI to <a href="https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/">speed up Gemini’s training and tweak its TPU designs</a>, <a href="https://green.googleblog.com/2016/07/deepmind-ai-reduces-energy-used-for.html">cut the energy used to cool its data centres</a> and <a href="https://doi.org/10.1038/s41586-021-04301-9">steer the plasma in a tokamak</a>. And Kurzweil’s accelerating returns are civilisational, encompassing everything.</p>
+<p>Naam offers no estimate for this; he’s simply “not convinced” that fast takeoff “is possible under realistic conditions”.</p>
+<p>So the narrow loop gets a number and the loop we actually care about gets a shrug. Naam misleads readers by suggesting that the shortfall in the first somehow applies to the second.</p>
+<p>He built the scaffold and chose the narrow loop. It makes a serviceable noose.</p>
+</section>
+<section id="subjective-singularity-k1" class="level2">
+<h2 class="anchored" data-anchor-id="subjective-singularity-k1">Subjective Singularity (<img src="https://latex.codecogs.com/png.latex?k%3C1">)</h2>
+<p>But let’s suppose that the wide loop falls short too, and <img src="https://latex.codecogs.com/png.latex?k"> really is just 0.15. Here’s the thing: that is still completely bonkers.</p>
+<p>“Diminishing returns” in <img src="https://latex.codecogs.com/png.latex?P%5Ek"> doesn’t mean progress plateaus. At <img src="https://latex.codecogs.com/png.latex?k%20=%200.15">, <img src="https://latex.codecogs.com/png.latex?P(t)"> grows as <img src="https://latex.codecogs.com/png.latex?t%5E%7B1.18%7D">. Both progress and the <em>speed</em> of progress (<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7BdP%7D%7Bdt%7D%20%5Csim%20t%5E%7B0.18%7D">) still climb forever.</p>
+<p>And progress doesn’t need a vertical asymptote to break our brains; it just needs to outrun primate wetware that spent millennia figuring out how to use twigs to eat ants. AI is already <a href="../posts/openai-maths.html">felling prize problems in batches</a>. Whether it proves a major theorem every morning before coffee or every 30 seconds is academic; either way, it’s bewildering.</p>
+<p>Alvin Toffler had a name for this back in 1970. <a href="https://en.wikipedia.org/wiki/Future_Shock">“Future shock”</a> is “the shattering stress and disorientation that we induce in individuals by subjecting them to too much change in too short a time.”</p>
+<p>So maybe <img src="https://latex.codecogs.com/png.latex?k"> is only 0.15, but some weeks recently, that’s felt like more than enough.</p>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>This post was co-authored by Claude Opus 5.5.</p>
+
+
+</section>
+
+
+ ]]></description>
+  <category>ai</category>
+  <category>mathematics</category>
+  <category>singularity</category>
+  <guid>https://joehalliwell.com/posts/recursive-self-improvement-blowup.html</guid>
+  <pubDate>Sat, 24 Oct 2026 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Does any of the OpenAI maths have real-world consequences?</title>
   <dc:creator>Joe Halliwell</dc:creator>
