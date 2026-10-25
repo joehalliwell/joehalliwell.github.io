@@ -2,40 +2,42 @@
 categories: [ai, mathematics, singularity]
 date: "2026-10-25"
 description: |
-    In a recent post entitled "Where's the Intelligence Explosion?", the futurologist
-    Ramez Naam explains why he's not worried about Recursive Self-Improvement.
-    I explain why things are about to get very weird anyway.
+    Ramez Naam says AI's self-improvement loop is 5-10x too weak to explode.
+    He's measuring the wrong thing, and even if he weren't, things are going to get weird anyway.
 draft: false
 title: "Here's the intelligence explosion"
 ---
 
 In his recent guest post on Noahpinion,
-[Where's the "intelligence explosion"?](https://www.noahpinion.blog/p/wheres-the-intelligence-explosion)
-futurologist Ramez Naam explains why he's skeptical about Recursive Self-Improvement takeoff sometimes called
-"FOOM"[^foom].
+[Where's the "intelligence explosion"?](https://www.noahpinion.blog/p/wheres-the-intelligence-explosion),
+the futurologist Ramez Naam explains why he's skeptical about a runaway takeoff driven by recursive self-improvement,
+sometimes called "FOOM"[^foom].
 
 [^foom]: FOOM is not an acronym. It's the sound of a LOUD explosion.
-    [Yudkowsky attributes it to IJ Good](https://youtube.com/watch?v=722LXkh5OGs&t=225s), but I couldn't find a
-    clear citation.
+    [Yudkowsky](https://youtube.com/watch?v=722LXkh5OGs&t=225s) popularized it, but it's
+    [not clear who originated the term](https://www.reddit.com/r/singularity/comments/12bisxu/what_does_foom_stand_for_who_coined_this_term).
 
-The post is worth reading in its entirety, but in a nutshell there are many factors that could drive recursive
-self-improvement. And the frontier labs are spending an absolute fortune applying AI to accelerating the development of
-AI. Anthropic claim that
-[26% of their AI research is led by AI](https://www.anthropic.com/institute/measuring-pace-of-ai-development). It's also
-why they are profitable
-[unless you take into account the stupendous sums of money spent on developing the next AI](https://futurism.com/future-society/anthropic-claude-profit-ai-safety-development-finances).
-
-Naam's point, buttressed by evidence from the labs themselves, is that these all face "diminishing returns".
+The post is worth reading in its entirety, but here's the nutshell. The frontier labs are spending an absolute
+fortune[^rsi-investment] applying AI to the development of AI. Indeed, Anthropic claim that
+[26% of their AI research is now led by AI](https://www.anthropic.com/institute/measuring-pace-of-ai-development).
+Naam distinguishes five overlapping ways AI can improve AI, and argues, citing evidence from the labs themselves, that
+all of them face "diminishing returns".
 
 ![Key infographic from the Naam post, which acknowledges that AI is speeding up AI development, but claims this somehow falls short of "fast takeoff"](/assets/images/rsi-chart.webp){#fig-naam}
 
+[^rsi-investment]: We don't have good numbers here. In June, Claude Code's creator Boris Cherny said he'd
+    [used over 8 billion tokens since March](https://app.dealroom.co/news/note/boris-cherny-on-coding-from-his-phone-and-the-post-coding-bottleneck).
+    If a few thousand Anthropic engineers coded like that, it would cost hundreds of millions of dollars
+    a year. But Cherny is hardly typical, and that's just coding assistance; automated experimentation
+    probably costs far more. The ceiling is total compute: nearly
+    $9B in the first half of 2026, [according to the WSJ](https://thenextweb.com/news/anthropic-s-1-750bn-compute-80-7bn-loss), most of it for training and serving models. Maybe $1B
+    a year is a reasonable guess?
+
 ## The Maths Bit
 
-Wisely, perhaps, he doesn't include a formula.
-
-The underlying assumption is that the speed of **progress** (scientific, economic, etc.[^social]) is linked to the
-current level of progress. The more progress we make, the faster progress becomes. Because, roughly, we're building and
-improving tools all the time.
+Wisely, perhaps, Naam doesn't include a formula. But the underlying assumption is that the speed of **progress**
+(scientific, economic, etc.[^social]) is linked to the current level of progress. The more progress we make, the faster
+progress becomes. Because, roughly, we're building and improving tools all the time.
 
 [^social]: We don't talk about social progress. The idea of social progress has the unmistakable whiff of socialism.
 Indeed one might say the very idea of social progress is characteristic of socialism.
@@ -48,121 +50,99 @@ $$
 $$
 
 This is a "differential equation" that characterizes the behaviour of the system. Solving it gives very different curves
-depending on $k$: power-law growth for $k<1$, exponential growth for $k=1$, and a blow-up to infinity in finite time for
-$k>1$.
+depending on $k$. Everything depends on the value of $k$, which is something we can try to estimate from data.
 
-What this means is that the behaviour of the system depends on the value we estimate for $k$.
-
-We can fit it to data.
-
-Naam cites the following evidence:
+Naam's evidence includes:
 
 - At OpenAI, researchers used 124× more tokens per person and shipped about 7× as many lines of code, but ran only 1.6×
   as many experiments.
 - At Anthropic, staff report a productivity uplift of around 4×. Naam reckons doubling the pace of progress would need
   about 40×.
 
-From this he estimates that each extra point of AI capability (on Epoch's ECI benchmark) buys 2–3% more research
-productivity, against the 15–19% needed for the loop to sustain itself. Very roughly, that puts $k$ at about 0.15. These
-are the "diminishing returns".
+He also draws on the returns to experiments in other sciences, on chess engines, and on a model of the feedback loop by
+[Tom Cunningham and colleagues](https://arxiv.org/abs/2609.15802). From all this he estimates that each extra point of
+AI capability (on Epoch's ECI benchmark) buys 2–3% more research productivity. For the loop to sustain itself it would
+need to be 15–19%. Very roughly, that puts $k$ at about 0.15: these are the "diminishing returns".
 
 Nothing to worry about, see?
 
-## Straw Man Singularity ($K>1$)
+## Straw Man Singularity ($K\gt1$)
 
-Well no.
+Well, no.
 
-First up, it's worth noting that $k>1$ is utterly implausible. It hits infinity in finite time, which is not something
-that anything actually does.
-
-(move to footnote? needs to be accessible for general reader)
-
-Suppose for the sake of argument that we're at progress level 0.1, and that $k=2$. We can show that the progress at time
-$t$ is
+Start with $k>1$, the scariest regime. Suppose for the sake of argument that we're at progress level 0.1, and that
+$k=2$. We can show that the progress at time $t$ is
 
 $$
-P(t) = \frac{0.1}{1 - 0.1t}
+P(t) = \frac{1}{10 - t}
 $$
 
-So at time 10, the denominator goes to zero; progress has gone infinite.
+So at time 10, the denominator goes to zero and progress goes to infinity.
 
-Like the [Navier-Stokes result](FIXME) it points to a problem in our model. And it's not clear that anyone really
-believes that $k>1$.
+Nothing real goes infinite, of course. A blow-up just tells you where the model stops working, and blow-up models can
+fit the past beautifully right up until they don't. In 1960 Heinz von Foerster and colleagues
+[fitted just such a curve](https://doi.org/10.1126/science.132.3436.1291) to two thousand years of world population.
+Their ["Doomsday Equation"](https://en.wikipedia.org/wiki/Heinz_von_Foerster#Doomsday_equation) predicted 5.99 billion
+people by 1997; the actual figure was 5.92 billion. Since then, population growth has fallen steadily behind the curve.
 
-(Something about exponential) (Does anyone seriously claim k>1?)
+Hardly anyone takes the blow-up literally for progress either. Even the models that produce one treat it as the point
+where the model breaks, not as a forecast. So if fast takeoff means $k>1$, as Naam's "accelerating returns" suggests,
+it's a straw man.
 
-Naam does seem to equate FOOM with k>1. That has to be a straw man.
+## Self-Sustaining Singularity ($K\approx1$)
 
-## Subjective Singularity ($K\leq1$)
+What people do believe is that $k$ is approximately 1. At $k=1$ progress is "exponential": progress, the rate of
+progress, the rate of the rate of progress and so on all keep growing. None ever hits infinity, but wait long enough and
+they are arbitrarily large. Ray Kurzweil, the most influential singularitarian[^coined], has spent his career here, or a
+hair above[^double]. In
+[The Law of Accelerating Returns](https://www.writingsbyraykurzweil.com/the-law-of-accelerating-returns) he spells out
+what that means for the century we're in:
 
-In general, futurologists do seem to believe that $k\leq1$. Kurzweil -- possibly the most influential thinker (did he
-originate?) -- has spent a career arguing that $k=1$.
+[^coined]: He didn't coin the term "singularity". That was John von Neumann, as
+    [recalled by Stanislaw Ulam](https://www.ams.org/journals/bull/1958-64-03/S0002-9904-1958-10189-5/S0002-9904-1958-10189-5.pdf)
+    in 1958. But Kurzweil did the most to popularise it.
 
-When $k=1$ the rate just keeps getting faster, forever. Progress never hits infinity, nor does the rate of progress. But
-wait long enough and they are arbitrarily large. (Insert quote about how crazy this will feel -- centuries of innovation
-in a week etc.)
+[^double]: Strictly, he argues for a "double" exponential, "meaning that the rate of exponential growth is itself
+    growing exponentially". If $P = e^{e^t}$ then $\frac{dP}{dt} = P \ln P$: faster than $P^1$, slower than $P^k$ for
+    any $k>1$, so it still never reaches infinity in finite time.
 
-And -- here's the thing -- $k<1$ is not much less bonkers. The "diminishing returns" are not a slowing to a halt. The
-rate of progress keeps climbing forever, just ever more gently.
+> it isn't the case that we'll experience 100 years of progress in the 21st century. Rather we'll witness on the order
+> of twenty thousand years of progress — at today's rate of progress, that is.
 
-For all values of $k$ progress continues apace! When $k<1$ it still grows -- it never stops! -- but the rate of growth
-decreases over time.
+Naam's 15–19% threshold tests exactly this: can the loop sustain itself? But it tests one narrow loop, AI making AI
+software better, with everything else held fixed. He says so himself: "This model isolates the software loop; outside
+investment can still drive rapid progress." On that loop his data say we're 5-10x short.
 
-Either way, it's still a very strange world for primates who spent millennia figuring out how to use twigs to catch
-ants.
+But no-one thinks the narrow loop runs alone. Kurzweil's accelerating returns span the whole technology stack, and
+Google alone has used AI to
+[speed up Gemini's training and tweak its TPU designs](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/),
+[cut the energy used to cool its data centres](https://green.googleblog.com/2016/07/deepmind-ai-reduces-energy-used-for.html)
+and
+[plan how to steer the plasma in a fusion reactor](https://www.ans.org/news/2025-10-22/article-7484/commonwealth-fusion-systems-partners-with-google-deepmind/).
+These gains are small and slow; they show the wider loop exists, not how strong it is. Naam offers no estimate for it.
+He's simply "not convinced" that fast takeoff "is possible under realistic conditions".
 
-But it doesn't have to be. $dP / dt$ is still ticking up and arguably it just has to be fast enough to give us future
-shock. We don't need to stay exponential.
+So the narrow loop gets a number and the loop we actually care about gets a shrug. Naam's "skeptical" headline misleads
+readers by suggesting that the shortfall in the first somehow applies to the second.
 
-If say we start making mathematical breakthroughs every day, that's going to feel disorientating. It doesn't have to be
-every hour.
+He chose the narrow loop. It makes a serviceable noose.
 
-Anthropic's CEO Dario Amodei, for one, doesn't need an explosion to predict
-[a "compressed 21st century"](https://www.darioamodei.com/essay/machines-of-loving-grace):
+## Subjective Singularity ($K<1$)
 
-> AI-enabled biology and medicine will allow us to compress the progress that human biologists would have achieved over
-> the next 50-100 years into 5-10 years.
+But let's suppose that the wide loop falls short too, and $k<1$. Here's the thing: that's not much less bonkers.
+"Diminishing returns" doesn't mean slowing to a halt. Progress keeps growing forever, and so does its rate, just ever
+more gently. And it only has to be fast enough to disorientate: if we start making mathematical breakthroughs every day,
+it doesn't have to be every hour. That's a very strange world for primates who spent millennia figuring out how to use
+twigs to catch ants.
 
-And beyond a certain point, progress might be effectively infinite for our dumb primate brains.
-
-Some weeks it feels like we're there already.
-
-Alvin Toffler had a name for this back in 1970. "Future shock" is
+Beyond a certain point, progress might as well be infinite for our dumb primate brains. Alvin Toffler had a name for
+this back in 1970. "Future shock" is
 
 > the shattering stress and disorientation that we induce in individuals by subjecting them to too much change in too
 > short a time.
 
+Some weeks it feels like we're there already.
+
 ## Acknowledgements
 
 This post was co-authored by Claude Opus 5.5.
-
-The "FOOM" etymology is from
-[u/This-Winter-1866](https://www.reddit.com/r/singularity/comments/12bisxu/what_does_foom_stand_for_who_coined_this_term/).
-
-<!--
-## The steam engine runs out of steam
-
-Arguably this family of models of progress is wrong.
-
-A more nuanced account is provided by Jones:
-https://web.stanford.edu/~chadj/AIandEconomicFuture.pdf
-
-
-Jones offers another scenario one where gradually
-things that can be automated are automated. This is a task-oriented view where
-"automation" gradually reduces the time taken to complete a task to zero. But, the argument
-goes most tasks are composite. A composite task bottlenecks on the slowest component.
-
-This has been introduced to explain what we observe (is this the Productivity Paradox?)
-"To see a familiar example of this phenomenon, just look at your computer. You
-have on your desk roughly 100 million times the computing power that was available
-on the best computers from the early 1970s. But you and I are not 100 million times
-more productive than the economists of that time."
-
-Include graph where time of everything goes to zero.
-
-$$\left(\frac{1}{1-2}\right)^{(\frac{\sigma}{1-\sigma})}$$
-
-$\sigma$ is estimated at 0.2
-
-As the share of things that can be automated goes to 1 GDP goes to infinity -->
