@@ -134,11 +134,12 @@ Paper:
 [^triangles]: Computationally speaking.
 
 Say a dating app wants to set up as many dates as possible tonight, one per person, between people
-who've both swiped right on each other. In a cishet world, where users split neatly into two groups who only date each
-other, a method from 2022 does this almost as fast as you can read the list of matches. In reality, anyone
-can fancy anyone, and the resulting queer love triangles have kept the general case stuck at a 1980 method
-that's much slower on big networks. This randomised algorithm brings the general case up to the same
-speed, though it maximises the number of dates, not how well they go.
+who've both swiped right on each other. In a cishet world, where users split neatly into two groups
+who only date each other, a method from 2022 does this almost as fast as you can read the list of
+matches. In reality, anyone can fancy anyone, and the resulting queer love triangles have kept the
+general case stuck at a 1980 method that's much slower on big networks. This randomised algorithm
+brings the general case up to the same speed, though it maximises the number of dates, not how well
+they go.
 
 Paper:
 [Almost-linear-time maximum-cardinality matching in general graphs](https://github.com/openai/math/blob/main/preprints/Almost-Linear-Time-Maximum-Cardinality-Matching-in-Sparse-General-Graphs-September-24-2026/main.pdf)

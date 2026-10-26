@@ -10,8 +10,8 @@ title: "Here's the intelligence explosion"
 ---
 
 Frontier labs are spending an absolute fortune[^rsi-investment] applying AI to build better AI.
-Anthropic claims that
-[26% of its AI research is now led by AI](https://www.anthropic.com/institute/measuring-pace-of-ai-development).
+Anthropic claims that Claude now
+["leads" 26% of its AI R&D work](https://www.anthropic.com/institute/measuring-pace-of-ai-development).
 Many believe that we're on a clear and accelerating path towards superintelligence in our lifetimes.
 
 Not so fast, says the futurologist Ramez Naam. In
@@ -20,7 +20,7 @@ he explores five overlapping ways AI can improve AI, and argues that a runaway t
 while all of them face "diminishing returns".
 
 ::: {#fig-naam}
-![](/assets/images/rsi-chart.jpg){#fig-naam}
+![](/assets/images/rsi-chart.jpg)
 
 Key infographic from the Naam post, acknowledging that AI speeds up AI development while insisting
 this falls short of "fast takeoff."
@@ -35,11 +35,10 @@ this falls short of "fast takeoff."
 ## The Maths Bit
 
 The intuition behind a takeoff is simple: we keep building better tools, so the speed of
-**progress** (scientific or economic[^social]) depends on how much progress we've already made.
+**progress** (scientific or economic[^socialism]) depends on how much progress we've already made.
 
-[^social]: We don't talk about social progress. The very idea of social progress
-    has the unmistakable whiff of socialism,
-which makes it a tough sell in Silicon Valley.
+[^socialism]: We don't talk about social progress. It has a yeasty tang of socialism and is
+    remarkably difficult to price into a Series B.
 
 Wisely, perhaps, Naam avoids equations. But we can explore the scenarios using a toy
 model[^translation] that assumes the speed with which progress, ahem, progresses (written
@@ -47,7 +46,7 @@ $\frac{dP}{dt}$) is proportional to the $k$-th power of the current level of pro
 
 [^translation]: The model, and the mapping of Naam's numbers onto it, are ours, not Naam's or
     his sources'. The mapping also assumes outside investment keeps flowing: in standard growth
-    models, a sub-threshold loop slows to a crawl without it.
+    models, a sub-threshold loop's percentage growth rate slows to a crawl without it.
 
 $$
 \frac{dP}{dt} \propto P^k
@@ -56,7 +55,7 @@ $$
 As we'll see, solving this differential equation gives very different futures depending on the
 exponent $k$.
 
-Naam's evidence speaks directly to it:
+Naam's evidence bears on it:
 
 - At OpenAI, researchers used 124× more tokens per person and shipped about 7× as many lines of
   code, but ran only 1.6× as many experiments.
@@ -75,14 +74,17 @@ Overall, Naam concludes:
     self-sustaining threshold of 15–19% from a
     [model by Tom Cunningham and colleagues](https://arxiv.org/abs/2609.15802).
 
-In the toy model, a loop that just sustains itself has $k=1$. Being 5–10× too weak puts $k$ at very
-roughly 0.15. These are the "diminishing returns".
+In the toy model, a loop that just sustains itself has $k=1$. Being 5–10× too weak puts $k$ at worst
+around 0.15[^floor]. These are the "diminishing returns".
+
+[^floor]: It's a floor: 0.15 assumes each advance makes the next one no easier. If progress
+    stands on its own shoulders, the same 5–10× shortfall gives a higher $k$.
 
 Nothing to worry about, see?
 
-## Straw Man Singularity ($K>1$)
-
 Well, no.
+
+## Straw Man Singularity ($k>1$)
 
 Let's start with what the piece is billed[^billed] as refuting: "the 'FOOM' of Vernor Vinge novels",
 a runaway loop with $k>1$. Say $k=2$, so that doubling progress quadruples its speed, and we start
@@ -105,13 +107,13 @@ Curves like this can fit the past remarkably well. In 1960 Heinz von Foerster an
 predicted 5.99 billion people by 1997; the actual figure was 5.92 billion. It also predicts infinite
 humans by Friday, 13 November 2026. At the time of writing, this looks ambitious.
 
-Nothing real goes infinite, of course. A blow-up just marks the point where the model stops working.
-If FOOM means $k>1$, Naam's data rule it out, and fair enough. But it's the easy target. The
+Nothing real goes infinite, of course. So a blow-up just marks the point where the model stops
+working. If FOOM means $k>1$, Naam's data rule it out. Fair enough: it's the easy target. The
 interesting case is the next one.
 
-## Self-Sustaining Singularity ($K\approx1$)
+## Self-Sustaining Singularity ($k\approx1$)
 
-What some experts do believe is that $k$ is approximately 1.
+Serious singularitarians bet on $k\approx1$.
 
 At $k=1$ progress is "exponential": progress, the rate of progress, the rate of the rate of progress
 and so on all keep growing. None ever hits infinity, but wait long enough and they are arbitrarily
@@ -123,7 +125,8 @@ above[^double]. In
 he spells out what that means for the century we're in:
 
 [^coined]: He didn't coin the term "singularity". That was John von Neumann, as
-    [recalled by Stanislaw Ulam](https://www.ams.org/journals/bull/1958-64-03/S0002-9904-1958-10189-5/S0002-9904-1958-10189-5.pdf) in 1958. But Kurzweil did the most to popularise it.
+    [recalled by Stanislaw Ulam](https://www.ams.org/journals/bull/1958-64-03/S0002-9904-1958-10189-5/S0002-9904-1958-10189-5.pdf) in 1958. Vernor Vinge made it famous in 1993; Kurzweil made
+    it a career.
 
 [^double]: Strictly, he argues for a "double" exponential, "meaning that the
     rate of exponential growth is itself growing exponentially". If
@@ -134,34 +137,34 @@ he spells out what that means for the century we're in:
 > it isn't the case that we'll experience 100 years of progress in the 21st century. Rather we'll
 > witness on the order of twenty thousand years of progress — at today's rate of progress, that is.
 
-Naam's threshold asks whether the loop can sustain itself ($k \geq 1$), "let alone run away". The
-catch is that he only measures one narrow loop: AI writing better AI software, holding hardware,
-energy, and capital fixed.
+Naam's threshold tests exactly this: whether the loop can sustain itself ($k \geq 1$), "let alone
+run away". The catch is which loop he measures: AI writing better AI software. Hardware, energy and
+capital sit outside it, as forces that "can keep driving rapid progress even if the loop can't
+sustain itself".
 
-But no-one thinks AI progress happens in isolation. Google has used AI to
+But they aren't outside. Google has used AI to
 [optimise its custom silicon](https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/),
 [cut the energy used to cool its data centres](https://green.googleblog.com/2016/07/deepmind-ai-reduces-energy-used-for.html)
 and
-[steer the plasma in a tokamak](https://doi.org/10.1038/s41586-021-04301-9).
-And Kurzweil's accelerating returns are civilisational, encompassing everything.
+[steer the plasma in a tokamak fusion reactor](https://doi.org/10.1038/s41586-021-04301-9).
+And AI investment now depends on AI revenue, so capital is in the loop too. Leaving them out is no
+small omission: it's Kurzweil's whole point that accelerating returns are civilisational,
+encompassing everything.
 
-Naam offers no estimate for this; he's simply "not convinced" that fast takeoff "is possible under
-realistic conditions". So the narrow loop gets a number and the loop we actually care about gets a
-shrug.
+So Naam gives the narrow loop a number, and declares the wide one exogenous: economist for "somebody
+else's problem".
 
-He built the scaffold and chose the narrow loop. It makes a serviceable noose.
+## Subjective Singularity ($k<1$)
 
-## Subjective Singularity ($K<1$)
-
-But let's suppose that the wide loop falls short too, and $k$ really is just 0.15. Here's the thing:
-that is still completely bonkers.
+But let's play by Naam's rules: hardware, energy and capital don't count, and $k$ is a measly 0.15.
+Here's the thing: that is still completely bonkers.
 
 "Diminishing returns" in $P^k$ doesn't mean progress plateaus. At $k = 0.15$, $P(t)$ grows as
 $t^{1.18}$. Both progress and the *speed* of progress ($\frac{dP}{dt} \sim t^{0.18}$) still climb
 forever.
 
 And progress doesn't need a vertical asymptote to break our brains; it just needs to outrun primate
-wetware that spent millennia figuring out how to use twigs to eat ants. AI is already
+wetware that spent a few million years figuring out how to use twigs to eat ants. AI is already
 [felling prize problems in batches](openai-maths.qmd). Whether it proves a major theorem every morning before coffee
 or every 30 seconds is academic; either way, it's bewildering.
 
@@ -173,4 +176,4 @@ So maybe $k$ is only 0.15, but lately that's felt like more than enough.
 
 ## Acknowledgements
 
-This post was co-authored by [Claude Opus 5.5](https://claude.ai).
+[Claude Opus 5.5](https://claude.ai) led 26% of this post.
