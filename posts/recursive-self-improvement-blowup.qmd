@@ -41,9 +41,13 @@ The intuition behind a takeoff is simple: we keep building better tools, so the 
     has the unmistakable whiff of socialism,
 which makes it a tough sell in Silicon Valley.
 
-Wisely, perhaps, Naam avoids equations. But he seems to assume a toy model where the speed with
-which progress, ahem, progresses (written $\frac{dP}{dt}$) is proportional to the $k$-th power of
-the current level of progress ($P^k$).
+Wisely, perhaps, Naam avoids equations. But we can explore the scenarios using a toy
+model[^translation] that assumes the speed with which progress, ahem, progresses (written
+$\frac{dP}{dt}$) is proportional to the $k$-th power of the current level of progress ($P^k$).
+
+[^translation]: The model, and the mapping of Naam's numbers onto it, are ours, not Naam's or
+    his sources'. The mapping also assumes outside investment keeps flowing: in standard growth
+    models, a sub-threshold loop slows to a crawl without it.
 
 $$
 \frac{dP}{dt} \propto P^k
@@ -52,7 +56,7 @@ $$
 As we'll see, solving this differential equation gives very different futures depending on the
 exponent $k$.
 
-Naam tries to estimate it from data:
+Naam's evidence speaks directly to it:
 
 - At OpenAI, researchers used 124× more tokens per person and shipped about 7× as many lines of
   code, but ran only 1.6× as many experiments.
@@ -72,12 +76,7 @@ Overall, Naam concludes:
     [model by Tom Cunningham and colleagues](https://arxiv.org/abs/2609.15802).
 
 In the toy model, a loop that just sustains itself has $k=1$. Being 5–10× too weak puts $k$ at very
-roughly 0.15[^translation]. These are the "diminishing returns".
-
-[^translation]: This mapping is our rough translation, not Naam's or
-    Cunningham's. It also assumes outside investment keeps flowing:
-    in standard growth models, a sub-threshold loop slows to a crawl
-    without it.
+roughly 0.15. These are the "diminishing returns".
 
 Nothing to worry about, see?
 
