@@ -1,0 +1,9 @@
+repos:
+  - repo: https://github.com/rvben/rumdl-pre-commit
+    rev: v0.3.0
+    hooks:
+      - id: rumdl-check
+        args: [--fix]
+        # .qmd isn't a markdown type to pre-commit, so match by path instead
+        types: [text]
+        files: ^posts/.*\.(qmd|md)$

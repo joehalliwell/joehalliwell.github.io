@@ -1,7 +1,8 @@
-# Render the site
+# Lint and reflow posts via the pre-commit hooks; a pass that only reflows exits 1, so run twice
 lint:
-    rumdl check --fix posts
+    pre-commit run --all-files || pre-commit run --all-files
 
+# Render the site
 render: lint
     quarto render
 
@@ -22,10 +23,13 @@ check: render
 # --no-render matters: without it quarto renders a second time into its own
 # worktree and publishes that, so the build `check` just validated is not the
 # build that goes up.
+#
+# quarto commits to gh-pages, which has no .pre-commit-config.yaml;
+# PRE_COMMIT_ALLOW_NO_CONFIG stops the pre-commit hook failing that commit.
 
 # Publish the checked build to GitHub Pages
 publish: check
-    quarto publish --no-prompt --no-browser --no-render gh-pages
+    PRE_COMMIT_ALLOW_NO_CONFIG=1 quarto publish --no-prompt --no-browser --no-render gh-pages
 
 # Start a local preview server with live reload
 preview:

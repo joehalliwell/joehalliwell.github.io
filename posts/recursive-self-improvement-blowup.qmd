@@ -23,7 +23,7 @@ while all of them face "diminishing returns".
 ![](/assets/images/rsi-chart.jpg)
 
 Key infographic from the Naam post, acknowledging that AI speeds up AI development while insisting
-this falls short of "fast takeoff."
+this falls short of "fast takeoff".
 :::
 
 [^rsi-investment]: A guess: maybe
@@ -74,11 +74,8 @@ Overall, Naam concludes:
     self-sustaining threshold of 15–19% from a
     [model by Tom Cunningham and colleagues](https://arxiv.org/abs/2609.15802).
 
-In the toy model, a loop that just sustains itself has $k=1$. Being 5–10× too weak puts $k$ at worst
-around 0.15[^floor]. These are the "diminishing returns".
-
-[^floor]: It's a floor: 0.15 assumes each advance makes the next one no easier. If progress
-    stands on its own shoulders, the same 5–10× shortfall gives a higher $k$.
+In the toy model, a loop that just sustains itself has $k=1$. Being 5–10× too weak puts $k$
+somewhere around 0.15, at worst. These are the "diminishing returns".
 
 Nothing to worry about, see?
 
@@ -116,7 +113,7 @@ interesting case is the next one.
 Serious singularitarians bet on $k\approx1$.
 
 At $k=1$ progress is "exponential": progress, the rate of progress, the rate of the rate of progress
-and so on all keep growing. None ever hits infinity, but wait long enough and they are arbitrarily
+and so on all keep growing. None ever hits infinity, but wait long enough and they grow arbitrarily
 large.
 
 Ray Kurzweil, the most influential singularitarian[^coined], has spent his career here, or a hair
@@ -151,13 +148,14 @@ And AI investment now depends on AI revenue, so capital is in the loop too. Leav
 small omission: it's Kurzweil's whole point that accelerating returns are civilisational,
 encompassing everything.
 
-So Naam gives the narrow loop a number, and declares the wide one exogenous: economist for "somebody
-else's problem".
+Naam gives the narrow loop a number, and declares the wide one exogenous, which is how economists
+say "somebody else's problem". He quietly concedes that his analysis leaves a lot out, but his
+overall verdict doesn't.
 
 ## Subjective Singularity ($k<1$)
 
-But let's play by Naam's rules: hardware, energy and capital don't count, and $k$ is a measly 0.15.
-Here's the thing: that is still completely bonkers.
+Fine, let's grant Naam his verdict: hardware, energy and capital don't count, and $k$ is a measly
+0.15. Here's the thing: that is still completely bonkers.
 
 "Diminishing returns" in $P^k$ doesn't mean progress plateaus. At $k = 0.15$, $P(t)$ grows as
 $t^{1.18}$. Both progress and the *speed* of progress ($\frac{dP}{dt} \sim t^{0.18}$) still climb
