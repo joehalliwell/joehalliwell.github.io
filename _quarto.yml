@@ -5,9 +5,15 @@ project:
   # Only these get rendered. Without an explicit list Quarto also picks up
   # markdown inside the vendored reveal.js decks and renders over the real
   # pages, e.g. online-hadoop/plugin/markdown/example.md.
+  #
+  # Both entries are globs on purpose. "*.qmd" has no slash, so it matches at
+  # any depth, not just the top level. "posts/**" rather than "posts/": Quarto
+  # walks a bare directory entry with a hidden-file filter tested against the
+  # absolute path, so from any checkout under a hidden directory (an agent
+  # worktree in .claude/) it finds nothing, and the .md and .ipynb posts vanish.
   render:
     - "*.qmd"
-    - "posts/"
+    - "posts/**"
 
   # The theme's @font-face rules point at /assets/fonts/. Quarto only copies
   # files it can see referenced from the rendered HTML, and these are referenced
