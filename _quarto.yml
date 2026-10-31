@@ -13,8 +13,10 @@ project:
   # files it can see referenced from the rendered HTML, and these are referenced
   # from inside the compiled bootstrap CSS, which it does not scan -- so without
   # this the site ships with no webfont and silently falls back to Georgia.
+  # The leading slash anchors the glob to the project root; unanchored, it also
+  # matches any nested assets/ dir, and once published an agent worktree's.
   resources:
-    - assets/**
+    - /assets/**
 
   post-render:
     # Pages that predate Quarto live in _legacy/ and are copied to the root of

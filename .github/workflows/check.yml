@@ -1,0 +1,40 @@
+# Run the same checks `just publish` runs, on every PR and every push to main.
+#
+# Publishing is still done locally with `just publish`. To drive it from main
+# instead, a publish job would follow this one on push to main only, with
+# `contents: write`.
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.10.19
+
+      - uses: extractions/setup-just@v2
+
+      - name: Install pre-commit
+        run: pipx install pre-commit
+
+      # Locally `just lint` fixes and carries on; here a post that needs
+      # reflowing should fail, so run the hooks once and show what they'd change.
+      - name: Lint
+        run: pre-commit run --all-files --show-diff-on-failure
+
+      - name: Test the checks
+        run: just test
+
+      - name: Render and check
+        run: just check
