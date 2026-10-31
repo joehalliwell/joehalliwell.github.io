@@ -7,11 +7,13 @@ here in July 2026 and now sits at the top level; `/blog/*` URLs redirect.
 
 Alongside the Quarto project there is a pile of older static pages (sketches,
 talks, `thesis.pdf`, ...) that keep their original URLs. They are carried into
-the build verbatim via `resources:` in `_quarto.yml`; `just check` asserts they
-survive.
+the build verbatim by `_scripts/copy-legacy.sh`. `just check` asserts that
+everything the live site serves (the gh-pages tree) survives; list deliberate
+removals in `retired.txt`.
 
 ```sh
 just preview   # local server with live reload
-just check     # render, then assert no URLs have gone missing
+just check     # render, then assert nothing served has gone missing
+just test      # test the checks themselves
 just publish   # push the built site to the gh-pages branch
 ```

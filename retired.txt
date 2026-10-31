@@ -1,0 +1,11 @@
+# Paths that may disappear from the built site.
+#
+# `just check` asserts that every file the live site serves (the tree of the
+# gh-pages branch, bar Quarto's site_libs/) is still in the build. To take a
+# page down on purpose, list its path here, one per line, relative to the site
+# root -- e.g. posts/some-post/index.html; a trailing slash retires a whole
+# directory. Once the removal has been published
+# the entry is redundant and can go.
+
+# An agent worktree, published by accident through an unanchored resources glob.
+.claude/

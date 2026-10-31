@@ -6,8 +6,11 @@ _freeze/
 .venv/
 _quarto_internal_scss_error.scss
 
+.rumdl_cache/
+
 # Editors and OS
 .DS_Store
+.vscode/
 *.sublime-project
 *.sublime-workspace
 

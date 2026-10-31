@@ -12,6 +12,17 @@
 set -euo pipefail
 
 output_dir="${QUARTO_PROJECT_OUTPUT_DIR:-build}"
+project_dir="$(cd "$(dirname "$0")/.." && pwd)"
+
+# The canonical has to be absolute, as add-seo-metadata.sh writes them; the
+# origin comes from the same place it does.
+site_url="$(sed -n 's|^ *site-url: *||p' "$project_dir/_quarto.yml" | head -1)"
+site_url="${site_url%/}"
+if [ -z "$site_url" ]; then
+    echo "post-render: no site-url in _quarto.yml, cannot build canonical URLs" >&2
+    exit 1
+fi
+
 cd "$output_dir"
 
 rm -rf blog
@@ -32,7 +43,7 @@ find index.html about.html posts -name '*.html' -type f | while read -r page; do
   <head>
     <meta charset="utf-8" />
     <title>Moved</title>
-    <link rel="canonical" href="$target" />
+    <link rel="canonical" href="$site_url$target" />
     <meta http-equiv="refresh" content="0; url=$target" />
   </head>
   <body>
