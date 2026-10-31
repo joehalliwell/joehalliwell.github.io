@@ -16,9 +16,6 @@ measure page="posts/rust-tools/index.html" width="1440":
 
 # The fetch is best-effort so that check still works offline, against the last
 # fetched copy of gh-pages.
-#
-# Rendering from inside a hidden directory (e.g. an agent worktree under
-# .claude/) silently drops the .md and .ipynb posts, so check fails there.
 
 # Render, then assert nothing served has gone missing, nothing hidden ships, and no page uses h4+
 check: render
